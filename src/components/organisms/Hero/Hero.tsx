@@ -37,19 +37,18 @@ export function Hero() {
           {/* Headline */}
           <h1
             className={cn(
-              'text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight',
+              'text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight',
               'text-[var(--color-text-primary)]',
-              'text-balance leading-[1.1]'
+              'leading-[1.1]'
             )}
           >
-            Your engineers shouldn&apos;t be{' '}
-            <span className="text-gradient">translating Figma files.</span>
+            From Bootstrapped to Unicorn{' '}
+            <span className="text-gradient">We Grow with You.</span>
           </h1>
 
           {/* Subheadline */}
           <p className="mt-6 md:mt-8 text-lg md:text-xl text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed">
-            We deliver design systems that ship—Figma AND production React.
-            So your team builds features, not buttons.
+            We eliminate the Friction between Design and Development with Scalable AI Design Solutions for Enterprise SaaS Startups
           </p>
 
           {/* CTAs */}
