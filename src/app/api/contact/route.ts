@@ -5,18 +5,23 @@ const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
   try {
-    const { name, company, email, message } = await req.json();
+    const { name, company, email, service, message } = await req.json();
 
     if (!name || !email || !message) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
+    // Combine service preference into message if provided
+    const fullMessage = service 
+      ? `[Service Interest: ${service}]\n\n${message}`
+      : message;
+
     await prisma.contact.create({
       data: {
         name,
-        company,
+        company: company || null,
         email,
-        message,
+        message: fullMessage,
       },
     });
 

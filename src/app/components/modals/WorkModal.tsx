@@ -77,7 +77,7 @@ export default function WorkModal({ onClose }: WorkModalProps) {
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-200"></div>
             
             <div className="space-y-12">
-              {projects.map((project, index) => (
+              {projects.map((project) => (
                 <div key={project.id} className="relative flex items-start">
                   {/* Timeline Dot */}
                   <div className="absolute left-6 w-4 h-4 bg-blue-500 rounded-full border-4 border-white shadow-lg transform -translate-x-2"></div>
