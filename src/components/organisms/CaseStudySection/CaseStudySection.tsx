@@ -2,8 +2,6 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/atoms/Button';
-import { SectionHeader } from '@/components/molecules/SectionHeader';
-import { cn } from '@/lib/cn';
 
 const featuredCaseStudy = {
   title: 'HANDS AI',
@@ -29,132 +27,100 @@ const featuredCaseStudy = {
 
 export function CaseStudySection() {
   return (
-    <section className="py-24 md:py-32 bg-[var(--color-bg-primary)]">
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        <SectionHeader
-          eyebrow="Case Study"
-          title="From scattered to systematic"
-          description="See how we help teams transform their design-to-development workflow."
-        />
+    <section className="py-20 md:py-28 bg-[var(--color-bg-primary)]">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+            Case Study
+          </span>
+          <h2 className="text-2xl md:text-3xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
+            From scattered to systematic
+          </h2>
+          <p className="mt-4 text-base text-[var(--color-text-secondary)] max-w-xl mx-auto">
+            See how we help teams transform their design-to-development workflow.
+          </p>
+        </div>
 
-        <div className="mt-16">
-          {/* Case study card */}
-          <div
-            className={cn(
-              'rounded-2xl overflow-hidden',
-              'bg-[var(--color-bg-elevated)] border border-[var(--color-border)]'
-            )}
-          >
-            {/* Header with gradient */}
-            <div className="relative h-48 md:h-64 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-hover)] flex items-center justify-center">
-              <div className="text-center text-white">
-                <span className="text-sm uppercase tracking-wider opacity-80">
-                  {featuredCaseStudy.category}
-                </span>
-                <h3 className="text-3xl md:text-4xl font-bold mt-2">
-                  {featuredCaseStudy.title}
-                </h3>
-              </div>
-              {/* Decorative pattern */}
-              <div
-                className="absolute inset-0 opacity-10"
-                style={{
-                  backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-                  backgroundSize: '24px 24px',
-                }}
-              />
+        {/* Case study card - Geometric, minimal */}
+        <div className="border border-[var(--color-border)]">
+          {/* Header */}
+          <div className="p-8 md:p-10 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
+            <span className="text-[10px] tracking-[0.15em] uppercase text-[var(--color-text-muted)]">
+              {featuredCaseStudy.category}
+            </span>
+            <h3 className="text-2xl md:text-3xl font-medium text-[var(--color-text-primary)] mt-2">
+              {featuredCaseStudy.title}
+            </h3>
+          </div>
+
+          {/* Content */}
+          <div className="p-8 md:p-10">
+            <p className="text-base text-[var(--color-text-secondary)] mb-8 max-w-2xl">
+              {featuredCaseStudy.description}
+            </p>
+
+            {/* Metrics - Inline grid */}
+            <div className="grid grid-cols-3 gap-px bg-[var(--color-border)] border border-[var(--color-border)] mb-10">
+              {featuredCaseStudy.metrics.map((metric, index) => (
+                <div key={index} className="bg-[var(--color-bg-elevated)] p-4 text-center">
+                  <div className="text-xl md:text-2xl font-medium text-[var(--color-text-primary)]">
+                    {metric.value}
+                  </div>
+                  <div className="text-xs text-[var(--color-text-muted)] mt-1">
+                    {metric.label}
+                  </div>
+                </div>
+              ))}
             </div>
 
-            {/* Content */}
-            <div className="p-8 md:p-12">
-              <p className="text-lg text-[var(--color-text-secondary)] mb-8 max-w-2xl">
-                {featuredCaseStudy.description}
-              </p>
-
-              {/* Metrics */}
-              <div className="grid grid-cols-3 gap-6 mb-10 py-6 border-y border-[var(--color-border)]">
-                {featuredCaseStudy.metrics.map((metric, index) => (
-                  <div key={index} className="text-center">
-                    <div className="text-2xl md:text-3xl font-bold text-[var(--color-accent)]">
-                      {metric.value}
-                    </div>
-                    <div className="text-sm text-[var(--color-text-muted)] mt-1">
-                      {metric.label}
-                    </div>
-                  </div>
-                ))}
+            {/* Before / After */}
+            <div className="grid md:grid-cols-2 gap-8 mb-10">
+              {/* Before */}
+              <div>
+                <h4 className="text-xs tracking-[0.1em] uppercase text-[var(--color-text-muted)] mb-4">
+                  Before
+                </h4>
+                <ul className="space-y-2">
+                  {featuredCaseStudy.before.map((item, index) => (
+                    <li
+                      key={index}
+                      className="flex items-start gap-3 text-sm text-[var(--color-text-secondary)]"
+                    >
+                      <span className="text-[var(--color-text-muted)]">—</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              {/* Before / After */}
-              <div className="grid md:grid-cols-2 gap-8">
-                {/* Before */}
-                <div>
-                  <h4 className="flex items-center gap-2 text-lg font-semibold text-[var(--color-text-primary)] mb-4">
-                    <span className="w-8 h-8 rounded-full bg-[var(--color-error-muted)] flex items-center justify-center">
-                      <svg className="w-4 h-4 text-[var(--color-error)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </span>
-                    Before ADL
-                  </h4>
-                  <ul className="space-y-3">
-                    {featuredCaseStudy.before.map((item, index) => (
-                      <li
-                        key={index}
-                        className="flex items-start gap-3 text-[var(--color-text-secondary)]"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-text-muted)] mt-2 flex-shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* After */}
-                <div>
-                  <h4 className="flex items-center gap-2 text-lg font-semibold text-[var(--color-text-primary)] mb-4">
-                    <span className="w-8 h-8 rounded-full bg-[var(--color-success-muted)] flex items-center justify-center">
-                      <svg className="w-4 h-4 text-[var(--color-success)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </span>
-                    After ADL
-                  </h4>
-                  <ul className="space-y-3">
-                    {featuredCaseStudy.after.map((item, index) => (
-                      <li
-                        key={index}
-                        className="flex items-start gap-3 text-[var(--color-text-secondary)]"
-                      >
-                        <svg
-                          className="w-5 h-5 text-[var(--color-success)] flex-shrink-0 mt-0.5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              {/* After */}
+              <div>
+                <h4 className="text-xs tracking-[0.1em] uppercase text-[var(--color-text-muted)] mb-4">
+                  After
+                </h4>
+                <ul className="space-y-2">
+                  {featuredCaseStudy.after.map((item, index) => (
+                    <li
+                      key={index}
+                      className="flex items-start gap-3 text-sm text-[var(--color-text-secondary)]"
+                    >
+                      <span className="text-[var(--color-accent)]">+</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
+            </div>
 
-              {/* CTA */}
-              <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
-                <Link href={featuredCaseStudy.href}>
-                  <Button>
-                    View All Case Studies
-                  </Button>
-                </Link>
-                <Link href="/contact">
-                  <Button variant="ghost">
-                    Discuss Your Project
-                  </Button>
-                </Link>
-              </div>
+            {/* CTA */}
+            <div className="pt-8 border-t border-[var(--color-border)] flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <Link href={featuredCaseStudy.href}>
+                <Button>View All Case Studies</Button>
+              </Link>
+              <Link href="/contact">
+                <Button variant="link">Discuss Your Project</Button>
+              </Link>
             </div>
           </div>
         </div>

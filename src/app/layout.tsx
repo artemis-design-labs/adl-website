@@ -37,12 +37,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth" data-theme="dark" suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth" data-theme="light" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500&display=swap"
           rel="stylesheet"
         />
         <script
@@ -52,8 +52,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 const stored = localStorage.getItem('adl-theme');
                 if (stored === 'light' || stored === 'dark') {
                   document.documentElement.setAttribute('data-theme', stored);
-                } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-                  document.documentElement.setAttribute('data-theme', 'light');
                 }
               })();
             `,
