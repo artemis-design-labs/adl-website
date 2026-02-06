@@ -4,27 +4,57 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/atoms/Button';
 import { cn } from '@/lib/cn';
+import { useSectionVersion } from '@/context/ContentVersionContext';
 
-const HEADLINE_PART1 = 'From Bootstrapped to Unicorn';
-const HEADLINE_PART2 = 'We Grow with You.';
+// V1 Content (Main Branch)
+const V1_CONTENT = {
+  eyebrow: 'AI-Powered Design Infrastructure',
+  headline1: 'From Bootstrapped to Unicorn',
+  headline2: 'We Grow with You.',
+  subheadline: 'We combine human expertise with AI-powered delivery to solve design-to-development friction permanently.',
+  cta1: { label: 'About us', href: '#about' },
+  cta2: { label: 'Get a Free Audit', href: '/contact?type=audit' },
+  trustIndicator: 'Trusted by product teams at Series A–C startups',
+};
+
+// V2 Content (AI-First Rebrand)
+const V2_CONTENT = {
+  eyebrow: 'Built by Founders. Powered by AI.',
+  headline1: 'We Build the AI That Builds',
+  headline2: 'Your Design Infrastructure.',
+  subheadline: "We're ex-startup founders who got tired of the design-to-code problem — so we built proprietary AI to solve it. Not another agency. Not another automation tool. A team that's been in your shoes, armed with technology we built from the trenches.",
+  cta1: { label: 'Book a Conversation', href: '/contact' },
+  cta2: { label: 'Get a Free Audit', href: '/contact?type=audit' },
+  trustIndicator: 'Founded by startup operators. Trusted by product teams from Seed to Series C.',
+};
+
 const TYPING_SPEED = 35;
 const START_DELAY = 400;
 
 export function Hero() {
+  const version = useSectionVersion('hero');
+  const content = version === 'v1' ? V1_CONTENT : V2_CONTENT;
+
   const [displayedText1, setDisplayedText1] = useState('');
   const [displayedText2, setDisplayedText2] = useState('');
   const [isTypingComplete, setIsTypingComplete] = useState(false);
   const [showCursor, setShowCursor] = useState(true);
 
+  // Reset and retype when version changes
   useEffect(() => {
+    setDisplayedText1('');
+    setDisplayedText2('');
+    setIsTypingComplete(false);
+    setShowCursor(true);
+
     let timeout: NodeJS.Timeout;
     let currentIndex = 0;
     let isTypingPart2 = false;
 
     const typeNextChar = () => {
       if (!isTypingPart2) {
-        if (currentIndex < HEADLINE_PART1.length) {
-          setDisplayedText1(HEADLINE_PART1.slice(0, currentIndex + 1));
+        if (currentIndex < content.headline1.length) {
+          setDisplayedText1(content.headline1.slice(0, currentIndex + 1));
           currentIndex++;
           timeout = setTimeout(typeNextChar, TYPING_SPEED);
         } else {
@@ -33,8 +63,8 @@ export function Hero() {
           timeout = setTimeout(typeNextChar, TYPING_SPEED);
         }
       } else {
-        if (currentIndex < HEADLINE_PART2.length) {
-          setDisplayedText2(HEADLINE_PART2.slice(0, currentIndex + 1));
+        if (currentIndex < content.headline2.length) {
+          setDisplayedText2(content.headline2.slice(0, currentIndex + 1));
           currentIndex++;
           timeout = setTimeout(typeNextChar, TYPING_SPEED);
         } else {
@@ -45,7 +75,7 @@ export function Hero() {
 
     timeout = setTimeout(typeNextChar, START_DELAY);
     return () => clearTimeout(timeout);
-  }, []);
+  }, [version, content.headline1, content.headline2]);
 
   useEffect(() => {
     if (isTypingComplete) {
@@ -62,9 +92,19 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-[var(--color-bg-primary)]">
+      {/* Version indicator */}
+      <div className="absolute top-20 right-4 z-10">
+        <span className={cn(
+          'px-2 py-1 text-[10px] font-medium uppercase tracking-wider rounded',
+          version === 'v1' ? 'bg-blue-600 text-white' : 'bg-green-600 text-white'
+        )}>
+          {version === 'v1' ? 'V1 - Main' : 'V2 - AI-First'}
+        </span>
+      </div>
+
       {/* Content container */}
       <div className="relative max-w-5xl mx-auto px-6 lg:px-8 py-24 md:py-32">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className={cn('mx-auto text-center', version === 'v2' ? 'max-w-4xl' : 'max-w-3xl')}>
           {/* Eyebrow - corporate badge style */}
           <div className="inline-flex items-center gap-3 px-4 py-2 mb-10 border border-[var(--color-border)] bg-[var(--color-bg-elevated)]">
             <span className="w-2 h-2 bg-[var(--color-accent)]" />
@@ -74,7 +114,7 @@ export function Hero() {
                 'text-[var(--color-text-tertiary)]'
               )}
             >
-              AI-Powered Design Infrastructure
+              {content.eyebrow}
             </span>
           </div>
 
@@ -89,7 +129,7 @@ export function Hero() {
             )}
           >
             {displayedText1}
-            {displayedText1.length === HEADLINE_PART1.length && <br />}
+            {displayedText1.length === content.headline1.length && <br />}
             <span className="text-[var(--color-accent)]">{displayedText2}</span>
             {showCursor && (
               <span
@@ -103,29 +143,38 @@ export function Hero() {
             className={cn(
               'mt-8 text-base md:text-lg',
               'text-[var(--color-text-secondary)]',
-              'max-w-xl mx-auto leading-relaxed'
+              'leading-relaxed',
+              version === 'v2' ? 'max-w-2xl mx-auto' : 'max-w-xl mx-auto'
             )}
           >
-            We combine human expertise with AI-powered delivery to solve design-to-development friction permanently.
+            {content.subheadline}
           </p>
 
           {/* CTAs - geometric, minimal */}
           <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a href="#about">
-              <Button size="lg" className="min-w-[160px]">
-                About us
-              </Button>
-            </a>
-            <Link href="/contact?type=audit">
-              <Button variant="secondary" size="lg" className="min-w-[160px]">
-                Get a Free Audit
+            {content.cta1.href.startsWith('#') ? (
+              <a href={content.cta1.href}>
+                <Button size="lg" className="min-w-[180px]">
+                  {content.cta1.label}
+                </Button>
+              </a>
+            ) : (
+              <Link href={content.cta1.href}>
+                <Button size="lg" className="min-w-[180px]">
+                  {content.cta1.label}
+                </Button>
+              </Link>
+            )}
+            <Link href={content.cta2.href}>
+              <Button variant="secondary" size="lg" className="min-w-[180px]">
+                {content.cta2.label}
               </Button>
             </Link>
           </div>
 
           {/* Trust indicator - understated */}
           <p className="mt-16 text-xs tracking-[0.1em] uppercase text-[var(--color-text-muted)]">
-            Trusted by product teams at Series A–C startups
+            {content.trustIndicator}
           </p>
         </div>
       </div>

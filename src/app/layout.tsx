@@ -1,6 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { ThemeProvider } from '@/context/ThemeContext';
+import { ContentVersionProvider } from '@/context/ContentVersionContext';
+import { ContentSwitcher } from '@/components/ContentSwitcher';
 
 export const metadata: Metadata = {
   title: 'Artemis Design Labs | Design Systems for B2B Startups',
@@ -60,7 +62,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-sans antialiased">
         <ThemeProvider>
-          {children}
+          <ContentVersionProvider>
+            {children}
+            <ContentSwitcher />
+          </ContentVersionProvider>
         </ThemeProvider>
       </body>
     </html>
