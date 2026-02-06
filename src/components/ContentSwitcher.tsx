@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useContentVersion, SectionName } from '@/context/ContentVersionContext';
-import { cn } from '@/lib/cn';
 
 const sections: { name: SectionName; label: string }[] = [
   { name: 'navigation', label: 'Navigation' },
@@ -20,67 +19,125 @@ export function ContentSwitcher() {
   const { sectionVersions, setSectionVersion, setAllVersions } = useContentVersion();
 
   return (
-    <div className="fixed left-0 top-1/2 -translate-y-1/2 z-[100]">
+    <>
       {/* Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={cn(
-          'absolute top-1/2 -translate-y-1/2 transition-all duration-300',
-          'bg-[#1a1a1a] text-white px-2 py-4 rounded-r-lg shadow-lg',
-          'hover:bg-[#2a2a2a] border border-l-0 border-[#333]',
-          'flex items-center justify-center',
-          isOpen ? 'left-[280px]' : 'left-0'
-        )}
+        style={{
+          position: 'fixed',
+          left: isOpen ? '280px' : '0',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          zIndex: 9999,
+          backgroundColor: '#1a1a1a',
+          color: '#ffffff',
+          padding: '16px 8px',
+          borderRadius: '0 8px 8px 0',
+          border: '1px solid #333',
+          borderLeft: 'none',
+          cursor: 'pointer',
+          transition: 'left 0.3s ease',
+          writingMode: 'vertical-rl',
+          textOrientation: 'mixed',
+          fontSize: '11px',
+          fontWeight: 500,
+          letterSpacing: '0.05em',
+          textTransform: 'uppercase',
+        }}
         title={isOpen ? 'Close panel' : 'Content Version Switcher'}
       >
-        <span className="writing-mode-vertical text-xs tracking-wider uppercase font-medium">
-          {isOpen ? '×' : 'A/B Test'}
-        </span>
+        {isOpen ? '×' : 'A/B Test'}
       </button>
 
       {/* Panel */}
       <div
-        className={cn(
-          'fixed left-0 top-0 h-full w-[280px] bg-[#1a1a1a] text-white',
-          'shadow-2xl border-r border-[#333] transition-transform duration-300',
-          'overflow-y-auto',
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        )}
+        style={{
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          height: '100vh',
+          width: '280px',
+          backgroundColor: '#1a1a1a',
+          color: '#ffffff',
+          zIndex: 9998,
+          transform: isOpen ? 'translateX(0)' : 'translateX(-100%)',
+          transition: 'transform 0.3s ease',
+          overflowY: 'auto',
+          borderRight: '1px solid #333',
+          boxShadow: isOpen ? '4px 0 20px rgba(0,0,0,0.5)' : 'none',
+        }}
       >
-        <div className="p-4">
+        <div style={{ padding: '16px' }}>
           {/* Header */}
-          <div className="mb-6 pb-4 border-b border-[#333]">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-white/90">
+          <div style={{ marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid #333' }}>
+            <h2 style={{
+              fontSize: '12px',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              color: 'rgba(255,255,255,0.9)',
+              margin: 0,
+            }}>
               Content Version Switcher
             </h2>
-            <p className="text-xs text-white/50 mt-1">
+            <p style={{
+              fontSize: '11px',
+              color: 'rgba(255,255,255,0.5)',
+              marginTop: '4px',
+              margin: '4px 0 0 0',
+            }}>
               Toggle between V1 (main) and V2 (AI-first rebrand) for each section
             </p>
           </div>
 
           {/* Global Toggle */}
-          <div className="mb-6 p-3 bg-[#252525] rounded-lg border border-[#333]">
-            <p className="text-xs uppercase tracking-wider text-white/60 mb-3">Set All Sections</p>
-            <div className="flex gap-2">
+          <div style={{
+            marginBottom: '24px',
+            padding: '12px',
+            backgroundColor: '#252525',
+            borderRadius: '8px',
+            border: '1px solid #333',
+          }}>
+            <p style={{
+              fontSize: '10px',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              color: 'rgba(255,255,255,0.6)',
+              marginBottom: '12px',
+              margin: '0 0 12px 0',
+            }}>
+              Set All Sections
+            </p>
+            <div style={{ display: 'flex', gap: '8px' }}>
               <button
                 onClick={() => setAllVersions('v1')}
-                className={cn(
-                  'flex-1 py-2 px-3 text-xs font-medium rounded transition-colors',
-                  Object.values(sectionVersions).every(v => v === 'v1')
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-[#333] text-white/70 hover:bg-[#444]'
-                )}
+                style={{
+                  flex: 1,
+                  padding: '8px 12px',
+                  fontSize: '11px',
+                  fontWeight: 500,
+                  borderRadius: '4px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  backgroundColor: Object.values(sectionVersions).every(v => v === 'v1') ? '#2563eb' : '#333',
+                  color: Object.values(sectionVersions).every(v => v === 'v1') ? '#fff' : 'rgba(255,255,255,0.7)',
+                }}
               >
                 All V1
               </button>
               <button
                 onClick={() => setAllVersions('v2')}
-                className={cn(
-                  'flex-1 py-2 px-3 text-xs font-medium rounded transition-colors',
-                  Object.values(sectionVersions).every(v => v === 'v2')
-                    ? 'bg-green-600 text-white'
-                    : 'bg-[#333] text-white/70 hover:bg-[#444]'
-                )}
+                style={{
+                  flex: 1,
+                  padding: '8px 12px',
+                  fontSize: '11px',
+                  fontWeight: 500,
+                  borderRadius: '4px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  backgroundColor: Object.values(sectionVersions).every(v => v === 'v2') ? '#16a34a' : '#333',
+                  color: Object.values(sectionVersions).every(v => v === 'v2') ? '#fff' : 'rgba(255,255,255,0.7)',
+                }}
               >
                 All V2
               </button>
@@ -88,65 +145,94 @@ export function ContentSwitcher() {
           </div>
 
           {/* Section Toggles */}
-          <div className="space-y-2">
-            <p className="text-xs uppercase tracking-wider text-white/60 mb-3">Per-Section Control</p>
-            {sections.map(({ name, label }) => (
-              <div
-                key={name}
-                className="flex items-center justify-between p-3 bg-[#252525] rounded-lg border border-[#333]"
-              >
-                <span className="text-sm text-white/80">{label}</span>
-                <div className="flex gap-1">
-                  <button
-                    onClick={() => setSectionVersion(name, 'v1')}
-                    className={cn(
-                      'px-3 py-1 text-xs font-medium rounded-l transition-colors',
-                      sectionVersions[name] === 'v1'
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-[#333] text-white/50 hover:bg-[#444]'
-                    )}
-                  >
-                    V1
-                  </button>
-                  <button
-                    onClick={() => setSectionVersion(name, 'v2')}
-                    className={cn(
-                      'px-3 py-1 text-xs font-medium rounded-r transition-colors',
-                      sectionVersions[name] === 'v2'
-                        ? 'bg-green-600 text-white'
-                        : 'bg-[#333] text-white/50 hover:bg-[#444]'
-                    )}
-                  >
-                    V2
-                  </button>
+          <div>
+            <p style={{
+              fontSize: '10px',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              color: 'rgba(255,255,255,0.6)',
+              marginBottom: '12px',
+              margin: '0 0 12px 0',
+            }}>
+              Per-Section Control
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              {sections.map(({ name, label }) => (
+                <div
+                  key={name}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '12px',
+                    backgroundColor: '#252525',
+                    borderRadius: '8px',
+                    border: '1px solid #333',
+                  }}
+                >
+                  <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.8)' }}>{label}</span>
+                  <div style={{ display: 'flex', gap: '2px' }}>
+                    <button
+                      onClick={() => setSectionVersion(name, 'v1')}
+                      style={{
+                        padding: '4px 12px',
+                        fontSize: '11px',
+                        fontWeight: 500,
+                        borderRadius: '4px 0 0 4px',
+                        border: 'none',
+                        cursor: 'pointer',
+                        backgroundColor: sectionVersions[name] === 'v1' ? '#2563eb' : '#333',
+                        color: sectionVersions[name] === 'v1' ? '#fff' : 'rgba(255,255,255,0.5)',
+                      }}
+                    >
+                      V1
+                    </button>
+                    <button
+                      onClick={() => setSectionVersion(name, 'v2')}
+                      style={{
+                        padding: '4px 12px',
+                        fontSize: '11px',
+                        fontWeight: 500,
+                        borderRadius: '0 4px 4px 0',
+                        border: 'none',
+                        cursor: 'pointer',
+                        backgroundColor: sectionVersions[name] === 'v2' ? '#16a34a' : '#333',
+                        color: sectionVersions[name] === 'v2' ? '#fff' : 'rgba(255,255,255,0.5)',
+                      }}
+                    >
+                      V2
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           {/* Legend */}
-          <div className="mt-6 pt-4 border-t border-[#333]">
-            <p className="text-xs uppercase tracking-wider text-white/60 mb-2">Legend</p>
-            <div className="space-y-1 text-xs text-white/50">
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 bg-blue-600 rounded"></span>
+          <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid #333' }}>
+            <p style={{
+              fontSize: '10px',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              color: 'rgba(255,255,255,0.6)',
+              marginBottom: '8px',
+              margin: '0 0 8px 0',
+            }}>
+              Legend
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '11px', color: 'rgba(255,255,255,0.5)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ width: '12px', height: '12px', backgroundColor: '#2563eb', borderRadius: '2px' }}></span>
                 <span>V1 - Main Branch (Current)</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 bg-green-600 rounded"></span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ width: '12px', height: '12px', backgroundColor: '#16a34a', borderRadius: '2px' }}></span>
                 <span>V2 - AI-First Rebrand</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .writing-mode-vertical {
-          writing-mode: vertical-rl;
-          text-orientation: mixed;
-        }
-      `}</style>
-    </div>
+    </>
   );
 }
