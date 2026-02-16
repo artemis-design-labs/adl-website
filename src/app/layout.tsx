@@ -2,6 +2,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { ContentVersionProvider } from '@/context/ContentVersionContext';
+import { ContentSwitcher } from '@/components/ContentSwitcher';
+import { DevOnly } from '@/components/DevOnly';
 
 export const metadata: Metadata = {
   title: 'Artemis Design Labs | Design Systems for B2B Startups',
@@ -63,6 +65,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <ContentVersionProvider>
             {children}
+            <DevOnly>
+              <ContentSwitcher />
+            </DevOnly>
           </ContentVersionProvider>
         </ThemeProvider>
       </body>
