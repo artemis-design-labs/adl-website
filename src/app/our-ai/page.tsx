@@ -1,5 +1,6 @@
 'use client';
 
+import { Fragment } from 'react';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -114,14 +115,14 @@ export default function OurAIPage() {
 
             {/* Rows */}
             {humanVsAI.map((row, index) => (
-              <>
-                <div key={`human-${index}`} className="bg-[var(--color-bg-elevated)] p-4 lg:p-6">
+              <Fragment key={index}>
+                <div className="bg-[var(--color-bg-elevated)] p-4 lg:p-6">
                   <p className="text-sm text-[var(--color-text-primary)]">{row.human}</p>
                 </div>
-                <div key={`ai-${index}`} className="bg-[var(--color-bg-elevated)] p-4 lg:p-6">
+                <div className="bg-[var(--color-bg-elevated)] p-4 lg:p-6">
                   <p className="text-sm text-[var(--color-text-secondary)]">{row.ai}</p>
                 </div>
-              </>
+              </Fragment>
             ))}
           </div>
         </div>
