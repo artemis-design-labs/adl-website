@@ -1,15 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useContentVersion, SectionName, ColorPalette } from '@/context/ContentVersionContext';
-
-// Only Homepage sections that have V1/V2 content variants
-const sections: { name: SectionName; label: string }[] = [
-  { name: 'hero', label: 'Hero' },
-  { name: 'problem', label: 'Problem Section' },
-  { name: 'socialProof', label: 'Social Proof' },
-  { name: 'cta', label: 'CTA Section' },
-];
+import { usePathname } from 'next/navigation';
+import { useContentVersion, PageName, ColorPalette, pageSections } from '@/context/ContentVersionContext';
 
 const palettes: { id: ColorPalette; label: string; color: string }[] = [
   { id: 'default', label: 'Sage Green', color: '#7D8471' },
@@ -17,9 +10,44 @@ const palettes: { id: ColorPalette; label: string; color: string }[] = [
   { id: 'terracotta', label: 'Terracotta', color: '#B87A5A' },
 ];
 
+// Map routes to page names
+function getPageFromPath(pathname: string): PageName | null {
+  if (pathname === '/') return 'home';
+  if (pathname === '/about') return 'about';
+  if (pathname === '/services') return 'services';
+  if (pathname === '/our-ai') return 'ourAi';
+  if (pathname === '/work') return 'work';
+  if (pathname === '/pricing') return 'pricing';
+  if (pathname === '/contact') return 'contact';
+  return null;
+}
+
+// Page display names
+const pageDisplayNames: Record<PageName, string> = {
+  home: 'Homepage',
+  about: 'About',
+  services: 'Products & Services',
+  ourAi: 'Our AI',
+  work: 'Work',
+  pricing: 'Pricing',
+  contact: 'Contact',
+};
+
 export function ContentSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
-  const { sectionVersions, setSectionVersion, setAllVersions, colorPalette, setColorPalette } = useContentVersion();
+  const pathname = usePathname();
+  const { sectionVersions, setSectionVersion, setAllVersionsForPage, colorPalette, setColorPalette } = useContentVersion();
+
+  const currentPage = getPageFromPath(pathname);
+  const sections = currentPage ? pageSections[currentPage] : [];
+
+  // Check if all sections on current page are same version
+  const allV1 = sections.every(s => sectionVersions[s.name] === 'v1');
+  const allV2 = sections.every(s => sectionVersions[s.name] === 'v2');
+
+  if (!currentPage) {
+    return null; // Don't show switcher on pages not in our list
+  }
 
   return (
     <>
@@ -91,17 +119,17 @@ export function ContentSwitcher() {
             }}>
               Toggle between V1 and V2 content variants
             </p>
-            <p style={{
-              fontSize: '10px',
-              color: '#f59e0b',
-              marginTop: '8px',
-              margin: '8px 0 0 0',
-              padding: '6px 8px',
-              backgroundColor: 'rgba(245, 158, 11, 0.1)',
+            {/* Current Page Indicator */}
+            <div style={{
+              marginTop: '12px',
+              padding: '8px 10px',
+              backgroundColor: '#2563eb',
               borderRadius: '4px',
+              fontSize: '11px',
+              fontWeight: 500,
             }}>
-              Note: Only affects Homepage sections
-            </p>
+              Current Page: {pageDisplayNames[currentPage]}
+            </div>
           </div>
 
           {/* Color Palette Section */}
@@ -158,7 +186,7 @@ export function ContentSwitcher() {
             </div>
           </div>
 
-          {/* Global Toggle */}
+          {/* Global Toggle for Current Page */}
           <div style={{
             marginBottom: '24px',
             padding: '12px',
@@ -174,11 +202,11 @@ export function ContentSwitcher() {
               marginBottom: '12px',
               margin: '0 0 12px 0',
             }}>
-              Set All Sections
+              Set All Sections (This Page)
             </p>
             <div style={{ display: 'flex', gap: '8px' }}>
               <button
-                onClick={() => setAllVersions('v1')}
+                onClick={() => setAllVersionsForPage(currentPage, 'v1')}
                 style={{
                   flex: 1,
                   padding: '8px 12px',
@@ -187,14 +215,14 @@ export function ContentSwitcher() {
                   borderRadius: '4px',
                   border: 'none',
                   cursor: 'pointer',
-                  backgroundColor: Object.values(sectionVersions).every(v => v === 'v1') ? '#2563eb' : '#333',
-                  color: Object.values(sectionVersions).every(v => v === 'v1') ? '#fff' : 'rgba(255,255,255,0.7)',
+                  backgroundColor: allV1 ? '#2563eb' : '#333',
+                  color: allV1 ? '#fff' : 'rgba(255,255,255,0.7)',
                 }}
               >
                 All V1
               </button>
               <button
-                onClick={() => setAllVersions('v2')}
+                onClick={() => setAllVersionsForPage(currentPage, 'v2')}
                 style={{
                   flex: 1,
                   padding: '8px 12px',
@@ -203,8 +231,8 @@ export function ContentSwitcher() {
                   borderRadius: '4px',
                   border: 'none',
                   cursor: 'pointer',
-                  backgroundColor: Object.values(sectionVersions).every(v => v === 'v2') ? '#16a34a' : '#333',
-                  color: Object.values(sectionVersions).every(v => v === 'v2') ? '#fff' : 'rgba(255,255,255,0.7)',
+                  backgroundColor: allV2 ? '#16a34a' : '#333',
+                  color: allV2 ? '#fff' : 'rgba(255,255,255,0.7)',
                 }}
               >
                 All V2
