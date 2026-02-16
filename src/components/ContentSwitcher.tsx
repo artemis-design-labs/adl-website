@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useContentVersion, SectionName } from '@/context/ContentVersionContext';
+import { useContentVersion, SectionName, ColorPalette } from '@/context/ContentVersionContext';
 
 const sections: { name: SectionName; label: string }[] = [
   { name: 'navigation', label: 'Navigation' },
@@ -14,9 +14,15 @@ const sections: { name: SectionName; label: string }[] = [
   { name: 'footer', label: 'Footer' },
 ];
 
+const palettes: { id: ColorPalette; label: string; color: string }[] = [
+  { id: 'default', label: 'Sage Green', color: '#7D8471' },
+  { id: 'ocean', label: 'Ocean Blue', color: '#4A90A4' },
+  { id: 'terracotta', label: 'Terracotta', color: '#B87A5A' },
+];
+
 export function ContentSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
-  const { sectionVersions, setSectionVersion, setAllVersions } = useContentVersion();
+  const { sectionVersions, setSectionVersion, setAllVersions, colorPalette, setColorPalette } = useContentVersion();
 
   return (
     <>
@@ -88,6 +94,60 @@ export function ContentSwitcher() {
             }}>
               Toggle between V1 (main) and V2 (AI-first rebrand) for each section
             </p>
+          </div>
+
+          {/* Color Palette Section */}
+          <div style={{
+            marginBottom: '24px',
+            padding: '12px',
+            backgroundColor: '#252525',
+            borderRadius: '8px',
+            border: '1px solid #333',
+          }}>
+            <p style={{
+              fontSize: '10px',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              color: 'rgba(255,255,255,0.6)',
+              marginBottom: '12px',
+              margin: '0 0 12px 0',
+            }}>
+              Color Palette
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              {palettes.map((palette) => (
+                <button
+                  key={palette.id}
+                  onClick={() => setColorPalette(palette.id)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    padding: '10px 12px',
+                    fontSize: '12px',
+                    fontWeight: 500,
+                    borderRadius: '6px',
+                    border: colorPalette === palette.id ? `2px solid ${palette.color}` : '2px solid transparent',
+                    cursor: 'pointer',
+                    backgroundColor: colorPalette === palette.id ? 'rgba(255,255,255,0.1)' : '#333',
+                    color: colorPalette === palette.id ? '#fff' : 'rgba(255,255,255,0.7)',
+                    transition: 'all 0.15s ease',
+                  }}
+                >
+                  <span style={{
+                    width: '20px',
+                    height: '20px',
+                    backgroundColor: palette.color,
+                    borderRadius: '4px',
+                    flexShrink: 0,
+                  }}></span>
+                  <span>{palette.label}</span>
+                  {colorPalette === palette.id && (
+                    <span style={{ marginLeft: 'auto', fontSize: '10px', color: palette.color }}>✓</span>
+                  )}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Global Toggle */}

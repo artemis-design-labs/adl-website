@@ -4,89 +4,118 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import { cn } from '@/lib/cn';
 
 export default function WorkPage() {
+  const metrics = [
+    { value: '40%', label: 'Faster case processing', project: 'HANDS AI' },
+    { value: '60%', label: 'Decision time reduction', project: 'Insight' },
+    { value: '94%', label: 'First-PR approval rate', project: 'Average' },
+    { value: '3-4', label: 'Weeks to delivery', project: 'Average' },
+  ];
+
   const projects = [
     {
       title: 'HANDS AI',
       client: 'Public Healthcare',
-      description:
-        'A WIC case management platform powered by a custom AI agent that helps caseworkers serve vulnerable populations faster and more effectively.',
+      description: 'A WIC case management platform powered by a custom AI agent that helps caseworkers serve vulnerable populations faster and more effectively.',
       image: '/images/hands-ai/cover.png',
       link: '/hands-ai',
       tags: ['AI', 'Case Management', 'Healthcare'],
-      metrics: {
-        label: 'Faster case processing',
-        value: '40%',
-      },
+      metric: { value: '40%', label: 'Faster case processing' },
     },
     {
       title: 'Insight',
       client: 'Department of Education',
-      description:
-        'A school data platform designed for DOE officials to make fast, informed decisions using predictive AI and comprehensive data visualization.',
+      description: 'A school data platform designed for DOE officials to make fast, informed decisions using predictive AI and comprehensive data visualization.',
       image: '/images/insight/cover.png',
       link: '/insight',
       tags: ['AI', 'Education', 'Data Visualization'],
-      metrics: {
-        label: 'Decision time reduction',
-        value: '60%',
-      },
+      metric: { value: '60%', label: 'Decision time reduction' },
     },
     {
       title: 'My Project Inbox',
       client: 'Enterprise Engineering',
-      description:
-        'A project management platform that streamlines workflows for internal engineering teams, reducing context switching and improving delivery velocity.',
+      description: 'A project management platform that streamlines workflows for internal engineering teams, reducing context switching and improving delivery velocity.',
       image: '/images/my-project-inbox/cover.png',
       link: '/my-project-inbox',
       tags: ['Project Management', 'Enterprise'],
-      metrics: {
-        label: 'Team velocity increase',
-        value: '25%',
-      },
+      metric: { value: '25%', label: 'Team velocity increase' },
     },
   ];
 
   return (
-    <div className="bg-white text-gray-900 min-h-screen">
+    <div className="min-h-screen bg-[var(--color-bg-primary)]">
       <Navigation />
 
       {/* Hero */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-end">
-            <div>
-              <p className="text-sm font-medium text-teal-600 uppercase tracking-wider mb-4">
-                Our Work
-              </p>
-              <h1 className="text-4xl md:text-5xl font-semibold text-gray-900 leading-tight">
-                Transformations, not just deliverables
-              </h1>
-            </div>
-            <div>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                Every project starts with a problem and ends with measurable impact. Here are some
-                of the teams we&apos;ve helped ship faster.
-              </p>
-            </div>
+          <div className="max-w-3xl">
+            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+              Our Work
+            </span>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)] mb-6 leading-tight">
+              Transformations,<br />Not Just Deliverables
+            </h1>
+            <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed">
+              Every project starts with a problem and ends with measurable impact. Here are some of the teams we've helped ship faster.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Projects */}
-      <section className="pb-20 md:pb-28">
+      {/* Metrics / Results */}
+      <section className="py-16 bg-[var(--color-bg-secondary)]">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="space-y-16 md:space-y-24">
+          <header className="text-center mb-12">
+            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+              Results
+            </span>
+            <h2 className="text-2xl md:text-3xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
+              Measurable Impact
+            </h2>
+          </header>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--color-border)]" style={{ border: '1px solid var(--color-border)' }}>
+            {metrics.map((metric, index) => (
+              <div key={index} className="bg-[var(--color-bg-elevated)] p-6 text-center">
+                <span className="text-3xl lg:text-4xl font-medium text-[var(--color-text-primary)] block mb-2">
+                  {metric.value}
+                </span>
+                <span className="text-sm text-[var(--color-text-secondary)] block mb-1">
+                  {metric.label}
+                </span>
+                <span className="text-xs text-[var(--color-text-muted)]">
+                  {metric.project}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Case Studies */}
+      <section className="py-20 md:py-28">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <header className="text-center mb-16">
+            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+              Case Studies
+            </span>
+            <h2 className="text-2xl md:text-3xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
+              Featured Projects
+            </h2>
+          </header>
+
+          <div className="space-y-16">
             {projects.map((project, idx) => (
               <Link key={idx} href={project.link} className="block group">
                 <article className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                   {/* Image */}
-                  <div
-                    className={`relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 ${
-                      idx % 2 === 1 ? 'lg:order-2' : ''
-                    }`}
-                  >
+                  <div className={cn(
+                    'relative aspect-[4/3] overflow-hidden bg-[var(--color-bg-secondary)]',
+                    idx % 2 === 1 ? 'lg:order-2' : ''
+                  )}>
                     <Image
                       src={project.image}
                       alt={project.title}
@@ -102,7 +131,7 @@ export default function WorkPage() {
                       {project.tags.map((tag, i) => (
                         <span
                           key={i}
-                          className="text-xs font-medium bg-gray-100 text-gray-600 px-3 py-1 rounded-full"
+                          className="text-[10px] tracking-[0.1em] uppercase text-[var(--color-text-muted)] px-2 py-1 border border-[var(--color-border)]"
                         >
                           {tag}
                         </span>
@@ -110,38 +139,32 @@ export default function WorkPage() {
                     </div>
 
                     {/* Title & Client */}
-                    <p className="text-sm text-gray-500 mb-1">{project.client}</p>
-                    <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-4 group-hover:text-teal-600 transition-colors">
+                    <span className="text-xs text-[var(--color-text-muted)] block mb-1">{project.client}</span>
+                    <h3 className="text-2xl md:text-3xl font-medium text-[var(--color-text-primary)] mb-4 group-hover:text-[var(--color-accent)] transition-colors">
                       {project.title}
-                    </h2>
+                    </h3>
 
                     {/* Description */}
-                    <p className="text-gray-600 leading-relaxed mb-6">{project.description}</p>
+                    <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                      {project.description}
+                    </p>
 
                     {/* Metric */}
-                    <div className="inline-flex items-center gap-3 p-4 bg-teal-50 rounded-lg border border-teal-100">
-                      <span className="text-2xl font-semibold text-teal-600">
-                        {project.metrics.value}
+                    <div className="inline-flex items-center gap-3 p-4 bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+                      <span className="text-2xl font-medium text-[var(--color-text-primary)]">
+                        {project.metric.value}
                       </span>
-                      <span className="text-sm text-gray-600">{project.metrics.label}</span>
+                      <span className="text-sm text-[var(--color-text-secondary)]">
+                        {project.metric.label}
+                      </span>
                     </div>
 
                     {/* Link */}
                     <div className="mt-6">
-                      <span className="inline-flex items-center text-teal-600 font-medium group-hover:text-teal-700">
+                      <span className="inline-flex items-center text-xs tracking-[0.08em] uppercase text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)] transition-colors">
                         View case study
-                        <svg
-                          className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 5l7 7-7 7"
-                          />
+                        <svg className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
                         </svg>
                       </span>
                     </div>
@@ -154,19 +177,29 @@ export default function WorkPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 md:py-28 bg-gray-50 border-t border-gray-200">
+      <section className="py-20 md:py-28 bg-[var(--color-text-primary)]">
         <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-6">
-            Want results like these?
-          </h2>
-          <p className="text-lg text-gray-600 mb-10">
-            Let&apos;s talk about how we can help your team ship faster and more consistently.
-          </p>
+          <header className="mb-10">
+            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+              Get Started
+            </span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-bg-primary)] mb-6">
+              Want Results Like These?
+            </h2>
+            <p className="text-lg text-[var(--color-text-muted)]">
+              Let's talk about how we can help your team ship faster and more consistently.
+            </p>
+          </header>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center px-8 py-4 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors"
+            className={cn(
+              'inline-block text-xs tracking-[0.08em] uppercase px-8 py-4',
+              'bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]',
+              'hover:bg-[var(--color-bg-secondary)]',
+              'transition-colors duration-150'
+            )}
           >
-            Start a conversation
+            Start a Conversation
           </Link>
         </div>
       </section>

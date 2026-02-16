@@ -201,3 +201,49 @@
   --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.25);
   --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
+/* ============================================
+   COLOR PALETTE A/B TEST VARIANTS
+   ============================================ */
+
+/* PALETTE 2: Ocean Blue - Modern, Tech-Forward */
+[data-palette="ocean"] {
+  --color-accent: #4A90A4;               /* Ocean blue */
+  --color-accent-hover: #3D7A8C;         /* Darker blue */
+  --color-accent-muted: #7AB3C4;         /* Lighter blue */
+  --color-accent-subtle: rgba(74, 144, 164, 0.08);
+
+  --color-accent-warm: #6B8A99;          /* Muted steel blue */
+  --color-accent-warm-hover: #5A7A89;    /* Darker steel */
+  --color-accent-warm-subtle: rgba(107, 138, 153, 0.1);
+
+  --color-success: #4A8A7A;              /* Teal */
+  --color-border-accent: #4A90A4;        /* Ocean blue border */
+}
+
+[data-theme="dark"][data-palette="ocean"] {
+  --color-accent: #5BA4B8;               /* Brighter ocean for dark */
+  --color-accent-hover: #4A90A4;
+  --color-accent-muted: #3D7A8C;
+}
+
+/* PALETTE 3: Warm Terracotta - Earthy, Approachable */
+[data-palette="terracotta"] {
+  --color-accent: #B87A5A;               /* Terracotta */
+  --color-accent-hover: #A06A4C;         /* Darker terracotta */
+  --color-accent-muted: #D4A088;         /* Lighter terracotta */
+  --color-accent-subtle: rgba(184, 122, 90, 0.08);
+
+  --color-accent-warm: #C4956E;          /* Warm sand */
+  --color-accent-warm-hover: #B08560;    /* Darker sand */
+  --color-accent-warm-subtle: rgba(196, 149, 110, 0.1);
+
+  --color-success: #8A9A6B;              /* Olive */
+  --color-border-accent: #B87A5A;        /* Terracotta border */
+}
+
+[data-theme="dark"][data-palette="terracotta"] {
+  --color-accent: #CC8A68;               /* Brighter terracotta for dark */
+  --color-accent-hover: #B87A5A;
+  --color-accent-muted: #A06A4C;
+}

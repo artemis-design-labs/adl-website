@@ -3,311 +3,246 @@
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import { cn } from '@/lib/cn';
 
 export default function ServicesPage() {
   const services = [
     {
       id: 'creation',
+      number: 'A',
       title: 'Design System Creation',
-      headline: 'From Scattered Components to Shipping Machine',
+      tagline: 'From chaos to foundation',
       price: '$15,000 - $25,000',
       timeline: '3-4 weeks',
-      narrative:
-        "You know the drill. A button here, a modal there, three different shades of gray that were supposed to be the same. Your product looks like five different apps had a meeting. We've seen it a hundred times. Here's what we do about it.",
+      description: 'You either don\'t have a design system, or you have fragments scattered across your product. We come in, audit the chaos, and build you a real foundation.',
       deliverables: [
-        {
-          item: '25+ core Figma components with variants',
-          detail:
-            'Buttons, inputs, cards, modals, tables, navigation, forms—all with loading, error, and empty states',
-        },
-        {
-          item: 'React/TypeScript component library',
-          detail:
-            'Production-ready code with Tailwind CSS, virtualization for 10K+ rows, keyboard navigation',
-        },
-        {
-          item: 'Design tokens',
-          detail: 'Colors, typography, spacing, shadows—systematized for consistency across your product',
-        },
-        {
-          item: 'Dark mode support',
-          detail: 'Built-in from day one, not bolted on later',
-        },
-        {
-          item: 'Storybook documentation',
-          detail: "Interactive component docs your devs will actually use",
-        },
-        {
-          item: 'WCAG 2.1 AA accessibility',
-          detail: 'Pass enterprise accessibility audits on the first attempt',
-        },
+        '25+ production-ready components in Figma AND your framework',
+        'Design tokens that sync across your entire product',
+        'Full state coverage: loading, error, empty, partial, permission-denied',
+        'Documentation your engineers will actually read',
+        'Accessibility baked in from day one',
+        'Delivered in 3-4 weeks via AI-accelerated workflow',
       ],
-      triggerEvents: [
-        'You just closed your Seed/Series A and need to ship faster',
-        'You lost a deal because the prospect said your product looked "unpolished"',
-        'Your first designer just joined and inherited chaos',
-        'Your engineers are complaining about "design drift" in retros',
-        "You're preparing for an accessibility or SOC2 audit",
-      ],
-      guarantee: 'Developers ship 2x faster within 30 days or extended support free',
     },
     {
       id: 'maintenance',
+      number: 'B',
       title: 'Design System Maintenance',
-      headline: 'Your Design System Is Drifting. We Fix That.',
+      tagline: 'Keep it alive, keep it aligned',
       price: '$4,000 - $6,000/month',
       timeline: '6-month minimum',
-      narrative:
-        "The Figma file is not the truth. It's a picture of the truth. And that picture is already out of date. Design systems rot without dedicated maintenance. Figma drifts from code. Documentation goes stale. New devs don't know which components to use. We prevent all of that.",
+      description: 'Design systems die without maintenance. Components drift. Documentation goes stale. We become your dedicated design systems team.',
       deliverables: [
-        {
-          item: 'Up to 5 new components per month',
-          detail: 'Built to your existing standards and patterns',
-        },
-        {
-          item: 'Monthly Figma ↔ React sync audits',
-          detail: 'We catch drift before it becomes technical debt',
-        },
-        {
-          item: 'Continuous documentation updates',
-          detail: 'Every change is documented as it happens',
-        },
-        {
-          item: '2-4 hours monthly office hours',
-          detail: 'Direct access to our team for questions and guidance',
-        },
-        {
-          item: 'Quarterly health assessments',
-          detail: 'Comprehensive review of adoption, consistency, and areas for improvement',
-        },
-        {
-          item: 'Same-week turnaround on critical requests',
-          detail: 'When you need something fast, we deliver',
-        },
+        'Up to 5 new components per month',
+        'AI-powered drift detection between Figma and code',
+        'Monthly health reports that prove ROI',
+        'Dedicated office hours for your team',
+        'Priority response for critical requests',
+        'Governance support that scales with you',
       ],
-      triggerEvents: [
-        'Your existing design system is experiencing Figma-code drift',
-        "You don't have a dedicated design system maintainer",
-        "You're launching new product lines and need components fast",
-        'Multiple teams are building simultaneously with no coordination',
-        'Design system support tickets are piling up',
-      ],
-      guarantee: 'Same-week turnaround on critical component requests',
     },
     {
       id: 'handoff',
-      title: 'Design-to-Code Handoff',
-      headline: 'Your Figma Files Deserve to Ship',
+      number: 'C',
+      title: 'Design-to-Code',
+      tagline: 'Your designs, shipped',
       price: '$8,000 - $15,000',
       timeline: '2-3 weeks',
-      narrative:
-        "You have designers. You have Figma files. What you don't have is frontend bandwidth. Those beautiful designs are sitting in a folder while your engineers rebuild buttons for the third time. We convert your existing Figma library into production-ready React components.",
+      description: 'Your designs are sitting in Figma. Your engineering team doesn\'t have the frontend bandwidth. Our AI converts your existing designs into production-ready code.',
       deliverables: [
-        {
-          item: 'Production-ready React components',
-          detail: 'TypeScript, Tailwind CSS, optimized for your tech stack',
-        },
-        {
-          item: 'Full state coverage',
-          detail: 'Loading, error, empty, partial, permission-denied states',
-        },
-        {
-          item: 'Virtualization for large datasets',
-          detail: 'Tables and lists that handle 10K+ rows without lag',
-        },
-        {
-          item: 'WCAG 2.1 AA accessibility',
-          detail: 'Keyboard navigation, ARIA labels, screen reader support',
-        },
-        {
-          item: 'API integration patterns',
-          detail: 'Data binding scaffolding, loading states, error handling',
-        },
-        {
-          item: 'Performance benchmarks',
-          detail: 'Documented render times and optimization recommendations',
-        },
+        'Production-ready components built to your codebase standards',
+        'Full state coverage beyond the happy path',
+        'Performance optimization for enterprise-scale data',
+        'Comprehensive Storybook documentation',
+        'Code that passes review on the first PR',
+        'Delivered in weeks, not months',
       ],
-      triggerEvents: [
-        'You have Figma designs ready but no frontend bandwidth to implement',
-        'Previous attempts with freelancers or Figma-to-code tools produced unusable output',
-        'Your engineering team is strong on backend but frontend-constrained',
-        "You have a tight deadline for a feature launch or redesign",
-      ],
-      guarantee: '100% design fidelity or we revise until it matches',
     },
   ];
 
   return (
-    <div className="bg-white text-gray-900 min-h-screen">
+    <div className="min-h-screen bg-[var(--color-bg-primary)]">
       <Navigation />
 
-      {/* Hero */}
+      {/* Hero Section */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-sm font-medium text-teal-600 uppercase tracking-wider mb-4">
-              Services
-            </p>
-            <h1 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-6 leading-tight">
-              Three ways we eliminate design-dev friction
+          <header className="max-w-3xl">
+            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+              Products & Services
+            </span>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)] mb-6 leading-tight">
+              Three Ways to Eliminate<br />Design-Dev Friction
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              Every engagement is scoped, priced, and delivered on a fixed timeline. No hourly
-              billing. No scope creep. No surprises.
+            <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed">
+              Every engagement is scoped, priced, and delivered on a fixed timeline. No hourly billing. No scope creep. No surprises.
             </p>
-          </div>
+          </header>
         </div>
       </section>
 
-      {/* Quick Navigation */}
-      <section className="border-y border-gray-200 bg-gray-50 sticky top-16 md:top-20 z-40">
+      {/* DS Creation Section */}
+      <section id="creation" className="py-20 md:py-28 bg-[var(--color-bg-secondary)]">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="flex gap-2 py-4 overflow-x-auto">
-            {services.map((service) => (
-              <a
-                key={service.id}
-                href={`#${service.id}`}
-                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-white rounded-lg border border-transparent hover:border-gray-200 transition-all whitespace-nowrap"
-              >
-                {service.title}
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
+          <header className="text-center mb-16">
+            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+              Service A
+            </span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
+              Design System Creation
+            </h2>
+            <p className="mt-4 text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+              {services[0].description}
+            </p>
+          </header>
 
-      {/* Services */}
-      {services.map((service, index) => (
-        <section
-          key={service.id}
-          id={service.id}
-          className={`py-20 md:py-28 ${index % 2 === 1 ? 'bg-gray-50' : ''}`}
-        >
-          <div className="max-w-6xl mx-auto px-6 lg:px-8">
-            <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
-              {/* Left column - Overview */}
-              <div className="lg:col-span-1">
-                <div className="lg:sticky lg:top-40">
-                  <p className="text-4xl md:text-5xl font-semibold text-teal-600 mb-2">
-                    {service.price}
-                  </p>
-                  <p className="text-gray-500 mb-6">{service.timeline}</p>
-                  <h2 className="text-2xl font-semibold text-gray-900 mb-4">{service.headline}</h2>
-                  <p className="text-gray-600 leading-relaxed mb-8">{service.narrative}</p>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center justify-center px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors"
-                  >
-                    Get started
-                  </Link>
-                </div>
-              </div>
-
-              {/* Right column - Details */}
-              <div className="lg:col-span-2 space-y-12">
-                {/* Deliverables */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-[var(--color-border)]" style={{ border: '1px solid var(--color-border)' }}>
+            <div className="bg-[var(--color-bg-elevated)] p-6 lg:p-8">
+              <h3 className="text-xs tracking-[0.1em] uppercase text-[var(--color-accent)] mb-6">What You Get</h3>
+              <ul className="space-y-3">
+                {services[0].deliverables.map((item, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-[var(--color-text-secondary)]">
+                    <span className="text-[var(--color-text-muted)]">-</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-[var(--color-bg-elevated)] p-6 lg:p-8">
+              <h3 className="text-xs tracking-[0.1em] uppercase text-[var(--color-accent)] mb-6">Investment</h3>
+              <div className="space-y-4">
                 <div>
-                  <p className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-6">
-                    What you get
-                  </p>
-                  <div className="space-y-6">
-                    {service.deliverables.map((d, i) => (
-                      <div key={i} className="flex gap-4">
-                        <span className="text-teal-600 mt-1 flex-shrink-0">✓</span>
-                        <div>
-                          <p className="font-medium text-gray-900 mb-1">{d.item}</p>
-                          <p className="text-gray-600 text-sm">{d.detail}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                  <span className="text-3xl font-medium text-[var(--color-text-primary)]">{services[0].price}</span>
                 </div>
-
-                {/* Trigger Events */}
-                <div>
-                  <p className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-6">
-                    This service is for you if...
-                  </p>
-                  <ul className="space-y-3">
-                    {service.triggerEvents.map((item, i) => (
-                      <li key={i} className="flex gap-3 items-start">
-                        <span className="text-gray-400">→</span>
-                        <span className="text-gray-700">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                <div className="pt-4 border-t border-[var(--color-border)]">
+                  <span className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider">Timeline: </span>
+                  <span className="text-sm text-[var(--color-text-primary)]">{services[0].timeline}</span>
                 </div>
-
-                {/* Guarantee */}
-                <div className="p-6 bg-teal-50 border border-teal-200 rounded-xl">
-                  <p className="text-sm font-medium text-teal-700 uppercase tracking-wider mb-2">
-                    Our guarantee
-                  </p>
-                  <p className="text-gray-800">{service.guarantee}</p>
-                </div>
+                <p className="text-sm text-[var(--color-text-secondary)]">
+                  Best for startups with no design system or fragmented components.
+                </p>
               </div>
             </div>
           </div>
-        </section>
-      ))}
+        </div>
+      </section>
 
-      {/* FAQ */}
-      <section className="py-20 md:py-28 border-t border-gray-200">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <h2 className="text-3xl font-semibold text-gray-900 mb-12">Common questions</h2>
+      {/* DS Maintenance Section */}
+      <section id="maintenance" className="py-20 md:py-28 bg-[var(--color-bg-primary)]">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <header className="text-center mb-16">
+            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+              Service B
+            </span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
+              Design System Maintenance
+            </h2>
+            <p className="mt-4 text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+              {services[1].description}
+            </p>
+          </header>
 
-          <div className="space-y-8">
-            {[
-              {
-                q: 'What tech stack do you work with?',
-                a: "We primarily deliver React/TypeScript with Tailwind CSS. We can also work with Vue, Angular, or vanilla CSS—just depends on your setup.",
-              },
-              {
-                q: 'Do we need a designer on our team?',
-                a: "No. We handle the complete design and development of your design system. Having a designer helps with ongoing adoption, but isn't required.",
-              },
-              {
-                q: 'What if we already have some components?',
-                a: 'We audit what you have and either incorporate, rebuild, or replace based on quality. No wasted work.',
-              },
-              {
-                q: 'How do you handle revisions?',
-                a: "Each service includes a revision period. For Design System Creation, that's 30 days of support. For Handoff, we revise until it matches your Figma exactly.",
-              },
-              {
-                q: 'Can we start with Handoff and add Maintenance later?',
-                a: 'Absolutely. Many clients start with a one-time project and add Maintenance once they see the value.',
-              },
-              {
-                q: 'Why not just use Figma-to-code tools like Locofy or Anima?',
-                a: "Those tools deliver 80% solutions that require significant developer cleanup. We deliver production-ready code that passes code review on the first submission. The time you'd spend fixing automated output is better spent shipping features.",
-              },
-            ].map((faq, i) => (
-              <div key={i} className="border-b border-gray-200 pb-8">
-                <p className="text-lg font-medium text-gray-900 mb-2">{faq.q}</p>
-                <p className="text-gray-600">{faq.a}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-[var(--color-border)]" style={{ border: '1px solid var(--color-border)' }}>
+            <div className="bg-[var(--color-bg-elevated)] p-6 lg:p-8">
+              <h3 className="text-xs tracking-[0.1em] uppercase text-[var(--color-accent)] mb-6">What You Get</h3>
+              <ul className="space-y-3">
+                {services[1].deliverables.map((item, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-[var(--color-text-secondary)]">
+                    <span className="text-[var(--color-text-muted)]">-</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-[var(--color-bg-elevated)] p-6 lg:p-8">
+              <h3 className="text-xs tracking-[0.1em] uppercase text-[var(--color-accent)] mb-6">Investment</h3>
+              <div className="space-y-4">
+                <div>
+                  <span className="text-3xl font-medium text-[var(--color-text-primary)]">{services[1].price}</span>
+                </div>
+                <div className="pt-4 border-t border-[var(--color-border)]">
+                  <span className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider">Commitment: </span>
+                  <span className="text-sm text-[var(--color-text-primary)]">{services[1].timeline}</span>
+                </div>
+                <p className="text-sm text-[var(--color-text-secondary)]">
+                  Best for companies with existing systems experiencing drift.
+                </p>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 md:py-28 bg-gray-900">
+      {/* Design-to-Code Section */}
+      <section id="handoff" className="py-20 md:py-28 bg-[var(--color-bg-secondary)]">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <header className="text-center mb-16">
+            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+              Service C
+            </span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
+              Design-to-Code
+            </h2>
+            <p className="mt-4 text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+              {services[2].description}
+            </p>
+          </header>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-[var(--color-border)]" style={{ border: '1px solid var(--color-border)' }}>
+            <div className="bg-[var(--color-bg-elevated)] p-6 lg:p-8">
+              <h3 className="text-xs tracking-[0.1em] uppercase text-[var(--color-accent)] mb-6">What You Get</h3>
+              <ul className="space-y-3">
+                {services[2].deliverables.map((item, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-[var(--color-text-secondary)]">
+                    <span className="text-[var(--color-text-muted)]">-</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-[var(--color-bg-elevated)] p-6 lg:p-8">
+              <h3 className="text-xs tracking-[0.1em] uppercase text-[var(--color-accent)] mb-6">Investment</h3>
+              <div className="space-y-4">
+                <div>
+                  <span className="text-3xl font-medium text-[var(--color-text-primary)]">{services[2].price}</span>
+                </div>
+                <div className="pt-4 border-t border-[var(--color-border)]">
+                  <span className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider">Timeline: </span>
+                  <span className="text-sm text-[var(--color-text-primary)]">{services[2].timeline}</span>
+                </div>
+                <p className="text-sm text-[var(--color-text-secondary)]">
+                  Best for teams with Figma ready but struggling with implementation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 md:py-28 bg-[var(--color-text-primary)]">
         <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
-            Not sure which service you need?
-          </h2>
-          <p className="text-xl text-gray-400 mb-10">
-            Book a 15-minute call. We&apos;ll review your current setup and recommend the right
-            approach.
-          </p>
+          <header className="mb-10">
+            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+              Get Started
+            </span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-bg-primary)] mb-6">
+              Not Sure Which Service You Need?
+            </h2>
+            <p className="text-lg text-[var(--color-text-muted)]">
+              Book a 15-minute call. We'll review your current setup and recommend the right approach.
+            </p>
+          </header>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-900 font-medium rounded-lg hover:bg-gray-100 transition-colors"
+            className={cn(
+              'inline-block text-xs tracking-[0.08em] uppercase px-8 py-4',
+              'bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]',
+              'hover:bg-[var(--color-bg-secondary)]',
+              'transition-colors duration-150'
+            )}
           >
-            Book a discovery call
+            Book a Discovery Call
           </Link>
         </div>
       </section>

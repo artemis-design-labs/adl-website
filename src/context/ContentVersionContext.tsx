@@ -1,8 +1,9 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 export type ContentVersion = 'v1' | 'v2';
+export type ColorPalette = 'default' | 'ocean' | 'terracotta';
 
 export type SectionName =
   | 'hero'
@@ -20,6 +21,8 @@ interface ContentVersionContextType {
   sectionVersions: SectionVersions;
   setSectionVersion: (section: SectionName, version: ContentVersion) => void;
   setAllVersions: (version: ContentVersion) => void;
+  colorPalette: ColorPalette;
+  setColorPalette: (palette: ColorPalette) => void;
 }
 
 const defaultVersions: SectionVersions = {
@@ -37,6 +40,16 @@ const ContentVersionContext = createContext<ContentVersionContextType | undefine
 
 export function ContentVersionProvider({ children }: { children: ReactNode }) {
   const [sectionVersions, setSectionVersions] = useState<SectionVersions>(defaultVersions);
+  const [colorPalette, setColorPaletteState] = useState<ColorPalette>('default');
+
+  // Apply palette to document
+  useEffect(() => {
+    if (colorPalette === 'default') {
+      document.documentElement.removeAttribute('data-palette');
+    } else {
+      document.documentElement.setAttribute('data-palette', colorPalette);
+    }
+  }, [colorPalette]);
 
   const setSectionVersion = (section: SectionName, version: ContentVersion) => {
     setSectionVersions(prev => ({ ...prev, [section]: version }));
@@ -50,8 +63,18 @@ export function ContentVersionProvider({ children }: { children: ReactNode }) {
     setSectionVersions(allSame);
   };
 
+  const setColorPalette = (palette: ColorPalette) => {
+    setColorPaletteState(palette);
+  };
+
   return (
-    <ContentVersionContext.Provider value={{ sectionVersions, setSectionVersion, setAllVersions }}>
+    <ContentVersionContext.Provider value={{
+      sectionVersions,
+      setSectionVersion,
+      setAllVersions,
+      colorPalette,
+      setColorPalette
+    }}>
       {children}
     </ContentVersionContext.Provider>
   );

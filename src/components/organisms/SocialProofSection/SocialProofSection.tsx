@@ -5,6 +5,8 @@ import { cn } from '@/lib/cn';
 
 // V1 Content (Main Branch)
 const V1_CONTENT = {
+  metricsEyebrow: 'By The Numbers',
+  metricsHeadline: 'Results That Speak',
   metrics: [
     { value: '40%', label: 'Faster design-to-code', description: 'Average velocity improvement' },
     { value: '25+', label: 'Components per system', description: 'Production-ready with full states' },
@@ -25,18 +27,22 @@ const V1_CONTENT = {
       company: 'Series A Fintech',
     },
   ],
+  clientsEyebrow: 'Our Clients',
+  clientsHeadline: 'Helping teams at companies you\'d recognize',
 };
 
 // V2 Content (AI-First Rebrand)
 const V2_CONTENT = {
+  metricsEyebrow: 'By The Numbers',
+  metricsHeadline: 'AI-Powered Results',
   metrics: [
     { value: '190K+', label: 'Training images', description: 'Powering our proprietary AI models' },
     { value: '3-4 weeks', label: 'Not 3-4 months', description: 'Average delivery for a full design system' },
     { value: '5 states', label: 'Per component', description: 'Loading, error, empty, partial, permission-denied' },
     { value: '0', label: 'Figma-only deliverables', description: 'Every design ships with production-ready code' },
   ],
-  testimonialsEyebrow: "From Founders Who've Been Where You Are",
-  testimonialsHeadline: "We don't have clients. We have founders who trust us with their infrastructure.",
+  testimonialsEyebrow: 'Testimonials',
+  testimonialsHeadline: "Founders Who Trust Us With Their Infrastructure",
   testimonials: [
     {
       quote: "We'd burned $40K on an agency that delivered Figma files our engineers couldn't use. ADL delivered Figma and production-ready React in three weeks — and the code actually passed review. As a founder, I didn't know that was possible.",
@@ -54,6 +60,8 @@ const V2_CONTENT = {
       company: 'Series B Analytics Platform',
     },
   ],
+  clientsEyebrow: 'Our Clients',
+  clientsHeadline: 'Helping teams at companies you\'d recognize',
 };
 
 export function SocialProofSection() {
@@ -61,7 +69,7 @@ export function SocialProofSection() {
   const content = version === 'v1' ? V1_CONTENT : V2_CONTENT;
 
   return (
-    <section className="py-20 md:py-28 bg-[var(--color-bg-secondary)] relative">
+    <div className="relative">
       {/* Version indicator */}
       <div className="absolute top-4 right-4 z-10">
         <span className={cn(
@@ -72,45 +80,52 @@ export function SocialProofSection() {
         </span>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 lg:px-8">
-        {/* Metrics */}
-        <div className="grid grid-cols-2 md:grid-cols-4 border border-[var(--color-border)]">
-          {content.metrics.map((metric, index) => (
-            <div
-              key={index}
-              className={cn(
-                'p-6 text-center',
-                'border-[var(--color-border)]',
-                index < 2 && 'border-b md:border-b-0',
-                index % 2 === 0 && 'border-r',
-                index < 2 && 'md:border-r'
-              )}
-            >
-              <div className="text-2xl md:text-3xl font-medium text-[var(--color-text-primary)] mb-1">
-                {metric.value}
-              </div>
-              <div className="text-xs tracking-[0.08em] uppercase text-[var(--color-text-secondary)] mb-1">
-                {metric.label}
-              </div>
-              <div className="text-xs text-[var(--color-text-muted)]">
-                {metric.description}
-              </div>
-            </div>
-          ))}
-        </div>
+      {/* Metrics Section */}
+      <section className="py-20 md:py-28 bg-[var(--color-bg-primary)]">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <header className="text-center mb-16">
+            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+              {content.metricsEyebrow}
+            </span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
+              {content.metricsHeadline}
+            </h2>
+          </header>
 
-        {/* Testimonials Section */}
-        <div className="mt-20">
-          <div className="text-center mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--color-border)]" style={{ border: '1px solid var(--color-border)' }}>
+            {content.metrics.map((metric, index) => (
+              <div
+                key={index}
+                className="bg-[var(--color-bg-elevated)] p-6 text-center"
+              >
+                <div className="text-2xl md:text-3xl font-medium text-[var(--color-text-primary)] mb-1">
+                  {metric.value}
+                </div>
+                <div className="text-xs tracking-[0.08em] uppercase text-[var(--color-text-secondary)] mb-1">
+                  {metric.label}
+                </div>
+                <div className="text-xs text-[var(--color-text-muted)]">
+                  {metric.description}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 md:py-28 bg-[var(--color-bg-secondary)]">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8">
+          <header className="text-center mb-16">
             <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
               {content.testimonialsEyebrow}
             </span>
-            <h2 className="text-2xl md:text-3xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
               {content.testimonialsHeadline}
             </h2>
-          </div>
+          </header>
 
-          <div className="grid gap-px bg-[var(--color-border)] border border-[var(--color-border)]">
+          <div className="grid gap-px bg-[var(--color-border)]" style={{ border: '1px solid var(--color-border)' }}>
             {content.testimonials.map((testimonial, index) => (
               <div
                 key={index}
@@ -139,22 +154,30 @@ export function SocialProofSection() {
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Client logos placeholder */}
-        <div className="mt-16 pt-12 border-t border-[var(--color-border)]">
-          <p className="text-center text-xs tracking-[0.1em] uppercase text-[var(--color-text-muted)] mb-8">
-            Helping teams at companies you&apos;d recognize
-          </p>
+      {/* Clients Section */}
+      <section className="py-20 md:py-28 bg-[var(--color-bg-primary)]">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8">
+          <header className="text-center mb-12">
+            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+              {content.clientsEyebrow}
+            </span>
+            <h2 className="text-2xl md:text-3xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
+              {content.clientsHeadline}
+            </h2>
+          </header>
+
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
             {[1, 2, 3, 4, 5].map((i) => (
               <div
                 key={i}
-                className="w-20 h-6 bg-[var(--color-border)]"
+                className="w-24 h-8 bg-[var(--color-border)]"
               />
             ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

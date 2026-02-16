@@ -26,11 +26,10 @@ export default function Navigation() {
   }, []);
 
   const navLinks = [
-    { href: '/products', label: 'Products' },
-    { href: '/services', label: 'Services' },
-    { href: '/work', label: 'Work' },
-    { href: '/pricing', label: 'Pricing' },
     { href: '/about', label: 'About' },
+    { href: '/services', label: 'Products & Services' },
+    { href: '/our-ai', label: 'Our AI' },
+    { href: '/work', label: 'Work' },
   ];
 
   return (

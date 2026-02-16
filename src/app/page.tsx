@@ -4,9 +4,9 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Hero } from '@/components/organisms/Hero';
 import { ProblemSection } from '@/components/organisms/ProblemSection';
-import { ServicesSection } from '@/components/organisms/ServicesSection';
+import { HowItWorksSection } from '@/components/organisms/HowItWorksSection';
+import { OurAIPreviewSection } from '@/components/organisms/OurAIPreviewSection';
 import { SocialProofSection } from '@/components/organisms/SocialProofSection';
-import { CaseStudySection } from '@/components/organisms/CaseStudySection';
 import { CTASection } from '@/components/organisms/CTASection';
 
 export default function HomePage() {
@@ -20,14 +20,14 @@ export default function HomePage() {
       {/* Problem - The 5 emotional truths that resonate with startup founders */}
       <ProblemSection />
 
-      {/* Services - Three pathways to eliminate design-dev friction */}
-      <ServicesSection />
+      {/* How It Works - Our three-step process */}
+      <HowItWorksSection />
 
-      {/* Social Proof - Metrics, testimonials, and trust signals */}
+      {/* Our AI - Preview of our AI capabilities */}
+      <OurAIPreviewSection />
+
+      {/* Our Clients - Metrics, testimonials, and trust signals */}
       <SocialProofSection />
-
-      {/* Case Study - Featured before/after with real impact */}
-      <CaseStudySection />
 
       {/* CTA - Final conversion point */}
       <CTASection />

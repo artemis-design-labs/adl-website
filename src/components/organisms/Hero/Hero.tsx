@@ -9,9 +9,9 @@ import { useSectionVersion } from '@/context/ContentVersionContext';
 // V1 Content (Main Branch)
 const V1_CONTENT = {
   eyebrow: 'AI-Powered Design Infrastructure',
-  headline1: 'From Bootstrapped to Unicorn',
-  headline2: 'We Grow with You.',
-  subheadline: 'We combine human expertise with AI-powered delivery to solve design-to-development friction permanently.',
+  headline1: 'From Bootstrap to Unicorn',
+  headline2: 'We Make Your Design Scalable.',
+  subheadline: 'We combine human expertise with AI-powered internal tooling to solve design-to-development friction permanently.',
   cta1: { label: 'About us', href: '#about' },
   cta2: { label: 'Get a Free Audit', href: '/contact?type=audit' },
   trustIndicator: 'Trusted by product teams at Series A–C startups',

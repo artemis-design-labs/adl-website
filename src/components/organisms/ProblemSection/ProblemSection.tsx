@@ -6,7 +6,7 @@ import { cn } from '@/lib/cn';
 // V1 Content (Main Branch)
 const V1_CONTENT = {
   eyebrow: 'From Inconvenience to Emergency',
-  headline: "This is what's slowing you down.\nAnd it's getting worse.",
+  headline: "You don't need more Designers\nYou need better Infrastructure",
   description: "Design-dev friction follows your growth curve—except it compounds faster. We've mapped the patterns across hundreds of startups and built the infrastructure to break the cycle.",
   cards: [
     {
@@ -35,7 +35,7 @@ const V1_CONTENT = {
       detail: "Documentation nobody reads. Components nobody trusts. Now your team builds around the system instead of with it—and you're paying for maintenance on infrastructure that creates more friction than it solves.",
     },
   ],
-  transition: "These problems are predictable. They don't require more headcount to solve—they require better infrastructure. That's why we built ours differently.",
+  transition: '',
 };
 
 // V2 Content (AI-First Rebrand)
@@ -129,11 +129,13 @@ export function ProblemSection() {
         </div>
 
         {/* Transition text */}
-        <div className="mt-16 pt-16 border-t border-[var(--color-border)]">
-          <p className="text-center text-base md:text-lg text-[var(--color-text-secondary)] max-w-3xl mx-auto">
-            {content.transition}
-          </p>
-        </div>
+        {content.transition && (
+          <div className="mt-16 pt-16 border-t border-[var(--color-border)]">
+            <p className="text-center text-base md:text-lg text-[var(--color-text-secondary)] max-w-3xl mx-auto">
+              {content.transition}
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -7,6 +7,7 @@ import { cn } from '@/lib/cn';
 
 // V1 Content (Main Branch)
 const V1_CONTENT = {
+  eyebrow: 'Get Started',
   headline: 'Ready to stop debugging handoffs?',
   subheadline: "Let's have a conversation about what you're building. No pitch deck. No pressure. Just a real talk about your design challenges.",
   primaryCta: { label: 'Book a Conversation', href: '/contact' },
@@ -16,6 +17,7 @@ const V1_CONTENT = {
 
 // V2 Content (AI-First Rebrand)
 const V2_CONTENT = {
+  eyebrow: 'Get Started',
   headline: "Let's Have a Founder-to-Founder Conversation",
   subheadline: "No pitch deck. No pressure. Just a real talk about what you're building, what's slowing you down, and whether we're the right fit. We've been on your side of this call — we know what you're looking for.",
   primaryCta: { label: 'Book a Conversation', href: '/contact' },
@@ -29,7 +31,7 @@ export function CTASection() {
   const content = version === 'v1' ? V1_CONTENT : V2_CONTENT;
 
   return (
-    <section className="py-20 md:py-28 bg-[var(--color-bg-secondary)] relative">
+    <section className="py-20 md:py-28 bg-[var(--color-text-primary)] relative">
       {/* Version indicator */}
       <div className="absolute top-4 right-4 z-10">
         <span className={cn(
@@ -41,25 +43,28 @@ export function CTASection() {
       </div>
 
       <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
-        {/* Headline */}
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)] mb-6">
-          {content.headline}
-        </h2>
-
-        {/* Subheadline */}
-        <p className="text-base md:text-lg text-[var(--color-text-secondary)] max-w-xl mx-auto mb-10">
-          {content.subheadline}
-        </p>
+        {/* Header */}
+        <header className="mb-10">
+          <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+            {content.eyebrow}
+          </span>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-bg-primary)] mb-6">
+            {content.headline}
+          </h2>
+          <p className="text-base md:text-lg text-[var(--color-text-muted)] max-w-xl mx-auto">
+            {content.subheadline}
+          </p>
+        </header>
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link href={content.primaryCta.href}>
-            <Button size="lg" className="min-w-[180px]">
+            <Button size="lg" variant="secondary" className="min-w-[180px] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]">
               {content.primaryCta.label}
             </Button>
           </Link>
           <Link href={content.secondaryCta.href}>
-            <Button variant="secondary" size="lg" className="min-w-[180px]">
+            <Button variant="ghost" size="lg" className="min-w-[180px] text-[var(--color-bg-primary)] border-[var(--color-bg-primary)] hover:bg-[var(--color-bg-primary)]/10">
               {content.secondaryCta.label}
             </Button>
           </Link>
@@ -72,7 +77,7 @@ export function CTASection() {
 
         {/* V2 Additional note */}
         {version === 'v2' && (
-          <p className="mt-6 text-sm text-[var(--color-text-secondary)] max-w-lg mx-auto">
+          <p className="mt-6 text-sm text-[var(--color-text-muted)] max-w-lg mx-auto">
             {V2_CONTENT.additionalNote}
           </p>
         )}
