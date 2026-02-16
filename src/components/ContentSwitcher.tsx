@@ -3,15 +3,12 @@
 import { useState } from 'react';
 import { useContentVersion, SectionName, ColorPalette } from '@/context/ContentVersionContext';
 
+// Only Homepage sections that have V1/V2 content variants
 const sections: { name: SectionName; label: string }[] = [
-  { name: 'navigation', label: 'Navigation' },
   { name: 'hero', label: 'Hero' },
   { name: 'problem', label: 'Problem Section' },
-  { name: 'services', label: 'Services / How It Works' },
   { name: 'socialProof', label: 'Social Proof' },
-  { name: 'caseStudy', label: 'Case Study' },
   { name: 'cta', label: 'CTA Section' },
-  { name: 'footer', label: 'Footer' },
 ];
 
 const palettes: { id: ColorPalette; label: string; color: string }[] = [
@@ -92,7 +89,18 @@ export function ContentSwitcher() {
               marginTop: '4px',
               margin: '4px 0 0 0',
             }}>
-              Toggle between V1 (main) and V2 (AI-first rebrand) for each section
+              Toggle between V1 and V2 content variants
+            </p>
+            <p style={{
+              fontSize: '10px',
+              color: '#f59e0b',
+              marginTop: '8px',
+              margin: '8px 0 0 0',
+              padding: '6px 8px',
+              backgroundColor: 'rgba(245, 158, 11, 0.1)',
+              borderRadius: '4px',
+            }}>
+              Note: Only affects Homepage sections
             </p>
           </div>
 

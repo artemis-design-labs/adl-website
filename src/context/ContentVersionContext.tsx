@@ -5,15 +5,15 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 export type ContentVersion = 'v1' | 'v2';
 export type ColorPalette = 'default' | 'ocean' | 'terracotta';
 
+// All sections with V1/V2 content support
+// Note: Only hero, problem, socialProof, cta are shown in ContentSwitcher (Homepage sections)
 export type SectionName =
   | 'hero'
   | 'problem'
   | 'services'
   | 'socialProof'
   | 'caseStudy'
-  | 'cta'
-  | 'navigation'
-  | 'footer';
+  | 'cta';
 
 type SectionVersions = Record<SectionName, ContentVersion>;
 
@@ -32,8 +32,6 @@ const defaultVersions: SectionVersions = {
   socialProof: 'v1',
   caseStudy: 'v1',
   cta: 'v1',
-  navigation: 'v1',
-  footer: 'v1',
 };
 
 const ContentVersionContext = createContext<ContentVersionContextType | undefined>(undefined);
