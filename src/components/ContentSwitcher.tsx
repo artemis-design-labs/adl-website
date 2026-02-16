@@ -33,8 +33,12 @@ const pageDisplayNames: Record<PageName, string> = {
   contact: 'Contact',
 };
 
+type SaveStatus = 'idle' | 'saving' | 'success' | 'error';
+
 export function ContentSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>('idle');
+  const [saveMessage, setSaveMessage] = useState('');
   const pathname = usePathname();
   const { sectionVersions, setSectionVersion, setAllVersionsForPage, colorPalette, setColorPalette } = useContentVersion();
 
@@ -44,6 +48,43 @@ export function ContentSwitcher() {
   // Check if all sections on current page are same version
   const allV1 = sections.every(s => sectionVersions[s.name] === 'v1');
   const allV2 = sections.every(s => sectionVersions[s.name] === 'v2');
+
+  const handleSave = async () => {
+    setSaveStatus('saving');
+    setSaveMessage('');
+
+    try {
+      const response = await fetch('/api/save-content-config', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sectionVersions,
+          colorPalette,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSaveStatus('success');
+        setSaveMessage('Saved & pushed to test-content-1!');
+        // Reset status after 3 seconds
+        setTimeout(() => {
+          setSaveStatus('idle');
+          setSaveMessage('');
+        }, 3000);
+      } else {
+        setSaveStatus('error');
+        setSaveMessage(data.error || 'Failed to save');
+      }
+    } catch (error) {
+      setSaveStatus('error');
+      setSaveMessage('Network error');
+      console.error('Save error:', error);
+    }
+  };
 
   if (!currentPage) {
     return null; // Don't show switcher on pages not in our list
@@ -130,6 +171,66 @@ export function ContentSwitcher() {
             }}>
               Current Page: {pageDisplayNames[currentPage]}
             </div>
+          </div>
+
+          {/* Save Button */}
+          <div style={{
+            marginBottom: '24px',
+            padding: '12px',
+            backgroundColor: '#1e3a5f',
+            borderRadius: '8px',
+            border: '1px solid #2563eb',
+          }}>
+            <p style={{
+              fontSize: '10px',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              color: 'rgba(255,255,255,0.6)',
+              marginBottom: '8px',
+              margin: '0 0 8px 0',
+            }}>
+              Save Configuration
+            </p>
+            <button
+              onClick={handleSave}
+              disabled={saveStatus === 'saving'}
+              style={{
+                width: '100%',
+                padding: '12px 16px',
+                fontSize: '12px',
+                fontWeight: 600,
+                borderRadius: '6px',
+                border: 'none',
+                cursor: saveStatus === 'saving' ? 'wait' : 'pointer',
+                backgroundColor: saveStatus === 'success' ? '#16a34a' : saveStatus === 'error' ? '#dc2626' : '#2563eb',
+                color: '#fff',
+                transition: 'all 0.15s ease',
+                opacity: saveStatus === 'saving' ? 0.7 : 1,
+              }}
+            >
+              {saveStatus === 'saving' ? 'Saving...' :
+               saveStatus === 'success' ? '✓ Saved!' :
+               saveStatus === 'error' ? 'Error' :
+               'Save to test-content-1'}
+            </button>
+            {saveMessage && (
+              <p style={{
+                marginTop: '8px',
+                fontSize: '10px',
+                color: saveStatus === 'success' ? '#4ade80' : '#f87171',
+                margin: '8px 0 0 0',
+              }}>
+                {saveMessage}
+              </p>
+            )}
+            <p style={{
+              marginTop: '8px',
+              fontSize: '9px',
+              color: 'rgba(255,255,255,0.4)',
+              margin: '8px 0 0 0',
+            }}>
+              Commits current palette + section versions to Git
+            </p>
           </div>
 
           {/* Color Palette Section */}
