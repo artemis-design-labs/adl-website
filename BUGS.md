@@ -149,6 +149,45 @@ No fix needed - this is expected Next.js behavior when modifying providers.
 
 ---
 
+## Bug #006: V1/V2 Content Switching Not Working (Same Content for Both)
+
+**Date:** February 2025
+**Severity:** High
+**Status:** ✅ Resolved
+
+### Symptoms
+When toggling between V1 and V2 in the ContentSwitcher, the page content didn't change - it always showed V2 content regardless of selection.
+
+### Root Cause
+Section name mismatch between components and ContentVersionContext. After making the context page-aware with prefixed section names (e.g., `home-hero`, `home-problem`), the components were still using the old unprefixed names (e.g., `hero`, `problem`).
+
+### Location
+- `src/components/organisms/Hero/Hero.tsx`
+- `src/components/organisms/ProblemSection/ProblemSection.tsx`
+- `src/components/organisms/SocialProofSection/SocialProofSection.tsx`
+- `src/components/organisms/CTASection/CTASection.tsx`
+- `src/components/organisms/HowItWorksSection/HowItWorksSection.tsx`
+- `src/components/organisms/OurAIPreviewSection/OurAIPreviewSection.tsx`
+
+### Solution
+1. Updated all homepage components to use page-prefixed section names:
+   - `useSectionVersion('hero')` → `useSectionVersion('home-hero')`
+   - `useSectionVersion('problem')` → `useSectionVersion('home-problem')`
+   - `useSectionVersion('socialProof')` → `useSectionVersion('home-socialProof')`
+   - `useSectionVersion('cta')` → `useSectionVersion('home-cta')`
+
+2. Added V1/V2 content variants to HowItWorksSection and OurAIPreviewSection (they previously only had single content)
+
+### Files Modified
+- `src/components/organisms/Hero/Hero.tsx`
+- `src/components/organisms/ProblemSection/ProblemSection.tsx`
+- `src/components/organisms/SocialProofSection/SocialProofSection.tsx`
+- `src/components/organisms/CTASection/CTASection.tsx`
+- `src/components/organisms/HowItWorksSection/HowItWorksSection.tsx`
+- `src/components/organisms/OurAIPreviewSection/OurAIPreviewSection.tsx`
+
+---
+
 ## Debugging Tips
 
 ### Clearing Next.js Cache
