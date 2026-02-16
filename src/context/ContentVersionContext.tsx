@@ -137,7 +137,7 @@ const ContentVersionContext = createContext<ContentVersionContextType | undefine
 
 export function ContentVersionProvider({ children }: { children: ReactNode }) {
   const [sectionVersions, setSectionVersions] = useState<SectionVersions>(defaultVersions);
-  const [colorPalette, setColorPaletteState] = useState<ColorPalette>('default');
+  const [colorPalette, setColorPaletteState] = useState<ColorPalette>('ocean');
 
   // Apply palette to document
   useEffect(() => {
