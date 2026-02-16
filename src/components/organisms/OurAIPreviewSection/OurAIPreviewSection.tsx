@@ -2,8 +2,10 @@
 
 import Link from 'next/link';
 import { cn } from '@/lib/cn';
+import { useSectionVersion } from '@/context/ContentVersionContext';
 
-const CONTENT = {
+// V1 Content (Main Branch)
+const V1_CONTENT = {
   eyebrow: 'Our AI',
   headline: 'Built Different.\nTrained on Production.',
   description: 'We didn\'t bolt AI onto an existing workflow. We built proprietary tools from the ground up, trained on 190,000+ labeled design-to-code examples.',
@@ -27,29 +29,66 @@ const CONTENT = {
   },
 };
 
+// V2 Content (AI-First Rebrand)
+const V2_CONTENT = {
+  eyebrow: 'The Technology Behind ADL',
+  headline: 'AI That Actually Works.\nBuilt From the Trenches.',
+  description: 'We got tired of AI tools that generated code nobody wanted to deploy. So we built our own — trained on production codebases, validated by senior engineers, and battle-tested across hundreds of projects.',
+  features: [
+    {
+      title: 'Built by Founders, For Founders',
+      description: 'We\'ve been on your side of this problem. Burning runway on agencies. Watching engineers fix AI-generated garbage. We built something that actually works because we needed it ourselves.',
+    },
+    {
+      title: '190,000+ Training Images',
+      description: 'Not scraped from the internet. Not generated from tutorials. Real design-to-code pairs from production codebases at companies you\'d recognize.',
+    },
+    {
+      title: 'Human Quality Control',
+      description: 'Our AI generates. Our senior engineers validate. Every component passes the same review your team would run. That\'s why the code actually ships.',
+    },
+  ],
+  cta: {
+    text: 'See How Our AI Works',
+    href: '/our-ai',
+  },
+};
+
 export function OurAIPreviewSection() {
-  const [line1, line2] = CONTENT.headline.split('\n');
+  const version = useSectionVersion('home-ourAiPreview');
+  const content = version === 'v1' ? V1_CONTENT : V2_CONTENT;
+  const [line1, line2] = content.headline.split('\n');
 
   return (
-    <section className="py-20 md:py-28 bg-[var(--color-bg-secondary)]">
+    <section className="py-20 md:py-28 bg-[var(--color-bg-secondary)] relative">
+      {/* Version indicator */}
+      <div className="absolute top-4 right-4 z-10">
+        <span className={cn(
+          'px-2 py-1 text-[10px] font-medium uppercase tracking-wider rounded',
+          version === 'v1' ? 'bg-blue-600 text-white' : 'bg-green-600 text-white'
+        )}>
+          {version === 'v1' ? 'V1' : 'V2'}
+        </span>
+      </div>
+
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <header className="text-center mb-16">
           <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
-            {CONTENT.eyebrow}
+            {content.eyebrow}
           </span>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)] leading-tight">
             {line1}<br />
             {line2}
           </h2>
           <p className="mt-6 text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-            {CONTENT.description}
+            {content.description}
           </p>
         </header>
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--color-border)]" style={{ border: '1px solid var(--color-border)' }}>
-          {CONTENT.features.map((feature, index) => (
+          {content.features.map((feature, index) => (
             <article
               key={index}
               className="bg-[var(--color-bg-elevated)] p-6 lg:p-8 flex flex-col"
@@ -67,7 +106,7 @@ export function OurAIPreviewSection() {
         {/* CTA */}
         <div className="mt-12 text-center">
           <Link
-            href={CONTENT.cta.href}
+            href={content.cta.href}
             className={cn(
               'inline-block text-xs tracking-[0.08em] uppercase px-6 py-3',
               'border border-[var(--color-border)]',
@@ -76,7 +115,7 @@ export function OurAIPreviewSection() {
               'transition-colors duration-150'
             )}
           >
-            {CONTENT.cta.text}
+            {content.cta.text}
           </Link>
         </div>
       </div>

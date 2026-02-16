@@ -65,7 +65,7 @@ const V2_CONTENT = {
 };
 
 export function SocialProofSection() {
-  const version = useSectionVersion('socialProof');
+  const version = useSectionVersion('home-socialProof');
   const content = version === 'v1' ? V1_CONTENT : V2_CONTENT;
 
   return (

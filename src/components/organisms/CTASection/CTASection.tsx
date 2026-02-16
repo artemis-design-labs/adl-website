@@ -27,7 +27,7 @@ const V2_CONTENT = {
 };
 
 export function CTASection() {
-  const version = useSectionVersion('cta');
+  const version = useSectionVersion('home-cta');
   const content = version === 'v1' ? V1_CONTENT : V2_CONTENT;
 
   return (

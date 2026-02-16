@@ -32,7 +32,7 @@ const TYPING_SPEED = 35;
 const START_DELAY = 400;
 
 export function Hero() {
-  const version = useSectionVersion('hero');
+  const version = useSectionVersion('home-hero');
   const content = version === 'v1' ? V1_CONTENT : V2_CONTENT;
 
   const [displayedText1, setDisplayedText1] = useState('');

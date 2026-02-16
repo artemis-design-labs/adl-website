@@ -74,7 +74,7 @@ const V2_CONTENT = {
 };
 
 export function ProblemSection() {
-  const version = useSectionVersion('problem');
+  const version = useSectionVersion('home-problem');
   const content = version === 'v1' ? V1_CONTENT : V2_CONTENT;
   const [line1, line2] = content.headline.split('\n');
 
