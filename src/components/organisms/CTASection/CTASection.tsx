@@ -45,13 +45,13 @@ export function CTASection() {
       <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
         {/* Header */}
         <header className="mb-10">
-          <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+          <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
             {content.eyebrow}
           </span>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-bg-primary)] mb-6">
             {content.headline}
           </h2>
-          <p className="text-base md:text-lg text-[var(--color-text-muted)] max-w-xl mx-auto">
+          <p className="text-base md:text-lg text-[var(--color-text-secondary)] max-w-xl mx-auto">
             {content.subheadline}
           </p>
         </header>
@@ -71,13 +71,13 @@ export function CTASection() {
         </div>
 
         {/* Trust note */}
-        <p className="mt-10 text-xs tracking-[0.1em] uppercase text-[var(--color-text-muted)]">
+        <p className="mt-10 text-xs tracking-[0.1em] uppercase text-[var(--color-text-secondary)]">
           {content.trustNote}
         </p>
 
         {/* V2 Additional note */}
         {version === 'v2' && (
-          <p className="mt-6 text-sm text-[var(--color-text-muted)] max-w-lg mx-auto">
+          <p className="mt-6 text-sm text-[var(--color-text-secondary)] max-w-lg mx-auto">
             {V2_CONTENT.additionalNote}
           </p>
         )}

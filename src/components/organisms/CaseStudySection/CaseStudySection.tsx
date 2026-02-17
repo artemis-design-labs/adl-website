@@ -90,7 +90,7 @@ export function CaseStudySection() {
       <div className="max-w-5xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+          <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
             {content.eyebrow}
           </span>
           <h2 className="text-2xl md:text-3xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
@@ -105,7 +105,7 @@ export function CaseStudySection() {
         <div className="border border-[var(--color-border)]">
           {/* Header */}
           <div className="p-8 md:p-10 border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
-            <span className="text-[10px] tracking-[0.15em] uppercase text-[var(--color-text-muted)]">
+            <span className="text-sm tracking-[0.15em] uppercase text-[var(--color-text-secondary)]">
               {caseStudy.category}
             </span>
             <h3 className="text-2xl md:text-3xl font-medium text-[var(--color-text-primary)] mt-2">
@@ -126,7 +126,7 @@ export function CaseStudySection() {
                   <div className="text-xl md:text-2xl font-medium text-[var(--color-text-primary)]">
                     {metric.value}
                   </div>
-                  <div className="text-xs text-[var(--color-text-muted)] mt-1">
+                  <div className="text-xs text-[var(--color-text-secondary)] mt-1">
                     {metric.label}
                   </div>
                 </div>
@@ -137,7 +137,7 @@ export function CaseStudySection() {
             <div className="grid md:grid-cols-2 gap-8 mb-10">
               {/* Before */}
               <div>
-                <h4 className="text-xs tracking-[0.1em] uppercase text-[var(--color-text-muted)] mb-4">
+                <h4 className="text-xs tracking-[0.1em] uppercase text-[var(--color-text-secondary)] mb-4">
                   Before
                 </h4>
                 <ul className="space-y-2">
@@ -146,7 +146,7 @@ export function CaseStudySection() {
                       key={index}
                       className="flex items-start gap-3 text-sm text-[var(--color-text-secondary)]"
                     >
-                      <span className="text-[var(--color-text-muted)]">—</span>
+                      <span className="text-[var(--color-text-secondary)]">—</span>
                       {item}
                     </li>
                   ))}
@@ -155,7 +155,7 @@ export function CaseStudySection() {
 
               {/* After */}
               <div>
-                <h4 className="text-xs tracking-[0.1em] uppercase text-[var(--color-text-muted)] mb-4">
+                <h4 className="text-xs tracking-[0.1em] uppercase text-[var(--color-text-secondary)] mb-4">
                   After
                 </h4>
                 <ul className="space-y-2">
@@ -180,7 +180,7 @@ export function CaseStudySection() {
                 </blockquote>
                 <div className="text-sm">
                   <span className="text-[var(--color-text-secondary)]">{V2_CONTENT.quote.author}</span>
-                  <span className="text-[var(--color-text-muted)]"> — {V2_CONTENT.quote.company}</span>
+                  <span className="text-[var(--color-text-secondary)]"> — {V2_CONTENT.quote.company}</span>
                 </div>
               </div>
             )}

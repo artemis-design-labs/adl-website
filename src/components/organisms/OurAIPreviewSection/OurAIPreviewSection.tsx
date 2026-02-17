@@ -74,12 +74,12 @@ export function OurAIPreviewSection() {
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <header className="text-center mb-16">
-          <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+          <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
             {content.eyebrow}
           </span>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)] leading-tight">
             {line1}<br />
-            {line2}
+            <span className="text-[var(--color-accent)]">{line2}</span>
           </h2>
           <p className="mt-6 text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto">
             {content.description}

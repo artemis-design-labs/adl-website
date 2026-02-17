@@ -6,7 +6,7 @@ import { cn } from '@/lib/cn';
 // V1 Content (Main Branch)
 const V1_CONTENT = {
   eyebrow: 'From Inconvenience to Emergency',
-  headline: "You don't need more Designers\nYou need better Infrastructure",
+  headline: "You don't need to expand your Team\nYou need Better Infrastructure",
   description: "Design-dev friction follows your growth curve—except it compounds faster. We've mapped the patterns across hundreds of startups and built the infrastructure to break the cycle.",
   cards: [
     {
@@ -93,12 +93,12 @@ export function ProblemSection() {
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <header className="text-center mb-16">
-          <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+          <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
             {content.eyebrow}
           </span>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)] leading-tight">
             {line1}<br />
-            {line2}
+            <span className="text-[var(--color-accent)]">{line2}</span>
           </h2>
           <p className="mt-6 text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto">
             {content.description}
@@ -115,7 +115,7 @@ export function ProblemSection() {
               key={index}
               className="bg-[var(--color-bg-elevated)] p-6 lg:p-8 flex flex-col"
             >
-              <span className="text-[10px] font-medium tracking-[0.15em] text-[var(--color-text-muted)] mb-4">
+              <span className="text-sm font-medium tracking-[0.15em] text-[var(--color-text-secondary)] mb-4">
                 {item.number}
               </span>
               <h3 className="text-base lg:text-lg font-medium text-[var(--color-text-primary)] leading-snug mb-3">

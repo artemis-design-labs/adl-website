@@ -141,7 +141,7 @@ export function ServicesSection() {
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <header className="text-center mb-16">
-          <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+          <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
             {content.eyebrow}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)] leading-tight">
@@ -156,7 +156,7 @@ export function ServicesSection() {
             {content.description}
           </p>
           {version === 'v2' && (
-            <p className="mt-4 text-sm text-[var(--color-text-muted)] max-w-2xl mx-auto">
+            <p className="mt-4 text-sm text-[var(--color-text-secondary)] max-w-2xl mx-auto">
               {V2_CONTENT.subDescription}
             </p>
           )}
@@ -172,7 +172,7 @@ export function ServicesSection() {
               key={service.id}
               className="bg-[var(--color-bg-elevated)] p-6 lg:p-8 flex flex-col"
             >
-              <span className="text-[10px] font-medium tracking-[0.15em] text-[var(--color-text-muted)] mb-4">
+              <span className="text-sm font-medium tracking-[0.15em] text-[var(--color-text-secondary)] mb-4">
                 {service.number}
               </span>
 
@@ -194,7 +194,7 @@ export function ServicesSection() {
                     key={featureIndex}
                     className="flex items-start gap-2 text-sm text-[var(--color-text-secondary)]"
                   >
-                    <span className="text-[var(--color-text-muted)]">—</span>
+                    <span className="text-[var(--color-text-secondary)]">—</span>
                     {feature}
                   </li>
                 ))}
@@ -205,11 +205,11 @@ export function ServicesSection() {
                 {version === 'v2' && (
                   <div className="space-y-2 mb-4">
                     <div className="flex justify-between text-xs">
-                      <span className="text-[var(--color-text-muted)] uppercase tracking-wider">Investment</span>
+                      <span className="text-[var(--color-text-secondary)] uppercase tracking-wider">Investment</span>
                       <span className="text-[var(--color-text-primary)] font-medium">{V2_CONTENT.services[serviceIndex].investment}</span>
                     </div>
                     <div className="flex justify-between text-xs">
-                      <span className="text-[var(--color-text-muted)] uppercase tracking-wider">Timeline</span>
+                      <span className="text-[var(--color-text-secondary)] uppercase tracking-wider">Timeline</span>
                       <span className="text-[var(--color-text-primary)] font-medium">{V2_CONTENT.services[serviceIndex].timeline}</span>
                     </div>
                   </div>

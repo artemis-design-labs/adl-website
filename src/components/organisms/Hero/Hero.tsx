@@ -11,10 +11,10 @@ const V1_CONTENT = {
   eyebrow: 'AI-Powered Design Infrastructure',
   headline1: 'From Bootstrap to Unicorn',
   headline2: 'We Make Your Design Scalable.',
-  subheadline: 'We combine human expertise with AI-powered internal tooling to solve design-to-development friction permanently.',
+  subheadline: 'We combine Human Expertise with AI-powered Internal Tooling to solve Design-to-Development Friction permanently.',
   cta1: { label: 'About us', href: '#about' },
   cta2: { label: 'Get a Free Audit', href: '/contact?type=audit' },
-  trustIndicator: 'Trusted by product teams at Series A–C startups',
+  trustIndicator: 'Trusted by product teams in Health, Fintech, and Enterprise',
 };
 
 // V2 Content (AI-First Rebrand)
@@ -172,8 +172,8 @@ export function Hero() {
             </Link>
           </div>
 
-          {/* Trust indicator - understated */}
-          <p className="mt-16 text-xs tracking-[0.1em] uppercase text-[var(--color-text-muted)]">
+          {/* Trust indicator */}
+          <p className="mt-16 text-xs tracking-[0.1em] uppercase text-[var(--color-text-secondary)]">
             {content.trustIndicator}
           </p>
         </div>
@@ -181,7 +181,7 @@ export function Hero() {
 
       {/* Scroll indicator - minimal, geometric */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <span className="text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
+        <span className="text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)]">
           Scroll
         </span>
         <div className="w-px h-8 bg-[var(--color-border)]" />

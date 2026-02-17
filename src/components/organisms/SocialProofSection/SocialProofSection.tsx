@@ -84,7 +84,7 @@ export function SocialProofSection() {
       <section className="py-20 md:py-28 bg-[var(--color-bg-primary)]">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <header className="text-center mb-16">
-            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
               {content.metricsEyebrow}
             </span>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
@@ -104,7 +104,7 @@ export function SocialProofSection() {
                 <div className="text-xs tracking-[0.08em] uppercase text-[var(--color-text-secondary)] mb-1">
                   {metric.label}
                 </div>
-                <div className="text-xs text-[var(--color-text-muted)]">
+                <div className="text-xs text-[var(--color-text-secondary)]">
                   {metric.description}
                 </div>
               </div>
@@ -117,7 +117,7 @@ export function SocialProofSection() {
       <section className="py-20 md:py-28 bg-[var(--color-bg-secondary)]">
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
           <header className="text-center mb-16">
-            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
               {content.testimonialsEyebrow}
             </span>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
@@ -145,7 +145,7 @@ export function SocialProofSection() {
                     <div className="text-sm font-medium text-[var(--color-text-primary)]">
                       {testimonial.author}
                     </div>
-                    <div className="text-xs text-[var(--color-text-muted)]">
+                    <div className="text-xs text-[var(--color-text-secondary)]">
                       {testimonial.company}
                     </div>
                   </div>
@@ -160,7 +160,7 @@ export function SocialProofSection() {
       <section className="py-20 md:py-28 bg-[var(--color-bg-primary)]">
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
           <header className="text-center mb-12">
-            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
               {content.clientsEyebrow}
             </span>
             <h2 className="text-2xl md:text-3xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">

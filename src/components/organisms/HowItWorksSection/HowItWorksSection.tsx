@@ -13,7 +13,7 @@ const V1_CONTENT = {
       number: '01',
       title: 'Discovery & Audit',
       description: 'We start by understanding your current state. What exists? What\'s broken? What does your team actually need? We audit your design files, codebase, and workflows to identify gaps and opportunities.',
-      duration: '1-2 days',
+      duration: '1-2 weeks',
     },
     {
       number: '02',
@@ -40,13 +40,13 @@ const V2_CONTENT = {
       number: '01',
       title: 'Free Audit',
       description: 'Send us your Figma files. Within 48 hours, our AI analyzes your design system and identifies gaps, inconsistencies, and opportunities. You keep the audit whether you work with us or not.',
-      duration: '48 hours',
+      duration: '1-2 weeks',
     },
     {
       number: '02',
       title: 'AI-Accelerated Build',
       description: 'Our proprietary AI tools handle the heavy lifting — generating production-ready React components from your designs. Our senior engineers review everything. You get code that actually passes review.',
-      duration: '3-4 weeks',
+      duration: '2-4 weeks',
     },
     {
       number: '03',
@@ -77,12 +77,12 @@ export function HowItWorksSection() {
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <header className="text-center mb-16">
-          <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+          <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
             {content.eyebrow}
           </span>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)] leading-tight">
             {line1}<br />
-            {line2}
+            <span className="text-[var(--color-accent)]">{line2}</span>
           </h2>
           <p className="mt-6 text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto">
             {content.description}
@@ -96,7 +96,7 @@ export function HowItWorksSection() {
               key={index}
               className="bg-[var(--color-bg-elevated)] p-6 lg:p-8 flex flex-col"
             >
-              <span className="text-[10px] font-medium tracking-[0.15em] text-[var(--color-text-muted)] mb-4">
+              <span className="text-sm font-medium tracking-[0.15em] text-[var(--color-text-secondary)] mb-4">
                 {step.number}
               </span>
               <h3 className="text-lg lg:text-xl font-medium text-[var(--color-text-primary)] leading-snug mb-3">
@@ -106,7 +106,7 @@ export function HowItWorksSection() {
                 {step.description}
               </p>
               <div className="mt-6 pt-4 border-t border-[var(--color-border)]">
-                <span className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider">
+                <span className="text-xs text-[var(--color-text-secondary)] uppercase tracking-wider">
                   Duration: {step.duration}
                 </span>
               </div>
