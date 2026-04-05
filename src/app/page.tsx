@@ -3,6 +3,7 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Hero } from '@/components/organisms/Hero';
+import { AboutUsSection } from '@/components/organisms/AboutUsSection';
 import { ProblemSection } from '@/components/organisms/ProblemSection';
 import { HowItWorksSection } from '@/components/organisms/HowItWorksSection';
 import { OurAIPreviewSection } from '@/components/organisms/OurAIPreviewSection';
@@ -16,6 +17,9 @@ export default function HomePage() {
 
       {/* Hero - Emotional hook with founder-to-founder positioning */}
       <Hero />
+
+      {/* About Us - Two column intro section */}
+      <AboutUsSection />
 
       {/* Problem - The 5 emotional truths that resonate with startup founders */}
       <ProblemSection />
