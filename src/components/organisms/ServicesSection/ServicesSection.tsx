@@ -122,7 +122,7 @@ const V2_CONTENT = {
 };
 
 export function ServicesSection() {
-  const version = useSectionVersion('services');
+  const version = useSectionVersion('services-hero');
   const content = version === 'v1' ? V1_CONTENT : V2_CONTENT;
   const headlineLines = content.headline.split('\n');
 
