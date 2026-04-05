@@ -71,7 +71,7 @@ const V2_CONTENT = {
 };
 
 export function CaseStudySection() {
-  const version = useSectionVersion('caseStudy');
+  const version = useSectionVersion('work-caseStudies');
   const content = version === 'v1' ? V1_CONTENT : V2_CONTENT;
   const caseStudy = content.caseStudy;
 
