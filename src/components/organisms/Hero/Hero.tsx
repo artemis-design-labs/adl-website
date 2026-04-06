@@ -11,10 +11,10 @@ const V1_CONTENT = {
   eyebrow: 'AI-Powered Design Infrastructure',
   headline1: 'From Bootstrap to Unicorn',
   headline2: 'We Make Your Design Scalable.',
-  subheadline: 'We combine Human Expertise with AI-powered Internal Tooling to solve Design-to-Development Friction permanently.',
-  cta1: { label: 'About us', href: '#about' },
+  subheadline:
+    'We partner with enterprise startups to provide dedicated design infrastructure solutions through a combination of human expertise and AI-powered internal tooling.',
+  cta1: { label: 'Why Us', href: '#pain-points' },
   cta2: { label: 'Get a Free Audit', href: '/contact?type=audit' },
-  trustIndicator: 'Trusted by product teams in Health, Fintech, and Enterprise',
 };
 
 // V2 Content (AI-First Rebrand)
@@ -25,7 +25,6 @@ const V2_CONTENT = {
   subheadline: "We're ex-startup founders who got tired of the design-to-code problem — so we built proprietary AI to solve it. Not another agency. Not another automation tool. A team that's been in your shoes, armed with technology we built from the trenches.",
   cta1: { label: 'Book a Conversation', href: '/contact' },
   cta2: { label: 'Get a Free Audit', href: '/contact?type=audit' },
-  trustIndicator: 'Founded by startup operators. Trusted by product teams from Seed to Series C.',
 };
 
 const TYPING_SPEED = 35;
@@ -171,20 +170,7 @@ export function Hero() {
               </Button>
             </Link>
           </div>
-
-          {/* Trust indicator */}
-          <p className="mt-16 text-xs tracking-[0.1em] uppercase text-[var(--color-text-secondary)]">
-            {content.trustIndicator}
-          </p>
         </div>
-      </div>
-
-      {/* Scroll indicator - minimal, geometric */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <span className="text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)]">
-          Scroll
-        </span>
-        <div className="w-px h-8 bg-[var(--color-border)]" />
       </div>
     </section>
   );

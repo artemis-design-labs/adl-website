@@ -180,12 +180,12 @@
    DARK MODE - Inverted but still sterile
    ============================================ */
 [data-theme="dark"] {
-  --color-bg-primary: #1A1A1A;
-  --color-bg-secondary: #1F1F1F;
-  --color-bg-tertiary: #252525;
-  --color-bg-elevated: #222222;
-  --color-bg-hover: #2A2A2A;
-  --color-bg-inset: #151515;
+  --color-bg-primary: #0E0E0E;
+  --color-bg-secondary: #141414;
+  --color-bg-tertiary: #1A1A1A;
+  --color-bg-elevated: #161616;
+  --color-bg-hover: #1F1F1F;
+  --color-bg-inset: #0A0A0A;
 
   --color-text-primary: #E8E8E8;
   --color-text-secondary: #A0A0A0;

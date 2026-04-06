@@ -46,9 +46,9 @@ This document contains all text content from the Artemis Design Labs website, or
 
 **Eyebrow:** From Inconvenience to Emergency
 
-**Headline:** You don't need to expand your Team / You need Better Infrastructure
+**Headline:** Your Team Is Growing. / Your Design Infrastructure Isn't.
 
-**Description:** Design-dev friction follows your growth curve—except it compounds faster. We've mapped the patterns across hundreds of startups and built the infrastructure to break the cycle.
+**Description:** Design-to-development friction follows your growth curve — except it compounds faster. What starts as a minor annoyance at five engineers becomes a structural bottleneck at fifteen. Here's where it breaks.
 
 **Card 01:** Your engineers are translating Figma files instead of shipping features.
 > Every hour spent decoding design specs is an hour not spent on your product. At 10 engineers, that's 350+ hours per quarter lost to translation. At 50 engineers, the math gets ugly.

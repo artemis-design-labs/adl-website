@@ -18,11 +18,11 @@ export default function HomePage() {
       {/* Hero - Emotional hook with founder-to-founder positioning */}
       <Hero />
 
-      {/* About Us - Two column intro section */}
-      <AboutUsSection />
-
       {/* Problem - The 5 emotional truths that resonate with startup founders */}
       <ProblemSection />
+
+      {/* About Us - Two column intro section */}
+      <AboutUsSection />
 
       {/* How It Works - Our three-step process */}
       <HowItWorksSection />

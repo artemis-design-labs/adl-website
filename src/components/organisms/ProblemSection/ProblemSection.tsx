@@ -5,13 +5,13 @@ import { cn } from '@/lib/cn';
 
 // V1 Content (Main Branch)
 const V1_CONTENT = {
-  eyebrow: 'From Inconvenience to Emergency',
-  headline: "You don't need to expand your Team\nYou need Better Infrastructure",
-  description: "Design-dev friction follows your growth curve—except it compounds faster. We've mapped the patterns across hundreds of startups and built the infrastructure to break the cycle.",
+  eyebrow: 'Why Teams Come to Us',
+  headline: "You're not behind.\nYou're building without the right foundation.",
+  description: "Most B2B startups don't have a design problem. They have an infrastructure problem — and it shows up in ways that compound quietly until they can't be ignored.",
   cards: [
     {
       number: '01',
-      title: 'Your engineers are translating Figma files instead of shipping features.',
+      title: 'Your engineers are deciphering Figma files instead of shipping features.',
       detail: "Every hour spent decoding design specs is an hour not spent on your product. At 10 engineers, that's 350+ hours per quarter lost to translation. At 50 engineers, the math gets ugly.",
     },
     {
@@ -46,8 +46,8 @@ const V2_CONTENT = {
   cards: [
     {
       number: '01',
-      title: 'Your engineers are translating Figma files instead of shipping features.',
-      detail: "We've sat in the sprint retros where this comes up. Every quarter, your engineering team loses 350+ hours to design translation — not building, not shipping, just translating. We built AI that eliminates this entirely. Not by generating sloppy code your team has to fix, but by producing components your senior engineers actually approve.",
+      title: 'Your engineers are deciphering Figma files instead of shipping features.',
+      detail: "We've sat in the sprint retros where this comes up. Every quarter, your engineering team loses 350+ hours to design translation — not building, not shipping, just deciphering. We built AI that eliminates this entirely. Not by generating sloppy code your team has to fix, but by producing components your senior engineers actually approve.",
     },
     {
       number: '02',
@@ -79,7 +79,7 @@ export function ProblemSection() {
   const [line1, line2] = content.headline.split('\n');
 
   return (
-    <section id="about" className="py-20 md:py-28 bg-[var(--color-bg-secondary)] relative">
+    <section id="pain-points" className="py-20 md:py-28 bg-[var(--color-bg-secondary)] relative">
       {/* Version indicator */}
       <div className="absolute top-4 right-4 z-10">
         <span className={cn(

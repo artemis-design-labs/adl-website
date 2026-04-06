@@ -3,6 +3,9 @@
 import { useSectionVersion } from '@/context/ContentVersionContext';
 import { cn } from '@/lib/cn';
 
+const CLIENTS_TRUST_LINE =
+  'Trusted by product teams in Health, Fintech, and Enterprise';
+
 // V1 Content (Main Branch)
 const V1_CONTENT = {
   metricsEyebrow: 'By The Numbers',
@@ -29,6 +32,7 @@ const V1_CONTENT = {
   ],
   clientsEyebrow: 'Our Clients',
   clientsHeadline: 'Helping teams at companies you\'d recognize',
+  clientsTrustLine: CLIENTS_TRUST_LINE,
 };
 
 // V2 Content (AI-First Rebrand)
@@ -62,6 +66,7 @@ const V2_CONTENT = {
   ],
   clientsEyebrow: 'Our Clients',
   clientsHeadline: 'Helping teams at companies you\'d recognize',
+  clientsTrustLine: CLIENTS_TRUST_LINE,
 };
 
 export function SocialProofSection() {
@@ -176,6 +181,10 @@ export function SocialProofSection() {
               />
             ))}
           </div>
+
+          <p className="mt-12 text-center text-xs tracking-[0.1em] uppercase text-[var(--color-text-secondary)]">
+            {content.clientsTrustLine}
+          </p>
         </div>
       </section>
     </div>

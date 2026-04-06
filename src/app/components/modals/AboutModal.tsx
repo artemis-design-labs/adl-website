@@ -33,7 +33,7 @@ export default function AboutModal({ onClose }: AboutModalProps) {
           </div>
 
           {/* Hero Message - Centered and Powerful */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-32">
             <h3 className="text-5xl md:text-6xl font-light text-gray-900 mb-12 leading-tight tracking-tight">
               We believe technology should
               <span className="block font-medium">feel human</span>
@@ -42,11 +42,6 @@ export default function AboutModal({ onClose }: AboutModalProps) {
             <p className="text-xl md:text-2xl text-gray-500 font-light max-w-3xl mx-auto leading-relaxed">
               So we design AI experiences that people actually want to use.
             </p>
-          </div>
-
-          {/* Simple Visual Separator */}
-          <div className="flex justify-center mb-16">
-            <div className="w-px h-24 bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
           </div>
 
           {/* Philosophy Statement */}

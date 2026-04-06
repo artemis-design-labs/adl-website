@@ -7,7 +7,7 @@ export default function AboutUsSection() {
       <div className="max-w-5xl mx-auto px-6">
 
         {/* Hero Message - Centered and Powerful */}
-        <div className="text-center mb-32">
+        <div className="text-center mb-64">
           <h2 className="text-6xl md:text-7xl font-light text-gray-900 mb-12 leading-tight tracking-tight">
             We believe technology should
             <span className="block font-medium">feel human</span>
@@ -16,11 +16,6 @@ export default function AboutUsSection() {
           <p className="text-2xl md:text-3xl text-gray-500 font-light max-w-3xl mx-auto leading-relaxed">
             So we design AI experiences that people actually want to use.
           </p>
-        </div>
-
-        {/* Simple Visual Separator */}
-        <div className="flex justify-center mb-32">
-          <div className="w-px h-24 bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
         </div>
 
         {/* Philosophy Statement */}

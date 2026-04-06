@@ -34,19 +34,24 @@ export function AboutUsSection() {
                 'leading-[1.2]'
               )}
             >
-              We Build Design Systems{' '}
-              <span className="text-[var(--color-accent)]">That Ship</span>
+              Production-Grade Design Systems
+              <br />
+              <span className="text-[var(--color-accent)]">Delivered in Weeks</span>
             </h2>
 
             {/* Description */}
             <div className="space-y-4">
               <p className="text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed">
-                We&apos;re a team of designers and engineers who&apos;ve lived the startup grind.
+                We&apos;re a team of design system architects who have over a decade of experience
+                working with startup teams in building design infrastructures that remove product
+                development bottlenecks.
+              </p>
+              <p className="text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed">
                 We know what it&apos;s like to ship fast, iterate faster, and scale when it matters most.
               </p>
               <p className="text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed">
-                Our mission is simple: eliminate the friction between design and development
-                so your team can focus on building products that matter.
+                Our mission is simple: eliminate the friction between design and development so your team
+                can focus on building products that matter.
               </p>
             </div>
 
