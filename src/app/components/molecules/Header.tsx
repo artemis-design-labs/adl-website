@@ -3,18 +3,20 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
+import { useTheme } from '@/context/ThemeContext'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [isServicesOpen, setIsServicesOpen] = useState(false)
+  const { theme } = useTheme()
 
   return (
-    <header className="bg-white border-b border-gray-300 sticky top-0 z-50">
+    <header className="bg-[var(--color-bg-primary)] border-b border-[var(--color-border)] sticky top-0 z-50">
       <div className="w-full pl-2 pr-8 lg:px-8 flex justify-between items-center h-15">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
           <Image
-            src="/images/logos/adl-logo-1.png"
+            src={theme === 'dark' ? '/images/logos/logo-dark.png' : '/images/logos/logo-light.png'}
             alt="Artemis Design Labs Logo"
             width={150}
             height={60}
@@ -39,7 +41,7 @@ export default function Header() {
               </svg>
             </button>
             {isServicesOpen && (
-              <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+              <div className="absolute top-full left-0 mt-2 w-48 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-md shadow-lg z-50">
                 <Link href="/services/rapid-mvp-design" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                   Rapid MVP Design
                 </Link>
@@ -95,7 +97,7 @@ export default function Header() {
       {isOpen && (
         <nav
           aria-label="Mobile navigation"
-          className="md:hidden px-4 pb-4 flex flex-col space-y-2 bg-white border-t"
+          className="md:hidden px-4 pb-4 flex flex-col space-y-2 bg-[var(--color-bg-primary)] border-t border-[var(--color-border)]"
         >
           <Link href="/work">
             <span className="text-gray-700 hover:text-black text-base">Work</span>
