@@ -212,16 +212,16 @@ export default function OurAIPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 md:py-28 bg-[var(--color-text-primary)]">
+      <section className="py-20 md:py-28 bg-[var(--color-bg-secondary)]">
         <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
           <header className="mb-10">
-            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
+            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
               Get Started
             </span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-bg-primary)] mb-6">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)] mb-6">
               See Our AI in Action
             </h2>
-            <p className="text-lg text-[var(--color-text-muted)]">
+            <p className="text-lg text-[var(--color-text-secondary)]">
               Book a call to see how our AI-powered workflow can accelerate your design-to-code delivery.
             </p>
           </header>
@@ -229,8 +229,8 @@ export default function OurAIPage() {
             href="/contact"
             className={cn(
               'inline-block text-xs tracking-[0.08em] uppercase px-8 py-4',
-              'bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]',
-              'hover:bg-[var(--color-bg-secondary)]',
+              'bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]',
+              'hover:bg-[var(--color-text-secondary)]',
               'transition-colors duration-150'
             )}
           >

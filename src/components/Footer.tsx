@@ -7,14 +7,14 @@ export default function Footer() {
 
   const footerLinks = {
     services: [
-      { href: '/services#creation', label: 'Design System Creation' },
-      { href: '/services#maintenance', label: 'Design System Maintenance' },
-      { href: '/services#handoff', label: 'Design-to-Code Handoff' },
+      { href: '/#about', label: 'Design System Creation' },
+      { href: '/#about', label: 'Design System Maintenance' },
+      { href: '/#about', label: 'Design-to-Code' },
     ],
     company: [
       { href: '/about', label: 'About' },
+      { href: '/our-ai', label: 'Our AI' },
       { href: '/work', label: 'Work' },
-      { href: '/pricing', label: 'Pricing' },
       { href: '/contact', label: 'Contact' },
     ],
   };

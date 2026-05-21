@@ -1,0 +1,1 @@
+export { MetricsTestimonialsSection } from './MetricsTestimonialsSection';

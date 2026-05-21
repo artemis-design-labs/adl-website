@@ -136,6 +136,23 @@ export function ProblemSection() {
             </p>
           </div>
         )}
+
+        {/* About Us Button */}
+        <div className="mt-12 text-left">
+          <a
+            href="#about"
+            className={cn(
+              'inline-flex items-center justify-center gap-2',
+              'px-6 py-3 text-sm',
+              'font-medium tracking-[0.05em] uppercase',
+              'bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]',
+              'hover:bg-[var(--color-text-secondary)]',
+              'transition-colors duration-150'
+            )}
+          >
+            About Us
+          </a>
+        </div>
       </div>
     </section>
   );

@@ -3,11 +3,10 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Hero } from '@/components/organisms/Hero';
-import { AboutUsSection } from '@/components/organisms/AboutUsSection';
 import { ProblemSection } from '@/components/organisms/ProblemSection';
-import { HowItWorksSection } from '@/components/organisms/HowItWorksSection';
-import { OurAIPreviewSection } from '@/components/organisms/OurAIPreviewSection';
-import { SocialProofSection } from '@/components/organisms/SocialProofSection';
+import { AboutUsSection } from '@/components/organisms/AboutUsSection';
+import { MetricsTestimonialsSection } from '@/components/organisms/MetricsTestimonialsSection';
+import { ClientsSection } from '@/components/organisms/ClientsSection';
 import { CTASection } from '@/components/organisms/CTASection';
 
 export default function HomePage() {
@@ -15,25 +14,22 @@ export default function HomePage() {
     <div className="min-h-screen">
       <Navigation />
 
-      {/* Hero - Emotional hook with founder-to-founder positioning */}
+      {/* 1. Hero - Emotional hook with founder-to-founder positioning */}
       <Hero />
 
-      {/* Problem - The 5 emotional truths that resonate with startup founders */}
+      {/* 2. Why Teams Come to Us - The emotional truths that resonate */}
       <ProblemSection />
 
-      {/* About Us - Two column intro section */}
+      {/* 3. About Us - Company intro with how it works carousel */}
       <AboutUsSection />
 
-      {/* How It Works - Our three-step process */}
-      <HowItWorksSection />
+      {/* 4. Metrics & Testimonials - Two column grid */}
+      <MetricsTestimonialsSection />
 
-      {/* Our AI - Preview of our AI capabilities */}
-      <OurAIPreviewSection />
+      {/* 5. Who We Worked With - Client logos */}
+      <ClientsSection />
 
-      {/* Our Clients - Metrics, testimonials, and trust signals */}
-      <SocialProofSection />
-
-      {/* CTA - Final conversion point */}
+      {/* 6. Contact - Final conversion point */}
       <CTASection />
 
       <Footer />
