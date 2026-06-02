@@ -1,0 +1,18 @@
+/**
+ * Cloudflare Workers config for the ADL website.
+ * Built via @opennextjs/cloudflare; deployed via Workers Builds (CI) or `wrangler deploy` (manual).
+ */
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "adl-website",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-06-02",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": ".open-next/assets"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
