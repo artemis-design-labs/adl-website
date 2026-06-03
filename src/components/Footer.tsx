@@ -1,95 +1,108 @@
-'use client';
-
 import Link from 'next/link';
+import { Logo } from '@/components/atoms/Logo';
+
+const ADMIN_EMAIL = 'itadmin@artemisdesignlabs.com';
+
+const FOOTER_LINKS = {
+  services: [
+    { href: '/#about', label: 'Design System Creation' },
+    { href: '/#about', label: 'Design System Maintenance' },
+    { href: '/#about', label: 'Design-to-Code Handoff' },
+  ],
+  company: [
+    { href: '/about',   label: 'About' },
+    { href: '/our-ai',  label: 'Our AI' },
+    { href: '/work',    label: 'Work' },
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/contact', label: 'Contact' },
+  ],
+};
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
-  const footerLinks = {
-    services: [
-      { href: '/#about', label: 'Design System Creation' },
-      { href: '/#about', label: 'Design System Maintenance' },
-      { href: '/#about', label: 'Design-to-Code' },
-    ],
-    company: [
-      { href: '/about', label: 'About' },
-      { href: '/our-ai', label: 'Our AI' },
-      { href: '/work', label: 'Work' },
-      { href: '/contact', label: 'Contact' },
-    ],
-  };
+  const year = new Date().getFullYear();
 
   return (
     <footer className="bg-[var(--color-bg-primary)] border-t border-[var(--color-border)]">
-      <div className="max-w-5xl mx-auto px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8 py-14 md:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           {/* Brand */}
-          <div className="md:col-span-2">
-            <Link href="/" className="inline-block">
-              <span className="text-sm font-medium tracking-[0.05em] uppercase text-[var(--color-text-primary)]">
-                Artemis Design Labs
-              </span>
+          <div className="md:col-span-5">
+            <Link
+              href="/"
+              className="inline-flex rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]"
+              aria-label="Artemis Design Labs — Home"
+            >
+              <Logo size="md" />
             </Link>
-            <p className="mt-4 text-sm text-[var(--color-text-secondary)] max-w-sm leading-relaxed">
-              Design systems that ship. We deliver Figma AND production-ready React
-              for B2B startups scaling from Seed to Series C.
+            <p className="mt-5 text-sm text-[var(--color-text-secondary)] max-w-sm leading-relaxed">
+              We build the AI that builds your design infrastructure.
+              Founder-built. Human-validated. Production-ready.
             </p>
-            <div className="mt-6 flex items-center gap-2 text-xs tracking-[0.05em] uppercase text-[var(--color-text-muted)]">
-              <span className="w-2 h-2 bg-[var(--color-accent)]"></span>
+            <div className="mt-6 inline-flex items-center gap-2 font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
+              <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] shadow-[0_0_10px_var(--color-accent-glow)]" />
               Available for new projects
             </div>
           </div>
 
           {/* Services */}
-          <div>
-            <p className="text-[10px] tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-4">
-              Services
+          <nav className="md:col-span-3" aria-labelledby="footer-services">
+            <p id="footer-services" className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] mb-5">
+              › services
             </p>
-            <ul className="space-y-2">
-              {footerLinks.services.map((link) => (
-                <li key={link.href}>
+            <ul className="space-y-3">
+              {FOOTER_LINKS.services.map((link) => (
+                <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-150"
+                    className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-150"
                   >
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           {/* Company */}
-          <div>
-            <p className="text-[10px] tracking-[0.15em] uppercase text-[var(--color-text-muted)] mb-4">
-              Company
+          <nav className="md:col-span-2" aria-labelledby="footer-company">
+            <p id="footer-company" className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] mb-5">
+              › company
             </p>
-            <ul className="space-y-2">
-              {footerLinks.company.map((link) => (
-                <li key={link.href}>
+            <ul className="space-y-3">
+              {FOOTER_LINKS.company.map((link) => (
+                <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-150"
+                    className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-150"
                   >
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
+          </nav>
+
+          {/* Contact */}
+          <div className="md:col-span-2">
+            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] mb-5">
+              › contact
+            </p>
+            <a
+              href={`mailto:${ADMIN_EMAIL}`}
+              className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-150 break-all"
+            >
+              {ADMIN_EMAIL}
+            </a>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-[var(--color-border)] flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-[var(--color-text-muted)]">
-            &copy; {currentYear} Artemis Design Labs
+        <div className="mt-14 pt-8 border-t border-[var(--color-border)] flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.15em] text-[var(--color-text-tertiary)]">
+            © {year} Artemis Design Labs · All rights reserved
           </p>
-          <a
-            href="mailto:itadmin@artemisdesignlabs.com"
-            className="text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-150"
-          >
-            itadmin@artemisdesignlabs.com
-          </a>
+          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.15em] text-[var(--color-text-tertiary)]">
+            Built with care · trained on production
+          </p>
         </div>
       </div>
     </footer>
