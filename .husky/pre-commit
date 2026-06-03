@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+# Husky v9 pre-commit hook — runs lint-staged against the files
+# you're about to commit. Bypass with `git commit --no-verify`
+# only when you know what you're doing.
+npx lint-staged

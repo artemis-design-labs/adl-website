@@ -1,289 +1,130 @@
-# ADL Website - Development Documentation
+# Artemis Design Labs — Project Guide for Claude
 
-## Overview
+A short, accurate map of the codebase so future Claude sessions can be useful without re-discovering everything. For deeper detail see [`DEPLOYMENT.md`](./DEPLOYMENT.md) (infrastructure) and [`CHANGELOG.md`](./CHANGELOG.md) (chronology).
 
-This document provides context for AI assistants and developers working on the Artemis Design Labs website.
+## What this is
 
-## Tech Stack
+Marketing site for **Artemis Design Labs (ADL)** — a B2B design systems agency. Pitch: "We build the AI that builds your design infrastructure." Audience is Series A-C founders and CTOs. Brand voice is founder-to-founder, no fluff. Source of truth for in-copy strings lives in [`Website-Content.md`](./Website-Content.md).
 
-- **Framework:** Next.js 15.5 (App Router)
-- **Styling:** Tailwind CSS 4.1
-- **Language:** TypeScript 5
-- **Database:** SQLite with Prisma ORM
-- **Package Manager:** npm
+## Stack
 
-## Project Structure
+| Layer | Choice |
+|---|---|
+| Framework | Next.js 15 (App Router, React 19, Server + Client Components) |
+| Language | TypeScript 5 |
+| Styling | Tailwind CSS 4 + design tokens in `src/styles/tokens.css` |
+| Fonts | Geist Sans + Geist Mono via the `geist` npm package |
+| DB | MongoDB Atlas (`adl_website` db, native `mongodb` driver — no Prisma) |
+| Hosting | Cloudflare Workers via `@opennextjs/cloudflare` |
+| CI/CD | GitHub Actions (`.github/workflows/deploy.yml`). Push to `main` → live in ~2 min. |
+| DNS / TLS | Cloudflare (zone `artemisdesignlabs.com`, custom-domain attach via Workers) |
+| Package mgr | npm |
+
+## Visual direction
+
+**AI-tech forward**, dark by default with a polished light-mode alternate.
+
+| Token | Dark (default) | Light |
+|---|---|---|
+| `--color-bg-primary` | `#0A0A0F` | `#FAFAFC` |
+| `--color-bg-elevated` | `#1B1B26` | `#FFFFFF` |
+| `--color-text-primary` | `#EDEDF0` | `#0A0A0F` |
+| `--color-accent` | `#7C3AED` (electric violet) | `#6D28D9` (deeper violet, AAA on white) |
+| `--font-sans` | Geist Sans | — |
+| `--font-mono` | Geist Mono | — |
+
+Key UI patterns:
+- **Mono eyebrow** — `font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)]`, prefixed with `›`. Example: `› by the numbers`.
+- **Display headlines** — Geist Sans semibold, tracking-tight (-0.025em), second line often in `text-[var(--color-accent)]` for emphasis.
+- **Primary CTA** — violet fill, white text, arrow icon, hover glow via `shadow-[var(--shadow-glow)]`, active translate-y-px.
+- **Cards** — `rounded-xl`/`rounded-2xl` with `border-[var(--color-border)]`, hover promotes border to accent and bg to `bg-tertiary`.
+
+## Where things live
 
 ```
 src/
-├── app/                    # Next.js App Router pages
-│   ├── layout.tsx          # Root layout with ThemeProvider
-│   ├── page.tsx            # Homepage
-│   ├── globals.css         # Global styles and Tailwind imports
-│   ├── about/              # About page
-│   ├── contact/            # Contact page with form
-│   ├── pricing/            # Pricing page
-│   ├── services/           # Services page
-│   ├── work/               # Portfolio/case studies
-│   └── api/                # API routes
-│       └── contact/        # Contact form handler
+├── app/                          # Next.js App Router
+│   ├── layout.tsx                # Geist fonts, JSON-LD Organization, metadata, ThemeProvider
+│   ├── page.tsx                  # Homepage composition
+│   ├── icon.svg                  # Favicon (violet arrow on dark)
+│   ├── apple-icon.svg            # iOS home-screen icon
+│   ├── robots.ts / sitemap.ts    # Metadata routes
+│   ├── globals.css               # Imports tokens + global animations (marquee, etc.)
+│   ├── admin/                    # /admin — Mongo-backed contact submissions viewer
+│   │                             # (currently UNAUTHENTICATED — see security note)
+│   ├── api/contact/route.ts      # POST endpoint: validates, writes to Mongo, emails via Resend
+│   ├── about/ contact/ pricing/ work/ our-ai/ hands-ai/ nbcu/ insight/
+│   ├── publication/ marketplace/ design-system-license/ my-project-inbox/
+│
 ├── components/
-│   ├── atoms/              # Smallest UI components
-│   │   ├── Button/         # Button with variants
-│   │   └── ThemeToggle/    # Dark/light mode toggle
-│   ├── molecules/          # Composed components
-│   │   └── SectionHeader/  # Section header with eyebrow
-│   ├── organisms/          # Page sections
-│   │   ├── Hero/           # Homepage hero section
-│   │   ├── ProblemSection/ # 5 emotional truths
-│   │   ├── ServicesSection/# 3 service pathways
-│   │   ├── SocialProofSection/
-│   │   ├── CaseStudySection/
-│   │   └── CTASection/     # Final call-to-action
-│   ├── Navigation.tsx      # Global navigation
-│   └── Footer.tsx          # Global footer
-├── context/
-│   └── ThemeContext.tsx    # Theme state management
-├── hooks/                  # Custom React hooks
+│   ├── Navigation.tsx            # Header with Logo, theme toggle, violet Book-a-Call CTA
+│   ├── Footer.tsx                # Brand + nav + contact, mono eyebrows
+│   ├── atoms/
+│   │   ├── Button/               # Primary (violet) / secondary (outline) / ghost / link
+│   │   ├── Logo/                 # SVG Artemis arrow + wordmark, theme-aware
+│   │   └── ThemeToggle/          # 56x28 pill switch with sun/moon, role="switch"
+│   └── organisms/
+│       ├── Hero/                 # `> ./adl train --status=production` + headline + CTAs
+│       ├── ProblemSection/       # 5-card grid, hover promotes border to accent
+│       ├── AboutUsSection/       # Origin story + services carousel (auto-advance, pause on hover)
+│       ├── MetricsTestimonialsSection/  # 2x2 metrics + testimonial carousel
+│       ├── ClientsSection/       # Horizontal logo marquee (CSS `marqueeX` keyframe)
+│       └── CTASection/           # "Founder-to-founder conversation" + contact card
+│
+├── context/ThemeContext.tsx      # Theme state (defaults to dark), localStorage persistence
 ├── lib/
-│   └── cn.ts               # Class name utility (clsx + tailwind-merge)
-├── styles/
-│   └── tokens.css          # Design tokens (colors, spacing, typography)
-└── prisma/
-    └── schema.prisma       # Database schema
+│   ├── cn.ts                     # clsx + tailwind-merge utility
+│   └── mongo.ts                  # Cached MongoClient + ContactDoc type
+└── styles/tokens.css             # All design tokens (root + [data-theme="light"])
 ```
 
-## Design System
+Homepage composition (`src/app/page.tsx`):
+1. `<Navigation />` 2. `<Hero />` 3. `<ProblemSection />` 4. `<AboutUsSection />` 5. `<MetricsTestimonialsSection />` 6. `<ClientsSection />` 7. `<CTASection />` 8. `<Footer />`
 
-### Visual Language: Severance-Style Corporate Minimalism
+## Conventions
 
-The website uses a sterile, controlled, minimal aesthetic inspired by corporate environments:
-- Light mode primary (dark mode toggle available)
-- Desaturated whites and grays
-- Muted sage/beige accents (used sparingly)
-- Flat, geometric layouts
-- No gradients or dramatic shadows
-- Cold, fluorescent lighting feel
+- **Use CSS variables for theme-aware colors**: `text-[var(--color-text-primary)]`, never hardcoded `text-gray-900` etc.
+- **Class merging**: `cn()` from `@/lib/cn`, never raw template literals.
+- **Mono eyebrows**: prefix with `› ` and use the `--font-mono` family for any small uppercase label.
+- **Routes that hit the DB**: `export const dynamic = 'force-dynamic'` and `export const runtime = 'nodejs'`. The DB lives behind a Worker runtime secret, not at build time. `/admin` and `/api/contact` both need this.
+- **Don't add custom Tailwind colors**: drive new color needs through tokens.
+- **Don't fetch from `process.env` directly** outside of `src/lib/mongo.ts` and `src/app/api/`. Inside those it's fine (Worker runtime secrets surface via `process.env` under `nodejs_compat`).
 
-### Design Tokens
+## Workflow
 
-All design tokens are defined in `/src/styles/tokens.css`. The system uses CSS custom properties for runtime theming.
+- `npm run dev` — standard Next dev server (vanilla, no Worker emulation, fastest).
+- `npm run cf:preview` — local OpenNext + Workers preview. Closest to prod runtime. Requires Node ≥20.
+- `npm run lint` / `npm run typecheck` — sanity checks. Pre-commit hook (husky + lint-staged) runs lint --fix and tsc on staged files.
+- `git push origin main` — production deploy. Watch the run at github.com/artemis-design-labs/adl-website/actions.
 
-#### Color Tokens (Light Mode - Default)
-
-```css
---color-bg-primary: #FAFAFA;      /* Main background */
---color-bg-secondary: #F5F5F4;    /* Section backgrounds */
---color-bg-elevated: #FFFFFF;     /* Cards, elevated surfaces */
---color-text-primary: #1C1C1C;    /* Main text */
---color-text-secondary: #525252;  /* Secondary text */
---color-text-muted: #A3A3A3;      /* Muted text */
---color-accent: #7D8471;          /* Muted sage accent */
---color-border: #E5E5E5;          /* Borders */
+Required env (in `.env`, gitignored):
+```
+DATABASE_URL=mongodb+srv://...mongodb.net/adl_website?appName=uif-dev
+```
+For email notifications (optional locally, required in prod):
+```
+RESEND_API_KEY=re_...
 ```
 
-#### Dark Mode
+## Security notes (read before touching auth)
 
-Dark mode overrides are applied via `[data-theme="dark"]` selector.
+- **`/admin` has NO authentication right now.** Anyone with the URL sees every contact-form submission. Backlog: put it behind Cloudflare Access (Workers & Pages → adl-website → Access policy on `/admin/*`).
+- The contact endpoint has no captcha. Backlog: Cloudflare Turnstile (site key public, secret as Worker secret).
+- Credentials from earlier deploy sessions may exist in chat transcripts — see CHANGELOG `[v1.0.0]` → "Known follow-ups" before rotating.
 
-### Typography
+## Adding a new section
 
-- **Primary Font:** Inter (sans-serif)
-- **Monospace:** JetBrains Mono
+1. Create folder under `src/components/organisms/<Section>/`.
+2. Export named component + `index.ts`.
+3. Import + place in `src/app/page.tsx`.
+4. Use the mono-eyebrow + Geist display + accent-second-line pattern.
+5. Use CSS variables for all colors. No raw hex.
+6. Run `npm run typecheck` before committing.
 
-Font sizes use Tailwind classes with responsive breakpoints:
-- Hero headlines: `text-2xl sm:text-3xl md:text-4xl lg:text-5xl`
-- Section headers: `text-2xl md:text-3xl lg:text-4xl`
-- Body text: `text-base` (16px)
-- Small text: `text-sm` (14px)
-- Micro text: `text-xs` (12px)
+## Things NOT to revive
 
-### Components
-
-#### Button
-
-```tsx
-import { Button } from '@/components/atoms/Button';
-
-<Button variant="primary" size="lg">Let's Talk</Button>
-<Button variant="secondary">Learn More</Button>
-<Button variant="ghost">Cancel</Button>
-```
-
-Variants: `primary`, `secondary`, `ghost`, `link`
-Sizes: `sm`, `md`, `lg`
-
-#### Theme Toggle
-
-```tsx
-import { ThemeToggle } from '@/components/atoms/ThemeToggle';
-
-<ThemeToggle /> // Renders sun/moon icon button
-```
-
-### Using the Theme
-
-```tsx
-import { useTheme } from '@/context/ThemeContext';
-
-function MyComponent() {
-  const { theme, toggleTheme, setTheme } = useTheme();
-  // theme: 'dark' | 'light'
-}
-```
-
-### Class Name Utility
-
-Use `cn()` for conditional class names:
-
-```tsx
-import { cn } from '@/lib/cn';
-
-<div className={cn(
-  'base-classes',
-  isActive && 'active-classes',
-  variant === 'primary' && 'primary-styles'
-)} />
-```
-
-## Homepage Sections
-
-The homepage (`/src/app/page.tsx`) is composed of these sections:
-
-1. **Hero** - Typing animation: "From Bootstrapped to Unicorn / We Grow with You."
-2. **ProblemSection** - 5 friction pain points that resonate with startup founders
-3. **ServicesSection** - 3 service pathways (Creation, Maintenance, Handoff) with AI-powered messaging
-4. **SocialProofSection** - Metrics, testimonials, client logos
-5. **CaseStudySection** - Featured before/after case study (HANDS AI)
-6. **CTASection** - Final call-to-action
-
-## Brand Voice
-
-- Speak founder-to-founder, not vendor-to-client
-- Acknowledge real startup pressures: runway, velocity, enterprise deals
-- Be direct - no corporate fluff
-- Emphasize AI-human hybrid approach: "Human Expertise with AI Velocity"
-- Use "we" and "your team"
-
-### Key Messaging
-
-- Primary: "Human Expertise with AI Velocity"
-- AI-powered tools accelerate delivery
-- Design systems that ship, not files that sit
-- Enterprise-grade output at startup speed
-
-### CTAs
-
-- Primary: "About Us" / "Book a Conversation"
-- Secondary: "Get a Free Audit"
-- Tertiary: "UI Forge Waitlist"
-
-## Navigation
-
-Current navigation links:
-- Products
-- Services
-- Work
-- Pricing
-- About
-- Contact (CTA button)
-
-## Development Commands
-
-```bash
-npm run dev      # Start development server
-npm run build    # Build for production
-npm run start    # Start production server
-npm run lint     # Run ESLint
-```
-
-## Key Files to Know
-
-| File | Purpose |
-|------|---------|
-| `src/styles/tokens.css` | All design tokens |
-| `src/context/ThemeContext.tsx` | Theme state management |
-| `src/app/layout.tsx` | Root layout with providers |
-| `src/components/Navigation.tsx` | Global navigation |
-| `src/lib/cn.ts` | Class name utility |
-
-## Adding New Sections
-
-1. Create component in `/src/components/organisms/[SectionName]/`
-2. Export from index.ts
-3. Import and add to page.tsx
-4. Use CSS variables for colors: `var(--color-text-primary)`
-5. Use `cn()` for conditional classes
-
-## Theme-Aware Styling
-
-Always use CSS variables for theme-aware colors:
-
-```tsx
-// Good
-className="bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]"
-
-// Avoid (won't respond to theme changes)
-className="bg-gray-900 text-white"
-```
-
-## Responsive Grid Patterns
-
-### 1/2/3 Column Grid (Services, Problems)
-
-```tsx
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--color-border)]">
-  {items.map((item) => (
-    <article className="bg-[var(--color-bg-elevated)] p-6 lg:p-8">
-      {/* content */}
-    </article>
-  ))}
-</div>
-```
-
-## Recent Changes (February 2025)
-
-### Visual Redesign: Severance-Style Corporate Minimalism
-
-- Changed from dark-mode-primary to light-mode-primary
-- Updated color palette to desaturated whites/grays with muted sage accent
-- Removed all gradients, glows, and dramatic shadows
-- Implemented flat, geometric layouts
-- Updated all components for the new aesthetic
-
-### Homepage Content Updates
-
-- Hero: "From Bootstrapped to Unicorn / We Grow with You." with typing animation
-- Services section header: "Human Expertise with AI Velocity"
-- All three services now emphasize AI-powered delivery
-- Added "Products" to navigation menu
-- Responsive CSS Grid for Problem and Services sections
-
-### Services Reorder and AI Messaging
-
-1. **Design System Creation** - AI tools accelerate delivery
-2. **Design System Maintenance** - AI-powered monitoring and sync audits
-3. **Design-to-Code Handoff** - Proprietary AI tools for design-to-code conversion
-
-### Files Modified
-
-- `/src/styles/tokens.css` - New color palette
-- `/src/context/ThemeContext.tsx` - Default theme to light
-- `/src/app/layout.tsx` - Default theme to light
-- `/src/components/organisms/Hero/` - Updated headline with line break
-- `/src/components/organisms/ProblemSection/` - Responsive CSS Grid
-- `/src/components/organisms/ServicesSection/` - New content, AI messaging, responsive grid
-- `/src/components/Navigation.tsx` - Added Products link
-- All components updated for Severance aesthetic
-
-## Content Reference
-
-See `/website-content.md` for the complete text content of all website sections.
-
-## Next Steps (Phase 2)
-
-- [ ] Create Products page (UI Forge)
-- [ ] Update other pages (services, work, about, pricing, contact)
-- [ ] Add entrance animations with Intersection Observer
-- [ ] Integrate real case study content with images
-- [ ] Add client logos to social proof section
+- The "Severance corporate minimalism" palette (sage `#7D8471` accent, etc.) — replaced by violet.
+- `Prisma` / `@prisma/client` — incompatible with Workers runtime; we use the native `mongodb` driver.
+- `ContentVersionContext` / `ContentSwitcher` / V1+V2 content blocks — deleted Jun 3 2026 with their `test-content-*` branches.
+- `vercel.json` / `.vercel/` — we're on Cloudflare now.
+- The `src/app/components/` tree of old molecules/atoms/templates — purged.
