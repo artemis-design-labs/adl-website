@@ -3,9 +3,6 @@ import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { ThemeProvider } from '@/context/ThemeContext';
-import { ContentVersionProvider } from '@/context/ContentVersionContext';
-import { ContentSwitcher } from '@/components/ContentSwitcher';
-import { DevOnly } from '@/components/DevOnly';
 
 const SITE_URL = 'https://artemisdesignlabs.com';
 const OG_IMAGE = '/images/logos/adl-logo-1.png';
@@ -99,14 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-sans antialiased">
-        <ThemeProvider>
-          <ContentVersionProvider>
-            {children}
-            <DevOnly>
-              <ContentSwitcher />
-            </DevOnly>
-          </ContentVersionProvider>
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

@@ -1,157 +1,117 @@
 'use client';
 
-import { useSectionVersion } from '@/context/ContentVersionContext';
+import Link from 'next/link';
 import { cn } from '@/lib/cn';
 
-// V1 Content (Main Branch)
-const V1_CONTENT = {
-  eyebrow: 'Why Teams Come to Us',
-  headline: "You're not behind.\nYou're building without the right foundation.",
-  description: "Most B2B startups don't have a design problem. They have an infrastructure problem — and it shows up in ways that compound quietly until they can't be ignored.",
-  cards: [
-    {
-      number: '01',
-      title: 'Your engineers are deciphering Figma files instead of shipping features.',
-      detail: "Every hour spent decoding design specs is an hour not spent on your product. At 10 engineers, that's 350+ hours per quarter lost to translation. At 50 engineers, the math gets ugly.",
-    },
-    {
-      number: '02',
-      title: "Enterprise buyers are noticing what you've learned to ignore.",
-      detail: "The missing loading state. The inconsistent spacing. The table that freezes at 500 rows. At Seed, these are TODO comments. By Series B, they're the reason your enterprise deal just went dark.",
-    },
-    {
-      number: '03',
-      title: 'Design debt compounds faster than your runway shrinks.',
-      detail: '"We\'ll fix it later" becomes six months of engineers afraid to touch the UI. Then it becomes a rewrite. Then it becomes a reason your Series B takes longer than it should.',
-    },
-    {
-      number: '04',
-      title: "Traditional agencies aren't built to scale with you.",
-      detail: "They deliver Figma files at $50K+ and disappear. Your engineers rebuild everything anyway. The cycle repeats every time you need to move fast—and startups always need to move fast.",
-    },
-    {
-      number: '05',
-      title: 'A design system nobody uses is worse than no design system at all.',
-      detail: "Documentation nobody reads. Components nobody trusts. Now your team builds around the system instead of with it—and you're paying for maintenance on infrastructure that creates more friction than it solves.",
-    },
-  ],
-  transition: '',
-};
-
-// V2 Content (AI-First Rebrand)
-const V2_CONTENT = {
-  eyebrow: "We've Lived This. Here's What We Know.",
+const CONTENT = {
+  eyebrow: "We've lived this — here's what we know",
   headline: "These problems aren't new.\nWe had them too.",
-  description: "Before we built ADL, we were on the other side — scaling startups, burning runway on agency retainers, watching engineers waste sprints translating Figma files nobody asked them to translate. We've lived every one of these problems. That's why we stopped outsourcing the solution and built our own.",
+  description:
+    "Before we built ADL, we were on the other side — scaling startups, burning runway on agency retainers, watching engineers waste sprints translating Figma files nobody asked them to translate. We've lived every one of these problems. That's why we stopped outsourcing the solution and built our own.",
   cards: [
     {
       number: '01',
       title: 'Your engineers are deciphering Figma files instead of shipping features.',
-      detail: "We've sat in the sprint retros where this comes up. Every quarter, your engineering team loses 350+ hours to design translation — not building, not shipping, just deciphering. We built AI that eliminates this entirely. Not by generating sloppy code your team has to fix, but by producing components your senior engineers actually approve.",
+      detail:
+        "We've sat in the sprint retros where this comes up. Every quarter, your engineering team loses 350+ hours to design translation — not building, not shipping, just deciphering. We built AI that eliminates this entirely. Not by generating sloppy code your team has to fix, but by producing components your senior engineers actually approve.",
     },
     {
       number: '02',
-      title: "Enterprise buyers are noticing what your team has learned to ignore.",
-      detail: 'The missing loading state. The table that chokes at 500 rows. The inconsistent spacing between screens. We\'ve watched founders lose six-figure deals over details like these — because we\'ve been the founders losing those deals. Your product works. But "works" and "wins enterprise contracts" are different standards.',
+      title: 'Enterprise buyers are noticing what your team has learned to ignore.',
+      detail:
+        'The missing loading state. The table that chokes at 500 rows. The inconsistent spacing between screens. We\'ve watched founders lose six-figure deals over details like these — because we\'ve been the founders losing those deals. Your product works. But "works" and "wins enterprise contracts" are different standards.',
     },
     {
       number: '03',
       title: "Design debt is compounding while you're focused on features.",
-      detail: "We've made the \"we'll fix it later\" decision. Every founder has. Six months later, your engineers are afraid to touch the UI, your design system is a graveyard of half-adopted components, and the rewrite conversation starts. We built tools that prevent this from happening in the first place — because we learned the hard way what it costs when it does.",
+      detail:
+        "We've made the \"we'll fix it later\" decision. Every founder has. Six months later, your engineers are afraid to touch the UI, your design system is a graveyard of half-adopted components, and the rewrite conversation starts. We built tools that prevent this from happening — because we learned the hard way what it costs when it does.",
     },
     {
       number: '04',
       title: "Traditional agencies aren't built for how startups actually work.",
-      detail: "We've hired them. $50K+ for Figma files your engineers have to rebuild anyway. Three-month timelines when you needed it in three weeks. Beautiful portfolios, zero understanding of what it's like to ship under runway pressure. The agency model was built for enterprises with procurement teams, not founders burning cash.",
+      detail:
+        "We've hired them. $50K+ for Figma files your engineers have to rebuild anyway. Three-month timelines when you needed it in three weeks. Beautiful portfolios, zero understanding of what it's like to ship under runway pressure. The agency model was built for enterprises with procurement teams, not founders burning cash.",
     },
     {
       number: '05',
       title: 'Most "AI-powered" tools generate code nobody wants to deploy.',
-      detail: "We've tried them all. Anima, Locofy, Builder.io — they get you 70% of the way there, and your engineers spend longer fixing the output than they would have spent building from scratch. That's not AI-powered delivery. That's AI-powered technical debt. We built something different because the market didn't.",
+      detail:
+        "We've tried them all. Anima, Locofy, Builder.io — they get you 70% of the way there, and your engineers spend longer fixing the output than they would have spent building from scratch. That's not AI-powered delivery. That's AI-powered technical debt. We built something different because the market didn't.",
     },
   ],
-  transition: "We didn't start ADL because we saw a market opportunity. We started it because we lived these problems as founders and couldn't find anyone who solved them properly — so we built the AI to do it ourselves. Here's how it works.",
+  transition:
+    "We didn't start ADL because we saw a market opportunity. We started it because we lived these problems as founders and couldn't find anyone who solved them properly — so we built the AI to do it ourselves.",
 };
 
 export function ProblemSection() {
-  const version = useSectionVersion('home-problem');
-  const content = version === 'v1' ? V1_CONTENT : V2_CONTENT;
-  const [line1, line2] = content.headline.split('\n');
+  const [line1, line2] = CONTENT.headline.split('\n');
 
   return (
-    <section id="pain-points" className="py-20 md:py-28 bg-[var(--color-bg-secondary)] relative">
-      {/* Version indicator */}
-      <div className="absolute top-4 right-4 z-10">
-        <span className={cn(
-          'px-2 py-1 text-[10px] font-medium uppercase tracking-wider rounded',
-          version === 'v1' ? 'bg-blue-600 text-white' : 'bg-green-600 text-white'
-        )}>
-          {version === 'v1' ? 'V1' : 'V2'}
-        </span>
-      </div>
-
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        {/* Section Header */}
-        <header className="text-center mb-16">
-          <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
-            {content.eyebrow}
+    <section
+      id="pain-points"
+      className="relative py-24 md:py-32 bg-[var(--color-bg-secondary)]"
+    >
+      <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
+        <header className="max-w-3xl mx-auto text-center mb-16 md:mb-20">
+          <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-5">
+            {CONTENT.eyebrow}
           </span>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)] leading-tight">
-            {line1}<br />
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.025em] text-[var(--color-text-primary)] leading-[1.1]">
+            {line1}
+            <br />
             <span className="text-[var(--color-accent)]">{line2}</span>
           </h2>
-          <p className="mt-6 text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-            {content.description}
+          <p className="mt-6 text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed">
+            {CONTENT.description}
           </p>
         </header>
 
-        {/* Problem Cards - Responsive CSS Grid */}
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--color-border)]"
-          style={{ border: '1px solid var(--color-border)' }}
-        >
-          {content.cards.map((item, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {CONTENT.cards.map((card) => (
             <article
-              key={index}
-              className="bg-[var(--color-bg-elevated)] p-6 lg:p-8 flex flex-col"
+              key={card.number}
+              className={cn(
+                'group relative p-7 rounded-xl',
+                'bg-[var(--color-bg-elevated)] border border-[var(--color-border)]',
+                'hover:border-[var(--color-accent)] hover:bg-[var(--color-bg-tertiary)]',
+                'transition-colors duration-200'
+              )}
             >
-              <span className="text-sm font-medium tracking-[0.15em] text-[var(--color-text-secondary)] mb-4">
-                {item.number}
-              </span>
-              <h3 className="text-base lg:text-lg font-medium text-[var(--color-text-primary)] leading-snug mb-3">
-                {item.title}
+              <div className="flex items-center gap-3 mb-5">
+                <span className="font-[var(--font-mono)] text-[12px] uppercase tracking-[0.18em] text-[var(--color-accent)]">
+                  {card.number}
+                </span>
+                <span className="h-px flex-1 bg-[var(--color-border)] group-hover:bg-[var(--color-accent-muted)] transition-colors" />
+              </div>
+              <h3 className="text-lg lg:text-xl font-medium text-[var(--color-text-primary)] leading-snug mb-3">
+                {card.title}
               </h3>
-              <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-                {item.detail}
+              <p className="text-sm md:text-base text-[var(--color-text-secondary)] leading-relaxed">
+                {card.detail}
               </p>
             </article>
           ))}
         </div>
 
-        {/* Transition text */}
-        {content.transition && (
-          <div className="mt-16 pt-16 border-t border-[var(--color-border)]">
-            <p className="text-center text-base md:text-lg text-[var(--color-text-secondary)] max-w-3xl mx-auto">
-              {content.transition}
-            </p>
-          </div>
-        )}
-
-        {/* About Us Button */}
-        <div className="mt-12 text-left">
-          <a
+        <div className="mt-20 max-w-3xl mx-auto text-center">
+          <p className="text-base md:text-lg text-[var(--color-text-secondary)] italic">
+            {CONTENT.transition}
+          </p>
+          <Link
             href="#about"
             className={cn(
-              'inline-flex items-center justify-center gap-2',
-              'px-6 py-3 text-sm',
-              'font-medium tracking-[0.05em] uppercase',
-              'bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]',
-              'hover:bg-[var(--color-text-secondary)]',
-              'transition-colors duration-150'
+              'inline-flex items-center gap-2 mt-8 h-11 px-6 rounded-md',
+              'bg-[var(--color-accent)] text-[var(--color-text-on-accent)]',
+              'font-medium text-sm',
+              'hover:bg-[var(--color-accent-hover)] hover:shadow-[var(--shadow-glow)] transition-all duration-150'
             )}
           >
-            About Us
-          </a>
+            See how we work
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M12 5v14M5 12l7 7 7-7" />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>

@@ -1,37 +1,6 @@
 'use client';
 
-import { useSectionVersion } from '@/context/ContentVersionContext';
-import { cn } from '@/lib/cn';
-
-// V1 Content (Main Branch)
-const V1_CONTENT = {
-  eyebrow: 'How It Works',
-  headline: 'From Chaos to Clarity.\nIn Three Steps.',
-  description: 'We\'ve refined our process through hundreds of engagements. Here\'s how we transform your design-to-code workflow.',
-  steps: [
-    {
-      number: '01',
-      title: 'Discovery & Audit',
-      description: 'We start by understanding your current state. What exists? What\'s broken? What does your team actually need? We audit your design files, codebase, and workflows to identify gaps and opportunities.',
-      duration: '1-2 weeks',
-    },
-    {
-      number: '02',
-      title: 'Build & Deliver',
-      description: 'Our team gets to work. Human expertise drives strategy and quality. AI accelerates execution. You get production-ready components in both Figma and code, complete with documentation.',
-      duration: '2-4 weeks',
-    },
-    {
-      number: '03',
-      title: 'Integrate & Evolve',
-      description: 'We don\'t just hand off files and disappear. We work with your team to integrate the system, train your engineers, and establish governance. Optional ongoing maintenance keeps everything aligned.',
-      duration: 'Ongoing',
-    },
-  ],
-};
-
-// V2 Content (AI-First Rebrand)
-const V2_CONTENT = {
+const CONTENT = {
   eyebrow: 'Our Process',
   headline: 'Built by Founders.\nPowered by AI.',
   description: 'We\'ve been in your shoes — burning runway on agencies that don\'t deliver. So we built a process that actually works for startups.',
@@ -58,23 +27,12 @@ const V2_CONTENT = {
 };
 
 export function HowItWorksSection() {
-  const version = useSectionVersion('home-howItWorks');
-  const content = version === 'v1' ? V1_CONTENT : V2_CONTENT;
+  const content = CONTENT;
   const [line1, line2] = content.headline.split('\n');
 
   return (
-    <section className="py-20 md:py-28 bg-[var(--color-bg-primary)] relative">
-      {/* Version indicator */}
-      <div className="absolute top-4 right-4 z-10">
-        <span className={cn(
-          'px-2 py-1 text-[10px] font-medium uppercase tracking-wider rounded',
-          version === 'v1' ? 'bg-blue-600 text-white' : 'bg-green-600 text-white'
-        )}>
-          {version === 'v1' ? 'V1' : 'V2'}
-        </span>
-      </div>
-
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+    <section className="py-24 md:py-32 bg-[var(--color-bg-primary)]">
+      <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <header className="text-center mb-16">
           <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">

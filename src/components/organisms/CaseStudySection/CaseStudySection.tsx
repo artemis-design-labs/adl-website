@@ -2,40 +2,9 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/atoms/Button';
-import { useSectionVersion } from '@/context/ContentVersionContext';
 import { cn } from '@/lib/cn';
 
-// V1 Content (Main Branch)
-const V1_CONTENT = {
-  eyebrow: 'Case Study',
-  headline: 'From scattered to systematic',
-  description: 'See how we help teams transform their design-to-development workflow.',
-  caseStudy: {
-    title: 'HANDS AI',
-    category: 'Healthcare Technology',
-    description: 'How we helped a Series B healthcare startup ship their design system in 3 weeks and accelerate their enterprise sales.',
-    metrics: [
-      { value: '40%', label: 'Faster development velocity' },
-      { value: '3 weeks', label: 'To production-ready system' },
-      { value: '50+', label: 'Components delivered' },
-    ],
-    before: [
-      'Inconsistent UI across 12 product screens',
-      'Engineers rebuilding components from scratch',
-      'Enterprise demos failing accessibility audits',
-    ],
-    after: [
-      'Unified design system with full documentation',
-      'Reusable component library in Figma + React',
-      'WCAG 2.1 AA compliant, audit-ready',
-    ],
-  },
-  primaryCta: { label: 'View All Case Studies', href: '/work' },
-  secondaryCta: { label: 'Discuss Your Project', href: '/contact' },
-};
-
-// V2 Content (AI-First Rebrand)
-const V2_CONTENT = {
+const CONTENT = {
   eyebrow: 'What It Looks Like When It Works',
   headline: "Here's What Three Weeks Actually Gets You",
   description: "Not a pitch. Not a promise. An actual engagement we shipped.",
@@ -71,23 +40,12 @@ const V2_CONTENT = {
 };
 
 export function CaseStudySection() {
-  const version = useSectionVersion('work-caseStudies');
-  const content = version === 'v1' ? V1_CONTENT : V2_CONTENT;
+  const content = CONTENT;
   const caseStudy = content.caseStudy;
 
   return (
-    <section className="py-20 md:py-28 bg-[var(--color-bg-primary)] relative">
-      {/* Version indicator */}
-      <div className="absolute top-4 right-4 z-10">
-        <span className={cn(
-          'px-2 py-1 text-[10px] font-medium uppercase tracking-wider rounded',
-          version === 'v1' ? 'bg-blue-600 text-white' : 'bg-green-600 text-white'
-        )}>
-          {version === 'v1' ? 'V1' : 'V2'}
-        </span>
-      </div>
-
-      <div className="max-w-5xl mx-auto px-6 lg:px-8">
+    <section className="py-24 md:py-32 bg-[var(--color-bg-primary)]">
+      <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
           <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
@@ -172,18 +130,15 @@ export function CaseStudySection() {
               </div>
             </div>
 
-            {/* V2 Quote */}
-            {version === 'v2' && (
-              <div className="mb-10 p-6 bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
-                <blockquote className="text-base text-[var(--color-text-primary)] leading-relaxed mb-4">
-                  &ldquo;{V2_CONTENT.quote.text}&rdquo;
-                </blockquote>
-                <div className="text-sm">
-                  <span className="text-[var(--color-text-secondary)]">{V2_CONTENT.quote.author}</span>
-                  <span className="text-[var(--color-text-secondary)]"> — {V2_CONTENT.quote.company}</span>
-                </div>
+            <div className="mb-10 p-6 bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-lg">
+              <blockquote className="text-base text-[var(--color-text-primary)] leading-relaxed mb-4">
+                &ldquo;{CONTENT.quote.text}&rdquo;
+              </blockquote>
+              <div className="text-sm">
+                <span className="text-[var(--color-text-secondary)]">{CONTENT.quote.author}</span>
+                <span className="text-[var(--color-text-secondary)]"> — {CONTENT.quote.company}</span>
               </div>
-            )}
+            </div>
 
             {/* CTA */}
             <div className="pt-8 border-t border-[var(--color-border)] flex flex-col sm:flex-row items-start sm:items-center gap-4">

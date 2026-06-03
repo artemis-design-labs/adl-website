@@ -1,42 +1,11 @@
 'use client';
 
-import { useSectionVersion } from '@/context/ContentVersionContext';
 import { cn } from '@/lib/cn';
 
 const CLIENTS_TRUST_LINE =
   'Trusted by product teams in Health, Fintech, and Enterprise';
 
-// V1 Content (Main Branch)
-const V1_CONTENT = {
-  metricsEyebrow: 'By The Numbers',
-  metricsHeadline: 'Results That Speak',
-  metrics: [
-    { value: '40%', label: 'Faster design-to-code', description: 'Average velocity improvement' },
-    { value: '25+', label: 'Components per system', description: 'Production-ready with full states' },
-    { value: '2x', label: 'Faster onboarding', description: 'New engineers ship on day one' },
-    { value: '100%', label: 'Code coverage', description: 'Every design ships with React' },
-  ],
-  testimonialsEyebrow: 'What Teams Say',
-  testimonialsHeadline: 'Trusted by product teams building for enterprise',
-  testimonials: [
-    {
-      quote: "ADL transformed how our team ships UI. We went from weeks of back-and-forth to same-day implementation. The design system they built is actually used by everyone—not just sitting in a Figma file.",
-      author: 'Engineering Lead',
-      company: 'Series B Healthcare Startup',
-    },
-    {
-      quote: "Before ADL, every new engineer spent their first two weeks figuring out our component mess. Now they're shipping features on day one. That's not an exaggeration.",
-      author: 'VP of Engineering',
-      company: 'Series A Fintech',
-    },
-  ],
-  clientsEyebrow: 'Our Clients',
-  clientsHeadline: 'Helping teams at companies you\'d recognize',
-  clientsTrustLine: CLIENTS_TRUST_LINE,
-};
-
-// V2 Content (AI-First Rebrand)
-const V2_CONTENT = {
+const CONTENT = {
   metricsEyebrow: 'By The Numbers',
   metricsHeadline: 'AI-Powered Results',
   metrics: [
@@ -70,21 +39,10 @@ const V2_CONTENT = {
 };
 
 export function SocialProofSection() {
-  const version = useSectionVersion('home-socialProof');
-  const content = version === 'v1' ? V1_CONTENT : V2_CONTENT;
+  const content = CONTENT;
 
   return (
     <div className="relative">
-      {/* Version indicator */}
-      <div className="absolute top-4 right-4 z-10">
-        <span className={cn(
-          'px-2 py-1 text-[10px] font-medium uppercase tracking-wider rounded',
-          version === 'v1' ? 'bg-blue-600 text-white' : 'bg-green-600 text-white'
-        )}>
-          {version === 'v1' ? 'V1' : 'V2'}
-        </span>
-      </div>
-
       {/* Metrics Section */}
       <section className="py-20 md:py-28 bg-[var(--color-bg-primary)]">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">

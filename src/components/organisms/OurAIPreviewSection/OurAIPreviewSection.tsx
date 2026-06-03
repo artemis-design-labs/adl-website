@@ -2,35 +2,8 @@
 
 import Link from 'next/link';
 import { cn } from '@/lib/cn';
-import { useSectionVersion } from '@/context/ContentVersionContext';
 
-// V1 Content (Main Branch)
-const V1_CONTENT = {
-  eyebrow: 'Our AI',
-  headline: 'Built Different.\nTrained on Production.',
-  description: 'We didn\'t bolt AI onto an existing workflow. We built proprietary tools from the ground up, trained on 190,000+ labeled design-to-code examples.',
-  features: [
-    {
-      title: 'Human-AI Collaboration',
-      description: 'Our experts handle strategy and quality. AI handles the repetitive, error-prone work of converting designs to production-ready code.',
-    },
-    {
-      title: 'Trained on Reality',
-      description: '190,000+ labeled training images from real production codebases. Not tutorials. Not demos. Actual shipped software.',
-    },
-    {
-      title: 'Gets Better Every Project',
-      description: 'Every engagement improves our AI. Your project benefits from everything we\'ve learned across hundreds of successful deliveries.',
-    },
-  ],
-  cta: {
-    text: 'Learn More About Our AI',
-    href: '/our-ai',
-  },
-};
-
-// V2 Content (AI-First Rebrand)
-const V2_CONTENT = {
+const CONTENT = {
   eyebrow: 'The Technology Behind ADL',
   headline: 'AI That Actually Works.\nBuilt From the Trenches.',
   description: 'We got tired of AI tools that generated code nobody wanted to deploy. So we built our own — trained on production codebases, validated by senior engineers, and battle-tested across hundreds of projects.',
@@ -55,23 +28,12 @@ const V2_CONTENT = {
 };
 
 export function OurAIPreviewSection() {
-  const version = useSectionVersion('home-ourAiPreview');
-  const content = version === 'v1' ? V1_CONTENT : V2_CONTENT;
+  const content = CONTENT;
   const [line1, line2] = content.headline.split('\n');
 
   return (
-    <section className="py-20 md:py-28 bg-[var(--color-bg-secondary)] relative">
-      {/* Version indicator */}
-      <div className="absolute top-4 right-4 z-10">
-        <span className={cn(
-          'px-2 py-1 text-[10px] font-medium uppercase tracking-wider rounded',
-          version === 'v1' ? 'bg-blue-600 text-white' : 'bg-green-600 text-white'
-        )}>
-          {version === 'v1' ? 'V1' : 'V2'}
-        </span>
-      </div>
-
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+    <section className="py-24 md:py-32 bg-[var(--color-bg-secondary)]">
+      <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <header className="text-center mb-16">
           <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">

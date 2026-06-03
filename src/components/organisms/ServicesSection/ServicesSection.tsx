@@ -1,64 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { useSectionVersion } from '@/context/ContentVersionContext';
 import { cn } from '@/lib/cn';
 
-// V1 Content (Main Branch)
-const V1_CONTENT = {
-  eyebrow: 'How We Help',
-  headline: 'Human Expertise with AI Velocity',
-  description: 'Our design systems experts bring the strategy. Our proprietary AI tools accelerate execution. You get enterprise-grade output at startup speed.',
-  services: [
-    {
-      id: 'creation',
-      number: 'A',
-      title: 'Design System Creation',
-      tagline: 'From chaos to foundation',
-      description: 'We come in, audit what exists, and build you a real foundation: a production-ready component library in both design and code. Our internally developed AI tools accelerate every stage of the process — so you get enterprise-grade output in weeks, not months.',
-      features: [
-        'Design tokens that actually sync across your entire product',
-        'Documentation your team will read and actually use',
-        'Complete state coverage for every real-world scenario',
-        'Accessibility built in from day one',
-        'AI-assisted delivery that adapts to your stack, your standards, your workflow',
-      ],
-      href: '/services#creation',
-    },
-    {
-      id: 'maintenance',
-      number: 'B',
-      title: 'Design System Maintenance',
-      tagline: 'Keep it alive, keep it aligned',
-      description: "Your design system isn't a project — it's infrastructure. We become your design systems team, using our AI-powered tools to monitor, maintain, and evolve your system so you can focus on growth.",
-      features: [
-        'Continuous health monitoring and reporting',
-        'Dedicated support for your design and engineering teams',
-        'New components built and delivered as your product evolves',
-        'AI-powered sync audits to catch drift before it compounds',
-        'Governance and documentation that scales with your team',
-      ],
-      href: '/services#maintenance',
-    },
-    {
-      id: 'handoff',
-      number: 'C',
-      title: 'Design-to-Code Handoff',
-      tagline: 'Your designs, shipped',
-      description: "You have the designs. Your designers did great work. But those files have been sitting for weeks. We make them real — powered by our proprietary AI tools that convert design files into production-ready code at a speed and accuracy manual processes can't match.",
-      features: [
-        'Production-ready components built to your codebase standards',
-        'Full state coverage beyond the happy path',
-        'Comprehensive documentation your engineers can onboard with instantly',
-        'Code that passes review on the first PR — in whatever framework your team runs',
-      ],
-      href: '/services#handoff',
-    },
-  ],
-};
-
-// V2 Content (AI-First Rebrand)
-const V2_CONTENT = {
+const CONTENT = {
   eyebrow: 'Human Expertise × AI Precision',
   headline: 'Our Experts Build the Strategy.\nOur AI Builds the System.',
   description: "Every engagement pairs our design systems specialists — people who've built and scaled design infrastructure at startups — with proprietary AI tools we developed in-house. The humans handle what AI can't: understanding your product, your team dynamics, your growth stage. The AI handles what humans shouldn't have to: the repetitive, error-prone, time-intensive work of turning designs into production-ready code.",
@@ -122,23 +67,12 @@ const V2_CONTENT = {
 };
 
 export function ServicesSection() {
-  const version = useSectionVersion('services-hero');
-  const content = version === 'v1' ? V1_CONTENT : V2_CONTENT;
+  const content = CONTENT;
   const headlineLines = content.headline.split('\n');
 
   return (
-    <section className="py-20 md:py-28 bg-[var(--color-bg-primary)] relative">
-      {/* Version indicator */}
-      <div className="absolute top-4 right-4 z-10">
-        <span className={cn(
-          'px-2 py-1 text-[10px] font-medium uppercase tracking-wider rounded',
-          version === 'v1' ? 'bg-blue-600 text-white' : 'bg-green-600 text-white'
-        )}>
-          {version === 'v1' ? 'V1' : 'V2'}
-        </span>
-      </div>
-
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+    <section className="py-24 md:py-32 bg-[var(--color-bg-primary)]">
+      <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <header className="text-center mb-16">
           <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
@@ -155,11 +89,9 @@ export function ServicesSection() {
           <p className="mt-6 text-base text-[var(--color-text-secondary)] max-w-3xl mx-auto">
             {content.description}
           </p>
-          {version === 'v2' && (
-            <p className="mt-4 text-sm text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-              {V2_CONTENT.subDescription}
-            </p>
-          )}
+          <p className="mt-4 text-sm text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+            {CONTENT.subDescription}
+          </p>
         </header>
 
         {/* Services Grid */}
@@ -200,25 +132,22 @@ export function ServicesSection() {
                 ))}
               </ul>
 
-              {/* V2 shows investment/timeline, V1 shows just link */}
               <div className="pt-4 border-t border-[var(--color-border)]">
-                {version === 'v2' && (
-                  <div className="space-y-2 mb-4">
-                    <div className="flex justify-between text-xs">
-                      <span className="text-[var(--color-text-secondary)] uppercase tracking-wider">Investment</span>
-                      <span className="text-[var(--color-text-primary)] font-medium">{V2_CONTENT.services[serviceIndex].investment}</span>
-                    </div>
-                    <div className="flex justify-between text-xs">
-                      <span className="text-[var(--color-text-secondary)] uppercase tracking-wider">Timeline</span>
-                      <span className="text-[var(--color-text-primary)] font-medium">{V2_CONTENT.services[serviceIndex].timeline}</span>
-                    </div>
+                <div className="space-y-2 mb-4">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-[var(--color-text-secondary)] uppercase tracking-wider">Investment</span>
+                    <span className="text-[var(--color-text-primary)] font-medium">{CONTENT.services[serviceIndex].investment}</span>
                   </div>
-                )}
+                  <div className="flex justify-between text-xs">
+                    <span className="text-[var(--color-text-secondary)] uppercase tracking-wider">Timeline</span>
+                    <span className="text-[var(--color-text-primary)] font-medium">{CONTENT.services[serviceIndex].timeline}</span>
+                  </div>
+                </div>
                 <Link
                   href={service.href}
                   className="text-xs tracking-[0.05em] uppercase text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-150"
                 >
-                  Learn more {version === 'v2' ? '→' : ''}
+                  Learn more →
                 </Link>
               </div>
             </article>
