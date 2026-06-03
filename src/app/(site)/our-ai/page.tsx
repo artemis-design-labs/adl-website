@@ -1,7 +1,5 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
 import { cn } from '@/lib/cn';
 
 export const metadata: Metadata = {
@@ -68,9 +66,7 @@ const COMPARISON = [
 
 export default function OurAIPage() {
   return (
-    <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      <Navigation />
-      <main id="main-content">
+    <>
 
       {/* Hero */}
       <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
@@ -276,8 +272,6 @@ export default function OurAIPage() {
         </div>
       </section>
 
-      </main>
-      <Footer />
-    </div>
+    </>
   );
 }

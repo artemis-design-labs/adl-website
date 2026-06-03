@@ -1,12 +1,12 @@
 export default function HandsAIPage() {
     return (
-      <div className="px-6 md:px-16 lg:px-32 py-20 bg-white text-gray-900">
+      <div className="px-6 md:px-16 lg:px-32 pt-32 pb-20">
         <div className="max-w-5xl mx-auto">
           {/* Title and Intro */}
           <h1 className="text-4xl font-bold leading-tight mb-6">
             HANDS AI: Transforming Casework with Smart Automation
           </h1>
-          <p className="text-lg text-gray-700 mb-12">
+          <p className="text-lg text-[var(--color-text-secondary)] mb-12">
           The Special Supplemental Nutrition Program for Women, Infants, and Children (WIC) is a government initiative that serves millions of families across the country, providing critical nutrition assistance and healthcare support.
           <br /><br />
           CMA Global, a leader in IT infrastructure, launched an internal startup to develop Emma—an AI-powered assistant designed to improve case management. As part of their broader initiative, they built HANDS AI, an enterprise platform supporting WIC programs across six U.S. states by streamlining workflows and surfacing critical insights. We partnered with CMA’s internal team to lead the end-to-end design of Emma, ensuring a seamless, accessible, and productivity-boosting experience within the HANDS AI ecosystem.
@@ -31,7 +31,7 @@ export default function HandsAIPage() {
       >
         Our Primary Role
       </h2>
-      <ul className="space-y-6 text-gray-800">
+      <ul className="space-y-6 text-[var(--color-text-primary)]">
         <li>
           <h3 className="font-semibold">Design Leadership</h3>
           <p>
@@ -61,7 +61,7 @@ export default function HandsAIPage() {
       >
         Project Impact
       </h2>
-      <div className="grid grid-cols-2 gap-x-6 gap-y-8 text-gray-800">
+      <div className="grid grid-cols-2 gap-x-6 gap-y-8 text-[var(--color-text-primary)]">
         {[
           { value: '$250K', label: 'Projected Reduction in Administrative Overhead Costs' },
           { value: '45%', label: 'Increase in Documentation Accuracy' },
@@ -95,11 +95,11 @@ export default function HandsAIPage() {
         >
           The Problem
         </h2>
-        <hr className="mb-6 border-gray-300" />
+        <hr className="mb-6 border-[var(--color-border-strong)]" />
         <h3 className="text-3xl font-bold mb-4">
           Intense Bottlenecks in Case Management
         </h3>
-        <p className="text-gray-700">
+        <p className="text-[var(--color-text-secondary)]">
           WIC caseworkers rely on manual, time-consuming processes to manage thousands of client records,
           medical histories, and appointments. The outdated system leads to delays, high administrative burdens,
           and missed critical updates, ultimately affecting families in need.
@@ -114,9 +114,9 @@ export default function HandsAIPage() {
         >
           The Proposed Solution
         </h2>
-        <hr className="mb-6 border-gray-300" />
+        <hr className="mb-6 border-[var(--color-border-strong)]" />
         <h3 className="text-3xl font-bold mb-4">Human-Centered Automation</h3>
-        <p className="text-gray-700">
+        <p className="text-[var(--color-text-secondary)]">
           An intelligent case management platform that leverages automation and real-time insights to streamline workflows,
           reduce administrative burdens, and improve decision-making for WIC caseworkers so they can focus on what matters
           the most – supporting families and ensuring timely access to critical services.
@@ -151,7 +151,7 @@ export default function HandsAIPage() {
     </h2>
     <div className="w-[120%]">
       <img
-        src="/images/insight/design-process.png"
+        src="/images/hands-ai/design-process.png"
         alt="Design Process Illustration"
         className="w-full mx-auto rounded-xl"
       />
@@ -169,11 +169,11 @@ export default function HandsAIPage() {
       >
         User Research
       </h2>
-      <hr className="mb-6 border-gray-300" />
+      <hr className="mb-6 border-[var(--color-border-strong)]" />
       <h3 className="text-3xl font-bold mb-4">
         Understanding Pain, Stress, and Real-World Challenges
       </h3>
-      <p className="text-gray-700 mb-10">
+      <p className="text-[var(--color-text-secondary)] mb-10">
         We conducted 10+ in-depth interviews and 4 contextual inquiry sessions with a diverse group of WIC caseworkers,
         supervisors, and clinic staff to capture insights into their workflows, mental models, and day-to-day challenges.
       </p>
@@ -186,21 +186,21 @@ export default function HandsAIPage() {
       </h4>
 
       <div className="space-y-4">
-        <div className="flex items-center gap-4 bg-white border border-gray-200 p-4">
-          <img src="/images/hands-ai/user-need-1.png" alt="Vision Icon" className="w-8 h-8" />
-          <p className="text-gray-800 text-sm">
+        <div className="flex items-center gap-4 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] p-4">
+          <img src="/images/hands-ai/user-need-1.png" alt="" className="w-8 h-8" />
+          <p className="text-[var(--color-text-primary)] text-sm">
             Ensure faster and more accurate access to clients who require high-priority assistance
           </p>
         </div>
-        <div className="flex items-center gap-4 bg-white border border-gray-200 p-4">
-          <img src="/images/hands-ai/user-need-2.png" alt="Document Icon" className="w-8 h-8" />
-          <p className="text-gray-800 text-sm">
+        <div className="flex items-center gap-4 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] p-4">
+          <img src="/images/hands-ai/user-need-2.png" alt="" className="w-8 h-8" />
+          <p className="text-[var(--color-text-primary)] text-sm">
             Allow professionals to manage data effortlessly and make informed decisions with confidence
           </p>
         </div>
-        <div className="flex items-center gap-4 bg-white border border-gray-200 p-4">
-          <img src="/images/hands-ai/user-need-3.png" alt="Calendar Icon" className="w-8 h-8" />
-          <p className="text-gray-800 text-sm">
+        <div className="flex items-center gap-4 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] p-4">
+          <img src="/images/hands-ai/user-need-3.png" alt="" className="w-8 h-8" />
+          <p className="text-[var(--color-text-primary)] text-sm">
             Reduce no-shows and improve operational efficiency
           </p>
         </div>
@@ -241,14 +241,14 @@ export default function HandsAIPage() {
       ].map((person, index) => (
         <div
           key={index}
-          className="bg-white border border-gray-200 p-5 rounded-lg shadow-md"
+          className="bg-[var(--color-bg-elevated)] border border-[var(--color-border)] p-5 rounded-lg shadow-md"
         >
-          <p className="italic text-gray-800 mb-4"> {person.quote} </p>
+          <p className="italic text-[var(--color-text-primary)] mb-4"> {person.quote} </p>
           <div className="flex items-center gap-4">
-            <img src={person.img} alt={person.name} className="w-10 h-10 rounded-full" />
-            <p className="text-sm font-medium text-gray-900">
+            <img src={person.img} alt="" className="w-10 h-10 rounded-full" />
+            <p className="text-sm font-medium text-[var(--color-text-primary)]">
               {person.name}{' '}
-              <span className="block text-xs font-normal text-gray-600">{person.title}</span>
+              <span className="block text-xs font-normal text-[var(--color-text-secondary)]">{person.title}</span>
             </p>
           </div>
         </div>
@@ -265,7 +265,7 @@ export default function HandsAIPage() {
               {/* WIC Search */}
               <div>
                 <h3 className="text-xl font-semibold mb-2">Automating Data Filtering</h3>
-                <p className="text-gray-700 mb-4">
+                <p className="text-[var(--color-text-secondary)] mb-4">
                   Emma alleviates the manual burden of searching through large datasets by instantly applying precise filters and surfacing relevant information...
                 </p>
                 <img src="/images/hands-ai/WIC-Search.png" alt="WIC Search" className="w-full rounded-lg shadow" />
@@ -274,7 +274,7 @@ export default function HandsAIPage() {
               {/* Medical Modules */}
               <div>
                 <h3 className="text-xl font-semibold mb-2">Proactive Health Insights and Risk Monitoring</h3>
-                <p className="text-gray-700 mb-4">
+                <p className="text-[var(--color-text-secondary)] mb-4">
                   Emma enhances decision-making by surfacing critical health risks, such as iron deficiency...
                 </p>
                 <div className="space-y-6">
@@ -286,7 +286,7 @@ export default function HandsAIPage() {
               {/* Family Module */}
               <div>
                 <h3 className="text-xl font-semibold mb-2">AI-Powered Case Summaries</h3>
-                <p className="text-gray-700 mb-4">
+                <p className="text-[var(--color-text-secondary)] mb-4">
                   Emma streamlines case management by automatically summarizing key household details...
                 </p>
                 <img src="/images/hands-ai/Family-Module.png" alt="Family Module" className="w-full rounded-lg shadow" />
@@ -295,7 +295,7 @@ export default function HandsAIPage() {
               {/* Appointment 1 */}
               <div>
                 <h3 className="text-xl font-semibold mb-2">Seamless Appointment Scheduling with Emma</h3>
-                <p className="text-gray-700 mb-4">
+                <p className="text-[var(--color-text-secondary)] mb-4">
                   Emma streamlines appointment scheduling by guiding staff through the process with intuitive options...
                 </p>
                 <img src="/images/hands-ai/Appointment-1.png" alt="Appointment 1" className="w-full rounded-lg shadow" />
@@ -304,7 +304,7 @@ export default function HandsAIPage() {
               {/* Appointment 2 */}
               <div>
                 <h3 className="text-xl font-semibold mb-2">Smart Filtering for Effortless Appointment Management</h3>
-                <p className="text-gray-700 mb-4">
+                <p className="text-[var(--color-text-secondary)] mb-4">
                   Emma simplifies appointment tracking with intelligent filtering, allowing staff to quickly sort by type, status, or priority...
                 </p>
                 <img src="/images/hands-ai/Appointment-2.png" alt="Appointment 2" className="w-full rounded-lg shadow" />
@@ -313,7 +313,7 @@ export default function HandsAIPage() {
               {/* Appointment 3 */}
               <div>
                 <h3 className="text-xl font-semibold mb-2">Actionable No-Show Insights for Better Engagement</h3>
-                <p className="text-gray-700 mb-4">
+                <p className="text-[var(--color-text-secondary)] mb-4">
                   Emma provides instant visibility into missed appointments, helping staff track no-shows and take proactive steps...
                 </p>
                 <img src="/images/hands-ai/Appointment-3.png" alt="Appointment 3" className="w-full rounded-lg shadow" />
@@ -325,19 +325,19 @@ export default function HandsAIPage() {
       {/* Conclusion Section */}
       <div>
         <h2 className="text-sm font-semibold uppercase mb-2" style={{ color: '#1976D2' }}>Conclusion</h2>
-        <h3 className="text-3xl font-bold text-gray-900 mb-6">
+        <h3 className="text-3xl font-bold text-[var(--color-text-primary)] mb-6">
           Empowering Humans to <br /> Automate Efficiency
         </h3>
-        <p className="text-gray-700 mb-4">
+        <p className="text-[var(--color-text-secondary)] mb-4">
           Designing for HANDS AI was an exercise in balancing complexity with clarity. Across family,
           medical, WIC, and scheduling modules, the goal was never just to streamline workflows — it was to empower
           human service professionals with tools that feel intuitive, responsive, and unified.
         </p>
-        <p className="text-gray-700 mb-4">
+        <p className="text-[var(--color-text-secondary)] mb-4">
           By deeply understanding the real-world constraints of caseworkers and health professionals, this system brings structure
           to chaos, enabling better care coordination and outcomes.
         </p>
-        <p className="text-gray-700">
+        <p className="text-[var(--color-text-secondary)]">
           This project reaffirmed my belief that great enterprise design isn’t about adding more features —
           it’s about making the right decisions easier, faster, and more human.
         </p>
@@ -346,7 +346,7 @@ export default function HandsAIPage() {
       {/* Learning Outcomes Section */}
       <div>
         <h2 className="text-sm font-semibold uppercase mb-6" style={{ color: '#1976D2' }}>Learning Outcomes</h2>
-        <ul className="space-y-4 text-gray-800">
+        <ul className="space-y-4 text-[var(--color-text-primary)]">
           <li className="flex items-start gap-3">
             <span>Automated key processes, reducing the manual workload for staff</span>
           </li>

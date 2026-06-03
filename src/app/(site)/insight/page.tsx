@@ -2,13 +2,13 @@
 
 export default function InsightPage() {
   return (
-    <div className="px-6 md:px-16 lg:px-32 py-20 bg-white text-gray-900">
+    <div className="px-6 md:px-16 lg:px-32 pt-32 pb-20">
       <div className="max-w-5xl mx-auto">
         {/* Title and Intro */}
         <h1 className="text-4xl font-bold leading-tight mb-6">
           Redesigning How Educators Access & Act on Student Insights
         </h1>
-        <p className="text-lg text-gray-700 mb-12">
+        <p className="text-lg text-[var(--color-text-secondary)] mb-12">
         {"District administrators and educators rely on complex data to support students—but too often, crucial trends remain buried under charts, filters, and dashboards. Insight is changing that.\n\nThrough its Key Insights feature, the platform uses AI to generate natural-language summaries and targeted recommendations for each dataset—helping users quickly understand what's happening, why it matters, and what actions to take."}
           <br /><br />
           {"Through its Key Insights feature, the platform uses AI to generate natural-language summaries and targeted recommendations for each dataset—helping users quickly understand what's happening, why it matters, and what actions to take."}
@@ -33,7 +33,7 @@ export default function InsightPage() {
               >
                 Our Primary Role
               </h2>
-              <ul className="space-y-6 text-gray-800">
+              <ul className="space-y-6 text-[var(--color-text-primary)]">
                 <li>
                   <h3 className="font-semibold">AI-Enhanced UX Strategy</h3>
                   <p>
@@ -63,7 +63,7 @@ export default function InsightPage() {
               >
                 Project Impact
               </h2>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-8 text-gray-800">
+              <div className="grid grid-cols-2 gap-x-6 gap-y-8 text-[var(--color-text-primary)]">
                 {[
                   { value: '15%', label: 'Reduction in chronic absenteeism through early intervention strategies' },
                   { value: '10%', label: 'Increase in student engagement by providing personalized learning insights' },
@@ -95,11 +95,11 @@ export default function InsightPage() {
                 >
                   The Problem
                 </h2>
-                <hr className="mb-6 border-gray-300" />
+                <hr className="mb-6 border-[var(--color-border-strong)]" />
                 <h3 className="text-3xl font-bold mb-4">
                   Crucial Insights get Buried Deep
                 </h3>
-                <p className="text-gray-700">
+                <p className="text-[var(--color-text-secondary)]">
                   Schools and districts struggle with fragmented data systems that fail to provide real-time insights into attendance patterns, course enrollment trends, and student engagement. Without a centralized and predictive analytics platform, educators face difficulties in identifying at-risk students, optimizing course planning, and implementing timely interventions. These gaps result in increased absenteeism, inefficient resource allocation, and missed opportunities to support student success.
                 </p>
               </div>
@@ -112,9 +112,9 @@ export default function InsightPage() {
                 >
                   The Proposed Solution
                 </h2>
-                <hr className="mb-6 border-gray-300" />
+                <hr className="mb-6 border-[var(--color-border-strong)]" />
                 <h3 className="text-3xl font-bold mb-4">The Data needs to Enforce Quick Actions</h3>
-                <p className="text-gray-700">
+                <p className="text-[var(--color-text-secondary)]">
                   Insight AI leverages AI-powered analytics to transform raw student data into actionable insights. By integrating attendance tracking, predictive course planning, school climate analysis, and custom group management, the platform empowers educators to make informed decisions. AI-driven recommendations help schools intervene early, improve student engagement, and allocate resources more effectively—ultimately driving better academic outcomes.
                 </p>
               </div>
@@ -164,11 +164,11 @@ export default function InsightPage() {
               >
                 User Research 
               </h2>
-              <hr className="mb-6 border-gray-300" />
+              <hr className="mb-6 border-[var(--color-border-strong)]" />
               <h3 className="text-3xl font-bold mb-4">
                 Understanding Friction, Gaps, and Missed Opportunities in Student Data
               </h3>
-              <p className="text-gray-700 mb-10">
+              <p className="text-[var(--color-text-secondary)] mb-10">
                 We conducted 12+ interviews and multiple contextual inquiry sessions with school administrators, academic counselors, and district data specialists to uncover critical pain points in accessing, analyzing, and acting on student data. Our goal was to understand how information bottlenecks, disconnected dashboards, and lack of AI summarization were impacting decision-making, student outcomes, and staff efficiency.
               </p>
 
@@ -180,21 +180,21 @@ export default function InsightPage() {
               </h4>
 
               <div className="space-y-4">
-                <div className="flex items-center gap-4 bg-white border border-gray-200 p-4">
+                <div className="flex items-center gap-4 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] p-4">
                   <img src="/images/insight/user-need-1.png" alt="Vision Icon" className="w-8 h-8" />
-                  <p className="text-gray-800 text-sm">
+                  <p className="text-[var(--color-text-primary)] text-sm">
                     Quickly understand patterns and risks across large student populations without manual deep dives
                   </p>
                 </div>
-                <div className="flex items-center gap-4 bg-white border border-gray-200 p-4">
+                <div className="flex items-center gap-4 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] p-4">
                   <img src="/images/insight/user-need-2.png" alt="Document Icon" className="w-8 h-8" />
-                  <p className="text-gray-800 text-sm">
+                  <p className="text-[var(--color-text-primary)] text-sm">
                     Generate contextual, AI-powered summaries to streamline collaboration and decision-making
                   </p>
                 </div>
-                <div className="flex items-center gap-4 bg-white border border-gray-200 p-4">
+                <div className="flex items-center gap-4 bg-[var(--color-bg-elevated)] border border-[var(--color-border)] p-4">
                   <img src="/images/insight/user-need-3.png" alt="Calendar Icon" className="w-8 h-8" />
-                  <p className="text-gray-800 text-sm">
+                  <p className="text-[var(--color-text-primary)] text-sm">
                     Proactively detect trends like chronic absenteeism and academic dips to intervene early
                   </p>
                 </div>
@@ -232,14 +232,14 @@ export default function InsightPage() {
 .map((person, index) => (
               <div
                 key={index}
-                className="bg-white border border-gray-200 p-5 rounded-lg shadow-md"
+                className="bg-[var(--color-bg-elevated)] border border-[var(--color-border)] p-5 rounded-lg shadow-md"
               >
-                <p className="italic text-gray-800 mb-4"> {person.quote} </p>
+                <p className="italic text-[var(--color-text-primary)] mb-4"> {person.quote} </p>
                 <div className="flex items-center gap-4">
                   <img src={person.img} alt={person.name} className="w-10 h-10 rounded-full" />
-                  <p className="text-sm font-medium text-gray-900">
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]">
                     {person.name}{' '}
-                    <span className="block text-xs font-normal text-gray-600">{person.title}</span>
+                    <span className="block text-xs font-normal text-[var(--color-text-secondary)]">{person.title}</span>
                   </p>
                 </div>
               </div>
@@ -256,7 +256,7 @@ export default function InsightPage() {
             {/* ACA - 1 */}
             <div>
               <h3 className="text-xl font-semibold mb-2">AI-Powered Attendance Intelligence</h3>
-              <p className="text-gray-700 mb-4">
+              <p className="text-[var(--color-text-secondary)] mb-4">
               The Key Insights panel uses AI to detect attendance anomalies, identify high-risk student patterns, and generate real-time summaries based on subgroup disparities. By automating this analysis, the system flags critical insights—like sudden attendance drops or transportation-related disruptions—and offers suggested actions without requiring manual data exploration. This ensures school staff can focus their efforts where they’re needed most, accelerating interventions and improving student outcomes.
               </p>
               <img src="/images/insight/ACA-1.png" alt="ACA 1" className="w-full rounded-lg shadow" />
@@ -265,7 +265,7 @@ export default function InsightPage() {
 
             <div>
               <h3 className="text-xl font-semibold mb-2">AI-Driven Equity Insights in Advanced Coursework</h3>
-              <p className="text-gray-700 mb-4">
+              <p className="text-[var(--color-text-secondary)] mb-4">
               The AI-powered dashboard highlights patterns in advanced course enrollment and flags equity gaps—like low female participation in STEM or uneven access across student groups. It surfaces key insights and suggests actions, helping schools make data-informed decisions to promote fairness and expand opportunities.
               </p>
               <img src="/images/insight/AC-1.png" alt="AC-1" className="w-full rounded-lg shadow" />
@@ -274,7 +274,7 @@ export default function InsightPage() {
 
             <div>
               <h3 className="text-xl font-semibold mb-2">AI-Enhanced Custom Group Creation</h3>
-              <p className="text-gray-700 mb-4">
+              <p className="text-[var(--color-text-secondary)] mb-4">
               The Custom Group Creator uses AI to identify clusters of high-risk schools based on key indicators like assessment scores and suspension rates. It helps staff quickly build targeted groups for interventions, making it easier to prioritize support where it’s needed most.
               </p>
               <img src="/images/insight/CGC-1.png" alt="CGC-1" className="w-full rounded-lg shadow" />
@@ -283,7 +283,7 @@ export default function InsightPage() {
 
             <div>
               <h3 className="text-xl font-semibold mb-2">AI-Backed Student Climate Monitoring</h3>
-              <p className="text-gray-700 mb-4">
+              <p className="text-[var(--color-text-secondary)] mb-4">
               The School Climate Report uses AI to detect attendance patterns and behavioral trends across the school year. It highlights risk periods, identifies students in need of support, and recommends timely interventions—helping schools address chronic absenteeism and improve engagement more effectively.
               </p>
               <img src="/images/insight/SCR-1.png" alt="SCR-1" className="w-full rounded-lg shadow" />
@@ -300,13 +300,13 @@ export default function InsightPage() {
           {/* Conclusion Section */}
           <div>
             <h2 className="text-sm font-semibold uppercase mb-2" style={{ color: '#1976D2' }}>Conclusion</h2>
-            <h3 className="text-3xl font-bold text-gray-900 mb-6">
+            <h3 className="text-3xl font-bold text-[var(--color-text-primary)] mb-6">
             Designing with Insight:<br /> Human-Centered AI for Education 
             </h3>
-            <p className="text-gray-700 mb-4">
+            <p className="text-[var(--color-text-secondary)] mb-4">
             Designing the Insight platform challenged us to balance powerful AI automation with trust, clarity, and usability for educators. Rather than overwhelming users with data, we focused on surfacing the right insights—at the right time—for the right people. From detecting chronic absenteeism to flagging equity gaps in advanced courses, our goal was to help schools move from reactive to proactive decision-making.
             </p>
-            <p className="text-gray-700 mb-4">
+            <p className="text-[var(--color-text-secondary)] mb-4">
             This work reaffirmed our belief that AI should serve as a quiet partner—amplifying human judgment, not replacing it. When designed responsibly, AI can unlock faster interventions, fairer outcomes, and more confident decisions in public education.
             </p>
           </div>
@@ -314,7 +314,7 @@ export default function InsightPage() {
           {/* Learning Outcomes Section */}
           <div>
             <h2 className="text-sm font-semibold uppercase mb-6" style={{ color: '#1976D2' }}>Learning Outcomes</h2>
-            <ul className="space-y-4 text-gray-800">
+            <ul className="space-y-4 text-[var(--color-text-primary)]">
               <li className="flex items-start gap-3">
                 <span>Automated key processes, reducing the manual workload for staff</span>
               </li>

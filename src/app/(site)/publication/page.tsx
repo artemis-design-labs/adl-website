@@ -12,11 +12,11 @@ const articles = [
 
 export default function PublicationPage() {
     return (
-        <div className="max-w-7xl mx-auto px-6 py-16">
-            <h1 className="text-4xl font-bold mb-8 text-center">Online Publication</h1>
+        <div className="max-w-7xl mx-auto px-6 pt-32 pb-16">
+            <h1 className="text-4xl md:text-5xl font-semibold tracking-[-0.025em] mb-8 text-center text-[var(--color-text-primary)]">Online Publication</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                 {articles.map(article => (
-                    <a key={article.id} href={article.link} className="block bg-white shadow rounded-lg overflow-hidden hover:shadow-lg transition">
+                    <a key={article.id} href={article.link} className="block bg-[var(--color-bg-elevated)] shadow rounded-lg overflow-hidden hover:shadow-lg transition">
                         <Image
                             src={article.image}
                             alt={article.title}
@@ -25,9 +25,9 @@ export default function PublicationPage() {
                             className="w-full h-40 object-cover"
                         />
                         <div className="p-4">
-                            <h2 className="text-xl font-semibold mb-2">{article.title}</h2>
-                            <p className="text-gray-600 mb-2">{article.summary}</p>
-                            <span className="text-indigo-600 text-sm font-medium">Read More →</span>
+                            <h2 className="text-xl font-semibold mb-2 text-[var(--color-text-primary)]">{article.title}</h2>
+                            <p className="text-[var(--color-text-secondary)] mb-2">{article.summary}</p>
+                            <span className="text-[var(--color-accent-text)] text-sm font-medium">Read More →</span>
                         </div>
                     </a>
                 ))}

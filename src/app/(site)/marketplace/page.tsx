@@ -15,20 +15,22 @@ export default function MarketplacePage() {
     const filteredTemplates = templates.filter(t => t.name.toLowerCase().includes(filter.toLowerCase()));
 
     return (
-        <div className="max-w-7xl mx-auto px-6 py-16">
-            <h1 className="text-4xl font-bold mb-8 text-center">Template Marketplace</h1>
+        <div className="max-w-7xl mx-auto px-6 pt-32 pb-16">
+            <h1 className="text-4xl md:text-5xl font-semibold tracking-[-0.025em] mb-8 text-center text-[var(--color-text-primary)]">Template Marketplace</h1>
             <div className="mb-8 flex justify-center">
+                <label htmlFor="marketplace-search" className="sr-only">Search templates</label>
                 <input
+                    id="marketplace-search"
                     type="text"
                     placeholder="Search templates..."
-                    className="border px-4 py-2 rounded-md w-full max-w-xs"
+                    className="border border-[var(--color-border)] bg-[var(--color-bg-inset)] text-[var(--color-text-primary)] placeholder-[var(--color-text-tertiary)] px-4 py-2 rounded-md w-full max-w-xs focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/30"
                     value={filter}
                     onChange={e => setFilter(e.target.value)}
                 />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 {filteredTemplates.map(template => (
-                    <div key={template.id} className="bg-white shadow rounded-lg p-4 flex flex-col items-center">
+                    <div key={template.id} className="bg-[var(--color-bg-elevated)] shadow rounded-lg p-4 flex flex-col items-center">
                         <Image
                             src={template.image}
                             alt={template.name}
@@ -37,9 +39,9 @@ export default function MarketplacePage() {
                             className="w-full h-40 object-cover rounded mb-4"
                         />
                         <h2 className="text-xl font-semibold mb-2">{template.name}</h2>
-                        <p className="text-gray-600 mb-2 text-center">{template.description}</p>
+                        <p className="text-[var(--color-text-secondary)] mb-2 text-center">{template.description}</p>
                         <div className="font-bold text-lg mb-4">${template.price}</div>
-                        <button className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">Purchase</button>
+                        <button className="bg-[var(--color-accent)] text-[var(--color-text-on-accent)] px-4 py-2 rounded font-medium hover:bg-[var(--color-accent-hover)] hover:shadow-[var(--shadow-glow)] transition-all">Purchase</button>
                     </div>
                 ))}
             </div>
