@@ -55,6 +55,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
       <Navigation />
+      <main id="main-content">
 
       {/* Hero */}
       <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
@@ -220,6 +221,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   );
