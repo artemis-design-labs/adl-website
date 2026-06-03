@@ -84,10 +84,10 @@ export function ProblemSection() {
                 </span>
                 <span className="h-px flex-1 bg-[var(--color-border)] group-hover:bg-[var(--color-accent-muted)] transition-colors" />
               </div>
-              <h3 className="text-lg lg:text-xl font-medium text-[var(--color-text-primary)] leading-snug mb-3">
+              <h3 className="text-xl lg:text-2xl font-medium text-[var(--color-text-primary)] leading-snug mb-3">
                 {card.title}
               </h3>
-              <p className="text-sm md:text-base text-[var(--color-text-secondary)] leading-relaxed">
+              <p className="text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed">
                 {card.detail}
               </p>
             </article>

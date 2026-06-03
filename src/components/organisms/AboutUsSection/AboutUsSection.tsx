@@ -113,14 +113,25 @@ export function AboutUsSection() {
 
           {/* Right — Services carousel */}
           <div
-            className="lg:col-span-6"
+            className="lg:col-span-6 space-y-8"
             onMouseEnter={() => { pausedRef.current = true; }}
             onMouseLeave={() => { pausedRef.current = false; }}
           >
-            <div className="flex items-baseline justify-between mb-6">
-              <span className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
-                › what we offer
-              </span>
+            <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)]">
+              › what we offer
+            </span>
+
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.025em] text-[var(--color-text-primary)] leading-[1.1]">
+              Three places
+              <br />
+              <span className="text-[var(--color-accent)]">to start with us.</span>
+            </h3>
+
+            <p className="text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed">
+              Pick the engagement that matches your stage. Each one is shaped by what we wished we&apos;d had as founders.
+            </p>
+
+            <div className="flex items-baseline justify-end -mt-2 mb-2">
               <span className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
                 {String(activeService + 1).padStart(2, '0')} / {String(SERVICES.length).padStart(2, '0')}
               </span>
@@ -152,7 +163,7 @@ export function AboutUsSection() {
                 {service.tagline}
               </p>
 
-              <p className="text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed mb-8">
+              <p className="text-base md:text-lg lg:text-xl text-[var(--color-text-secondary)] leading-relaxed mb-8">
                 {service.description}
               </p>
 

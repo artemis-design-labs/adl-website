@@ -80,10 +80,10 @@ export function MetricsTestimonialsSection() {
                   <div className="text-3xl md:text-4xl font-semibold tracking-[-0.025em] text-[var(--color-accent)] mb-2">
                     {m.value}
                   </div>
-                  <div className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-primary)] mb-1">
+                  <div className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-text-primary)] mb-2">
                     {m.label}
                   </div>
-                  <div className="text-xs text-[var(--color-text-tertiary)] leading-snug">
+                  <div className="text-sm md:text-base text-[var(--color-text-secondary)] leading-snug">
                     {m.description}
                   </div>
                 </article>
@@ -120,7 +120,7 @@ export function MetricsTestimonialsSection() {
                 &ldquo;
               </span>
 
-              <blockquote className="text-lg md:text-xl text-[var(--color-text-primary)] leading-relaxed mb-8">
+              <blockquote className="text-lg md:text-xl lg:text-2xl text-[var(--color-text-primary)] leading-relaxed mb-8">
                 {t.quote}
               </blockquote>
 
