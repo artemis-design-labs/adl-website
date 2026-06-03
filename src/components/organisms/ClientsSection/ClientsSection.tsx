@@ -32,20 +32,20 @@ export function ClientsSection() {
           role="region"
         >
           <ul
-            className="flex w-max items-center gap-12 md:gap-16 animate-marquee-x"
+            className="flex w-max items-center gap-5 md:gap-8 animate-marquee-x"
             aria-hidden="true"
           >
             {[...CLIENTS, ...CLIENTS].map((client, i) => (
               <li
                 key={`${client.name}-${i}`}
-                className="flex-shrink-0 flex items-center justify-center h-16 md:h-20 w-32 md:w-40"
+                className="flex-shrink-0 flex items-center justify-center h-28 md:h-32 w-48 md:w-60"
               >
                 <Image
                   src={client.src}
                   alt={client.name}
-                  width={160}
-                  height={80}
-                  className="max-h-full w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-[filter,opacity] duration-300"
+                  width={280}
+                  height={140}
+                  className="max-h-full w-auto object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-[filter,opacity] duration-300"
                   unoptimized
                 />
               </li>
