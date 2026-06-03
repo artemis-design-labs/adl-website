@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/cn';
+import { HeroBackdrop } from './HeroBackdrop';
 
 const EYEBROW_PREFIX = '$ ./adl train ';
 const EYEBROW_SUFFIX = '--status=production';
@@ -16,14 +17,7 @@ const TRUST_TAGS = ['Health', 'Fintech', 'Enterprise'];
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-[var(--color-bg-primary)]">
-      {/* Ambient radial glow */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-[60vh] pointer-events-none"
-        style={{ background: 'var(--gradient-subtle)' }}
-      />
-      {/* Faint grid */}
-      <BackgroundGrid />
+      <HeroBackdrop />
 
       <div className="relative max-w-[var(--container-wide)] mx-auto px-6 lg:px-8 pt-36 md:pt-44 pb-28 md:pb-36">
         <div className="max-w-4xl mx-auto text-center">
@@ -127,23 +121,5 @@ function ArrowRight() {
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M5 12h14M13 5l7 7-7 7" />
     </svg>
-  );
-}
-
-function BackgroundGrid() {
-  return (
-    <div
-      aria-hidden="true"
-      className="absolute inset-0 pointer-events-none opacity-[0.06]"
-      style={{
-        backgroundImage:
-          'linear-gradient(var(--color-text-primary) 1px, transparent 1px), linear-gradient(90deg, var(--color-text-primary) 1px, transparent 1px)',
-        backgroundSize: '64px 64px',
-        maskImage:
-          'radial-gradient(ellipse at 50% 0%, black 0%, transparent 70%)',
-        WebkitMaskImage:
-          'radial-gradient(ellipse at 50% 0%, black 0%, transparent 70%)',
-      }}
-    />
   );
 }
