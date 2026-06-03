@@ -108,7 +108,7 @@ export default function ContactPage() {
             <div className="bg-[var(--color-bg-elevated)] border border-[var(--color-border)] p-8 text-center">
               <p className="text-sm text-[var(--color-text-muted)] mb-4">Calendar integration coming soon</p>
               <a
-                href="mailto:hello@artemisdesignlabs.com?subject=Discovery Call Request"
+                href="mailto:itadmin@artemisdesignlabs.com?subject=Discovery Call Request"
                 className={cn(
                   'inline-block text-xs tracking-[0.08em] uppercase px-6 py-3',
                   'bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]',
@@ -158,10 +158,10 @@ export default function ContactPage() {
               <div className="p-4 bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
                 <p className="text-xs text-[var(--color-text-muted)] mb-1">Prefer email?</p>
                 <a
-                  href="mailto:hello@artemisdesignlabs.com"
+                  href="mailto:itadmin@artemisdesignlabs.com"
                   className="text-sm text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors"
                 >
-                  hello@artemisdesignlabs.com
+                  itadmin@artemisdesignlabs.com
                 </a>
               </div>
             </div>

@@ -49,7 +49,7 @@ npm run lint     # Run ESLint
 - **Status:** Available for new projects
 - **Services Links:** Design System Creation, Design System Maintenance, Design-to-Code Handoff
 - **Company Links:** About, Work, Pricing, Contact
-- **Email:** hello@artemisdesignlabs.com
+- **Email:** itadmin@artemisdesignlabs.com
 
 ---
 
@@ -565,4 +565,4 @@ Get early access to UI Forge—our AI-powered design-to-code platform. Join the 
 
 ### Footer
 
-Design systems that ship. We deliver Figma AND production-ready React for B2B startups scaling from Seed to Series C. Available for new projects. hello@artemisdesignlabs.com
+Design systems that ship. We deliver Figma AND production-ready React for B2B startups scaling from Seed to Series C. Available for new projects. itadmin@artemisdesignlabs.com

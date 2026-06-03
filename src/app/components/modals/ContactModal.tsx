@@ -75,7 +75,7 @@ export default function ContactModal({ onClose }: ContactModalProps) {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900">Email</h4>
-                    <p className="text-gray-600">hello@artemisdesignlabs.com</p>
+                    <p className="text-gray-600">itadmin@artemisdesignlabs.com</p>
                   </div>
                 </div>
 

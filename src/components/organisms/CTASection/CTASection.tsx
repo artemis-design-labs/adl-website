@@ -70,10 +70,10 @@ export function CTASection() {
                   Email
                 </p>
                 <a
-                  href="mailto:hello@artemisdesignlabs.com"
+                  href="mailto:itadmin@artemisdesignlabs.com"
                   className="text-base text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors"
                 >
-                  hello@artemisdesignlabs.com
+                  itadmin@artemisdesignlabs.com
                 </a>
               </div>
 

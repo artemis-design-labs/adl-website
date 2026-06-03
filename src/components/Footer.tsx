@@ -85,10 +85,10 @@ export default function Footer() {
             &copy; {currentYear} Artemis Design Labs
           </p>
           <a
-            href="mailto:hello@artemisdesignlabs.com"
+            href="mailto:itadmin@artemisdesignlabs.com"
             className="text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-150"
           >
-            hello@artemisdesignlabs.com
+            itadmin@artemisdesignlabs.com
           </a>
         </div>
       </div>
