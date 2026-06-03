@@ -7,6 +7,81 @@ Tags follow semver — see "Releases" on GitHub for the immutable checkpoints.
 
 ---
 
+## [v1.1.0] — 2026-06-03 — Brand redesign + AI-tech foundation
+
+A same-day follow-up to the v1.0.0 cutover. v1.0.0 was about getting the site reliably hosted on Cloudflare. v1.1.0 is about **what visitors actually see**: a deliberate AI-tech-forward visual direction, founder-to-founder copy, and the infrastructure pieces (Prisma removed, email + spam-protection plumbing, dead-code purge) needed to safely ship updates from here.
+
+### Visual system
+- **Dark-primary palette** with light mode as a polished alternate (deeper violet for AAA contrast). All surfaces, borders, and type roles rebuilt around new tokens in `src/styles/tokens.css`. Variable names preserved so existing components inherit.
+- **Electric violet accent** (`#7C3AED` on dark, `#6D28D9` on light) drives CTAs, links, status pills, and headline emphasis.
+- **Geist Sans + Geist Mono** typography via the `geist` npm package. Inter Google Fonts `<link>`s dropped. Larger display sizes (clamp 2.5rem–5rem on hero) with -0.025em tracking.
+- **Brand mark**: SVG Artemis arrow in violet + Geist wordmark via the new `src/components/atoms/Logo` atom. Replaces the unbranded uppercase wordmark.
+- **Theme toggle**: pill switch with sun/moon icons and a violet-glowing thumb. `role="switch"`, `aria-checked`, full keyboard nav. Replaces the prior near-invisible 4×4px square.
+- **Primary CTA pattern**: violet fill, white text, arrow icon, hover shadow-glow, active translate-y. Used everywhere a primary action lives.
+- **Mono eyebrow pattern**: `font-mono text-[11px] uppercase tracking-[0.18em] text-accent` prefixed with `›`. Used on every section.
+
+### Homepage sections (all rebuilt)
+- **Hero**: terminal-style mono prompt (`> ./adl train --status=production`) with typewriter animation, oversized Geist display headline, violet-second-line emphasis, ambient radial accent glow, faint masked grid background. New V2 copy.
+- **ProblemSection**: 5-card grid, hover promotes card border + bg to accent, animated divider, mono numbers, italic transition + scroll CTA.
+- **AboutUsSection**: founder-led origin story copy, 3-stat block (190K+ images / 3-4 wks delivery / 100% code parity), services carousel with pause-on-hover via `ref`, role="tablist" dots, services updated with investment + timeline.
+- **MetricsTestimonialsSection**: 2×2 metrics grid with violet values, testimonial card with oversized open-quote glyph and accent avatar.
+- **ClientsSection**: horizontal infinite marquee of 8 real client logos (AT&T, Verizon, NBCU, NYCPS, NYCERS, CMA, Qualitrol, Freshop) — bumped from placeholder boxes. Grayscale at 80% opacity, hover-to-color, edge mask, pause on hover, `prefers-reduced-motion` respected. Cells enlarged in a follow-up to 112-128px tall.
+- **CTASection**: "Let's have a founder-to-founder conversation." headline, ambient violet wash, contact card with check-icon list.
+
+### Site-wide
+- **New favicon**: `src/app/icon.svg` + `apple-icon.svg` — violet arrow on dark rounded-rect. Old `favicon.ico` removed.
+- **Footer rebuild**: Logo atom, 12-col grid, mono eyebrows, status pill with violet glow, accent hover on links, contact column lifted out, Pricing added to nav. Server component now.
+- **Navigation rebuild**: Logo atom, pill ThemeToggle, prominent violet "Book a Call" CTA with arrow + glow, focus-visible rings throughout, 44×44 mobile hit target.
+- **Email canonicalized**: All `hello@artemisdesignlabs.com` references replaced with `itadmin@artemisdesignlabs.com` (Footer, CTASection, /contact, layout JSON-LD, README).
+- **`html` defaults to `data-theme="dark"`** instead of `light`. ThemeProvider default flipped to match.
+
+### V1/V2 ContentSwitcher and related infrastructure — removed
+The dev tool that toggled between V1 and V2 copy per section was generating runtime noise across 7 organisms, depended on a `/api/save-content-config` route that `git push`ed to `test-content-1`, and forced a `ContentVersionProvider` into the tree. Single source of truth wins.
+
+- Deleted: `src/components/ContentSwitcher.tsx`, `src/context/ContentVersionContext.tsx`, `src/components/DevOnly.tsx`, `src/app/api/save-content-config/`.
+- Stripped `V1_CONTENT` blocks and `version === 'v1'` ternaries from `Hero`, `ProblemSection`, `HowItWorksSection`, `OurAIPreviewSection`, `SocialProofSection`, `CaseStudySection`, `ServicesSection`. V2 copy lifted to `CONTENT`.
+- In-page V1/V2 chips removed.
+- Remote branches `test-content-1` and `test-content-2` deleted (no longer referenced anywhere).
+
+### Database — Prisma removed
+Prisma's query engine couldn't load in the Workers runtime, throwing a server-side exception on `/admin` (digest `888017765`).
+
+- Replaced `@prisma/client` + `prisma` with the native `mongodb` npm driver.
+- New `src/lib/mongo.ts` — cached `MongoClient` + `Db` singleton per isolate, `ContactDoc` interface.
+- `/api/contact/route.ts` writes to `db.collection('contacts')`.
+- `/admin/page.tsx` reads from the same collection. Still `force-dynamic` + `runtime: 'nodejs'`.
+- Deleted `prisma/` directory entirely (`schema.prisma`, migrations, `dev.db`). `prisma generate` no longer in any build script.
+
+### Contact form — Resend email + Cloudflare Turnstile
+- **Email** notifications via Resend on every submission to `itadmin@artemisdesignlabs.com` with the submitter's email as `Reply-To`. Skipped silently if `RESEND_API_KEY` isn't set (so dev and pre-rollout work). From-address defaults to `onboarding@resend.dev` until a domain is verified in Resend.
+- **Spam protection** via Cloudflare Turnstile. New `src/components/atoms/Turnstile/` widget atom activates only when `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is set; loads the CF challenges script on demand. Submit button stays disabled until a token arrives. Server verifies the token against `siteverify` before writing to Mongo or emailing. Fails open when `TURNSTILE_SECRET_KEY` is unset.
+
+### SEO + a11y
+- `layout.tsx` metadata bumped: `metadataBase` + canonical URL, title template, Open Graph image, Twitter card, JSON-LD `Organization` block.
+- New `src/app/robots.ts` allows everything except `/admin` and `/api/`, points crawlers at `/sitemap.xml`.
+- New `src/app/sitemap.ts` enumerates 12 public routes with priority + changeFrequency hints.
+- `role="switch"` / `role="menubar"` / `role="tablist"` applied on toggle, nav, carousels. `aria-label` / `aria-controls` / `aria-expanded` thread through. `focus-visible` rings everywhere.
+
+### Dev experience
+- **Pre-commit hooks**: `husky` v9 + `lint-staged` v17. `.husky/pre-commit` runs `npx lint-staged` which runs `next lint --fix --file` on staged JS/TS/CSS/MD and `tsc --noEmit` on staged TS. `prepare` script activates the hook on `npm install`. `typecheck` script added.
+- **Workflow rename**: deploy step renamed to "Sync Worker runtime secrets". Now bulk-syncs `DATABASE_URL` (required), `RESEND_API_KEY` (optional), `TURNSTILE_SECRET_KEY` (optional) — missing optionals log a skip instead of failing.
+
+### Dead-code purge
+Verified zero importers from any active route, then deleted:
+- `src/app/components/` — entire tree of pre-restructure leftovers (23 files, 7 dirs): `About/`, `Atoms/`, `modals/`, `molecules/`, `templates/`, `FullScreenMenu.tsx`.
+- `src/app/variables.css` — old standalone token file (peachy/cream pre-Severance palette).
+- `src/components/molecules/SectionHeader/` and the now-empty `molecules/` dir.
+
+### Docs
+- `CLAUDE.md` rewritten from scratch. The Feb 2025 Severance / Inter / Prisma stack notes were stale. New version: accurate stack table, palette tokens, current file layout, conventions, workflow, security follow-ups, and an explicit "do not revive" list.
+- `CHANGELOG.md` — this entry.
+
+### Security follow-ups (open)
+- `/admin` still has **no authentication**. Set up a Cloudflare Access policy on `/admin/*` (dashboard step — needs your CF login).
+- `MongoDB`, `CF`, and `GitHub PAT` credentials from the v1.0.0 cutover session live in the chat transcript that produced them. Rotate them when convenient.
+
+---
+
 ## [v1.0.0] — 2026-06-03 — First Cloudflare Workers production deploy
 
 This is the production cutover from Vercel (disabled, billing) to **Cloudflare Workers via OpenNext**, with **GitHub Actions CI/CD** auto-deploying every push to `main`. The site is live at:
