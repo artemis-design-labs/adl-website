@@ -44,7 +44,22 @@ jobs:
       - name: Deploy Worker
         run: npx opennextjs-cloudflare deploy
 
-      - name: Sync DATABASE_URL as Worker secret
+      - name: Sync Worker runtime secrets
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: printf '%s' "$DATABASE_URL" | npx wrangler secret put DATABASE_URL
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          TURNSTILE_SECRET_KEY: ${{ secrets.TURNSTILE_SECRET_KEY }}
+        run: |
+          # DATABASE_URL is required; the others are env-guarded and
+          # only synced when a value is set in the GitHub repo secrets.
+          printf '%s' "$DATABASE_URL" | npx wrangler secret put DATABASE_URL
+          if [ -n "$RESEND_API_KEY" ]; then
+            printf '%s' "$RESEND_API_KEY" | npx wrangler secret put RESEND_API_KEY
+          else
+            echo "RESEND_API_KEY not set — skipping (email notifications disabled)."
+          fi
+          if [ -n "$TURNSTILE_SECRET_KEY" ]; then
+            printf '%s' "$TURNSTILE_SECRET_KEY" | npx wrangler secret put TURNSTILE_SECRET_KEY
+          else
+            echo "TURNSTILE_SECRET_KEY not set — skipping (spam protection disabled)."
+          fi
