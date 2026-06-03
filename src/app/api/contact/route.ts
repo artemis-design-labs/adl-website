@@ -50,7 +50,7 @@ async function notifyByEmail(submission: ContactDoc) {
     return;
   }
 
-  const from = process.env.RESEND_FROM ?? 'ADL Contact <onboarding@resend.dev>';
+  const from = process.env.RESEND_FROM ?? 'ADL <noreply@artemisdesignlabs.com>';
 
   const lines = [
     `Name: ${submission.name}`,
