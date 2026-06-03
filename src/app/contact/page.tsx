@@ -1,9 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import { Turnstile } from '@/components/atoms/Turnstile';
 import { cn } from '@/lib/cn';
+
+const TURNSTILE_REQUIRED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -18,6 +21,7 @@ export default function ContactPage() {
   const [waitlistSuccess, setWaitlistSuccess] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -25,8 +29,14 @@ export default function ContactPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const onTurnstileToken = useCallback((token: string) => setTurnstileToken(token), []);
+  const onTurnstileExpire = useCallback(() => setTurnstileToken(null), []);
+
+  const canSubmit = !loading && (!TURNSTILE_REQUIRED || Boolean(turnstileToken));
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!canSubmit) return;
     setSuccess(false);
     setError('');
     setLoading(true);
@@ -34,7 +44,7 @@ export default function ContactPage() {
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, turnstileToken }),
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -42,6 +52,7 @@ export default function ContactPage() {
 
       setSuccess(true);
       setFormData({ name: '', email: '', company: '', service: '', message: '' });
+      setTurnstileToken(null);
     } catch (err) {
       console.error(err);
       setError('Something went wrong. Please try again or email us directly.');
@@ -264,18 +275,22 @@ export default function ContactPage() {
                     />
                   </div>
 
+                  {TURNSTILE_REQUIRED && (
+                    <Turnstile onToken={onTurnstileToken} onExpire={onTurnstileExpire} theme="auto" />
+                  )}
+
                   <button
                     type="submit"
-                    disabled={loading}
+                    disabled={!canSubmit}
                     className={cn(
                       'w-full text-xs tracking-[0.08em] uppercase px-6 py-4',
-                      'bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]',
-                      'hover:bg-[var(--color-text-secondary)]',
-                      'transition-colors duration-150',
-                      'disabled:opacity-50 disabled:cursor-not-allowed'
+                      'bg-[var(--color-accent)] text-[var(--color-text-on-accent)]',
+                      'hover:bg-[var(--color-accent-hover)] hover:shadow-[var(--shadow-glow)]',
+                      'transition-all duration-150',
+                      'disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none'
                     )}
                   >
-                    {loading ? 'Sending...' : 'Send Message'}
+                    {loading ? 'Sending…' : 'Send Message'}
                   </button>
                 </form>
               )}
