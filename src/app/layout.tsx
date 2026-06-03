@@ -1,8 +1,11 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { ThemeProvider } from '@/context/ThemeContext';
+
+const CF_BEACON_TOKEN = '81fa03a077554854b911e476023935c6';
 
 const SITE_URL = 'https://artemisdesignlabs.com';
 const OG_IMAGE = '/images/logos/adl-logo-1.png';
@@ -97,6 +100,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-sans antialiased">
         <ThemeProvider>{children}</ThemeProvider>
+        {/* Cloudflare Web Analytics — privacy-friendly, no cookies. */}
+        <Script
+          strategy="afterInteractive"
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={`{"token": "${CF_BEACON_TOKEN}"}`}
+        />
       </body>
     </html>
   );
