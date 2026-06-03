@@ -135,9 +135,14 @@ export default function ContactPage() {
                 </p>
                 <a
                   href={`mailto:${ADMIN_EMAIL}`}
-                  className="text-base text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors underline-offset-4 hover:underline break-all"
+                  className="inline-flex items-center gap-2 text-base text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors underline-offset-4 hover:underline break-all"
+                  title="Opens your email client"
                 >
-                  {ADMIN_EMAIL}
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="flex-shrink-0 text-[var(--color-accent)]">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <polyline points="22 6 12 13 2 6" />
+                  </svg>
+                  <span>{ADMIN_EMAIL}</span>
                 </a>
               </div>
             </div>
