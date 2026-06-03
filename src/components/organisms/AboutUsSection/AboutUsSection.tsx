@@ -1,126 +1,109 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/cn';
 
 const SERVICES = [
   {
     number: '01',
     title: 'Design System Creation',
-    tagline: 'From chaos to foundation',
-    price: '$15,000 - $25,000',
+    tagline: "We've built this from scratch — for our own startups.",
+    price: '$15,000 – $25,000',
     timeline: '3-4 weeks',
-    description: 'You don\'t have a design system, or you have fragments scattered across your product. We audit the chaos and build you a real foundation with 25+ production-ready components.',
+    description:
+      "You either don't have a design system, or you have fragments scattered across your product. We audit the chaos and build you a real foundation — 25+ production-ready components in Figma AND your framework.",
   },
   {
     number: '02',
     title: 'Design System Maintenance',
-    tagline: 'Keep it alive, keep it aligned',
-    price: '$4,000 - $6,000/mo',
+    tagline: 'Infrastructure without maintenance is debt waiting to happen.',
+    price: '$4,000 – $6,000 / mo',
     timeline: '6-month minimum',
-    description: 'Design systems die without maintenance. We become your dedicated design systems team with AI-powered drift detection and monthly health reports.',
+    description:
+      "Design systems die without maintenance. Components drift. Documentation goes stale. We become your dedicated design systems team with AI-powered drift detection and monthly health reports.",
   },
   {
     number: '03',
-    title: 'Design-to-Code',
-    tagline: 'Your designs, shipped',
-    price: '$8,000 - $15,000',
+    title: 'Design-to-Code Handoff',
+    tagline: 'Your designers did the work. Our AI finishes the job.',
+    price: '$8,000 – $15,000',
     timeline: '2-3 weeks',
-    description: 'Your designs are sitting in Figma. Your engineering team doesn\'t have bandwidth. Our AI converts your existing designs into production-ready code.',
+    description:
+      "Designs sitting in Figma your engineering team doesn't have bandwidth to implement. Our AI converts your existing files into production-ready code your senior engineers approve on the first PR.",
   },
 ];
 
 const STATS = [
-  { value: '50+', label: 'Projects Delivered' },
-  { value: '3x', label: 'Faster Handoff' },
-  { value: '100%', label: 'Code Parity' },
+  { value: '190K+', label: 'Training images' },
+  { value: '3-4 wks', label: 'Average delivery' },
+  { value: '100%', label: 'Code parity' },
 ];
+
+const AUTO_ADVANCE_MS = 6500;
 
 export function AboutUsSection() {
   const [activeService, setActiveService] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const pausedRef = useRef(false);
 
-  // Auto-advance carousel
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    const id = setInterval(() => {
+      if (!pausedRef.current) {
+        setActiveService((prev) => (prev + 1) % SERVICES.length);
+      }
+    }, AUTO_ADVANCE_MS);
+    return () => clearInterval(id);
+  }, []);
 
-    const interval = setInterval(() => {
-      setActiveService((prev) => (prev + 1) % SERVICES.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [isAutoPlaying]);
-
-  const goToService = (index: number) => {
-    setActiveService(index);
-    setIsAutoPlaying(false);
+  const goTo = (i: number) => {
+    pausedRef.current = true;
+    setActiveService(i);
   };
+  const prev = () => goTo((activeService - 1 + SERVICES.length) % SERVICES.length);
+  const next = () => goTo((activeService + 1) % SERVICES.length);
 
-  const goToPrev = () => {
-    setActiveService((prev) => (prev - 1 + SERVICES.length) % SERVICES.length);
-    setIsAutoPlaying(false);
-  };
-
-  const goToNext = () => {
-    setActiveService((prev) => (prev + 1) % SERVICES.length);
-    setIsAutoPlaying(false);
-  };
+  const service = SERVICES[activeService];
 
   return (
     <section
       id="about"
-      className="py-20 md:py-28 bg-[var(--color-bg-secondary)]"
+      className="relative py-24 md:py-32 bg-[var(--color-bg-secondary)] overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Left Column - About Us */}
-          <div className="space-y-8">
-            {/* Eyebrow */}
-            <div className="inline-flex items-center gap-3 px-4 py-2 border border-[var(--color-border)] bg-[var(--color-bg-elevated)]">
-              <span className="w-2 h-2 bg-[var(--color-accent)]" />
-              <span
-                className={cn(
-                  'text-xs font-medium tracking-[0.15em] uppercase',
-                  'text-[var(--color-text-tertiary)]'
-                )}
-              >
-                About Us
-              </span>
-            </div>
+      <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Left — About */}
+          <div className="lg:col-span-6 space-y-8">
+            <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)]">
+              › about adl
+            </span>
 
-            {/* Headline */}
-            <h2
-              className={cn(
-                'text-2xl md:text-3xl lg:text-4xl',
-                'font-medium tracking-[-0.02em]',
-                'text-[var(--color-text-primary)]',
-                'leading-[1.2]'
-              )}
-            >
-              Production-Grade Design Systems
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.025em] text-[var(--color-text-primary)] leading-[1.1]">
+              Built by founders.
               <br />
-              <span className="text-[var(--color-accent)]">Delivered in Weeks</span>
+              <span className="text-[var(--color-accent)]">For founders.</span>
             </h2>
 
-            {/* Description */}
-            <div className="space-y-4">
-              <p className="text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed">
-                We&apos;re design system architects with over a decade of experience helping startup teams
-                eliminate the friction between design and development.
+            <div className="space-y-5 text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed">
+              <p>
+                We&apos;re ex-startup operators who burned years of runway on agency retainers,
+                handoff cycles, and Figma files our engineers couldn&apos;t implement.
               </p>
-              <p className="text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed">
-                Our mission is simple: so your team can focus on building products that matter.
+              <p>
+                When the AI tooling caught up to the problem, we stopped waiting for someone else
+                to fix it and built it ourselves. Now we ship the design infrastructure we
+                wished we&apos;d had — for the next generation of founders walking the same path.
               </p>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[var(--color-border)]">
-              {STATS.map((stat, index) => (
-                <div key={index}>
-                  <p className="text-2xl md:text-3xl font-medium text-[var(--color-text-primary)]">
+            <div className="grid grid-cols-3 gap-px bg-[var(--color-border)] border border-[var(--color-border)] rounded-xl overflow-hidden">
+              {STATS.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="bg-[var(--color-bg-elevated)] p-5 lg:p-6 text-center"
+                >
+                  <p className="text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-[var(--color-text-primary)]">
                     {stat.value}
                   </p>
-                  <p className="text-sm text-[var(--color-text-secondary)] mt-1">
+                  <p className="mt-1 font-[var(--font-mono)] text-[10px] uppercase tracking-[0.15em] text-[var(--color-text-tertiary)]">
                     {stat.label}
                   </p>
                 </div>
@@ -128,112 +111,115 @@ export function AboutUsSection() {
             </div>
           </div>
 
-          {/* Right Column - Services Carousel */}
-          <div className="flex flex-col">
-            {/* Carousel Header */}
-            <div className="mb-6">
-              <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-2">
-                Products & Services
+          {/* Right — Services carousel */}
+          <div
+            className="lg:col-span-6"
+            onMouseEnter={() => { pausedRef.current = true; }}
+            onMouseLeave={() => { pausedRef.current = false; }}
+          >
+            <div className="flex items-baseline justify-between mb-6">
+              <span className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
+                › what we offer
               </span>
-              <h3 className="text-xl md:text-2xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
-                What We Offer
-              </h3>
+              <span className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
+                {String(activeService + 1).padStart(2, '0')} / {String(SERVICES.length).padStart(2, '0')}
+              </span>
             </div>
 
-            {/* Carousel Content */}
-            <div
+            <article
               className={cn(
-                'flex-grow',
-                'bg-[var(--color-bg-elevated)]',
-                'border border-[var(--color-border)]',
-                'p-6 lg:p-8',
-                'flex flex-col'
+                'relative p-8 lg:p-10 rounded-2xl',
+                'bg-[var(--color-bg-elevated)] border border-[var(--color-border)]',
+                'shadow-[var(--shadow-md)]',
+                'transition-all duration-300'
               )}
             >
-              {/* Service Content */}
-              <div className="flex-grow">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm font-medium tracking-[0.15em] text-[var(--color-accent)]">
-                    {SERVICES[activeService].number}
+              <div className="flex items-center gap-3 mb-6">
+                <span className="font-[var(--font-mono)] text-[12px] uppercase tracking-[0.18em] text-[var(--color-accent)]">
+                  {service.number}
+                </span>
+                <span className="flex-1 h-px bg-[var(--color-border)]" />
+                <span className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.15em] text-[var(--color-text-tertiary)]">
+                  {service.timeline}
+                </span>
+              </div>
+
+              <h3 className="text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-[var(--color-text-primary)] mb-3">
+                {service.title}
+              </h3>
+
+              <p className="font-[var(--font-mono)] text-[12px] uppercase tracking-[0.15em] text-[var(--color-accent)] mb-6">
+                {service.tagline}
+              </p>
+
+              <p className="text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed mb-8">
+                {service.description}
+              </p>
+
+              <div className="flex items-baseline justify-between pt-6 border-t border-[var(--color-border)]">
+                <div>
+                  <span className="block font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] mb-1">
+                    Starting at
                   </span>
-                  <span className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider">
-                    {SERVICES[activeService].timeline}
-                  </span>
-                </div>
-
-                <h4 className="text-xl lg:text-2xl font-medium text-[var(--color-text-primary)] leading-snug mb-2">
-                  {SERVICES[activeService].title}
-                </h4>
-
-                <p className="text-sm text-[var(--color-accent)] mb-4">
-                  {SERVICES[activeService].tagline}
-                </p>
-
-                <p className="text-base text-[var(--color-text-secondary)] leading-relaxed mb-6">
-                  {SERVICES[activeService].description}
-                </p>
-
-                <div className="pt-4 border-t border-[var(--color-border)]">
-                  <span className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider">Starting at </span>
                   <span className="text-lg font-medium text-[var(--color-text-primary)]">
-                    {SERVICES[activeService].price}
+                    {service.price}
                   </span>
                 </div>
-              </div>
 
-              {/* Carousel Controls */}
-              <div className="mt-8 pt-6 border-t border-[var(--color-border)] flex items-center justify-between">
-                {/* Dots */}
-                <div className="flex items-center gap-2">
-                  {SERVICES.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => goToService(index)}
-                      className={cn(
-                        'w-2 h-2 transition-all duration-200',
-                        index === activeService
-                          ? 'bg-[var(--color-accent)] w-6'
-                          : 'bg-[var(--color-border-strong)] hover:bg-[var(--color-text-muted)]'
-                      )}
-                      aria-label={`Go to service ${index + 1}`}
-                    />
-                  ))}
-                </div>
-
-                {/* Arrows */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <button
-                    onClick={goToPrev}
-                    className={cn(
-                      'w-10 h-10 flex items-center justify-center',
-                      'border border-[var(--color-border)]',
-                      'text-[var(--color-text-secondary)]',
-                      'hover:border-[var(--color-text-primary)] hover:text-[var(--color-text-primary)]',
-                      'transition-colors duration-150'
-                    )}
+                    type="button"
+                    onClick={prev}
                     aria-label="Previous service"
+                    className={cn(
+                      'inline-flex items-center justify-center w-10 h-10 rounded-md',
+                      'border border-[var(--color-border)] text-[var(--color-text-secondary)]',
+                      'hover:border-[var(--color-accent)] hover:text-[var(--color-text-primary)]',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]',
+                      'transition-colors'
+                    )}
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                      <path d="M15 19l-7-7 7-7" />
                     </svg>
                   </button>
                   <button
-                    onClick={goToNext}
-                    className={cn(
-                      'w-10 h-10 flex items-center justify-center',
-                      'border border-[var(--color-border)]',
-                      'text-[var(--color-text-secondary)]',
-                      'hover:border-[var(--color-text-primary)] hover:text-[var(--color-text-primary)]',
-                      'transition-colors duration-150'
-                    )}
+                    type="button"
+                    onClick={next}
                     aria-label="Next service"
+                    className={cn(
+                      'inline-flex items-center justify-center w-10 h-10 rounded-md',
+                      'border border-[var(--color-border)] text-[var(--color-text-secondary)]',
+                      'hover:border-[var(--color-accent)] hover:text-[var(--color-text-primary)]',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]',
+                      'transition-colors'
+                    )}
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                      <path d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
                 </div>
               </div>
+            </article>
+
+            {/* Dots */}
+            <div className="mt-6 flex items-center justify-center gap-2" role="tablist" aria-label="Services">
+              {SERVICES.map((s, i) => (
+                <button
+                  key={s.number}
+                  role="tab"
+                  aria-selected={i === activeService}
+                  aria-label={`Go to ${s.title}`}
+                  onClick={() => goTo(i)}
+                  className={cn(
+                    'h-1.5 rounded-full transition-all duration-200',
+                    i === activeService
+                      ? 'w-8 bg-[var(--color-accent)]'
+                      : 'w-1.5 bg-[var(--color-border-strong)] hover:bg-[var(--color-text-muted)]'
+                  )}
+                />
+              ))}
             </div>
           </div>
         </div>

@@ -1,147 +1,162 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/cn';
 
 const METRICS = [
-  { value: '40%', label: 'Faster design-to-code', description: 'Average velocity improvement' },
-  { value: '25+', label: 'Components per system', description: 'Production-ready with full states' },
-  { value: '2x', label: 'Faster onboarding', description: 'New engineers ship on day one' },
-  { value: '100%', label: 'Code coverage', description: 'Every design ships with React' },
+  { value: '190K+',     label: 'Training images',     description: 'Powering our proprietary AI models' },
+  { value: '3-4 wks',   label: 'Not 3-4 months',      description: 'Average delivery for a full system' },
+  { value: '5 states',  label: 'Per component',       description: 'Loading · error · empty · partial · denied' },
+  { value: '0',         label: 'Figma-only output',   description: 'Every design ships with production code' },
 ];
 
 const TESTIMONIALS = [
   {
-    quote: "ADL transformed how our team ships UI. We went from weeks of back-and-forth to same-day implementation. The design system they built is actually used by everyone—not just sitting in a Figma file.",
-    author: 'Engineering Lead',
-    company: 'Series B Healthcare Startup',
+    quote:
+      "We'd burned $40K on an agency that delivered Figma files our engineers couldn't use. ADL delivered Figma and production-ready React in three weeks — and the code actually passed review. As a founder, I didn't know that was possible.",
+    author: 'CTO & Co-founder',
+    company: 'Series A Healthcare SaaS',
   },
   {
-    quote: "Before ADL, every new engineer spent their first two weeks figuring out our component mess. Now they're shipping features on day one. That's not an exaggeration.",
-    author: 'VP of Engineering',
-    company: 'Series A Fintech',
+    quote:
+      "What sold us wasn't the AI pitch — it was that their team had actually built startups before. They understood why we needed this done in three weeks, not three months. The AI just meant they could actually deliver on that timeline.",
+    author: 'Founder & CEO',
+    company: 'Seed-Stage Fintech',
   },
   {
-    quote: "Our previous design system was a graveyard. Nobody used it. ADL rebuilt it around how our engineers actually work. Adoption went from 30% to over 90% in two months.",
+    quote:
+      "Our previous design system was a graveyard. Nobody used it. ADL rebuilt it around how our engineers actually work. Adoption went from maybe 30% to over 90% in two months.",
     author: 'VP of Engineering',
     company: 'Series B Analytics Platform',
   },
 ];
 
+const AUTO_ADVANCE_MS = 7000;
+
 export function MetricsTestimonialsSection() {
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [active, setActive] = useState(0);
+  const pausedRef = useRef(false);
 
-  // Auto-advance testimonials
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    const id = setInterval(() => {
+      if (!pausedRef.current) setActive((p) => (p + 1) % TESTIMONIALS.length);
+    }, AUTO_ADVANCE_MS);
+    return () => clearInterval(id);
+  }, []);
 
-    const interval = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
-    }, 6000);
-
-    return () => clearInterval(interval);
-  }, [isAutoPlaying]);
-
-  const goToTestimonial = (index: number) => {
-    setActiveTestimonial(index);
-    setIsAutoPlaying(false);
+  const goTo = (i: number) => {
+    pausedRef.current = true;
+    setActive(i);
   };
 
+  const t = TESTIMONIALS[active];
+
   return (
-    <section className="py-20 md:py-28 bg-[var(--color-bg-primary)]">
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Left Column - Metrics */}
-          <div>
+    <section className="py-24 md:py-32 bg-[var(--color-bg-primary)]">
+      <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Left — Metrics */}
+          <div className="lg:col-span-6">
             <div className="mb-8">
-              <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-2">
-                By The Numbers
+              <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-3">
+                › by the numbers
               </span>
-              <h2 className="text-2xl md:text-3xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
-                Results That Speak
+              <h2 className="text-3xl md:text-4xl font-semibold tracking-[-0.025em] text-[var(--color-text-primary)] leading-[1.1]">
+                AI-Powered Results
               </h2>
             </div>
 
-            <div className="grid grid-cols-2 gap-px bg-[var(--color-border)]" style={{ border: '1px solid var(--color-border)' }}>
-              {METRICS.map((metric, index) => (
-                <div
-                  key={index}
-                  className="bg-[var(--color-bg-elevated)] p-6"
+            <div className="grid grid-cols-2 gap-4">
+              {METRICS.map((m) => (
+                <article
+                  key={m.label}
+                  className={cn(
+                    'p-6 rounded-xl',
+                    'bg-[var(--color-bg-elevated)] border border-[var(--color-border)]',
+                    'hover:border-[var(--color-accent)] hover:bg-[var(--color-bg-tertiary)]',
+                    'transition-colors duration-200'
+                  )}
                 >
-                  <div className="text-2xl md:text-3xl font-medium text-[var(--color-text-primary)] mb-1">
-                    {metric.value}
+                  <div className="text-3xl md:text-4xl font-semibold tracking-[-0.025em] text-[var(--color-accent)] mb-2">
+                    {m.value}
                   </div>
-                  <div className="text-xs tracking-[0.08em] uppercase text-[var(--color-accent)] mb-1">
-                    {metric.label}
+                  <div className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-primary)] mb-1">
+                    {m.label}
                   </div>
-                  <div className="text-xs text-[var(--color-text-secondary)]">
-                    {metric.description}
+                  <div className="text-xs text-[var(--color-text-tertiary)] leading-snug">
+                    {m.description}
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           </div>
 
-          {/* Right Column - Testimonials */}
-          <div className="flex flex-col">
-            <div className="mb-8">
-              <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-2">
-                What Teams Say
-              </span>
-              <h2 className="text-2xl md:text-3xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
-                Trusted by Product Teams
-              </h2>
+          {/* Right — Testimonials */}
+          <div
+            className="lg:col-span-6"
+            onMouseEnter={() => { pausedRef.current = true; }}
+            onMouseLeave={() => { pausedRef.current = false; }}
+          >
+            <div className="flex items-baseline justify-between mb-8">
+              <div>
+                <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-3">
+                  › testimonials
+                </span>
+                <h2 className="text-3xl md:text-4xl font-semibold tracking-[-0.025em] text-[var(--color-text-primary)] leading-[1.1]">
+                  Founders who trust us
+                </h2>
+              </div>
             </div>
 
-            <div
+            <article
               className={cn(
-                'flex-grow',
-                'bg-[var(--color-bg-elevated)]',
-                'border border-[var(--color-border)]',
-                'p-6 lg:p-8',
-                'flex flex-col'
+                'p-8 lg:p-10 rounded-2xl',
+                'bg-[var(--color-bg-elevated)] border border-[var(--color-border)]',
+                'shadow-[var(--shadow-md)]'
               )}
             >
-              {/* Testimonial Content */}
-              <div className="flex-grow">
-                <blockquote className="text-base md:text-lg text-[var(--color-text-primary)] leading-relaxed mb-6">
-                  &ldquo;{TESTIMONIALS[activeTestimonial].quote}&rdquo;
-                </blockquote>
+              {/* Decorative open-quote in violet */}
+              <span aria-hidden="true" className="block text-5xl leading-none text-[var(--color-accent)] mb-2 font-[var(--font-mono)]">
+                &ldquo;
+              </span>
 
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-[var(--color-bg-secondary)] border border-[var(--color-border)] flex items-center justify-center">
-                    <span className="text-xs font-medium text-[var(--color-text-secondary)]">
-                      {TESTIMONIALS[activeTestimonial].author.charAt(0)}
-                    </span>
+              <blockquote className="text-lg md:text-xl text-[var(--color-text-primary)] leading-relaxed mb-8">
+                {t.quote}
+              </blockquote>
+
+              <div className="flex items-center gap-4 pt-6 border-t border-[var(--color-border)]">
+                <div className="w-11 h-11 rounded-full bg-[var(--color-accent-subtle)] border border-[var(--color-accent)]/40 flex items-center justify-center">
+                  <span className="font-[var(--font-mono)] text-sm font-medium text-[var(--color-accent)]">
+                    {t.author.charAt(0)}
+                  </span>
+                </div>
+                <div>
+                  <div className="text-sm font-medium text-[var(--color-text-primary)]">
+                    {t.author}
                   </div>
-                  <div>
-                    <div className="text-sm font-medium text-[var(--color-text-primary)]">
-                      {TESTIMONIALS[activeTestimonial].author}
-                    </div>
-                    <div className="text-xs text-[var(--color-text-secondary)]">
-                      {TESTIMONIALS[activeTestimonial].company}
-                    </div>
+                  <div className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.12em] text-[var(--color-text-tertiary)]">
+                    {t.company}
                   </div>
                 </div>
               </div>
+            </article>
 
-              {/* Dots */}
-              <div className="mt-8 pt-6 border-t border-[var(--color-border)] flex items-center gap-2">
-                {TESTIMONIALS.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToTestimonial(index)}
-                    className={cn(
-                      'w-2 h-2 transition-all duration-200',
-                      index === activeTestimonial
-                        ? 'bg-[var(--color-accent)] w-6'
-                        : 'bg-[var(--color-border-strong)] hover:bg-[var(--color-text-muted)]'
-                    )}
-                    aria-label={`Go to testimonial ${index + 1}`}
-                  />
-                ))}
-              </div>
+            <div className="mt-6 flex items-center justify-center gap-2" role="tablist" aria-label="Testimonials">
+              {TESTIMONIALS.map((_, i) => (
+                <button
+                  key={i}
+                  role="tab"
+                  aria-selected={i === active}
+                  aria-label={`Go to testimonial ${i + 1}`}
+                  onClick={() => goTo(i)}
+                  className={cn(
+                    'h-1.5 rounded-full transition-all duration-200',
+                    i === active
+                      ? 'w-8 bg-[var(--color-accent)]'
+                      : 'w-1.5 bg-[var(--color-border-strong)] hover:bg-[var(--color-text-muted)]'
+                  )}
+                />
+              ))}
             </div>
           </div>
         </div>
