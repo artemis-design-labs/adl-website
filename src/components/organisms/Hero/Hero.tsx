@@ -105,8 +105,19 @@ export function Hero() {
     const [cmdIndex, setCmdIndex] = useState(0);
     const [chars, setChars] = useState(0);
     const [phase, setPhase] = useState<'typing' | 'holding' | 'erasing'>('typing');
+    const [reducedMotion, setReducedMotion] = useState(false);
+
+    // Respect prefers-reduced-motion — pin to the first command, no animation.
+    useEffect(() => {
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const update = () => setReducedMotion(mq.matches);
+      update();
+      mq.addEventListener('change', update);
+      return () => mq.removeEventListener('change', update);
+    }, []);
 
     useEffect(() => {
+      if (reducedMotion) return;
       const current = EYEBROW_COMMANDS[cmdIndex];
       let id: ReturnType<typeof setTimeout> | undefined;
 
@@ -128,31 +139,31 @@ export function Hero() {
       }
 
       return () => { if (id) clearTimeout(id); };
-    }, [phase, chars, cmdIndex]);
+    }, [phase, chars, cmdIndex, reducedMotion]);
 
-    const visible = EYEBROW_COMMANDS[cmdIndex].slice(0, chars);
-    // Cursor is solid while typing, blinks while holding/erasing.
-    const cursorClass =
-      phase === 'typing' ? '' : 'animate-pulse';
+    // For reduced-motion users, show the full first command immediately and
+    // suppress the live region so screen readers don't get spam on each tick.
+    const visible = reducedMotion ? EYEBROW_COMMANDS[0] : EYEBROW_COMMANDS[cmdIndex].slice(0, chars);
+    const cursorClass = phase === 'typing' ? '' : 'animate-pulse';
 
     return (
-      <div
-        className="inline-flex items-baseline gap-2 font-[var(--font-mono)] text-[13px] text-[var(--color-text-secondary)]"
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        <span className="text-[var(--color-accent)]" aria-hidden="true">{'›'}</span>
-        <span aria-label={`Command: ${EYEBROW_PREFIX}${EYEBROW_COMMANDS[cmdIndex]}`}>
+      <div className="inline-flex items-baseline gap-2 font-[var(--font-mono)] text-[13px] text-[var(--color-text-secondary)]">
+        <span className="text-[var(--color-accent-text)]" aria-hidden="true">{'›'}</span>
+        {/* aria-hidden because constant updates would spam SR; the brand prompt is decorative. */}
+        <span aria-hidden="true">
           <span className="text-[var(--color-text-tertiary)]">{EYEBROW_PREFIX}</span>
           <span>{visible}</span>
-          <span
-            aria-hidden="true"
-            className={cn(
-              'inline-block w-[7px] h-[0.95em] bg-[var(--color-accent)] align-middle ml-0.5',
-              cursorClass
-            )}
-          />
+          {!reducedMotion && (
+            <span
+              className={cn(
+                'inline-block w-[7px] h-[0.95em] bg-[var(--color-accent)] align-middle ml-0.5',
+                cursorClass
+              )}
+            />
+          )}
         </span>
+        {/* Static SR-only label so screen readers know what this is, without the chatter. */}
+        <span className="sr-only">Terminal prompt: artemis design labs commands</span>
       </div>
     );
   }

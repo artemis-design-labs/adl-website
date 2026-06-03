@@ -36,13 +36,23 @@ const AUTO_ADVANCE_MS = 7000;
 export function MetricsTestimonialsSection() {
   const [active, setActive] = useState(0);
   const pausedRef = useRef(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReducedMotion(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion) return;
     const id = setInterval(() => {
       if (!pausedRef.current) setActive((p) => (p + 1) % TESTIMONIALS.length);
     }, AUTO_ADVANCE_MS);
     return () => clearInterval(id);
-  }, []);
+  }, [reducedMotion]);
 
   const goTo = (i: number) => {
     pausedRef.current = true;
@@ -150,11 +160,13 @@ export function MetricsTestimonialsSection() {
                   aria-label={`Go to testimonial ${i + 1}`}
                   onClick={() => goTo(i)}
                   className={cn(
-                    'h-1.5 rounded-full transition-all duration-200',
+                    'relative h-11 inline-flex items-center justify-center',
+                    'before:content-[""] before:block before:rounded-full before:transition-all before:duration-200',
                     i === active
-                      ? 'w-8 bg-[var(--color-accent)]'
-                      : 'w-1.5 bg-[var(--color-border-strong)] hover:bg-[var(--color-text-muted)]'
+                      ? 'before:w-8 before:h-1.5 before:bg-[var(--color-accent)]'
+                      : 'before:w-1.5 before:h-1.5 before:bg-[var(--color-border-strong)] hover:before:bg-[var(--color-text-muted)]'
                   )}
+                  style={{ minWidth: 44 }}
                 />
               ))}
             </div>

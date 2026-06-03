@@ -44,15 +44,25 @@ const AUTO_ADVANCE_MS = 6500;
 export function AboutUsSection() {
   const [activeService, setActiveService] = useState(0);
   const pausedRef = useRef(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReducedMotion(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion) return;
     const id = setInterval(() => {
       if (!pausedRef.current) {
         setActiveService((prev) => (prev + 1) % SERVICES.length);
       }
     }, AUTO_ADVANCE_MS);
     return () => clearInterval(id);
-  }, []);
+  }, [reducedMotion]);
 
   const goTo = (i: number) => {
     pausedRef.current = true;
@@ -183,7 +193,7 @@ export function AboutUsSection() {
                     onClick={prev}
                     aria-label="Previous service"
                     className={cn(
-                      'inline-flex items-center justify-center w-10 h-10 rounded-md',
+                      'inline-flex items-center justify-center w-11 h-11 rounded-md',
                       'border border-[var(--color-border)] text-[var(--color-text-secondary)]',
                       'hover:border-[var(--color-accent)] hover:text-[var(--color-text-primary)]',
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]',
@@ -199,7 +209,7 @@ export function AboutUsSection() {
                     onClick={next}
                     aria-label="Next service"
                     className={cn(
-                      'inline-flex items-center justify-center w-10 h-10 rounded-md',
+                      'inline-flex items-center justify-center w-11 h-11 rounded-md',
                       'border border-[var(--color-border)] text-[var(--color-text-secondary)]',
                       'hover:border-[var(--color-accent)] hover:text-[var(--color-text-primary)]',
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]',
@@ -224,11 +234,13 @@ export function AboutUsSection() {
                   aria-label={`Go to ${s.title}`}
                   onClick={() => goTo(i)}
                   className={cn(
-                    'h-1.5 rounded-full transition-all duration-200',
+                    'relative h-11 inline-flex items-center justify-center',
+                    'before:content-[""] before:block before:rounded-full before:transition-all before:duration-200',
                     i === activeService
-                      ? 'w-8 bg-[var(--color-accent)]'
-                      : 'w-1.5 bg-[var(--color-border-strong)] hover:bg-[var(--color-text-muted)]'
+                      ? 'before:w-8 before:h-1.5 before:bg-[var(--color-accent)]'
+                      : 'before:w-1.5 before:h-1.5 before:bg-[var(--color-border-strong)] hover:before:bg-[var(--color-text-muted)]'
                   )}
+                  style={{ minWidth: 44 }}
                 />
               ))}
             </div>

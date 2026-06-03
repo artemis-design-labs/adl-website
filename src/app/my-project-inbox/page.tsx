@@ -17,7 +17,7 @@ export default function HandsAIPage() {
           {/* Full-bleed cover image */}
           <img
             src="/images/my-project-inbox/cover.png"
-            alt="HANDS AI Cover"
+            alt="My Project Inbox case study cover"
             className="w-full max-w-[600px] mx-auto rounded-lg"
         />
 
@@ -184,19 +184,19 @@ export default function HandsAIPage() {
 
       <div className="space-y-4">
         <div className="flex items-center gap-4 bg-white border border-gray-200 p-4">
-          <img src="/images/my-project-inbox/user-need-1.png" alt="Vision Icon" className="w-8 h-8" />
+          <img src="/images/my-project-inbox/user-need-1.png" alt="" className="w-8 h-8" />
           <p className="text-gray-800 text-sm">
           An intuitive platform that enables quick decision making and timely project adjustments.
           </p>
         </div>
         <div className="flex items-center gap-4 bg-white border border-gray-200 p-4">
-          <img src="/images/my-project-inbox/user-need-2.png" alt="Document Icon" className="w-8 h-8" />
+          <img src="/images/my-project-inbox/user-need-2.png" alt="" className="w-8 h-8" />
           <p className="text-gray-800 text-sm">
           Simplified, centralized communication channels to facilitate better collaboration, reducing the risk of miscommunication or lost information.
           </p>
         </div>
         <div className="flex items-center gap-4 bg-white border border-gray-200 p-4">
-          <img src="/images/my-project-inbox/user-need-3.png" alt="Calendar Icon" className="w-8 h-8" />
+          <img src="/images/my-project-inbox/user-need-3.png" alt="" className="w-8 h-8" />
           <p className="text-gray-800 text-sm">
           The ability to automate repetitive administrative tasks to increase productivity and allow team members to focus more on critical project activities.
           </p>

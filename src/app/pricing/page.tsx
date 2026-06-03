@@ -121,7 +121,7 @@ export default function PricingPage() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.03em] text-[var(--color-text-primary)] leading-[1.05]">
               Fixed pricing.
               <br />
-              <span className="text-[var(--color-accent)]">No "scope creep" emails.</span>
+              <span className="text-[var(--color-accent)]">No &ldquo;scope creep&rdquo; emails.</span>
             </h1>
             <p className="mt-7 text-base md:text-lg lg:text-xl text-[var(--color-text-secondary)] leading-relaxed max-w-2xl">
               Every engagement ships Figma AND production-ready React. The proposal you sign is the proposal you pay.
@@ -238,7 +238,7 @@ export default function PricingPage() {
               <span className="text-[var(--color-accent)]">Above the budget shops.</span>
             </h2>
             <p className="mt-5 text-base md:text-lg text-[var(--color-text-secondary)]">
-              The same conversation founders have when they ask "should I just hire an agency?"
+              The same conversation founders have when they ask &ldquo;should I just hire an agency?&rdquo;
             </p>
           </header>
 

@@ -24,13 +24,14 @@
   /* === TEXT === */
   --color-text-primary: #EDEDF0;          /* default text */
   --color-text-secondary: #A8A8B3;        /* secondary text */
-  --color-text-tertiary: #7A7A87;         /* tertiary */
-  --color-text-muted: #5C5C68;            /* muted captions */
+  --color-text-tertiary: #8E8E9C;         /* tertiary (AA on dark bg at 14px) */
+  --color-text-muted: #6C6C78;            /* muted captions — non-essential text only */
   --color-text-disabled: #3A3A45;
   --color-text-on-accent: #FFFFFF;        /* type sitting on accent fills */
 
   /* === ACCENT — electric violet === */
-  --color-accent: #7C3AED;                /* primary accent */
+  --color-accent: #7C3AED;                /* primary accent — used for fills/borders */
+  --color-accent-text: #9B6BFF;           /* brighter variant for small-text use (AA on dark, 5:1) */
   --color-accent-hover: #8B5CF6;          /* lighter on hover (lifts in dark) */
   --color-accent-muted: #5B21B6;          /* deeper for borders */
   --color-accent-subtle: rgba(124, 58, 237, 0.12);
@@ -194,6 +195,7 @@
 
   /* Deeper violet so contrast >= AAA on white surfaces */
   --color-accent: #6D28D9;
+  --color-accent-text: #6D28D9;           /* same — already passes AAA on white */
   --color-accent-hover: #5B21B6;
   --color-accent-muted: #7C3AED;
   --color-accent-subtle: rgba(109, 40, 217, 0.08);

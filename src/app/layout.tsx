@@ -99,6 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-sans antialiased">
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <ThemeProvider>{children}</ThemeProvider>
         {/* Cloudflare Web Analytics — privacy-friendly, no cookies. */}
         <Script

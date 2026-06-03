@@ -187,19 +187,19 @@ export default function HandsAIPage() {
 
       <div className="space-y-4">
         <div className="flex items-center gap-4 bg-white border border-gray-200 p-4">
-          <img src="/images/hands-ai/user-need-1.png" alt="Vision Icon" className="w-8 h-8" />
+          <img src="/images/hands-ai/user-need-1.png" alt="" className="w-8 h-8" />
           <p className="text-gray-800 text-sm">
             Ensure faster and more accurate access to clients who require high-priority assistance
           </p>
         </div>
         <div className="flex items-center gap-4 bg-white border border-gray-200 p-4">
-          <img src="/images/hands-ai/user-need-2.png" alt="Document Icon" className="w-8 h-8" />
+          <img src="/images/hands-ai/user-need-2.png" alt="" className="w-8 h-8" />
           <p className="text-gray-800 text-sm">
             Allow professionals to manage data effortlessly and make informed decisions with confidence
           </p>
         </div>
         <div className="flex items-center gap-4 bg-white border border-gray-200 p-4">
-          <img src="/images/hands-ai/user-need-3.png" alt="Calendar Icon" className="w-8 h-8" />
+          <img src="/images/hands-ai/user-need-3.png" alt="" className="w-8 h-8" />
           <p className="text-gray-800 text-sm">
             Reduce no-shows and improve operational efficiency
           </p>
@@ -245,7 +245,7 @@ export default function HandsAIPage() {
         >
           <p className="italic text-gray-800 mb-4"> {person.quote} </p>
           <div className="flex items-center gap-4">
-            <img src={person.img} alt={person.name} className="w-10 h-10 rounded-full" />
+            <img src={person.img} alt="" className="w-10 h-10 rounded-full" />
             <p className="text-sm font-medium text-gray-900">
               {person.name}{' '}
               <span className="block text-xs font-normal text-gray-600">{person.title}</span>

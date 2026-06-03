@@ -259,7 +259,7 @@ function Field({ label, name, required, ...rest }: FieldProps) {
         className={cn(
           'w-full h-11 px-4 rounded-md',
           'bg-[var(--color-bg-inset)] border border-[var(--color-border)]',
-          'text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)]',
+          'text-[var(--color-text-primary)] placeholder-[var(--color-text-tertiary)]',
           'focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/30',
           'transition-colors'
         )}
@@ -329,7 +329,7 @@ function TextareaField({ label, name, required, ...rest }: TextareaFieldProps) {
         className={cn(
           'w-full px-4 py-3 rounded-md resize-y',
           'bg-[var(--color-bg-inset)] border border-[var(--color-border)]',
-          'text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)]',
+          'text-[var(--color-text-primary)] placeholder-[var(--color-text-tertiary)]',
           'focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/30',
           'transition-colors'
         )}
