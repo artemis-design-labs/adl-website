@@ -3,132 +3,163 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { ThemeToggle } from '@/components/atoms/ThemeToggle';
+import { Logo } from '@/components/atoms/Logo';
 import { cn } from '@/lib/cn';
+
+const NAV_LINKS = [
+  { href: '/about', label: 'About' },
+  { href: '/our-ai', label: 'Our AI' },
+  { href: '/work', label: 'Work' },
+  { href: '/pricing', label: 'Pricing' },
+];
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
+    const onEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setIsMobileMenuOpen(false);
     };
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+    document.addEventListener('keydown', onEscape);
+    return () => document.removeEventListener('keydown', onEscape);
   }, []);
-
-  const navLinks = [
-    { href: '/about', label: 'About' },
-    { href: '/our-ai', label: 'Our AI' },
-    { href: '/work', label: 'Work' },
-  ];
 
   return (
     <nav
+      aria-label="Primary"
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-colors duration-150',
+        'fixed top-0 inset-x-0 z-50 transition-[background-color,backdrop-filter,border-color] duration-200',
         isScrolled
-          ? 'bg-[var(--color-bg-primary)] border-b border-[var(--color-border)]'
-          : 'bg-transparent'
+          ? 'bg-[var(--color-bg-primary)]/85 backdrop-blur-md border-b border-[var(--color-border)]'
+          : 'bg-transparent border-b border-transparent'
       )}
     >
-      <div className="max-w-5xl mx-auto px-6 lg:px-8">
-        <div className="flex justify-between items-center h-14 md:h-16">
+      <div className="max-w-[var(--container-wide)] mx-auto px-5 lg:px-8">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <span className="text-sm font-medium tracking-[0.05em] uppercase text-[var(--color-text-primary)]">
-              Artemis Design Labs
-            </span>
+          <Link
+            href="/"
+            className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]"
+            aria-label="Artemis Design Labs — Home"
+          >
+            <Logo size="md" />
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-xs tracking-[0.08em] uppercase text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-150"
-              >
-                {link.label}
-              </Link>
-            ))}
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-1">
+            <ul className="flex items-center gap-1 mr-3" role="menubar">
+              {NAV_LINKS.map((link) => (
+                <li key={link.href} role="none">
+                  <Link
+                    role="menuitem"
+                    href={link.href}
+                    className={cn(
+                      'px-3 py-2 rounded-md text-sm',
+                      'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]',
+                      'hover:bg-[var(--color-bg-hover)]',
+                      'transition-colors duration-150',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]'
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
 
-            <div className="flex items-center gap-4 ml-4 pl-4 border-l border-[var(--color-border)]">
+            <div className="flex items-center gap-3 pl-3 border-l border-[var(--color-border)]">
               <ThemeToggle />
 
+              {/* Prominent CTA */}
               <Link
                 href="/contact"
                 className={cn(
-                  'text-xs tracking-[0.08em] uppercase px-4 py-2',
-                  'bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]',
-                  'hover:bg-[var(--color-text-secondary)]',
-                  'transition-colors duration-150'
+                  'inline-flex items-center gap-1.5 h-10 px-5 rounded-md',
+                  'bg-[var(--color-accent)] text-[var(--color-text-on-accent)]',
+                  'border border-[var(--color-accent)]',
+                  'text-sm font-medium',
+                  'hover:bg-[var(--color-accent-hover)] hover:border-[var(--color-accent-hover)]',
+                  'hover:shadow-[var(--shadow-glow)]',
+                  'transition-all duration-150',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]'
                 )}
               >
-                Contact
+                Book a Call
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
               </Link>
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="flex items-center gap-3 md:hidden">
+          {/* Mobile controls */}
+          <div className="flex md:hidden items-center gap-3">
             <ThemeToggle />
-
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+              type="button"
+              onClick={() => setIsMobileMenuOpen((s) => !s)}
+              className={cn(
+                'inline-flex items-center justify-center w-10 h-10 rounded-md',
+                'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]',
+                'hover:bg-[var(--color-bg-hover)]',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]'
+              )}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
-              {isMobileMenuOpen ? (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+                {isMobileMenuOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              )}
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+                )}
+              </svg>
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile menu */}
         <div
+          id="mobile-menu"
           className={cn(
-            'md:hidden overflow-hidden transition-all duration-200',
-            isMobileMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+            'md:hidden overflow-hidden transition-[max-height,opacity] duration-200',
+            isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
           )}
         >
-          <div className="py-4 border-t border-[var(--color-border)] bg-[var(--color-bg-primary)]">
-            <div className="flex flex-col">
-              {navLinks.map((link) => (
+          <ul className="py-3 border-t border-[var(--color-border)] flex flex-col gap-1">
+            {NAV_LINKS.map((link) => (
+              <li key={link.href}>
                 <Link
-                  key={link.href}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-xs tracking-[0.08em] uppercase py-3 px-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)] transition-colors"
+                  className="block px-3 py-3 rounded-md text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)]"
                 >
                   {link.label}
                 </Link>
-              ))}
+              </li>
+            ))}
+            <li className="pt-2">
               <Link
                 href="/contact"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-xs tracking-[0.08em] uppercase px-4 py-3 mt-4 text-center bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] hover:bg-[var(--color-text-secondary)] transition-colors"
+                className="inline-flex w-full items-center justify-center gap-1.5 h-11 px-5 rounded-md bg-[var(--color-accent)] text-[var(--color-text-on-accent)] font-medium text-sm hover:bg-[var(--color-accent-hover)] transition-colors"
               >
-                Contact
+                Book a Call
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
               </Link>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>

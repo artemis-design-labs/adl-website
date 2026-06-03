@@ -1,5 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { ContentVersionProvider } from '@/context/ContentVersionContext';
 import { ContentSwitcher } from '@/components/ContentSwitcher';
@@ -7,9 +9,9 @@ import { DevOnly } from '@/components/DevOnly';
 
 const SITE_URL = 'https://artemisdesignlabs.com';
 const OG_IMAGE = '/images/logos/adl-logo-1.png';
-const TITLE = 'Artemis Design Labs | Design Systems for B2B Startups';
+const TITLE = 'Artemis Design Labs | AI-Powered Design Infrastructure';
 const DESCRIPTION =
-  'We deliver Figma AND production-ready React components for Seed to Series C startups. Ship consistent UI 2x faster.';
+  'We build the AI that builds your design infrastructure. Founder-built, human-validated, production-ready. Trained on 190K+ design-to-code examples.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -20,12 +22,12 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   keywords: [
     'design system',
-    'react components',
+    'AI-powered design',
     'figma to code',
+    'design infrastructure',
     'B2B startups',
-    'design system agency',
-    'UI components',
-    'design to code',
+    'production-ready React',
+    'AI design tools',
   ],
   authors: [{ name: 'Artemis Design Labs', url: SITE_URL }],
   creator: 'Artemis Design Labs',
@@ -42,14 +44,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: 'Artemis Design Labs',
-    images: [
-      {
-        url: OG_IMAGE,
-        width: 1200,
-        height: 630,
-        alt: 'Artemis Design Labs',
-      },
-    ],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Artemis Design Labs' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -57,9 +52,7 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     images: [OG_IMAGE],
   },
-  icons: {
-    icon: '/favicon.ico',
-  },
+  icons: { icon: '/favicon.ico' },
 };
 
 const ORG_JSON_LD = {
@@ -75,26 +68,31 @@ const ORG_JSON_LD = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth" data-theme="light" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`scroll-smooth ${GeistSans.variable} ${GeistMono.variable}`}
+      data-theme="dark"
+      suppressHydrationWarning
+    >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500&display=swap"
-          rel="stylesheet"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSON_LD) }}
         />
+        {/* Set the data-theme attribute before paint so we don't flash the wrong theme. */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
-                const stored = localStorage.getItem('adl-theme');
-                if (stored === 'light' || stored === 'dark') {
-                  document.documentElement.setAttribute('data-theme', stored);
-                }
+                try {
+                  var stored = localStorage.getItem('adl-theme');
+                  if (stored === 'light' || stored === 'dark') {
+                    document.documentElement.setAttribute('data-theme', stored);
+                    return;
+                  }
+                  var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+                } catch (e) {}
               })();
             `,
           }}
