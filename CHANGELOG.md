@@ -7,6 +7,65 @@ Tags follow semver — see "Releases" on GitHub for the immutable checkpoints.
 
 ---
 
+## [v1.2.0] — 2026-06-03 — Sub-pages redesigned, full site under one shell, WCAG AA pass
+
+Same day as v1.1.0, but a noticeably bigger user-visible change: every public page now lives inside a single shared layout and uses the same dark/violet design system. The homepage looked great in v1.1.0 and the rest of the site didn't — that's fixed here. Also closes out the spam-protection, email, and authentication wiring that was stubbed in v1.1.0.
+
+### Site architecture
+- **`src/app/(site)/` route group** with its own `layout.tsx` that renders `Navigation` + `<main id="main-content">` + `Footer`. Every public page (homepage + 12 sub-routes) was moved into it. URL paths are unchanged because route-group parens don't appear in the URL.
+- Pages now contain only their content — the duplicated `Navigation` / `Footer` / `main` / wrapping `<div className="min-h-screen ...">` were stripped from each page file.
+- `admin/` and `api/*` stay outside the group: `/admin` is private and shouldn't render the marketing nav, API endpoints have no shell at all.
+
+### Sub-pages redesigned (5)
+All matching the homepage cadence: mono `›` eyebrows, oversized Geist semibold display headlines with a violet second-line emphasis, rounded-xl/2xl cards with hover-to-accent border, ambient violet wash on CTA sections.
+
+- **`/contact`** — sticky "what to expect" left column + 12-col grid + form card with `Field`/`SelectField`/`TextareaField` atoms. Turnstile widget rendered when the public key is configured. Success state is a centered card with a violet check-circle.
+- **`/about`** — "We built this for the founders we used to be." Sticky-left "origin story" header + 4-paragraph confession; 4-up stats (190K+ training images, 3-4 wks delivery, $0 figma-only output, 24h first response); 4 principle cards with the hover-promotes-to-accent pattern.
+- **`/pricing`** — 3 tier cards (popular in violet glow + most-popular pill); accordion FAQ via `<details>`/`<summary>` with chevron-toggle; comparison table with row-spaced layout and ADL row highlighted in violet.
+- **`/work`** — 4-up results grid + alternating-direction case studies on a 12-col grid (image 7 cols, content 5 cols) with hover border + 3% image scale; mono pill tags; per-project violet metric callout.
+- **`/our-ai`** — Human/AI 2-column split with circular icon + mono section header at top of each panel; 4-up tech-stack cards (190K+ images, every-project learning, 6+ frameworks, 94% first-PR approval); violet-highlighted comparison table.
+
+### Legacy pages brought onto the design system
+- **`/hands-ai`, `/insight`, `/nbcu`, `/my-project-inbox`**: outer wrappers no longer hardcode `bg-white text-gray-900`; top padding bumped from `py-20` to `pt-32 pb-20` so content clears the fixed nav. All inline `bg-white`, `text-gray-*`, `border-gray-*` replaced with token equivalents (`bg-elevated`, `text-primary/secondary/tertiary`, etc.). Internal structure preserved.
+- **`/marketplace`, `/publication`, `/design-system-license`**: same token sweep plus primary-button upgrades to the violet+glow treatment, input focus rings, AA-passing placeholder contrast, `<label htmlFor="…">` associations added on inputs.
+
+### Contact + email + spam protection
+- **Resend domain verified** for `artemisdesignlabs.com` (DKIM + SPF + MX + DMARC). From-address default flipped from `onboarding@resend.dev` to `noreply@artemisdesignlabs.com`. `Reply-To` stays the form submitter so hitting reply replies to them.
+- **Cloudflare Turnstile** site key created (`adl-website-widget`, Managed mode, scoped to `artemisdesignlabs.com`). Public site key wired as a GitHub repo *variable* (build-time inlined into the client bundle); secret key as a repo *secret* and synced to the Worker on every deploy. Server-side verifies against `siteverify` before writing to MongoDB or emailing.
+- **`/admin` behind Cloudflare Access** — Self-hosted Access app, email-restricted allow policy locked to `itadmin@artemisdesignlabs.com`. Anyone else hitting `/admin/*` is bounced to a one-time-PIN email challenge.
+- **Cloudflare Web Analytics** beacon wired into `layout.tsx` (`next/script` strategy `afterInteractive`), reading the existing `artemisdesignlabs.com` site token. Privacy-friendly, cookieless.
+- **Bot Fight Mode tuning**: zone `security_level` lowered to `low`, `browser_check` disabled so search-engine crawlers and social link previewers stop hitting the JS challenge.
+
+### WCAG 2.1 AA pass
+- New `--color-accent-text` (`#9B6BFF` on dark, AAA on white) for inline accent TEXT — the `#7C3AED` accent stays for fills/borders. Small mono eyebrows in `›` accent are now AA-clean.
+- `--color-text-tertiary` brightened from `#7A7A87` to `#8E8E9C` so 10-12px mono labels clear 4.5:1 with comfortable margin.
+- Skip-to-content link in the root layout, styled via a `.skip-link` utility that slides down in the accent when focused. All pages wrap content in `<main id="main-content">`.
+- Hero rotating-command animation, AboutUs services carousel, and MetricsTestimonials carousel all check `prefers-reduced-motion: reduce` and disable auto-advance / typing when set. `globals.css` wraps `html { scroll-behavior: smooth }` in `@media (prefers-reduced-motion: no-preference)`.
+- `ThemeToggle`: visible pill stays 56×28 px, but the surrounding `<button>` gets a 44×44 minimum hit target.
+- Carousel `prev`/`next` arrow buttons go from 40×40 to 44×44; carousel dots live inside `h-11`/`min-w-44` buttons so tapping near them registers.
+- `ClientsSection`: no longer `aria-hidden`s the only client-name source. The visible (doubled) marquee is hidden from AT; an `sr-only` `<ul>` exposes the 8 client names cleanly. Section gets `aria-labelledby`.
+- Decorative icons across `/hands-ai`, `/my-project-inbox` get `alt=""` instead of `alt="Vision Icon"` etc. The mis-labeled `alt="HANDS AI Cover"` on `/my-project-inbox` corrected.
+- Two unescaped quote pairs in `/pricing` fixed.
+- Form input placeholder color promoted from `text-muted` to `text-tertiary` so it clears AA on the inset surface.
+
+### Email link affordance
+- Every `mailto:` (Footer, CTASection, /contact "prefer email" box) now renders with a small envelope SVG so users understand the click opens their mail client instead of navigating in-app.
+
+### ClientsSection logo marquee tuning
+- Logo cells from 64-80 px to 112-128 px tall; cell width 128-160 → 192-240 px; gap dropped from 48-64 px to 20-32 px so more brands stay in the viewport at once.
+
+### Stale docs cleanup
+- Deleted `BUGS.md` (Feb 2025 historical bug log, all entries superseded) and `STATUS-REPORT.md` (April 3-7 2026 snapshot).
+- `README.md` rewritten from 568 to ~70 lines: drops the duplicated content reference, fixes "Pricing hidden from nav" stale fact, points at `DEPLOYMENT.md` / `CLAUDE.md` / `CHANGELOG.md` for details.
+- `Website-Content.md` is now V2-only (V1 sections deleted with the ContentSwitcher in v1.1.0).
+
+### Known follow-ups
+- Legacy case-study pages (`/hands-ai`, `/insight`, `/nbcu`, `/my-project-inbox`) are token-clean but structurally still the pre-redesign era. A proper redesign pass to match the homepage cadence is deferred.
+- `next/image` migration for legacy `<img>` tags on those pages — deferred.
+- Credential rotation (from v1.0.0 setup session) — runbook stands, still optional.
+
+---
+
 ## [v1.1.0] — 2026-06-03 — Brand redesign + AI-tech foundation
 
 A same-day follow-up to the v1.0.0 cutover. v1.0.0 was about getting the site reliably hosted on Cloudflare. v1.1.0 is about **what visitors actually see**: a deliberate AI-tech-forward visual direction, founder-to-founder copy, and the infrastructure pieces (Prisma removed, email + spam-protection plumbing, dead-code purge) needed to safely ship updates from here.
