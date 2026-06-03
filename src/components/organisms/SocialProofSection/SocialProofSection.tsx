@@ -1,6 +1,5 @@
 'use client';
 
-import { cn } from '@/lib/cn';
 
 const CLIENTS_TRUST_LINE =
   'Trusted by product teams in Health, Fintech, and Enterprise';

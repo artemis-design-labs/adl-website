@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/atoms/Button';
-import { cn } from '@/lib/cn';
 
 const CONTENT = {
   eyebrow: 'What It Looks Like When It Works',

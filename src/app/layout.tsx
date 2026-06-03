@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     images: [OG_IMAGE],
   },
-  icons: { icon: '/favicon.ico' },
+  // Icons are auto-resolved by Next from src/app/icon.svg + apple-icon.svg.
 };
 
 const ORG_JSON_LD = {
