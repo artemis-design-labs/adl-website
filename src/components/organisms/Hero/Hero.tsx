@@ -5,8 +5,24 @@ import Link from 'next/link';
 import { cn } from '@/lib/cn';
 import { HeroBackdrop } from './HeroBackdrop';
 
-const EYEBROW_PREFIX = '$ ./adl train ';
-const EYEBROW_SUFFIX = '--status=production';
+const EYEBROW_PREFIX = '$ ./adl ';
+/**
+ * Commands rotate through the eyebrow. Each is the part that comes
+ * AFTER `$ ./adl `. Theme: AI, software SDLC, design systems, tokens,
+ * a11y, the kind of operations our pitch keeps gesturing at.
+ */
+const EYEBROW_COMMANDS = [
+  'train --status=production',
+  'generate component button --states=5',
+  'audit design-system --target=figma',
+  'sync tokens --from=figma --to=react',
+  'validate --wcag=2.1AA',
+  'diff figma:main code:main',
+  'handoff --format=react --typed',
+  'review pr/847 --auto-fix',
+  'scaffold component card --variants=3',
+  'ship --reviewed-by=senior',
+];
 const HEADLINE_LINE_1 = 'We Build the AI That Builds';
 const HEADLINE_LINE_2 = 'Your Design Infrastructure.';
 const SUBHEADLINE =
@@ -86,28 +102,54 @@ export function Hero() {
   );
 
   function MonoEyebrow() {
-    const [shown, setShown] = useState(0);
-    const fullText = EYEBROW_PREFIX + EYEBROW_SUFFIX;
+    const [cmdIndex, setCmdIndex] = useState(0);
+    const [chars, setChars] = useState(0);
+    const [phase, setPhase] = useState<'typing' | 'holding' | 'erasing'>('typing');
 
     useEffect(() => {
-      if (shown >= fullText.length) return;
-      const id = setTimeout(() => setShown((s) => s + 1), 28);
-      return () => clearTimeout(id);
-    }, [shown, fullText.length]);
+      const current = EYEBROW_COMMANDS[cmdIndex];
+      let id: ReturnType<typeof setTimeout> | undefined;
 
-    const text = fullText.slice(0, shown);
-    const isDone = shown >= fullText.length;
+      if (phase === 'typing') {
+        if (chars < current.length) {
+          id = setTimeout(() => setChars((c) => c + 1), 38);
+        } else {
+          id = setTimeout(() => setPhase('holding'), 0);
+        }
+      } else if (phase === 'holding') {
+        id = setTimeout(() => setPhase('erasing'), 2400);
+      } else {
+        if (chars > 0) {
+          id = setTimeout(() => setChars((c) => c - 1), 18);
+        } else {
+          setCmdIndex((i) => (i + 1) % EYEBROW_COMMANDS.length);
+          setPhase('typing');
+        }
+      }
+
+      return () => { if (id) clearTimeout(id); };
+    }, [phase, chars, cmdIndex]);
+
+    const visible = EYEBROW_COMMANDS[cmdIndex].slice(0, chars);
+    // Cursor is solid while typing, blinks while holding/erasing.
+    const cursorClass =
+      phase === 'typing' ? '' : 'animate-pulse';
 
     return (
-      <div className="inline-flex items-center gap-2 font-[var(--font-mono)] text-[13px] text-[var(--color-text-secondary)]">
-        <span className="text-[var(--color-accent)]">{'›'}</span>
-        <span>
-          {text}
+      <div
+        className="inline-flex items-baseline gap-2 font-[var(--font-mono)] text-[13px] text-[var(--color-text-secondary)]"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <span className="text-[var(--color-accent)]" aria-hidden="true">{'›'}</span>
+        <span aria-label={`Command: ${EYEBROW_PREFIX}${EYEBROW_COMMANDS[cmdIndex]}`}>
+          <span className="text-[var(--color-text-tertiary)]">{EYEBROW_PREFIX}</span>
+          <span>{visible}</span>
           <span
             aria-hidden="true"
             className={cn(
-              'inline-block w-[7px] h-[1em] bg-[var(--color-accent)] align-middle ml-0.5',
-              isDone ? 'animate-pulse' : ''
+              'inline-block w-[7px] h-[0.95em] bg-[var(--color-accent)] align-middle ml-0.5',
+              cursorClass
             )}
           />
         </span>
