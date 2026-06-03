@@ -1,158 +1,198 @@
-'use client';
-
-import { Fragment } from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { cn } from '@/lib/cn';
 
+export const metadata: Metadata = {
+  title: 'Our AI',
+  description:
+    "We didn't bolt AI onto a workflow. We built it from scratch — trained on 190,000+ production design-to-code examples, validated by senior engineers.",
+};
+
+const HUMAN_VS_AI = [
+  {
+    human: 'Understanding your product vision and business context.',
+    ai: 'Converting design files to production-ready code.',
+  },
+  {
+    human: 'Strategic decisions about component architecture.',
+    ai: 'Generating consistent, error-free implementations.',
+  },
+  {
+    human: 'Quality review and edge case identification.',
+    ai: 'Handling repetitive patterns across your codebase.',
+  },
+  {
+    human: 'Team training and governance setup.',
+    ai: 'Documentation generation and maintenance.',
+  },
+  {
+    human: 'Adapting to your unique constraints and requirements.',
+    ai: 'State coverage — loading, error, empty, partial, denied.',
+  },
+];
+
+const TECH_STATS = [
+  {
+    title: 'Custom training data',
+    stat: '190K+',
+    description: 'Labeled design-to-code pairs from real production codebases. Not tutorials, not demos.',
+  },
+  {
+    title: 'Continuous learning',
+    stat: 'Every project',
+    description: 'Each engagement improves the models. Your project inherits everything we\'ve shipped before.',
+  },
+  {
+    title: 'Framework agnostic',
+    stat: '6+ frameworks',
+    description: 'React, Vue, Angular, Svelte and more. We match your stack, your conventions, your standards.',
+  },
+  {
+    title: 'First-PR approval',
+    stat: '94%',
+    description: 'Code that passes senior review because it was trained on production standards, not happy-path samples.',
+  },
+];
+
+const COMPARISON = [
+  { feature: 'Design-to-code accuracy', traditional: 'Manual translation',    adl: 'AI-assisted precision' },
+  { feature: 'Delivery timeline',       traditional: '3-4 months',            adl: '3-4 weeks' },
+  { feature: 'State coverage',          traditional: 'Happy path only',       adl: 'All 5 states included' },
+  { feature: 'Documentation',           traditional: 'Separate deliverable',  adl: 'Auto-generated with code' },
+  { feature: 'Consistency',             traditional: 'Varies by developer',   adl: 'AI-enforced standards' },
+  { feature: 'Maintenance',             traditional: 'Manual updates',        adl: 'AI-powered drift detection' },
+  { feature: 'Accessibility',           traditional: 'Often an afterthought', adl: 'WCAG baked in from day one' },
+];
+
 export default function OurAIPage() {
-  const humanVsAI = [
-    {
-      human: 'Understanding your product vision and business context',
-      ai: 'Converting design files to production-ready code',
-    },
-    {
-      human: 'Strategic decisions about component architecture',
-      ai: 'Generating consistent, error-free implementations',
-    },
-    {
-      human: 'Quality review and edge case identification',
-      ai: 'Handling repetitive patterns across your codebase',
-    },
-    {
-      human: 'Team training and governance setup',
-      ai: 'Documentation generation and maintenance',
-    },
-    {
-      human: 'Adapting to your unique constraints and requirements',
-      ai: 'State coverage (loading, error, empty, permission-denied)',
-    },
-  ];
-
-  const technologyStack = [
-    {
-      title: 'Custom Training Data',
-      stat: '190,000+',
-      description: 'Labeled design-to-code examples from real production codebases. Not tutorials or demos.',
-    },
-    {
-      title: 'Continuous Learning',
-      stat: 'Every Project',
-      description: 'Our AI improves with every engagement. Your project benefits from hundreds of successful deliveries.',
-    },
-    {
-      title: 'Framework Agnostic',
-      stat: '6+ Frameworks',
-      description: 'React, Vue, Angular, Svelte, and more. We match your stack, your conventions, your standards.',
-    },
-    {
-      title: 'Code Quality',
-      stat: '94%',
-      description: 'First-PR approval rate. Code that passes review because it was trained on production standards.',
-    },
-  ];
-
-  const comparisonData = [
-    { feature: 'Design-to-code accuracy', traditional: 'Manual translation', adl: 'AI-assisted precision' },
-    { feature: 'Delivery timeline', traditional: '3-4 months', adl: '3-4 weeks' },
-    { feature: 'State coverage', traditional: 'Happy path only', adl: 'All 5 states included' },
-    { feature: 'Documentation', traditional: 'Separate deliverable', adl: 'Auto-generated with code' },
-    { feature: 'Consistency', traditional: 'Varies by developer', adl: 'AI-enforced standards' },
-    { feature: 'Maintenance', traditional: 'Manual updates', adl: 'AI-powered drift detection' },
-    { feature: 'Accessibility', traditional: 'Often an afterthought', adl: 'Baked in from day one' },
-  ];
-
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
       <Navigation />
 
       {/* Hero */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-[55vh] pointer-events-none opacity-70"
+          style={{ background: 'var(--gradient-subtle)' }}
+        />
+        <div className="relative max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
-              Our AI
+            <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-5">
+              › ./adl --tech-stack
             </span>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)] mb-6 leading-tight">
-              We Didn't Bolt AI Onto an Existing Workflow.<br />
-              We Built From Scratch.
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.03em] text-[var(--color-text-primary)] leading-[1.05]">
+              We didn&apos;t bolt AI
+              <br />
+              onto a workflow.
+              <br />
+              <span className="text-[var(--color-accent)]">We built it from scratch.</span>
             </h1>
-            <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed">
-              Most "AI-powered" design tools generate code nobody wants to deploy. We built something different: proprietary tools trained on 190,000+ labeled examples from real production codebases.
+            <p className="mt-7 text-base md:text-lg lg:text-xl text-[var(--color-text-secondary)] leading-relaxed max-w-2xl">
+              Most &ldquo;AI-powered&rdquo; design tools generate code nobody wants to deploy. We built something different: proprietary models trained on 190,000+ labeled design-to-code pairs from real production codebases, validated by senior engineers.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Human vs AI Roles */}
-      <section className="py-20 md:py-28 bg-[var(--color-bg-secondary)]">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <header className="text-center mb-16">
-            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
-              The Partnership
+      {/* Partnership */}
+      <section className="py-24 md:py-32 bg-[var(--color-bg-secondary)]">
+        <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
+          <header className="text-center mb-14 md:mb-16 max-w-3xl mx-auto">
+            <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-4">
+              › the partnership
             </span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)] leading-tight">
-              Human Expertise Meets AI Precision
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.025em] text-[var(--color-text-primary)] leading-[1.1]">
+              Human expertise
+              <br />
+              <span className="text-[var(--color-accent)]">× AI precision.</span>
             </h2>
-            <p className="mt-6 text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-              We don't replace human expertise with AI. We amplify it. Here's how the work divides.
+            <p className="mt-6 text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed">
+              We don&apos;t replace human expertise with AI — we amplify it. The work divides cleanly.
             </p>
           </header>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--color-border)]" style={{ border: '1px solid var(--color-border)' }}>
-            {/* Headers */}
-            <div className="bg-[var(--color-bg-primary)] p-4 lg:p-6">
-              <h3 className="text-xs tracking-[0.1em] uppercase text-[var(--color-accent)] font-medium">
-                What Humans Handle
-              </h3>
-            </div>
-            <div className="bg-[var(--color-bg-primary)] p-4 lg:p-6">
-              <h3 className="text-xs tracking-[0.1em] uppercase text-[var(--color-accent)] font-medium">
-                What AI Handles
-              </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+            {/* Humans column */}
+            <div className="p-6 lg:p-8 rounded-2xl bg-[var(--color-bg-elevated)] border border-[var(--color-border)]">
+              <div className="flex items-center gap-3 mb-6 pb-5 border-b border-[var(--color-border)]">
+                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[var(--color-accent-subtle)] border border-[var(--color-accent)]/40">
+                  <svg className="w-4 h-4 text-[var(--color-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                </span>
+                <h3 className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)]">
+                  what humans handle
+                </h3>
+              </div>
+              <ul className="space-y-4">
+                {HUMAN_VS_AI.map((row, i) => (
+                  <li key={i} className="text-base md:text-lg text-[var(--color-text-primary)] leading-relaxed">
+                    {row.human}
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            {/* Rows */}
-            {humanVsAI.map((row, index) => (
-              <Fragment key={index}>
-                <div className="bg-[var(--color-bg-elevated)] p-4 lg:p-6">
-                  <p className="text-sm text-[var(--color-text-primary)]">{row.human}</p>
-                </div>
-                <div className="bg-[var(--color-bg-elevated)] p-4 lg:p-6">
-                  <p className="text-sm text-[var(--color-text-secondary)]">{row.ai}</p>
-                </div>
-              </Fragment>
-            ))}
+            {/* AI column */}
+            <div className="p-6 lg:p-8 rounded-2xl bg-[var(--color-bg-elevated)] border border-[var(--color-border)]">
+              <div className="flex items-center gap-3 mb-6 pb-5 border-b border-[var(--color-border)]">
+                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[var(--color-accent-subtle)] border border-[var(--color-accent)]/40">
+                  <svg className="w-4 h-4 text-[var(--color-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="3" />
+                    <path d="M9 9h6v6H9z" />
+                    <path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3" />
+                  </svg>
+                </span>
+                <h3 className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)]">
+                  what ai handles
+                </h3>
+              </div>
+              <ul className="space-y-4">
+                {HUMAN_VS_AI.map((row, i) => (
+                  <li key={i} className="text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed">
+                    {row.ai}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Technology */}
-      <section className="py-20 md:py-28 bg-[var(--color-bg-primary)]">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <header className="text-center mb-16">
-            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
-              The Technology
+      <section className="py-24 md:py-32 bg-[var(--color-bg-primary)]">
+        <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
+          <header className="max-w-3xl mb-14 md:mb-16">
+            <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-4">
+              › the technology
             </span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)] leading-tight">
-              Trained on Production,<br />Not Tutorials
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.025em] text-[var(--color-text-primary)] leading-[1.1]">
+              Trained on production,
+              <br />
+              <span className="text-[var(--color-accent)]">not tutorials.</span>
             </h2>
-            <p className="mt-6 text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-              Our AI wasn't trained on open-source examples or tutorial code. It learned from real production systems at scale.
+            <p className="mt-6 text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed">
+              Open-source samples and tutorial code don&apos;t reflect how your team actually works. Our models learned from real production systems at scale.
             </p>
           </header>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--color-border)]" style={{ border: '1px solid var(--color-border)' }}>
-            {technologyStack.map((item, index) => (
-              <article key={index} className="bg-[var(--color-bg-elevated)] p-6 lg:p-8">
-                <span className="text-3xl lg:text-4xl font-medium text-[var(--color-text-primary)] block mb-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {TECH_STATS.map((item) => (
+              <article
+                key={item.title}
+                className="p-6 lg:p-7 rounded-2xl bg-[var(--color-bg-elevated)] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:bg-[var(--color-bg-tertiary)] transition-colors"
+              >
+                <div className="text-3xl md:text-4xl font-semibold tracking-[-0.025em] text-[var(--color-accent)] mb-4">
                   {item.stat}
-                </span>
-                <h3 className="text-sm font-medium text-[var(--color-text-primary)] mb-3">
+                </div>
+                <h3 className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-text-primary)] mb-3">
                   {item.title}
                 </h3>
-                <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                <p className="text-sm md:text-base text-[var(--color-text-secondary)] leading-relaxed">
                   {item.description}
                 </p>
               </article>
@@ -161,46 +201,39 @@ export default function OurAIPage() {
         </div>
       </section>
 
-      {/* Comparison Table */}
-      <section className="py-20 md:py-28 bg-[var(--color-bg-secondary)]">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <header className="text-center mb-16">
-            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">
-              The Difference
+      {/* Comparison */}
+      <section className="py-24 md:py-32 bg-[var(--color-bg-secondary)]">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8">
+          <header className="max-w-3xl mb-12">
+            <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-4">
+              › the difference
             </span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)] leading-tight">
-              Traditional Agencies vs. ADL
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.025em] text-[var(--color-text-primary)] leading-[1.1]">
+              Traditional agencies
+              <br />
+              <span className="text-[var(--color-accent)]">vs. ADL.</span>
             </h2>
-            <p className="mt-6 text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-              See how our AI-powered approach compares to traditional design agency workflows.
-            </p>
           </header>
 
-          <div className="overflow-x-auto">
-            <table className="w-full border border-[var(--color-border)]">
+          <div className="overflow-x-auto -mx-6 lg:mx-0 px-6 lg:px-0">
+            <table className="w-full border-separate border-spacing-y-2 min-w-[640px]">
               <thead>
-                <tr className="bg-[var(--color-bg-primary)]">
-                  <th className="text-left p-4 text-xs tracking-[0.1em] uppercase text-[var(--color-text-muted)] font-medium border-b border-[var(--color-border)]">
-                    Feature
-                  </th>
-                  <th className="text-left p-4 text-xs tracking-[0.1em] uppercase text-[var(--color-text-muted)] font-medium border-b border-[var(--color-border)]">
-                    Traditional Agency
-                  </th>
-                  <th className="text-left p-4 text-xs tracking-[0.1em] uppercase text-[var(--color-accent)] font-medium border-b border-[var(--color-border)]">
-                    Artemis Design Labs
-                  </th>
+                <tr>
+                  <th className="text-left font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] pb-3 px-5">feature</th>
+                  <th className="text-left font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] pb-3 px-5">traditional agency</th>
+                  <th className="text-left font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-accent)] pb-3 px-5">artemis design labs</th>
                 </tr>
               </thead>
               <tbody>
-                {comparisonData.map((row, index) => (
-                  <tr key={index} className="bg-[var(--color-bg-elevated)]">
-                    <td className="p-4 text-sm text-[var(--color-text-primary)] border-b border-[var(--color-border)]">
+                {COMPARISON.map((row) => (
+                  <tr key={row.feature} className="bg-[var(--color-bg-elevated)]">
+                    <td className={cn('px-5 py-4 text-base md:text-lg align-middle rounded-l-lg border border-r-0 border-[var(--color-border)] text-[var(--color-text-primary)] font-medium')}>
                       {row.feature}
                     </td>
-                    <td className="p-4 text-sm text-[var(--color-text-secondary)] border-b border-[var(--color-border)]">
+                    <td className={cn('px-5 py-4 text-base align-middle border-t border-b border-[var(--color-border)] text-[var(--color-text-secondary)]')}>
                       {row.traditional}
                     </td>
-                    <td className="p-4 text-sm text-[var(--color-text-primary)] font-medium border-b border-[var(--color-border)]">
+                    <td className={cn('px-5 py-4 text-base align-middle rounded-r-lg border border-l-0 border-[var(--color-border)] text-[var(--color-accent)] font-medium')}>
                       {row.adl}
                     </td>
                   </tr>
@@ -212,29 +245,32 @@ export default function OurAIPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 md:py-28 bg-[var(--color-bg-secondary)]">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
-          <header className="mb-10">
-            <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
-              Get Started
-            </span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)] mb-6">
-              See Our AI in Action
-            </h2>
-            <p className="text-lg text-[var(--color-text-secondary)]">
-              Book a call to see how our AI-powered workflow can accelerate your design-to-code delivery.
-            </p>
-          </header>
+      <section className="relative py-24 md:py-32 bg-[var(--color-bg-primary)] overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 -bottom-1/2 h-[120%] pointer-events-none opacity-50"
+          style={{ background: 'var(--gradient-subtle)' }}
+        />
+        <div className="relative max-w-3xl mx-auto px-6 lg:px-8 text-center">
+          <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-5">
+            › see it in action
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.025em] text-[var(--color-text-primary)] leading-[1.1] mb-6">
+            Want to watch the AI
+            <br />
+            <span className="text-[var(--color-accent)]">work on your own files?</span>
+          </h2>
+          <p className="text-base md:text-lg text-[var(--color-text-secondary)] mb-10 max-w-xl mx-auto leading-relaxed">
+            Send us your Figma files. Within 48 hours, our AI audits the design system and identifies the gaps. You keep the audit either way.
+          </p>
           <Link
-            href="/contact"
-            className={cn(
-              'inline-block text-xs tracking-[0.08em] uppercase px-8 py-4',
-              'bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]',
-              'hover:bg-[var(--color-text-secondary)]',
-              'transition-colors duration-150'
-            )}
+            href="/contact?type=audit"
+            className="inline-flex items-center gap-2 h-12 px-7 rounded-md bg-[var(--color-accent)] text-[var(--color-text-on-accent)] font-medium text-base hover:bg-[var(--color-accent-hover)] hover:shadow-[var(--shadow-glow)] active:translate-y-px transition-all duration-150"
           >
-            Book a Conversation
+            Get a Free AI Audit
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
           </Link>
         </div>
       </section>
