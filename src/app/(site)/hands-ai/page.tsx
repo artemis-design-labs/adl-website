@@ -1,3 +1,11 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'HANDS AI — AI case management for WIC',
+  description:
+    "Case study: designing Emma, the AI assistant inside CMA Global's HANDS AI platform — streamlining WIC case management across six U.S. states with a design system and production-ready UI.",
+};
+
 export default function HandsAIPage() {
     return (
       <div className="px-6 md:px-16 lg:px-32 pt-32 pb-20">
