@@ -53,7 +53,6 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           TURNSTILE_SECRET_KEY: ${{ secrets.TURNSTILE_SECRET_KEY }}
-          ADMIN_BASIC_AUTH: ${{ secrets.ADMIN_BASIC_AUTH }}
         run: |
           # DATABASE_URL is required; the others are env-guarded and
           # only synced when a value is set in the GitHub repo secrets.
@@ -67,9 +66,4 @@ jobs:
             printf '%s' "$TURNSTILE_SECRET_KEY" | npx wrangler secret put TURNSTILE_SECRET_KEY
           else
             echo "TURNSTILE_SECRET_KEY not set — skipping (spam protection disabled)."
-          fi
-          if [ -n "$ADMIN_BASIC_AUTH" ]; then
-            printf '%s' "$ADMIN_BASIC_AUTH" | npx wrangler secret put ADMIN_BASIC_AUTH
-          else
-            echo "ADMIN_BASIC_AUTH not set — /admin stays locked (fail-closed)."
           fi
