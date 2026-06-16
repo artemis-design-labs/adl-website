@@ -180,6 +180,71 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Founder */}
+      <section className="py-24 md:py-32 bg-[var(--color-bg-primary)]">
+        <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
+          <header className="max-w-2xl mb-12">
+            <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-4">
+              › who&apos;s behind it
+            </span>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-[-0.025em] text-[var(--color-text-primary)] leading-[1.1]">
+              The founder you&apos;ll actually talk to.
+            </h2>
+          </header>
+
+          <article className="max-w-3xl flex flex-col sm:flex-row items-start gap-6 sm:gap-8 p-7 lg:p-9 rounded-2xl bg-[var(--color-bg-elevated)] border border-[var(--color-border)]">
+            {/* Headshot placeholder — swap for a photo by dropping a file at
+                public/images/founders/pritish-sai.jpg and replacing this div
+                with a next/image. */}
+            <div
+              className="flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[var(--color-accent-subtle)] border border-[var(--color-accent)]/40 flex items-center justify-center"
+              aria-hidden="true"
+            >
+              <span className="text-2xl sm:text-3xl font-semibold tracking-tight text-[var(--color-accent)]">PS</span>
+            </div>
+
+            <div className="flex-1">
+              <h3 className="text-xl md:text-2xl font-semibold text-[var(--color-text-primary)]">
+                Pritish Sai Kannan
+              </h3>
+              <p className="mt-1 font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)]">
+                Founder · Design Leader, Enterprise AI
+              </p>
+              <p className="mt-4 text-base text-[var(--color-text-secondary)] leading-relaxed">
+                Five years leading design teams across large-scale private and federal organizations,
+                solving complex enterprise challenges that impact thousands of users across the U.S. —
+                the experience ADL is built on.
+              </p>
+              <a
+                href="https://www.linkedin.com/in/pritishsai"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Pritish Sai Kannan on LinkedIn"
+                className="inline-flex items-center gap-2 mt-5 text-sm font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] transition-colors duration-150 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-elevated)]"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+                Connect on LinkedIn
+              </a>
+            </div>
+          </article>
+
+          <p className="mt-6 text-sm text-[var(--color-text-tertiary)]">
+            Follow{' '}
+            <a
+              href="https://www.linkedin.com/company/artemis-design-labs"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] underline-offset-4 hover:underline transition-colors"
+            >
+              Artemis Design Labs on LinkedIn
+            </a>
+            .
+          </p>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="relative py-24 md:py-32 bg-[var(--color-bg-primary)] overflow-hidden">
         <div
