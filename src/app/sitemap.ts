@@ -11,9 +11,6 @@ const ROUTES = [
   { path: '/our-ai',                priority: 0.7,  changeFrequency: 'monthly' as const },
   { path: '/hands-ai',              priority: 0.6,  changeFrequency: 'yearly' as const  },
   { path: '/insight',               priority: 0.5,  changeFrequency: 'monthly' as const },
-  { path: '/publication',           priority: 0.5,  changeFrequency: 'monthly' as const },
-  { path: '/marketplace',           priority: 0.5,  changeFrequency: 'monthly' as const },
-  { path: '/design-system-license', priority: 0.4,  changeFrequency: 'yearly' as const  },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
