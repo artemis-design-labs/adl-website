@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
+import Script from 'next/script';
 import { Turnstile } from '@/components/atoms/Turnstile';
 import { cn } from '@/lib/cn';
 
@@ -98,6 +99,32 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* Book a call — Calendly inline scheduler */}
+      <section id="book-a-call" className="pb-4 scroll-mt-24">
+        <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
+          <div className="max-w-2xl mb-6">
+            <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-3">
+              › book a call
+            </span>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-[-0.025em] text-[var(--color-text-primary)] leading-tight">
+              Grab a 30-minute slot.
+            </h2>
+            <p className="mt-3 text-base text-[var(--color-text-secondary)] leading-relaxed">
+              Pick a time that works — no form required. Prefer to write first? Scroll down and send a message instead.
+            </p>
+          </div>
+          <div
+            className="calendly-inline-widget rounded-2xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-elevated)]"
+            data-url="https://calendly.com/itadmin-artemisdesignlabs/30min?hide_gdpr_banner=1&background_color=1b1b26&text_color=ededf0&primary_color=7c3aed"
+            style={{ minWidth: '320px', height: '700px' }}
+          />
+        </div>
+      </section>
+      <Script
+        src="https://assets.calendly.com/assets/external/widget.js"
+        strategy="afterInteractive"
+      />
 
       {/* Form section */}
       <section className="py-16 md:py-20">
