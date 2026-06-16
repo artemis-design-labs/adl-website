@@ -42,7 +42,7 @@ export function CTASection() {
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
               <Link
-                href="/contact"
+                href="/contact#book-a-call"
                 className={cn(
                   'inline-flex items-center justify-center gap-2 h-12 px-7 rounded-md',
                   'bg-[var(--color-accent)] text-[var(--color-text-on-accent)]',

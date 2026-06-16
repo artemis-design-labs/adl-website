@@ -223,7 +223,7 @@ export default function WorkPage() {
             No pitch deck. No pressure. Just a real conversation about what you&apos;re building and where it&apos;s stuck.
           </p>
           <Link
-            href="/contact"
+            href="/contact#book-a-call"
             className="inline-flex items-center gap-2 h-12 px-7 rounded-md bg-[var(--color-accent)] text-[var(--color-text-on-accent)] font-medium text-base hover:bg-[var(--color-accent-hover)] hover:shadow-[var(--shadow-glow)] active:translate-y-px transition-all duration-150"
           >
             Start a Conversation

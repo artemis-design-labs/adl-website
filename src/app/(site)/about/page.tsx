@@ -265,7 +265,7 @@ export default function AboutPage() {
             No pitch deck. No pressure. Just founder-to-founder talk about what you&apos;re building and whether we&apos;re the right fit.
           </p>
           <Link
-            href="/contact"
+            href="/contact#book-a-call"
             className={cn(
               'inline-flex items-center gap-2 h-12 px-7 rounded-md',
               'bg-[var(--color-accent)] text-[var(--color-text-on-accent)]',
