@@ -9,7 +9,7 @@ export default function InsightPage() {
           Redesigning How Educators Access & Act on Student Insights
         </h1>
         <p className="text-lg text-[var(--color-text-secondary)] mb-12">
-        {"District administrators and educators rely on complex data to support students—but too often, crucial trends remain buried under charts, filters, and dashboards. Insight is changing that.\n\nThrough its Key Insights feature, the platform uses AI to generate natural-language summaries and targeted recommendations for each dataset—helping users quickly understand what's happening, why it matters, and what actions to take."}
+        {"District administrators and educators rely on complex data to support students—but too often, crucial trends remain buried under charts, filters, and dashboards. Insight is changing that."}
           <br /><br />
           {"Through its Key Insights feature, the platform uses AI to generate natural-language summaries and targeted recommendations for each dataset—helping users quickly understand what's happening, why it matters, and what actions to take."}
         </p>
