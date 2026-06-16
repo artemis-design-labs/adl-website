@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Turnstile } from '@/components/atoms/Turnstile';
 import { cn } from '@/lib/cn';
 
@@ -8,6 +8,7 @@ const TURNSTILE_REQUIRED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 const ADMIN_EMAIL = 'itadmin@artemisdesignlabs.com';
 
 const SERVICES = [
+  { value: 'audit',      label: 'Free design-to-code audit' },
   { value: 'creation',   label: 'Design System Creation — $15-25K' },
   { value: 'maintenance',label: 'Design System Maintenance — $4-6K / mo' },
   { value: 'handoff',    label: 'Design-to-Code Handoff — $8-15K' },
@@ -25,6 +26,17 @@ export default function ContactPage() {
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const [isAudit, setIsAudit] = useState(false);
+
+  // Honor the "Get a Free Audit" CTAs (/contact?type=audit): preselect the
+  // audit option and acknowledge the request so the intent isn't dropped.
+  useEffect(() => {
+    const type = new URLSearchParams(window.location.search).get('type');
+    if (type === 'audit') {
+      setIsAudit(true);
+      setFormData((prev) => ({ ...prev, service: 'audit' }));
+    }
+  }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -159,6 +171,13 @@ export default function ContactPage() {
                   )}
                   noValidate
                 >
+                  {isAudit && (
+                    <div className="p-4 rounded-md border border-[var(--color-accent)]/40 bg-[var(--color-accent-subtle)] text-sm text-[var(--color-text-primary)]">
+                      <strong className="font-medium text-[var(--color-accent)]">Free design-to-code audit.</strong>{' '}
+                      Tell us about your current setup below — we&apos;ll send your audit within 48 hours, yours to keep either way.
+                    </div>
+                  )}
+
                   {status === 'error' && (
                     <div
                       role="alert"
