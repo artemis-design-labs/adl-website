@@ -28,7 +28,7 @@ export function Hero() {
             />
             {/* Eyebrow */}
             <p
-              className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.12em] text-[var(--color-accent-text)] mb-8 hero-animate"
+              className="font-[var(--font-mono)] text-[length:var(--text-xs)] uppercase tracking-[0.12em] text-[var(--color-accent-text)] mb-8 hero-animate"
               style={{ animationDelay: '80ms' }}
             >
               UI INFRASTRUCTURE · ENTERPRISE B2B STARTUPS
@@ -49,7 +49,7 @@ export function Hero() {
 
             {/* Body */}
             <p
-              className="text-[18px] text-[var(--color-text-secondary)] leading-[1.5] max-w-[600px] mb-10 hero-animate"
+              className="text-[length:var(--text-body-lg)] text-[var(--color-text-secondary)] leading-[1.5] max-w-[600px] mb-10 hero-animate"
               style={{ animationDelay: '280ms' }}
             >
               ADL builds and operates governed UI infrastructure for enterprise
@@ -68,7 +68,7 @@ export function Hero() {
                 className={cn(
                   'inline-flex items-center justify-center gap-2 h-[45px] px-7 rounded-[var(--radius-md)]',
                   'bg-[var(--color-accent)] text-[var(--color-text-on-accent)]',
-                  'font-semibold text-[14px]',
+                  'font-semibold text-[length:var(--text-sm)]',
                   'hover:bg-[var(--color-accent-hover)] hover:shadow-[var(--shadow-glow)]',
                   'active:brightness-90 transition-all duration-150',
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]'
@@ -81,7 +81,7 @@ export function Hero() {
                 className={cn(
                   'inline-flex items-center justify-center gap-2 h-[45px] px-7 rounded-[var(--radius-md)]',
                   'border border-[var(--color-border-strong)] text-[var(--color-text-secondary)]',
-                  'font-semibold text-[14px]',
+                  'font-semibold text-[length:var(--text-sm)]',
                   'hover:border-[var(--color-accent)] hover:text-[var(--color-accent-text)]',
                   'active:brightness-90 transition-all duration-150',
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]'
@@ -98,20 +98,20 @@ export function Hero() {
             style={{ animationDelay: '300ms' }}
             aria-hidden="true"
           >
-            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.12em] text-[var(--color-accent-text)] font-semibold mb-3">
+            <p className="font-[var(--font-mono)] text-[length:var(--text-xs)] uppercase tracking-[0.12em] text-[var(--color-accent-text)] font-semibold mb-4">
               WHAT WE BUILD
             </p>
             <div className="border-t border-[var(--color-border)]" />
             {TRACKS.map((track, i) => (
               <div
                 key={i}
-                className="border-b border-[var(--color-border)] py-[14px] flex justify-between items-center"
+                className="border-b border-[var(--color-border)] py-[14px] flex items-start gap-3"
               >
-                <span className="text-[var(--color-text-primary)] text-[15px] leading-[1.2]">
+                <svg className="w-4 h-4 mt-1 flex-shrink-0 text-[var(--color-accent-text)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span className="text-[var(--color-text-primary)] text-[length:var(--text-body)] leading-[1.35]">
                   {track.name}
-                </span>
-                <span className="text-[var(--color-accent-text)] text-[13px] ml-4 flex-shrink-0">
-                  →
                 </span>
               </div>
             ))}

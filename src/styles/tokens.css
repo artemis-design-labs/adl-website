@@ -66,15 +66,18 @@
   --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), 'JetBrains Mono', 'IBM Plex Mono', 'Courier New', monospace;
 
-  --text-display: 5.75rem;
-  --text-h1: 2rem;
-  --text-h2: 1.5rem;
-  --text-h3: 1.25rem;
-  --text-h4: 1.25rem;
-  --text-body-lg: 1.125rem;
-  --text-body: 1rem;
-  --text-sm: 0.875rem;
-  --text-xs: 0.75rem;
+  /* Modular type scale — 17px body, ~1.25 (major-third) ratio.
+     Bigger + consistent hierarchy. Reference in JSX via
+     text-[length:var(--text-h2)], leading-[var(--leading-tight)], etc. */
+  --text-display: 5rem;        /* 80px — hero headline */
+  --text-h1: 3.25rem;          /* 52px */
+  --text-h2: 2.5rem;           /* 40px */
+  --text-h3: 1.875rem;         /* 30px */
+  --text-h4: 1.5rem;           /* 24px */
+  --text-body-lg: 1.3125rem;   /* 21px — intros, lead paragraphs */
+  --text-body: 1.0625rem;      /* 17px — base body (was 16) */
+  --text-sm: 0.9375rem;        /* 15px — secondary (was 14) */
+  --text-xs: 0.75rem;          /* 12px — mono eyebrows/labels */
 
   --font-weight-normal: 400;
   --font-weight-medium: 500;
