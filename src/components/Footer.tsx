@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Logo } from '@/components/atoms/Logo';
 
-const ADMIN_EMAIL = 'itadmin@artemisdesignlabs.com';
+const ADMIN_EMAIL = 'hello@artemisdesignlabs.com';
 
 const FOOTER_LINKS = {
   services: [

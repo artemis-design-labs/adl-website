@@ -61,7 +61,7 @@ const ORG_JSON_LD = {
   name: 'Artemis Design Labs',
   url: SITE_URL,
   logo: `${SITE_URL}/images/logos/adl-logo-1.png`,
-  email: 'itadmin@artemisdesignlabs.com',
+  email: 'hello@artemisdesignlabs.com',
   sameAs: [
     'https://www.linkedin.com/company/artemis-design-labs',
     'https://github.com/artemis-design-labs',

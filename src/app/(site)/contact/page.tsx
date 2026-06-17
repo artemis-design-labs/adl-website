@@ -6,7 +6,7 @@ import { Turnstile } from '@/components/atoms/Turnstile';
 import { cn } from '@/lib/cn';
 
 const TURNSTILE_REQUIRED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
-const ADMIN_EMAIL = 'itadmin@artemisdesignlabs.com';
+const ADMIN_EMAIL = 'hello@artemisdesignlabs.com';
 
 const SERVICES = [
   { value: 'audit',      label: 'Free design-to-code audit' },
