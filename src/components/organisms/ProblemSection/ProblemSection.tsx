@@ -45,15 +45,15 @@ export function ProblemSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 md:mb-20">
           <h2
             className={cn(
-              'text-[2rem] font-semibold leading-[1.2]',
-              'tracking-[-0.01em] text-[var(--color-text-primary)] fade-up'
+              'text-[length:var(--text-h2)] font-semibold leading-[1.1]',
+              'tracking-[-0.02em] text-[var(--color-text-primary)] fade-up'
             )}
             data-visible={dataVisible}
           >
             Two Tracks. One Mission.
           </h2>
           <p
-            className="text-[16px] text-[var(--color-text-secondary)] leading-[1.65] lg:pt-2 fade-up"
+            className="text-[length:var(--text-body-lg)] text-[var(--color-text-secondary)] leading-[1.6] lg:pt-2 fade-up"
             data-visible={dataVisible}
             style={{ transitionDelay: '80ms' }}
           >
@@ -79,16 +79,18 @@ export function ProblemSection() {
               data-visible={dataVisible}
               style={{ transitionDelay: `${120 + i * 80}ms` }}
             >
-              <span
-                className="block text-[var(--color-accent-text)] text-[22px] mb-5"
-                aria-hidden="true"
-              >
-                {svc.icon}
-              </span>
-              <h3 className="text-[18px] font-semibold text-[var(--color-text-primary)] leading-[1.2] mb-3">
-                {svc.title}
-              </h3>
-              <p className="text-[14px] text-[var(--color-text-secondary)] leading-[1.65]">
+              <div className="flex items-center gap-3 mb-4">
+                <span
+                  className="text-[var(--color-accent-text)] text-[length:var(--text-h3)] leading-none flex-shrink-0"
+                  aria-hidden="true"
+                >
+                  {svc.icon}
+                </span>
+                <h3 className="text-[length:var(--text-h4)] font-semibold text-[var(--color-text-primary)] leading-[1.2]">
+                  {svc.title}
+                </h3>
+              </div>
+              <p className="text-[length:var(--text-body)] text-[var(--color-text-secondary)] leading-[1.65]">
                 {svc.description}
               </p>
             </article>

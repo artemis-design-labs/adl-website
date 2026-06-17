@@ -19,10 +19,10 @@ export function ClientsSection() {
       className="bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]"
       aria-labelledby="clients-heading"
     >
-      <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-8 py-12">
+      <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-8 py-14 md:py-16">
         <p
           id="clients-heading"
-          className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.12em] text-[var(--color-text-muted)] mb-8"
+          className="font-[var(--font-mono)] text-[length:var(--text-xs)] uppercase tracking-[0.12em] text-[var(--color-text-muted)] mb-8"
         >
           TRUSTED BY PRODUCT TEAMS YOU'D RECOGNIZE
         </p>
@@ -36,18 +36,19 @@ export function ClientsSection() {
 
         {/* Scrollable logo row */}
         <div className="overflow-x-auto marquee-mask" aria-hidden="true">
-          <ul className="flex w-max items-center gap-8 md:gap-12 animate-marquee-x">
+          <ul className="flex w-max items-center gap-10 md:gap-16 animate-marquee-x">
             {[...CLIENTS, ...CLIENTS].map((client, i) => (
               <li
                 key={`${client.name}-${i}`}
-                className="flex-shrink-0 flex items-center justify-center h-10 w-32 md:w-40"
+                className="flex-shrink-0 flex items-center justify-center h-12 md:h-16 w-36 md:w-48"
               >
                 <Image
                   src={client.src}
                   alt=""
-                  width={160}
-                  height={40}
-                  className="max-h-full w-auto object-contain opacity-40 hover:opacity-70 transition-opacity duration-300"
+                  width={192}
+                  height={64}
+                  decoding="async"
+                  className="max-h-full w-auto object-contain opacity-50 hover:opacity-80 transition-opacity duration-300"
                   unoptimized
                 />
               </li>
