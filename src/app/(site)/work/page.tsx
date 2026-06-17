@@ -170,7 +170,7 @@ export default function WorkPage() {
                         <span className="block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-2">
                           {project.client}
                         </span>
-                        <h3 className="text-3xl md:text-4xl font-semibold tracking-[-0.025em] text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors leading-[1.1]">
+                        <h3 className="text-2xl md:text-3xl font-semibold tracking-[-0.025em] text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors leading-[1.1]">
                           {project.title}
                         </h3>
                       </div>
@@ -179,8 +179,8 @@ export default function WorkPage() {
                         {project.description}
                       </p>
 
-                      <div className="inline-flex items-center gap-4 p-4 rounded-xl bg-[var(--color-bg-elevated)] border border-[var(--color-border)]">
-                        <span className="text-3xl font-semibold tracking-[-0.025em] text-[var(--color-accent)]">
+                      <div className="flex w-fit items-center gap-4 p-4 rounded-xl bg-[var(--color-bg-elevated)] border border-[var(--color-border)]">
+                        <span className="text-2xl md:text-3xl font-semibold tracking-[-0.025em] text-[var(--color-accent)]">
                           {project.metric.value}
                         </span>
                         <span className="text-sm md:text-base text-[var(--color-text-secondary)]">
@@ -188,7 +188,7 @@ export default function WorkPage() {
                         </span>
                       </div>
 
-                      <div className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] group-hover:text-[var(--color-accent)] inline-flex items-center gap-2 transition-colors">
+                      <div className="font-[var(--font-mono)] text-[12px] uppercase tracking-[0.18em] text-[var(--color-text-secondary)] group-hover:text-[var(--color-accent)] flex w-fit items-center gap-2 transition-colors pt-1">
                         View case study
                         <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                           <path d="M5 12h14M13 5l7 7-7 7" />
