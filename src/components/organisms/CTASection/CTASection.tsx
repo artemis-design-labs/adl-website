@@ -69,10 +69,10 @@ export function CTASection() {
             Book a call
           </Link>
           <a
-            href="mailto:itadmin@artemisdesignlabs.com"
+            href="mailto:hello@artemisdesignlabs.com"
             className="text-[14px] text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] transition-colors duration-150"
           >
-            itadmin@artemisdesignlabs.com
+            hello@artemisdesignlabs.com
           </a>
         </div>
 

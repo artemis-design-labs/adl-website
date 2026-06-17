@@ -80,4 +80,4 @@ Dark-primary AI-tech-forward. Electric violet (`#7C3AED`) accent. Geist typograp
 
 ## Contact
 
-`itadmin@artemisdesignlabs.com`
+`hello@artemisdesignlabs.com`

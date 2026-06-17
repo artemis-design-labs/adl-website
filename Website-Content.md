@@ -116,7 +116,7 @@ Horizontal infinite marquee. Real logos: **AT&T · Verizon · NBCU · NYCPS · N
 
 **Trust note:** We respond within 24 hours · usually faster
 
-**Contact card on the right:** itadmin@artemisdesignlabs.com · Remote-first · "What to expect" 3-bullet list.
+**Contact card on the right:** hello@artemisdesignlabs.com · Remote-first · "What to expect" 3-bullet list.
 
 ---
 
@@ -137,5 +137,5 @@ Horizontal infinite marquee. Real logos: **AT&T · Verizon · NBCU · NYCPS · N
 | Brand | "We build the AI that builds your design infrastructure. Founder-built. Human-validated. Production-ready." + violet "Available for new projects" pill |
 | Services | Design System Creation · Design System Maintenance · Design-to-Code Handoff |
 | Company | About · Our AI · Work · Pricing · Contact |
-| Contact | itadmin@artemisdesignlabs.com |
+| Contact | hello@artemisdesignlabs.com |
 | Bottom row | © year + "Built with care · trained on production" |
