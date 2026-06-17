@@ -7,6 +7,13 @@ Tags follow semver — see "Releases" on GitHub for the immutable checkpoints.
 
 ---
 
+## [v1.3.1] — 2026-06-17 — Public contact email → hello@
+
+- **Public-facing contact email swapped to `hello@artemisdesignlabs.com`** — Footer, `CTASection` mailto, `/contact` "prefer email" box, and the `layout.tsx` JSON-LD `Organization.email`. Copy-reference docs (`README`, `Website-Content.md`) updated to match.
+- **Form notifications still delivered to `itadmin@`** — `/api/contact/route.ts` `ADMIN_INBOX` is unchanged. `hello@` is a free **Google Workspace alias** on the `itadmin@` mailbox (added alongside a `noreply@` alias), so it forwards to the real inbox; the deploy was held until the alias was provisioned and test-delivered to avoid bouncing visitor mail. This reverses, for public display only, the v1.1.0 `hello@`→`itadmin@` canonicalization.
+
+---
+
 ## [v1.3.0] — 2026-06-17 — Customer-acquisition pass, Ramotion redesign, typography system
 
 Two threads landed together: a third-party customer-acquisition audit with fixes shipped across discoverability/trust/conversion, and a homepage redesign (the "Ramotion" design language, authored by Electromau5) that this session merged and then polished with a real type scale. Copy was preserved throughout the polish — only structure and font sizing changed.
