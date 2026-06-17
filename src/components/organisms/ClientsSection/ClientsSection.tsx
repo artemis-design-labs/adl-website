@@ -15,49 +15,45 @@ const CLIENTS = [
 
 export function ClientsSection() {
   return (
-    <section className="py-20 md:py-28 bg-[var(--color-bg-secondary)]" aria-labelledby="clients-heading">
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        <header className="text-center mb-12">
-          <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent-text)] mb-3">
-            › our clients
-          </span>
-          <h2 id="clients-heading" className="text-2xl md:text-3xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)]">
-            Helping teams at companies you&apos;d recognize
-          </h2>
-        </header>
+    <section
+      className="bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]"
+      aria-labelledby="clients-heading"
+    >
+      <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-8 py-12">
+        <p
+          id="clients-heading"
+          className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.12em] text-[var(--color-text-muted)] mb-8"
+        >
+          TRUSTED BY PRODUCT TEAMS YOU'D RECOGNIZE
+        </p>
 
-        {/* Screen-reader-only list of clients so assistive tech gets the
-            real content while the visible marquee (which is doubled for
-            the seamless loop) is hidden from AT to avoid duplicate reads. */}
+        {/* SR-only list */}
         <ul className="sr-only">
           {CLIENTS.map((c) => (
             <li key={c.name}>{c.name}</li>
           ))}
         </ul>
 
-        <div className="relative overflow-hidden marquee-mask" aria-hidden="true">
-          <ul className="flex w-max items-center gap-5 md:gap-8 animate-marquee-x">
+        {/* Scrollable logo row */}
+        <div className="overflow-x-auto marquee-mask" aria-hidden="true">
+          <ul className="flex w-max items-center gap-8 md:gap-12 animate-marquee-x">
             {[...CLIENTS, ...CLIENTS].map((client, i) => (
               <li
                 key={`${client.name}-${i}`}
-                className="flex-shrink-0 flex items-center justify-center h-28 md:h-32 w-48 md:w-60"
+                className="flex-shrink-0 flex items-center justify-center h-10 w-32 md:w-40"
               >
                 <Image
                   src={client.src}
                   alt=""
-                  width={280}
-                  height={140}
-                  className="max-h-full w-auto object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-[filter,opacity] duration-300"
+                  width={160}
+                  height={40}
+                  className="max-h-full w-auto object-contain opacity-40 hover:opacity-70 transition-opacity duration-300"
                   unoptimized
                 />
               </li>
             ))}
           </ul>
         </div>
-
-        <p className="mt-12 text-center text-xs tracking-[0.1em] uppercase text-[var(--color-text-secondary)]">
-          Trusted by product teams in Health, Fintech, and Enterprise
-        </p>
       </div>
     </section>
   );

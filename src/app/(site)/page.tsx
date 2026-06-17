@@ -1,20 +1,22 @@
 'use client';
 
 import { Hero } from '@/components/organisms/Hero';
-import { ProblemSection } from '@/components/organisms/ProblemSection';
-import { AboutUsSection } from '@/components/organisms/AboutUsSection';
-import { MetricsTestimonialsSection } from '@/components/organisms/MetricsTestimonialsSection';
 import { ClientsSection } from '@/components/organisms/ClientsSection';
+import { ProblemSection } from '@/components/organisms/ProblemSection';
+import { CaseStudySection } from '@/components/organisms/CaseStudySection';
+import { OperationalMoatSection } from '@/components/organisms/OperationalMoatSection';
+import { TestimonialsSection } from '@/components/organisms/TestimonialsSection';
 import { CTASection } from '@/components/organisms/CTASection';
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <ProblemSection />
-      <AboutUsSection />
-      <MetricsTestimonialsSection />
       <ClientsSection />
+      <ProblemSection />
+      <CaseStudySection />
+      <OperationalMoatSection />
+      <TestimonialsSection />
       <CTASection />
     </>
   );

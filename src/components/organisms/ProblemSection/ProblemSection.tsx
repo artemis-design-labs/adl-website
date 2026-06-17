@@ -1,118 +1,100 @@
 'use client';
 
-import Link from 'next/link';
 import { cn } from '@/lib/cn';
+import { useFadeInOnView } from '@/hooks/useFadeInOnView';
 
-const CONTENT = {
-  eyebrow: "We've lived this — here's what we know",
-  headline: "These problems aren't new.\nWe had them too.",
-  description:
-    "Before we built ADL, we were on the other side — scaling startups, burning runway on agency retainers, watching engineers waste sprints translating Figma files nobody asked them to translate. We've lived every one of these problems. That's why we stopped outsourcing the solution and built our own.",
-  cards: [
-    {
-      number: '01',
-      title: 'Your engineers are deciphering Figma files instead of shipping features.',
-      detail:
-        "We've sat in the sprint retros where this comes up. Every quarter, your engineering team loses 350+ hours to design translation — not building, not shipping, just deciphering. We built AI that eliminates this entirely. Not by generating sloppy code your team has to fix, but by producing components your senior engineers actually approve.",
-    },
-    {
-      number: '02',
-      title: 'Enterprise buyers are noticing what your team has learned to ignore.',
-      detail:
-        'The missing loading state. The table that chokes at 500 rows. The inconsistent spacing between screens. We\'ve watched founders lose six-figure deals over details like these — because we\'ve been the founders losing those deals. Your product works. But "works" and "wins enterprise contracts" are different standards.',
-    },
-    {
-      number: '03',
-      title: "Design debt is compounding while you're focused on features.",
-      detail:
-        "We've made the \"we'll fix it later\" decision. Every founder has. Six months later, your engineers are afraid to touch the UI, your design system is a graveyard of half-adopted components, and the rewrite conversation starts. We built tools that prevent this from happening — because we learned the hard way what it costs when it does.",
-    },
-    {
-      number: '04',
-      title: "Traditional agencies aren't built for how startups actually work.",
-      detail:
-        "We've hired them. $50K+ for Figma files your engineers have to rebuild anyway. Three-month timelines when you needed it in three weeks. Beautiful portfolios, zero understanding of what it's like to ship under runway pressure. The agency model was built for enterprises with procurement teams, not founders burning cash.",
-    },
-    {
-      number: '05',
-      title: 'Most "AI-powered" tools generate code nobody wants to deploy.',
-      detail:
-        "We've tried them all. Anima, Locofy, Builder.io — they get you 70% of the way there, and your engineers spend longer fixing the output than they would have spent building from scratch. That's not AI-powered delivery. That's AI-powered technical debt. We built something different because the market didn't.",
-    },
-  ],
-  transition:
-    "We didn't start ADL because we saw a market opportunity. We started it because we lived these problems as founders and couldn't find anyone who solved them properly — so we built the AI to do it ourselves.",
-};
+const SERVICES = [
+  {
+    icon: '⬡',
+    title: 'Build Track',
+    description:
+      'We audit your UI infrastructure, then build a custom AI-powered governance system for the specific problems found — component architecture, drift detection, and a Figma-to-React pipeline your team owns after delivery. Fixed scope. $15K–$25K.',
+  },
+  {
+    icon: '◎',
+    title: 'Operate Track',
+    description:
+      'We take over and run your entire UI infrastructure operation. ADL\'s agentic ecosystem handles drift monitoring, governed component delivery, governance enforcement, and monthly health reports. Your team focuses on shipping. $4K–$15K/mo.',
+  },
+  {
+    icon: '⟠',
+    title: 'Agentic Ecosystem',
+    description:
+      'A master "UI Infrastructure Architect" agent coordinating specialized sub-agents that autonomously govern, maintain, and scale your frontend. It\'s what lets a 15-person startup run UI governance at 500-person company quality.',
+  },
+  {
+    icon: '◈',
+    title: 'UI Forge',
+    description:
+      'Our internal AI engine converts Figma designs into production-ready React — all 5 interaction states, full token integration, governance review before any output touches your codebase. Not 80% complete. Production-ready.',
+  },
+];
 
 export function ProblemSection() {
-  const [line1, line2] = CONTENT.headline.split('\n');
+  const { ref, dataVisible } = useFadeInOnView(0.08);
 
   return (
     <section
-      id="pain-points"
-      className="relative py-24 md:py-32 bg-[var(--color-bg-secondary)]"
+      ref={ref}
+      id="services"
+      className="py-16 md:py-20 bg-[var(--color-bg-elevated)]"
     >
-      <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
-        <header className="max-w-3xl mx-auto text-center mb-16 md:mb-20">
-          <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-5">
-            {CONTENT.eyebrow}
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.025em] text-[var(--color-text-primary)] leading-[1.1]">
-            {line1}
-            <br />
-            <span className="text-[var(--color-accent)]">{line2}</span>
-          </h2>
-          <p className="mt-6 text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed">
-            {CONTENT.description}
-          </p>
-        </header>
+      <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-8">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {CONTENT.cards.map((card) => (
+        {/* Section header — 50/50 split per Creative Navy pattern */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 md:mb-20">
+          <h2
+            className={cn(
+              'text-[2rem] font-semibold leading-[1.2]',
+              'tracking-[-0.01em] text-[var(--color-text-primary)] fade-up'
+            )}
+            data-visible={dataVisible}
+          >
+            Two Tracks. One Mission.
+          </h2>
+          <p
+            className="text-[16px] text-[var(--color-text-secondary)] leading-[1.65] lg:pt-2 fade-up"
+            data-visible={dataVisible}
+            style={{ transitionDelay: '80ms' }}
+          >
+            ADL operates on two tracks depending on how much of the UI
+            infrastructure function you want to own versus outsource. Both are
+            powered by the same proprietary agentic ecosystem — the difference
+            is who runs it after delivery.
+          </p>
+        </div>
+
+        {/* 2×2 card grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {SERVICES.map((svc, i) => (
             <article
-              key={card.number}
+              key={i}
               className={cn(
-                'group relative p-7 rounded-xl',
-                'bg-[var(--color-bg-elevated)] border border-[var(--color-border)]',
-                'hover:border-[var(--color-accent)] hover:bg-[var(--color-bg-tertiary)]',
-                'transition-colors duration-200'
+                'bg-[var(--color-bg-primary)] border border-[var(--color-border)]',
+                'rounded-[var(--radius-md)] p-7 lg:p-8',
+                'shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)]',
+                'hover:border-[var(--color-accent)] transition-all duration-200',
+                'fade-up'
               )}
+              data-visible={dataVisible}
+              style={{ transitionDelay: `${120 + i * 80}ms` }}
             >
-              <div className="flex items-center gap-3 mb-5">
-                <span className="font-[var(--font-mono)] text-[12px] uppercase tracking-[0.18em] text-[var(--color-accent)]">
-                  {card.number}
-                </span>
-                <span className="h-px flex-1 bg-[var(--color-border)] group-hover:bg-[var(--color-accent-muted)] transition-colors" />
-              </div>
-              <h3 className="text-xl lg:text-2xl font-medium text-[var(--color-text-primary)] leading-snug mb-3">
-                {card.title}
+              <span
+                className="block text-[var(--color-accent-text)] text-[22px] mb-5"
+                aria-hidden="true"
+              >
+                {svc.icon}
+              </span>
+              <h3 className="text-[18px] font-semibold text-[var(--color-text-primary)] leading-[1.2] mb-3">
+                {svc.title}
               </h3>
-              <p className="text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed">
-                {card.detail}
+              <p className="text-[14px] text-[var(--color-text-secondary)] leading-[1.65]">
+                {svc.description}
               </p>
             </article>
           ))}
         </div>
 
-        <div className="mt-20 max-w-3xl mx-auto text-center">
-          <p className="text-base md:text-lg text-[var(--color-text-secondary)] italic">
-            {CONTENT.transition}
-          </p>
-          <Link
-            href="#about"
-            className={cn(
-              'inline-flex items-center gap-2 mt-8 h-11 px-6 rounded-md',
-              'bg-[var(--color-accent)] text-[var(--color-text-on-accent)]',
-              'font-medium text-sm',
-              'hover:bg-[var(--color-accent-hover)] hover:shadow-[var(--shadow-glow)] transition-all duration-150'
-            )}
-          >
-            See how we work
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M12 5v14M5 12l7 7 7-7" />
-            </svg>
-          </Link>
-        </div>
       </div>
     </section>
   );

@@ -18,7 +18,7 @@ const FRAGMENTS_TOP_RIGHT = [
 
 const FRAGMENTS_BOTTOM_LEFT = [
   'tokens/spacing/lg',
-  'tokens/color/violet/500',
+  'tokens/color/teal/500',
   'components/button/primary',
   'states · loading | error | empty',
 ];

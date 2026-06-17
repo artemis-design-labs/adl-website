@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/cn';
+import { useFadeInOnView } from '@/hooks/useFadeInOnView';
 
 const METRICS = [
   { value: '190K+',     label: 'Training images',     description: 'Powering our proprietary AI models' },
@@ -60,9 +61,10 @@ export function MetricsTestimonialsSection() {
   };
 
   const t = TESTIMONIALS[active];
+  const { ref, dataVisible } = useFadeInOnView(0.1);
 
   return (
-    <section className="py-24 md:py-32 bg-[var(--color-bg-primary)]">
+    <section ref={ref} className="py-24 md:py-32 bg-[var(--color-bg-primary)]">
       <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left — Metrics */}
@@ -77,15 +79,18 @@ export function MetricsTestimonialsSection() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              {METRICS.map((m) => (
+              {METRICS.map((m, idx) => (
                 <article
                   key={m.label}
                   className={cn(
                     'p-6 rounded-xl',
                     'bg-[var(--color-bg-elevated)] border border-[var(--color-border)]',
                     'hover:border-[var(--color-accent)] hover:bg-[var(--color-bg-tertiary)]',
-                    'transition-colors duration-200'
+                    'transition-colors duration-200',
+                    'fade-up'
                   )}
+                  data-visible={dataVisible}
+                  style={{ transitionDelay: `${100 + idx * 80}ms` }}
                 >
                   <div className="text-3xl md:text-4xl font-semibold tracking-[-0.025em] text-[var(--color-accent)] mb-2">
                     {m.value}

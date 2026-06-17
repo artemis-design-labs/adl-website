@@ -1,54 +1,53 @@
 /*
- * ADL Design Tokens — AI-tech forward
+ * ADL Design Tokens — Ramotion Design Language
  *
- * Visual language: dark-primary, electric-violet accent, Geist typography.
- * Variable NAMES are kept intentionally backwards-compatible with the prior
- * Severance system so existing components inherit the new aesthetic without
- * needing per-file rewrites. VALUES are all new.
+ * Visual language: dark-first (inverted from Ramotion light), electric blue (#2f77ea).
+ * Surfaces: neutral near-black (#0d0d0d) with Ramotion's own surface-dark (#262626).
+ * Variable NAMES are backwards-compatible. VALUES updated to Ramotion system.
  */
 
 :root {
   /* ============================================
-     COLOR SYSTEM — Dark primary
-     Cool near-black surfaces. Violet accent (#7C3AED).
+     COLOR SYSTEM — Ramotion dark (inverted)
+     Neutral near-black surfaces. Electric blue accent.
      ============================================ */
 
   /* === BACKGROUND === */
-  --color-bg-primary: #0A0A0F;            /* page bg */
-  --color-bg-secondary: #11111A;          /* section bg */
-  --color-bg-tertiary: #16161F;           /* nested section */
-  --color-bg-elevated: #1B1B26;           /* cards, raised surfaces */
-  --color-bg-hover: #25252F;              /* hover state */
-  --color-bg-inset: #07070C;              /* inputs, recessed */
+  --color-bg-primary: #0d0d0d;            /* page bg — Ramotion #fafafa inverted */
+  --color-bg-secondary: #141414;          /* section bg — Ramotion text-primary value */
+  --color-bg-tertiary: #1a1a1a;           /* nested section */
+  --color-bg-elevated: #262626;           /* cards, raised — Ramotion surface-dark verbatim */
+  --color-bg-hover: #2e2e2e;              /* hover state */
+  --color-bg-inset: #080808;              /* inputs, recessed */
 
   /* === TEXT === */
-  --color-text-primary: #EDEDF0;          /* default text */
-  --color-text-secondary: #A8A8B3;        /* secondary text */
-  --color-text-tertiary: #8E8E9C;         /* tertiary (AA on dark bg at 14px) */
-  --color-text-muted: #6C6C78;            /* muted captions — non-essential text only */
-  --color-text-disabled: #3A3A45;
-  --color-text-on-accent: #FFFFFF;        /* type sitting on accent fills */
+  --color-text-primary: #fafafa;          /* default text — Ramotion #fafafa bg inverted */
+  --color-text-secondary: #8a9198;        /* secondary — Ramotion #6f7984 lightened for dark */
+  --color-text-tertiary: #6e7680;         /* tertiary */
+  --color-text-muted: #555e68;            /* muted captions */
+  --color-text-disabled: #2e2e2e;
+  --color-text-on-accent: #ffffff;        /* white on Ramotion blue (4.3:1 — passes for bold) */
 
-  /* === ACCENT — electric violet === */
-  --color-accent: #7C3AED;                /* primary accent — used for fills/borders */
-  --color-accent-text: #9B6BFF;           /* brighter variant for small-text use (AA on dark, 5:1) */
-  --color-accent-hover: #8B5CF6;          /* lighter on hover (lifts in dark) */
-  --color-accent-muted: #5B21B6;          /* deeper for borders */
-  --color-accent-subtle: rgba(124, 58, 237, 0.12);
-  --color-accent-glow: rgba(124, 58, 237, 0.40);
+  /* === ACCENT — Ramotion electric blue === */
+  --color-accent: #2f77ea;                /* primary — Ramotion blue verbatim */
+  --color-accent-text: #60a5fa;           /* brighter blue for small text on dark (7.9:1) */
+  --color-accent-hover: #4f8ef0;          /* lighter blue on hover */
+  --color-accent-muted: #1d6ad4;          /* deeper blue for subtle borders */
+  --color-accent-subtle: rgba(47, 119, 234, 0.12);
+  --color-accent-glow: rgba(47, 119, 234, 0.35);
 
-  /* Warm secondary accent — used sparingly for status/highlights */
-  --color-accent-warm: #FB923C;
-  --color-accent-warm-hover: #F97316;
-  --color-accent-warm-subtle: rgba(251, 146, 60, 0.12);
+  /* Secondary warm accent */
+  --color-accent-warm: #f59e0b;
+  --color-accent-warm-hover: #d97706;
+  --color-accent-warm-subtle: rgba(245, 158, 11, 0.12);
 
   /* === BORDER === */
-  --color-border: #25252F;                /* default divider */
-  --color-border-hover: #34343E;
-  --color-border-strong: #44444F;
-  --color-border-accent: #7C3AED;
+  --color-border: #2a2a2a;                /* Ramotion #e0e0e0 border-light, inverted for dark */
+  --color-border-hover: #333333;
+  --color-border-strong: #404040;
+  --color-border-accent: #2f77ea;
 
-  /* === SEMANTIC — saturated for dark contrast === */
+  /* === SEMANTIC === */
   --color-success: #34D399;
   --color-success-muted: rgba(52, 211, 153, 0.12);
   --color-error: #F87171;
@@ -56,55 +55,50 @@
   --color-warning: #FBBF24;
   --color-warning-muted: rgba(251, 191, 36, 0.12);
 
-  /* === GRADIENTS — used sparingly for AI-tech accent === */
-  --gradient-accent: linear-gradient(135deg, #7C3AED 0%, #8B5CF6 100%);
-  --gradient-subtle: radial-gradient(ellipse at top, rgba(124, 58, 237, 0.10), transparent 70%);
+  /* === GRADIENTS — Ramotion blue === */
+  --gradient-accent: linear-gradient(135deg, #2f77ea 0%, #4f8ef0 100%);
+  --gradient-subtle: radial-gradient(ellipse at top, rgba(47, 119, 234, 0.08), transparent 70%);
 
   /* ============================================
      TYPOGRAPHY — Geist Sans + Geist Mono
-     Loaded via the `geist` npm package in layout.tsx
      ============================================ */
 
   --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), 'JetBrains Mono', 'IBM Plex Mono', 'Courier New', monospace;
 
-  /* Font sizes — bigger display for AI-tech-forward presence */
-  --text-display: 4.5rem;      /* 72px — hero */
-  --text-h1: 3.25rem;          /* 52px — page titles */
-  --text-h2: 2.25rem;          /* 36px — section headers */
-  --text-h3: 1.625rem;         /* 26px — sub-section */
-  --text-h4: 1.25rem;          /* 20px — card titles */
-  --text-body-lg: 1.125rem;    /* 18px — lede paragraphs */
-  --text-body: 1rem;           /* 16px — default body */
-  --text-sm: 0.875rem;         /* 14px — small */
-  --text-xs: 0.75rem;          /* 12px — micro labels */
+  --text-display: 5.75rem;
+  --text-h1: 2rem;
+  --text-h2: 1.5rem;
+  --text-h3: 1.25rem;
+  --text-h4: 1.25rem;
+  --text-body-lg: 1.125rem;
+  --text-body: 1rem;
+  --text-sm: 0.875rem;
+  --text-xs: 0.75rem;
 
-  /* Weights */
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  /* Line heights */
-  --leading-tight: 1.10;       /* display headlines */
+  --leading-tight: 1.10;
   --leading-snug: 1.25;
   --leading-normal: 1.55;
   --leading-relaxed: 1.70;
 
-  /* Letter spacing — tight for display, wide for mono labels */
-  --tracking-tight: -0.02em;
+  --tracking-tight: -0.01em;
   --tracking-normal: 0;
   --tracking-wide: 0.04em;
   --tracking-wider: 0.08em;
-  --tracking-widest: 0.14em;   /* mono labels (uppercase) */
+  --tracking-widest: 0.14em;
 
   /* ============================================
      SPACING
      ============================================ */
 
-  --space-section: 8rem;       /* 128px — between sections (larger for breathing room) */
-  --space-component: 3rem;     /* 48px */
-  --space-element: 1.25rem;    /* 20px */
+  --space-section: 8rem;
+  --space-component: 3rem;
+  --space-element: 1.25rem;
   --space-xs: 0.375rem;
   --space-sm: 0.625rem;
   --space-md: 1rem;
@@ -117,23 +111,23 @@
      LAYOUT
      ============================================ */
 
-  --container-max: 1200px;
+  --container-max: 1440px;
   --container-narrow: 720px;
   --container-wide: 1360px;
 
   /* ============================================
-     RADIUS — slightly softer than Severance but still geometric
+     RADIUS
      ============================================ */
 
   --radius-none: 0;
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 10px;
-  --radius-xl: 16px;
+  --radius-sm: 8px;
+  --radius-md: 20px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
   --radius-full: 9999px;
 
   /* ============================================
-     SHADOWS — restrained, allow violet glow on accent surfaces
+     SHADOWS
      ============================================ */
 
   --shadow-none: none;
@@ -141,8 +135,12 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
   --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.45);
   --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.03);
-  --shadow-glow: 0 0 0 1px rgba(124, 58, 237, 0.45),
-                 0 8px 24px -4px rgba(124, 58, 237, 0.40);
+  --shadow-glow: 0 0 0 1px rgba(47, 119, 234, 0.45),
+                 0 8px 24px -4px rgba(47, 119, 234, 0.30);
+  /* Ring-shadow — neutral on #262626 elevated surfaces */
+  --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --shadow-card-hover: 0 4px 20px -4px rgba(0, 0, 0, 0.60),
+                       0 0 0 1px rgba(255, 255, 255, 0.09);
 
   /* ============================================
      ANIMATION
@@ -153,7 +151,7 @@
   --duration-base: 200ms;
   --duration-slow: 300ms;
   --ease-linear: linear;
-  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 
   /* ============================================
@@ -170,13 +168,12 @@
      OVERLAYS
      ============================================ */
 
-  --overlay-light: rgba(124, 58, 237, 0.06);
+  --overlay-light: rgba(47, 119, 234, 0.06);
   --overlay-dim: rgba(0, 0, 0, 0.60);
 }
 
 /* ============================================
-   LIGHT MODE — polished alternate, not a downgrade
-   Deeper violet (AAA on white). Same component API.
+   LIGHT MODE — teal system, polished alternate
    ============================================ */
 [data-theme="light"] {
   --color-bg-primary: #FAFAFC;
@@ -193,18 +190,17 @@
   --color-text-disabled: #C5C5CE;
   --color-text-on-accent: #FFFFFF;
 
-  /* Deeper violet so contrast >= AAA on white surfaces */
-  --color-accent: #6D28D9;
-  --color-accent-text: #6D28D9;           /* same — already passes AAA on white */
-  --color-accent-hover: #5B21B6;
-  --color-accent-muted: #7C3AED;
-  --color-accent-subtle: rgba(109, 40, 217, 0.08);
-  --color-accent-glow: rgba(109, 40, 217, 0.20);
+  --color-accent: #0F766E;
+  --color-accent-text: #0F766E;
+  --color-accent-hover: #0D6B64;
+  --color-accent-muted: #0D9488;
+  --color-accent-subtle: rgba(15, 118, 110, 0.08);
+  --color-accent-glow: rgba(15, 118, 110, 0.20);
 
   --color-border: #E1E1E8;
   --color-border-hover: #C8C8D1;
   --color-border-strong: #A8A8B3;
-  --color-border-accent: #6D28D9;
+  --color-border-accent: #0F766E;
 
   --color-success: #047857;
   --color-success-muted: rgba(4, 120, 87, 0.08);
@@ -213,16 +209,19 @@
   --color-warning: #B45309;
   --color-warning-muted: rgba(180, 83, 9, 0.08);
 
-  --gradient-accent: linear-gradient(135deg, #6D28D9 0%, #7C3AED 100%);
-  --gradient-subtle: radial-gradient(ellipse at top, rgba(109, 40, 217, 0.06), transparent 70%);
+  --gradient-accent: linear-gradient(135deg, #0F766E 0%, #0D9488 100%);
+  --gradient-subtle: radial-gradient(ellipse at top, rgba(15, 118, 110, 0.06), transparent 70%);
 
   --shadow-sm: 0 1px 2px rgba(15, 15, 25, 0.06);
   --shadow-md: 0 4px 12px rgba(15, 15, 25, 0.08);
   --shadow-lg: 0 12px 32px rgba(15, 15, 25, 0.10);
   --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 1);
-  --shadow-glow: 0 0 0 1px rgba(109, 40, 217, 0.20),
-                 0 8px 24px -4px rgba(109, 40, 217, 0.20);
+  --shadow-glow: 0 0 0 1px rgba(15, 118, 110, 0.25),
+                 0 8px 24px -4px rgba(15, 118, 110, 0.20);
+  --shadow-card: 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 2px 8px -2px rgba(0, 0, 0, 0.08),
+                       0 0 0 1px rgba(0, 0, 0, 0.08);
 
-  --overlay-light: rgba(109, 40, 217, 0.05);
+  --overlay-light: rgba(15, 118, 110, 0.05);
   --overlay-dim: rgba(15, 15, 25, 0.60);
 }

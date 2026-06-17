@@ -37,6 +37,62 @@
   100% { transform: translate3d(-50%, 0, 0); }
 }
 
+/* Hero entrance — staggered per element via animation-delay */
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-animate {
+  opacity: 0;
+  animation: heroIn 600ms var(--ease-out) both;
+}
+
+/* Gentle float for decorative elements */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: floatY 4s ease-in-out infinite;
+}
+
+/* Pulsing teal glow for the product visual */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 1px rgba(13, 148, 136, 0.30),
+                0 8px 24px -4px rgba(45, 212, 191, 0.20);
+  }
+  50% {
+    box-shadow: 0 0 0 1px rgba(13, 148, 136, 0.55),
+                0 12px 40px -4px rgba(45, 212, 191, 0.35);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-animate {
+    animation: none;
+    opacity: 1;
+  }
+  .animate-float {
+    animation: none;
+  }
+  .animate-glow-pulse {
+    animation: none;
+  }
+}
+
 .animate-marquee-x {
   animation: marqueeX 40s linear infinite;
   will-change: transform;
@@ -53,6 +109,35 @@
 
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee-x { animation: none; }
+}
+
+/* ============================================
+   FADE-UP STAGGER UTILITY
+   Used by useFadeInOnView hook for scroll-triggered entrances.
+   Set on a wrapper or directly on items; toggle data-visible="true" to reveal.
+   Stagger via inline `style={{ transitionDelay }}` on each item.
+   ============================================ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 600ms var(--ease-out),
+    transform 600ms var(--ease-out);
+  will-change: opacity, transform;
+}
+
+.fade-up[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up,
+  .fade-up[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* ============================================
@@ -146,8 +231,8 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
 [tabindex]:focus-visible {
-  outline: 1px solid var(--color-text-secondary);
-  outline-offset: 2px;
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 /* ============================================
@@ -241,11 +326,14 @@ select:focus-visible,
   background-color: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  transition: border-color var(--duration-fast) var(--ease-linear);
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--duration-base) var(--ease-out),
+              box-shadow var(--duration-base) var(--ease-out);
 }
 
 .card:hover {
   border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-card-hover);
 }
 
 /* ============================================
@@ -277,7 +365,8 @@ select:focus-visible,
   font-size: var(--text-sm);
   letter-spacing: var(--tracking-wide);
   border-radius: var(--radius-sm);
-  transition: all var(--duration-fast) var(--ease-linear);
+  transition: all var(--duration-fast) var(--ease-out),
+              transform 200ms var(--ease-out);
   cursor: pointer;
   text-transform: uppercase;
 }
