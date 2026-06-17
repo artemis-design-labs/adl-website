@@ -35,20 +35,20 @@ export function ClientsSection() {
         </ul>
 
         {/* Scrollable logo row */}
-        <div className="overflow-x-auto marquee-mask" aria-hidden="true">
-          <ul className="flex w-max items-center gap-10 md:gap-16 animate-marquee-x">
+        <div className="overflow-hidden marquee-mask" aria-hidden="true">
+          <ul className="flex w-max items-center gap-5 md:gap-7 animate-marquee-x">
             {[...CLIENTS, ...CLIENTS].map((client, i) => (
               <li
                 key={`${client.name}-${i}`}
-                className="flex-shrink-0 flex items-center justify-center h-12 md:h-16 w-36 md:w-48"
+                className="flex-shrink-0 flex items-center justify-center h-16 md:h-20 w-44 md:w-52 px-6 py-4 bg-white rounded-xl"
               >
                 <Image
                   src={client.src}
                   alt=""
-                  width={192}
-                  height={64}
+                  width={200}
+                  height={80}
                   decoding="async"
-                  className="max-h-full w-auto object-contain opacity-50 hover:opacity-80 transition-opacity duration-300"
+                  className="max-h-full max-w-full w-auto h-auto object-contain"
                   unoptimized
                 />
               </li>
