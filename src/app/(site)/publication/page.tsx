@@ -1,5 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
+import type { Metadata } from 'next';
+
+// Work-in-progress page — kept in the codebase but hidden from search
+// engines (noindex) until it ships with real content.
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 const articles = [
     { id: 1, title: 'Design Trends 2024', summary: 'Explore the latest in UI/UX design for web and mobile.', image: '/images/publication/design-trends.png', link: '#' },

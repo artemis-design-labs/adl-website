@@ -1,4 +1,12 @@
-export default function HandsAIPage() {
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'My Project Inbox — project coordination UX',
+  description:
+    'Case study: a project coordination platform for engineering and networking teams — real-time tracking, smart task delegation, and adaptive progress insights.',
+};
+
+export default function MyProjectInboxPage() {
     return (
       <div className="px-6 md:px-16 lg:px-32 pt-32 pb-20">
         <div className="max-w-5xl mx-auto">

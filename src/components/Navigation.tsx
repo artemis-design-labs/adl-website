@@ -80,7 +80,7 @@ export default function Navigation() {
 
               {/* Prominent CTA */}
               <Link
-                href="/contact"
+                href="/contact#book-a-call"
                 className={cn(
                   'inline-flex items-center gap-1.5 h-10 px-5 rounded-md',
                   'bg-[var(--color-accent)] text-[var(--color-text-on-accent)]',
@@ -149,7 +149,7 @@ export default function Navigation() {
             ))}
             <li className="pt-2">
               <Link
-                href="/contact"
+                href="/contact#book-a-call"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="inline-flex w-full items-center justify-center gap-1.5 h-11 px-5 rounded-md bg-[var(--color-accent)] text-[var(--color-text-on-accent)] font-medium text-sm hover:bg-[var(--color-accent-hover)] transition-colors"
               >

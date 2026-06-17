@@ -62,7 +62,15 @@ const ORG_JSON_LD = {
   url: SITE_URL,
   logo: `${SITE_URL}/images/logos/adl-logo-1.png`,
   email: 'itadmin@artemisdesignlabs.com',
-  sameAs: [],
+  sameAs: [
+    'https://www.linkedin.com/company/artemis-design-labs',
+    'https://github.com/artemis-design-labs',
+  ],
+  founder: {
+    '@type': 'Person',
+    name: 'Pritish Sai',
+    url: 'https://www.linkedin.com/in/pritishsai',
+  },
   description: DESCRIPTION,
 };
 

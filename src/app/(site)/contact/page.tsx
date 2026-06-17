@@ -1,6 +1,7 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import Script from 'next/script';
 import { Turnstile } from '@/components/atoms/Turnstile';
 import { cn } from '@/lib/cn';
 
@@ -8,6 +9,7 @@ const TURNSTILE_REQUIRED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 const ADMIN_EMAIL = 'itadmin@artemisdesignlabs.com';
 
 const SERVICES = [
+  { value: 'audit',      label: 'Free design-to-code audit' },
   { value: 'creation',   label: 'Design System Creation — $15-25K' },
   { value: 'maintenance',label: 'Design System Maintenance — $4-6K / mo' },
   { value: 'handoff',    label: 'Design-to-Code Handoff — $8-15K' },
@@ -25,6 +27,17 @@ export default function ContactPage() {
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const [isAudit, setIsAudit] = useState(false);
+
+  // Honor the "Get a Free Audit" CTAs (/contact?type=audit): preselect the
+  // audit option and acknowledge the request so the intent isn't dropped.
+  useEffect(() => {
+    const type = new URLSearchParams(window.location.search).get('type');
+    if (type === 'audit') {
+      setIsAudit(true);
+      setFormData((prev) => ({ ...prev, service: 'audit' }));
+    }
+  }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -86,6 +99,32 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* Book a call — Calendly inline scheduler */}
+      <section id="book-a-call" className="pb-4 scroll-mt-24">
+        <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
+          <div className="max-w-2xl mb-6">
+            <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-3">
+              › book a call
+            </span>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-[-0.025em] text-[var(--color-text-primary)] leading-tight">
+              Grab a 30-minute slot.
+            </h2>
+            <p className="mt-3 text-base text-[var(--color-text-secondary)] leading-relaxed">
+              Pick a time that works — no form required. Prefer to write first? Scroll down and send a message instead.
+            </p>
+          </div>
+          <div
+            className="calendly-inline-widget rounded-2xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-elevated)]"
+            data-url="https://calendly.com/itadmin-artemisdesignlabs/30min?hide_gdpr_banner=1&background_color=1b1b26&text_color=ededf0&primary_color=7c3aed"
+            style={{ minWidth: '320px', height: '700px' }}
+          />
+        </div>
+      </section>
+      <Script
+        src="https://assets.calendly.com/assets/external/widget.js"
+        strategy="afterInteractive"
+      />
 
       {/* Form section */}
       <section className="py-16 md:py-20">
@@ -159,6 +198,13 @@ export default function ContactPage() {
                   )}
                   noValidate
                 >
+                  {isAudit && (
+                    <div className="p-4 rounded-md border border-[var(--color-accent)]/40 bg-[var(--color-accent-subtle)] text-sm text-[var(--color-text-primary)]">
+                      <strong className="font-medium text-[var(--color-accent)]">Free design-to-code audit.</strong>{' '}
+                      Tell us about your current setup below — we&apos;ll send your audit within 48 hours, yours to keep either way.
+                    </div>
+                  )}
+
                   {status === 'error' && (
                     <div
                       role="alert"
