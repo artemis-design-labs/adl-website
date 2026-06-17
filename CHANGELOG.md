@@ -7,6 +7,52 @@ Tags follow semver — see "Releases" on GitHub for the immutable checkpoints.
 
 ---
 
+## [v1.3.0] — 2026-06-17 — Customer-acquisition pass, Ramotion redesign, typography system
+
+Two threads landed together: a third-party customer-acquisition audit with fixes shipped across discoverability/trust/conversion, and a homepage redesign (the "Ramotion" design language, authored by Electromau5) that this session merged and then polished with a real type scale. Copy was preserved throughout the polish — only structure and font sizing changed.
+
+### Discoverability — the #1 fix (site was invisible to Google)
+- **Bot Fight Mode was ON** (`bot_management.fight_mode: true`) and 403-ing every crawler. `site:artemisdesignlabs.com` returned **zero** indexed pages. Disabled `fight_mode` via the Cloudflare API → homepage + sitemap now return **200** to Googlebot. (This is distinct from the v1.2.0 `security_level`/`browser_check` tuning; the free Bot Fight Mode toggle was separately on.)
+- **Sitemap cleaned** (`sitemap.ts`): removed the broken `/nbcu`, dropped the 3 unfinished stub routes, added the real `/my-project-inbox`. Now lists 9 finished pages.
+- **Google Search Console**: domain property verified, `sitemap.xml` submitted (Success, 9 URLs), homepage indexing requested.
+- **Cloudflare Polish** (`lossy`) enabled on the zone for image auto-optimization.
+
+### Content / SEO hygiene
+- **Removed `/nbcu`** — it was a verbatim duplicate of the HANDS AI case study (wrong client/personas/images) sitting in the sitemap.
+- **`noindex` on the 3 stub pages** (`/publication`, `/marketplace`, `/design-system-license`) — server `robots` metadata on the static one, a passthrough `layout.tsx` on the two client-component ones — and dropped them from the sitemap. Code kept.
+- **Unique metadata** on case studies (`/hands-ai`, `/insight`, `/my-project-inbox`) instead of inheriting the homepage default; renamed the mislabeled `HandsAIPage` function on `/my-project-inbox`.
+- **`/insight`** intro paragraph was printed twice — de-duplicated.
+
+### Trust
+- **Named founder section** on `/about` ("who's behind it") — Pritish Sai Kannan, title, a bio sourced verbatim from pritishsai.com, plus personal + company LinkedIn links. The page was previously 100% anonymous ("we"/"founders").
+- **Socials wired**: footer LinkedIn + GitHub icon links; JSON-LD `Organization.sameAs` (company LinkedIn + GitHub org) + a `founder` Person — was an empty `sameAs: []`.
+- Client logo wall confirmed as real/permissioned by the owner — kept as-is.
+
+### Conversion
+- **Free-audit CTA now works**: `/contact?type=audit` pre-selects an audit service option and shows an acknowledgement banner (the param was silently dropped before).
+- **Calendly scheduler** embedded inline on `/contact` (`calendly.com/itadmin-artemisdesignlabs/30min`, themed to the palette) with a `#book-a-call` anchor; the "Book a Call" CTAs (nav, hero, CTA, work, about) deep-link to it. CTASection offers all three paths (book a call / free audit / email).
+- **Contact email unified** to `itadmin@` everywhere (the redesign had introduced `hello@` in one spot; `hello@` is not yet provisioned — the domain is on Google Workspace, so a free alias is the intended route, not Cloudflare Email Routing which would break the MX).
+
+### Security / infrastructure / repo
+- **`/admin`** is gated by **Cloudflare Access** (302 → Access login). The session added a fail-closed Basic Auth middleware as a backstop, then **removed it** once Access was confirmed — it was redundant and double-prompted; `ADMIN_BASIC_AUTH` secret-sync and the GitHub/Worker secrets were deleted too.
+- **Deploy token rotated**: the original "Edit Cloudflare Workers" token was deleted mid-session (breaking CI); replaced with one combined token (Workers deploy + Zone Settings + Bot Management + Firewall edit) stored in both the GitHub `CLOUDFLARE_API_TOKEN` secret and `.env`.
+- **Stray `zoho-verification` TXT record** deleted from DNS (left over from an abandoned Zoho setup).
+- **Repo set private** (`artemis-design-labs/adl-website`).
+
+### Ramotion redesign (homepage — by Electromau5)
+- New `tokens.css` — **dark-first "Ramotion" language, electric-blue accent `#2f77ea`** (was violet `#7C3AED`).
+- New homepage composition: `Hero` (with a "WHAT WE BUILD" panel), `ProblemSection` ("Two Tracks. One Mission."), `OperationalMoatSection`, `CaseStudySection`, `TestimonialsSection` (dedicated), `ClientsSection`, `CTASection`. New components also added: `TwoTracksSection`, `WhoThisIsForSection`, `StatBarSection`, `HeroProductVisual`, and a `useFadeInOnView` scroll-reveal hook.
+
+### Typography system + structural polish (this session, on top of the redesign)
+- **Reset the type scale** in `tokens.css` to a **17px body on a ~1.25 (major-third) ratio** with real `h1→h4` hierarchy. The redesign's scale jumped `--text-display: 92px` straight to `--text-h1: 32px` (nothing between) and had `h3 == h4`. Components now route through it via `text-[length:var(--text-h2)]` etc.
+- **Hero**: bigger eyebrow/body/CTAs; the **"WHAT WE BUILD" panel** is now a checkmark capabilities list (was rows with a right-arrow `→` that looked clickable but weren't — the panel is `aria-hidden` decorative).
+- **ProblemSection** ("Two Tracks"): icon now sits **inline with the title** (was a block stacked above), all text up-sized.
+- **`/work`**: the metric pill and "View case study" were `inline-flex` and sat side-by-side with no gap — made block-level so they stack; project title reduced from `text-3xl/4xl` (== the section heading) to `text-2xl/3xl`.
+- **Logo strip**: enlarged and de-jankified. The source logo PNGs were **16,000–21,000 px wide (up to 327 megapixels)** rendered at 64px — resized to fit 440×150 with Pillow, cutting the strip from **~6.9MB to ~47KB (99%)**; added `decoding="async"`.
+- **Pricing**: bigger table headers, more row padding, larger FAQ question/answer text (info-density pass; copy unchanged).
+
+---
+
 ## [v1.2.0] — 2026-06-03 — Sub-pages redesigned, full site under one shell, WCAG AA pass
 
 Same day as v1.1.0, but a noticeably bigger user-visible change: every public page now lives inside a single shared layout and uses the same dark/violet design system. The homepage looked great in v1.1.0 and the rest of the site didn't — that's fixed here. Also closes out the spam-protection, email, and authentication wiring that was stubbed in v1.1.0.

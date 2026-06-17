@@ -29,9 +29,11 @@ Marketing site for **Artemis Design Labs (ADL)** — a B2B design systems agency
 | `--color-bg-primary` | `#0A0A0F` | `#FAFAFC` |
 | `--color-bg-elevated` | `#1B1B26` | `#FFFFFF` |
 | `--color-text-primary` | `#EDEDF0` | `#0A0A0F` |
-| `--color-accent` | `#7C3AED` (electric violet) | `#6D28D9` (deeper violet, AAA on white) |
+| `--color-accent` | `#2F77EA` (Ramotion electric blue) | `#0F766E` (teal) |
 | `--font-sans` | Geist Sans | — |
 | `--font-mono` | Geist Mono | — |
+
+> **As of v1.3.0** the homepage runs the "Ramotion" design language (dark-first, electric-blue accent), and `tokens.css` carries a 17px-body, ~1.25 modular **type scale** (`--text-display/h1/h2/h3/h4/body-lg/body/sm/xs`) — reference sizes in JSX via `text-[length:var(--text-h2)]`. The older violet accent is gone; everything resolves through `tokens.css`. Sub-pages still use the mono-eyebrow + Geist-display patterns below.
 
 Key UI patterns:
 - **Mono eyebrow** — `font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)]`, prefixed with `›`. Example: `› by the numbers`.
@@ -78,8 +80,8 @@ src/
 └── styles/tokens.css             # All design tokens (root + [data-theme="light"])
 ```
 
-Homepage composition (`src/app/page.tsx`):
-1. `<Navigation />` 2. `<Hero />` 3. `<ProblemSection />` 4. `<AboutUsSection />` 5. `<MetricsTestimonialsSection />` 6. `<ClientsSection />` 7. `<CTASection />` 8. `<Footer />`
+Homepage composition (`src/app/(site)/page.tsx`, v1.3.0 Ramotion redesign):
+`<Hero />` → `<ProblemSection />` (Two Tracks) → `<OperationalMoatSection />` → `<CaseStudySection />` → `<TestimonialsSection />` → `<ClientsSection />` → `<CTASection />`. Navigation + Footer come from the `(site)` layout. The old `AboutUsSection` / `MetricsTestimonialsSection` are off the homepage; `TwoTracksSection` / `WhoThisIsForSection` / `StatBarSection` / `HeroProductVisual` exist but aren't all wired in yet.
 
 ## Conventions
 
@@ -108,7 +110,7 @@ RESEND_API_KEY=re_...
 
 ## Security notes (read before touching auth)
 
-- **`/admin` has NO authentication right now.** Anyone with the URL sees every contact-form submission. Backlog: put it behind Cloudflare Access (Workers & Pages → adl-website → Access policy on `/admin/*`).
+- **`/admin` is behind Cloudflare Access** (302 → Access login; verified v1.3.0). An app-level Basic Auth backstop was added then removed as redundant. It lists contact-form submissions, so keep the Access policy restricted to your team.
 - The contact endpoint has no captcha. Backlog: Cloudflare Turnstile (site key public, secret as Worker secret).
 - Credentials from earlier deploy sessions may exist in chat transcripts — see CHANGELOG `[v1.0.0]` → "Known follow-ups" before rotating.
 
@@ -123,7 +125,7 @@ RESEND_API_KEY=re_...
 
 ## Things NOT to revive
 
-- The "Severance corporate minimalism" palette (sage `#7D8471` accent, etc.) — replaced by violet.
+- The "Severance corporate minimalism" palette (sage `#7D8471`) and the **violet `#7C3AED`** accent that replaced it — both superseded by the v1.3.0 Ramotion **electric-blue `#2F77EA`** system in `tokens.css`.
 - `Prisma` / `@prisma/client` — incompatible with Workers runtime; we use the native `mongodb` driver.
 - `ContentVersionContext` / `ContentSwitcher` / V1+V2 content blocks — deleted Jun 3 2026 with their `test-content-*` branches.
 - `vercel.json` / `.vercel/` — we're on Cloudflare now.

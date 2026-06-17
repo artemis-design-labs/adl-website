@@ -243,9 +243,9 @@ export default function PricingPage() {
             <table className="w-full text-left border-separate border-spacing-y-2 min-w-[640px]">
               <thead>
                 <tr>
-                  <th className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] pb-3 px-5">option</th>
-                  <th className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] pb-3 px-5">price</th>
-                  <th className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] pb-3 px-5">what you get</th>
+                  <th className="font-[var(--font-mono)] text-[length:var(--text-xs)] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] pb-4 px-5">option</th>
+                  <th className="font-[var(--font-mono)] text-[length:var(--text-xs)] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] pb-4 px-5">price</th>
+                  <th className="font-[var(--font-mono)] text-[length:var(--text-xs)] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] pb-4 px-5">what you get</th>
                 </tr>
               </thead>
               <tbody>
@@ -261,7 +261,7 @@ export default function PricingPage() {
                   >
                     <td
                       className={cn(
-                        'rounded-l-lg px-5 py-4 text-base align-middle border-l',
+                        'rounded-l-lg px-5 py-5 text-base align-middle border-l',
                         row.highlight
                           ? 'font-semibold text-[var(--color-text-primary)] border-[var(--color-accent)]'
                           : 'text-[var(--color-text-primary)] border-[var(--color-border)]'
@@ -271,7 +271,7 @@ export default function PricingPage() {
                     </td>
                     <td
                       className={cn(
-                        'px-5 py-4 text-base align-middle border-t border-b',
+                        'px-5 py-5 text-base align-middle border-t border-b',
                         row.highlight
                           ? 'font-semibold text-[var(--color-accent)] border-[var(--color-accent)]'
                           : 'text-[var(--color-text-secondary)] border-[var(--color-border)]'
@@ -316,7 +316,7 @@ export default function PricingPage() {
                 className="group p-6 lg:p-7 rounded-xl bg-[var(--color-bg-elevated)] border border-[var(--color-border)] open:border-[var(--color-accent)] transition-colors"
               >
                 <summary className="flex items-start justify-between gap-4 cursor-pointer list-none">
-                  <h3 className="text-base md:text-lg font-medium text-[var(--color-text-primary)] leading-snug">
+                  <h3 className="text-[length:var(--text-body-lg)] font-medium text-[var(--color-text-primary)] leading-snug">
                     {faq.q}
                   </h3>
                   <span className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center border border-[var(--color-border)] group-open:bg-[var(--color-accent)] group-open:border-[var(--color-accent)] group-open:text-[var(--color-text-on-accent)] text-[var(--color-text-tertiary)] transition-colors">
@@ -326,7 +326,7 @@ export default function PricingPage() {
                     </svg>
                   </span>
                 </summary>
-                <p className="mt-4 text-sm md:text-base text-[var(--color-text-secondary)] leading-relaxed">
+                <p className="mt-4 text-[length:var(--text-body)] text-[var(--color-text-secondary)] leading-relaxed">
                   {faq.a}
                 </p>
               </details>
