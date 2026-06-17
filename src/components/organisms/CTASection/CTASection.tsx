@@ -56,11 +56,23 @@ export function CTASection() {
           >
             Book a free audit
           </Link>
+          <Link
+            href="/contact#book-a-call"
+            className={cn(
+              'inline-flex items-center justify-center gap-2 h-[45px] px-7 rounded-[var(--radius-md)]',
+              'border border-[var(--color-border)] text-[var(--color-text-primary)]',
+              'font-semibold text-[14px]',
+              'hover:border-[var(--color-accent)] hover:text-[var(--color-accent-text)] transition-all duration-150',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]'
+            )}
+          >
+            Book a call
+          </Link>
           <a
-            href="mailto:hello@artemisdesignlabs.com"
+            href="mailto:itadmin@artemisdesignlabs.com"
             className="text-[14px] text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] transition-colors duration-150"
           >
-            hello@artemisdesignlabs.com
+            itadmin@artemisdesignlabs.com
           </a>
         </div>
 
