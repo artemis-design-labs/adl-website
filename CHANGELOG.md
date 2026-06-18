@@ -7,6 +7,13 @@ Tags follow semver — see "Releases" on GitHub for the immutable checkpoints.
 
 ---
 
+## [v1.3.2] — 2026-06-18 — Client logo strip enlarged
+
+- **Client logos now render ~3–4× bigger** on the homepage `ClientsSection` marquee. Root cause was the source PNGs, not the CSS: all 8 logos had **opaque white backgrounds** with the actual mark filling only ~25–40% of a 219×150 frame (AT&T's globe rendered ~16px tall in a 64px cell). Made every background **transparent** and trimmed each to its content bbox (`public/images/*-logo.png` — e.g. AT&T 219×150 → 80×38, NBCU → 148×18), then render them inside **uniform white rounded chips** (`bg-white rounded-xl`, even padding) so multi-color marks stay crisp at full brand color on the dark `#141414` strip.
+- Dropped the `opacity-50` wash (chips are intentional at full strength), enlarged cells to `h-16 md:h-20 w-44 md:w-52`, tightened the gap. Originals recoverable from git history (commit before `d0902ad`).
+
+---
+
 ## [v1.3.1] — 2026-06-17 — Public contact email → hello@
 
 - **Public-facing contact email swapped to `hello@artemisdesignlabs.com`** — Footer, `CTASection` mailto, `/contact` "prefer email" box, and the `layout.tsx` JSON-LD `Organization.email`. Copy-reference docs (`README`, `Website-Content.md`) updated to match.
