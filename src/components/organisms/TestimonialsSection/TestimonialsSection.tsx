@@ -28,45 +28,53 @@ export function TestimonialsSection() {
   const { ref, dataVisible } = useFadeInOnView(0.1);
 
   return (
-    <section ref={ref} className="py-16 md:py-20 bg-[var(--color-bg-elevated)]">
+    /*
+     * Interactivism pattern: 3-col dark cards, each opened by a large accent
+     * quotation mark (blue instead of yellow). Quote body fills the card,
+     * attribution sits at the very bottom separated by a thin rule.
+     * Blink UX tokens: bg-elevated section, bg-primary cards, radius-md, accent color.
+     */
+    <section ref={ref} className="py-10 bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)]">
       <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-8">
 
-        <h2
-          className={cn(
-            'text-[2rem] font-semibold leading-[1.2]',
-            'tracking-[-0.01em] text-[var(--color-text-primary)] mb-12 fade-up'
-          )}
+        <p
+          className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--color-accent-text)] mb-10 fade-up"
           data-visible={dataVisible}
         >
-          From Our Clients
-        </h2>
+          WHAT FOUNDERS SAY
+        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {TESTIMONIALS.map((t, i) => (
             <article
               key={i}
               className={cn(
                 'bg-[var(--color-bg-primary)] border border-[var(--color-border)]',
-                'rounded-[var(--radius-md)] overflow-hidden p-6',
-                'shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)]',
-                'transition-shadow duration-200 fade-up'
+                'rounded-[var(--radius-md)] p-6 flex flex-col',
+                'fade-up'
               )}
               data-visible={dataVisible}
-              style={{ transitionDelay: `${120 + i * 100}ms` }}
+              style={{ transitionDelay: `${60 + i * 80}ms` }}
             >
-              {/* Creative Navy accent bar — 48px × 3px at card top-left */}
-              <div
-                className="w-12 h-[3px] bg-[var(--color-accent)] mb-5"
+              {/* Interactivism: large accent quotation mark as card opener */}
+              <span
+                className="text-[3.5rem] font-bold leading-none text-[var(--color-accent)] mb-3 select-none"
                 aria-hidden="true"
-              />
+              >
+                &ldquo;
+              </span>
 
-              <blockquote className="text-[14px] text-[var(--color-text-primary)] leading-[1.65] mb-6 flex-1">
-                &ldquo;{t.quote}&rdquo;
+              {/* Quote body */}
+              <blockquote className="text-[14px] text-[var(--color-text-primary)] leading-[1.7] flex-1 mb-6">
+                {t.quote}
               </blockquote>
 
-              <p className="font-[var(--font-mono)] text-[12px] text-[var(--color-text-muted)]">
-                {t.author} · {t.company}
-              </p>
+              {/* Thin rule + attribution */}
+              <div className="border-t border-[var(--color-border)] pt-4">
+                <p className="font-[var(--font-mono)] text-[11px] text-[var(--color-text-tertiary)] uppercase tracking-[0.08em] leading-[1.5]">
+                  {t.author}<br />{t.company}
+                </p>
+              </div>
             </article>
           ))}
         </div>

@@ -6,19 +6,24 @@ import { useFadeInOnView } from '@/hooks/useFadeInOnView';
 
 const PROJECTS = [
   {
-    category: 'Healthcare SaaS · Design System Build',
+    eyebrow: 'HEALTHCARE SAAS · DESIGN SYSTEM BUILD',
     title: 'HANDS AI — Production Design System',
+    description:
+      'Built a complete WIC case management platform powered by a custom AI agent. Production-ready React in three weeks — the first PR passed senior-engineer review on submission.',
+    metric: '40%',
+    metricLabel: 'Faster case processing',
     href: '/work/hands-ai',
+    colorBlock: 'left',
   },
   {
-    category: 'Enterprise Media · Component Library',
+    eyebrow: 'ENTERPRISE MEDIA · COMPONENT LIBRARY',
     title: 'NBCU — Unified Component Architecture',
+    description:
+      'Eliminated handoff chaos across four separate product teams by building a single token-synced component library. One source of truth, every surface.',
+    metric: '94%',
+    metricLabel: 'First-PR approval rate',
     href: '/work/nbcu',
-  },
-  {
-    category: 'Industrial B2B · Token Architecture',
-    title: 'Qualitrol — Design Token System',
-    href: '/work',
+    colorBlock: 'right',
   },
 ];
 
@@ -26,26 +31,43 @@ export function CaseStudySection() {
   const { ref, dataVisible } = useFadeInOnView(0.05);
 
   return (
+    /*
+     * Interactivism pattern: each case study spans the full container width as an
+     * alternating two-panel row — one side is a solid accent-tinted block,
+     * the other holds the content. Rows stack with a border-t divider.
+     * No image placeholders — the color block IS the visual anchor.
+     * Blink UX tokens: bg-elevated section, accent metric, radius-md block.
+     */
     <section
       ref={ref}
-      className="py-16 md:py-20 bg-[var(--color-bg-primary)]"
+      className="bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)]"
     >
-      <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-8">
+      <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-8 pt-10">
 
-        {/* Header row */}
-        <div className="flex items-baseline justify-between mb-12">
-          <h2
-            className={cn(
-              'text-[2rem] font-semibold leading-[1.2]',
-              'tracking-[-0.01em] text-[var(--color-text-primary)] fade-up'
-            )}
-            data-visible={dataVisible}
-          >
-            Selected Work
-          </h2>
+        {/* Section header */}
+        <div className="flex items-end justify-between mb-12">
+          <div>
+            <p
+              className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--color-accent-text)] mb-5 fade-up"
+              data-visible={dataVisible}
+            >
+              SELECTED WORK
+            </p>
+            <h2
+              className={cn(
+                'text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-[1.02] tracking-[-0.04em]',
+                'text-[var(--color-text-primary)] fade-up'
+              )}
+              data-visible={dataVisible}
+              style={{ transitionDelay: '60ms' }}
+            >
+              Work that closes<br />
+              <span className="text-[var(--color-accent-text)]">enterprise deals.</span>
+            </h2>
+          </div>
           <Link
             href="/work"
-            className="font-semibold text-[14px] text-[var(--color-accent-text)] hover:text-[var(--color-accent-hover)] transition-colors duration-150 fade-up"
+            className="font-bold text-[13px] text-[var(--color-accent-text)] hover:text-[var(--color-accent-hover)] transition-colors duration-150 flex-shrink-0 ml-8 pb-1 fade-up"
             data-visible={dataVisible}
             style={{ transitionDelay: '80ms' }}
           >
@@ -53,46 +75,69 @@ export function CaseStudySection() {
           </Link>
         </div>
 
-        {/* 3-up cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {PROJECTS.map((project, i) => (
-            <article
-              key={i}
+      </div>
+
+      {/* Interactivism: full-width alternating rows — no container padding so color
+          block bleeds to the section edge on desktop */}
+      <div className="divide-y divide-[var(--color-border)] border-t border-[var(--color-border)]">
+        {PROJECTS.map((project, i) => (
+          <article
+            key={i}
+            className={cn(
+              'grid grid-cols-1 lg:grid-cols-[2fr_3fr] min-h-[320px] fade-up',
+              project.colorBlock === 'right' && 'lg:grid-cols-[3fr_2fr]'
+            )}
+            data-visible={dataVisible}
+            style={{ transitionDelay: `${80 + i * 100}ms` }}
+          >
+            {/* Color block — Interactivism's visual anchor (accent-subtle bg) */}
+            <div
               className={cn(
-                'bg-[var(--color-bg-secondary)] rounded-[var(--radius-md)] overflow-hidden',
-                'border border-[var(--color-border)]',
-                'shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)]',
-                'hover:border-[var(--color-accent)] transition-all duration-200 group',
-                'fade-up'
+                'bg-[var(--color-accent-subtle)] min-h-[180px] lg:min-h-0',
+                project.colorBlock === 'right' && 'lg:order-2'
               )}
-              data-visible={dataVisible}
-              style={{ transitionDelay: `${120 + i * 100}ms` }}
+              aria-hidden="true"
+            />
+
+            {/* Content panel */}
+            <div
+              className={cn(
+                'px-6 lg:px-12 py-10 flex flex-col justify-center space-y-5',
+                'max-w-[var(--container-max)] mx-auto w-full',
+                project.colorBlock === 'right' && 'lg:order-1'
+              )}
             >
-              {/* Accent top bar — key Creative Navy detail */}
-              <div className="h-[3px] w-full bg-[var(--color-accent)]" aria-hidden="true" />
+              <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--color-accent-text)]">
+                {project.eyebrow}
+              </p>
 
-              {/* Image placeholder */}
-              <div className="h-[200px] bg-[var(--color-bg-tertiary)] border-b border-[var(--color-border)]" />
+              <h3 className="text-[clamp(1.5rem,3vw,2.25rem)] font-bold leading-[1.1] tracking-[-0.03em] text-[var(--color-text-primary)]">
+                {project.title}
+              </h3>
 
-              {/* Card body */}
-              <div className="p-5">
-                <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.12em] text-[var(--color-accent-text)] mb-2">
-                  {project.category}
-                </p>
-                <h3 className="text-[15px] font-semibold text-[var(--color-text-primary)] leading-[1.3] mb-5">
-                  {project.title}
-                </h3>
-                <Link
-                  href={project.href}
-                  className="font-semibold text-[13px] text-[var(--color-accent-text)] hover:text-[var(--color-accent-hover)] transition-colors duration-150"
-                >
-                  View project →
-                </Link>
+              <p className="text-[15px] text-[var(--color-text-secondary)] leading-[1.6] max-w-[480px]">
+                {project.description}
+              </p>
+
+              {/* Large metric — kept from previous implementation */}
+              <div className="flex items-baseline gap-3">
+                <span className="text-[3rem] font-bold text-[var(--color-accent)] leading-none tracking-[-0.03em]">
+                  {project.metric}
+                </span>
+                <span className="text-[14px] text-[var(--color-text-secondary)]">
+                  {project.metricLabel}
+                </span>
               </div>
-            </article>
-          ))}
-        </div>
 
+              <Link
+                href={project.href}
+                className="inline-block font-bold text-[13px] text-[var(--color-accent-text)] hover:text-[var(--color-accent-hover)] transition-colors duration-150"
+              >
+                Read the story →
+              </Link>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   );

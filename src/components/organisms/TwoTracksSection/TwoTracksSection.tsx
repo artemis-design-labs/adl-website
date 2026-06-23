@@ -5,6 +5,7 @@ import { cn } from '@/lib/cn';
 import { useFadeInOnView } from '@/hooks/useFadeInOnView';
 
 type Track = {
+  number: string;
   eyebrow: string;
   title: string;
   jtbd: string;
@@ -17,8 +18,9 @@ type Track = {
 
 const TRACKS: { build: Track; operate: Track } = {
   build: {
-    eyebrow: 'build track',
-    title: 'Install the system. Run it yourself.',
+    number: '01',
+    eyebrow: 'Build Track',
+    title: 'Install the system.\nRun it yourself.',
     jtbd:
       'For engineering teams that want to own UI infrastructure but can\'t build the governance layer from scratch.',
     whatAdlDoes: [
@@ -38,8 +40,9 @@ const TRACKS: { build: Track; operate: Track } = {
     ctaHref: '/contact?type=audit',
   },
   operate: {
-    eyebrow: 'operate track',
-    title: 'Outsource the function. We run it ongoing.',
+    number: '02',
+    eyebrow: 'Operate Track',
+    title: 'Outsource the function.\nWe run it ongoing.',
     jtbd:
       'For engineering teams scaling faster than internal capacity can support UI governance.',
     whatAdlDoes: [
@@ -64,134 +67,185 @@ export function TwoTracksSection() {
   const { ref, dataVisible } = useFadeInOnView(0.1);
 
   return (
+    /*
+     * Interactivism / Blink UX pattern — Services Section.
+     * Editorial 2-column, type-forward, no cards. Vertical 1px rule
+     * separates tracks. Thin horizontal rules separate sub-blocks
+     * within each column. Arrow-prefixed list items and arrow-prefixed
+     * text-link CTAs. Header uses 60/40 asymmetric split.
+     */
     <section
       ref={ref}
       id="tracks"
       className="relative bg-[var(--color-bg-secondary)] scroll-mt-24"
     >
       <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8 py-28 md:py-36">
-        {/* Section header */}
+
+        {/* Section header — Interactivism 60/40 asymmetric, left-aligned */}
         <header
-          className="text-center mb-16 md:mb-20 max-w-3xl mx-auto fade-up"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 fade-up"
           data-visible={dataVisible}
         >
-          <p className="font-[var(--font-mono)] text-[13px] text-[var(--color-text-secondary)]">
-            <span className="text-[var(--color-accent)]" aria-hidden="true">›&nbsp;</span>
-            two ways to close the gap
-          </p>
-          <h2
-            className={cn(
-              'mt-6 text-[clamp(2rem,4.5vw,3.5rem)] font-semibold',
-              'leading-[1.1] tracking-[-0.025em]',
-              'text-[var(--color-text-primary)]'
-            )}
-          >
-            Build the system.
-            <br />
-            <span className="text-[var(--color-accent)]">Or let us run it.</span>
-          </h2>
-          <p className="mt-7 text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed">
-            Same operational outcome. Different model of ownership. The choice depends on how
-            much of UI infrastructure you want to own internally — versus outsource entirely.
-          </p>
+          <div className="lg:col-span-7">
+            <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent-text)] mb-6">
+              <span aria-hidden="true">›&nbsp;</span>
+              two ways to close the gap
+            </p>
+            <h2
+              className={cn(
+                'text-[clamp(2.25rem,5vw,3.75rem)] font-light leading-[1.05]',
+                'tracking-[-0.025em] text-[var(--color-text-primary)]'
+              )}
+            >
+              Build the system.<br />
+              <span className="text-[var(--color-accent-text)]">Or let us run it.</span>
+            </h2>
+          </div>
+          <div className="lg:col-span-5 lg:pt-4">
+            <p className="text-[16px] md:text-[17px] text-[var(--color-text-secondary)] leading-[1.7]">
+              Same operational outcome. Different model of ownership. The choice depends on
+              how much of UI infrastructure you want to own internally — versus outsource
+              entirely.
+            </p>
+          </div>
         </header>
 
-        {/* Two cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-          <TrackCard
+        {/* Horizontal rule below header */}
+        <div
+          className="mt-16 md:mt-20 h-px bg-[var(--color-border)] fade-up"
+          data-visible={dataVisible}
+          style={{ transitionDelay: '80ms' }}
+          aria-hidden="true"
+        />
+
+        {/* Two-track editorial grid — no cards, vertical 1px rule between */}
+        <div className="mt-16 md:mt-20 grid grid-cols-1 lg:grid-cols-[1fr_1px_1fr] gap-12 lg:gap-0 relative">
+          <TrackColumn
             track={TRACKS.build}
             dataVisible={dataVisible}
             delay={120}
+            side="left"
           />
-          <TrackCard
+
+          {/* Vertical rule */}
+          <div
+            className="hidden lg:block w-px bg-[var(--color-border)] self-stretch"
+            aria-hidden="true"
+          />
+
+          <TrackColumn
             track={TRACKS.operate}
             dataVisible={dataVisible}
             delay={260}
+            side="right"
           />
         </div>
 
-        {/* Recommend-track sub-line */}
+        {/* Horizontal rule above recommend-track row */}
         <div
-          className="mt-14 md:mt-16 text-center fade-up"
+          className="mt-20 md:mt-24 h-px bg-[var(--color-border)] fade-up"
           data-visible={dataVisible}
-          style={{ transitionDelay: '420ms' }}
+          style={{ transitionDelay: '400ms' }}
+          aria-hidden="true"
+        />
+
+        {/* Recommend-track row */}
+        <div
+          className="mt-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6 fade-up"
+          data-visible={dataVisible}
+          style={{ transitionDelay: '460ms' }}
         >
           <p className="font-[var(--font-mono)] text-[13px] text-[var(--color-text-secondary)]">
-            Not sure which track fits?{' '}
-            <Link
-              href="/contact?type=audit"
-              className={cn(
-                'text-[var(--color-text-primary)] hover:text-[var(--color-accent)]',
-                'underline underline-offset-4 decoration-[var(--color-border-strong)]',
-                'hover:decoration-[var(--color-accent)]',
-                'transition-colors duration-150'
-              )}
-            >
-              Run{' '}
-              <span className="text-[var(--color-accent)]" aria-hidden="true">›</span>{' '}
-              ./adl audit --recommend-track
-            </Link>
+            Not sure which track fits?
           </p>
+          <Link
+            href="/contact?type=audit"
+            className={cn(
+              'group inline-flex items-center gap-3 font-[var(--font-mono)] text-[14px]',
+              'text-[var(--color-text-primary)] hover:text-[var(--color-accent-text)]',
+              'transition-colors duration-150'
+            )}
+          >
+            <span
+              className="text-[var(--color-accent-text)] transition-transform duration-200 group-hover:translate-x-1"
+              aria-hidden="true"
+            >
+              →
+            </span>
+            ./adl audit --recommend-track
+          </Link>
         </div>
       </div>
     </section>
   );
 }
 
-function TrackCard({
+function TrackColumn({
   track,
   dataVisible,
   delay,
+  side,
 }: {
   track: Track;
   dataVisible: string;
   delay: number;
+  side: 'left' | 'right';
 }) {
+  const titleLines = track.title.split('\n');
+
   return (
-    <article
+    <div
       className={cn(
-        'rounded-2xl border border-[var(--color-border)]',
-        'bg-[var(--color-bg-elevated)]',
-        'p-8 lg:p-10',
-        'transition-colors duration-200',
-        'hover:border-[var(--color-accent)] hover:bg-[var(--color-bg-tertiary)]',
-        'flex flex-col',
-        'fade-up'
+        'flex flex-col fade-up',
+        side === 'left' ? 'lg:pr-12 xl:pr-16' : 'lg:pl-12 xl:pl-16'
       )}
       data-visible={dataVisible}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      {/* Card eyebrow */}
-      <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)]">
-        <span aria-hidden="true">›&nbsp;</span>
-        {track.eyebrow}
+      {/* Eyebrow — numbered Interactivism convention */}
+      <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.22em] text-[var(--color-accent-text)]">
+        {track.number} <span className="text-[var(--color-text-tertiary)] mx-1">/</span> {track.eyebrow}
       </p>
 
-      {/* Title */}
-      <h3 className="mt-4 text-2xl md:text-[1.75rem] font-semibold tracking-[-0.02em] text-[var(--color-text-primary)] leading-snug">
-        {track.title}
+      {/* Title — large editorial */}
+      <h3
+        className={cn(
+          'mt-6 text-[clamp(1.75rem,3.2vw,2.5rem)] font-light',
+          'leading-[1.1] tracking-[-0.025em]',
+          'text-[var(--color-text-primary)]'
+        )}
+      >
+        {titleLines.map((line, i) => (
+          <span key={i}>
+            {line}
+            {i < titleLines.length - 1 && <br />}
+          </span>
+        ))}
       </h3>
 
-      {/* JTBD */}
-      <p className="mt-4 text-base text-[var(--color-text-secondary)] leading-relaxed italic">
+      {/* JTBD — secondary lead */}
+      <p className="mt-6 text-[16px] md:text-[17px] text-[var(--color-text-secondary)] leading-[1.7]">
         {track.jtbd}
       </p>
 
+      {/* — Divider */}
+      <div className="mt-10 h-px bg-[var(--color-border)]" aria-hidden="true" />
+
       {/* What ADL does */}
       <div className="mt-8">
-        <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] mb-4">
+        <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] mb-5">
           What ADL does
         </p>
-        <ul className="space-y-3">
+        <ul className="space-y-3.5">
           {track.whatAdlDoes.map((item) => (
-            <li key={item} className="flex items-start gap-3">
+            <li key={item} className="flex items-start gap-4">
               <span
-                className="font-[var(--font-mono)] text-[var(--color-accent)] leading-[1.55] mt-px flex-shrink-0"
+                className="font-[var(--font-mono)] text-[var(--color-accent-text)] leading-[1.6] mt-px flex-shrink-0"
                 aria-hidden="true"
               >
                 →
               </span>
-              <span className="text-base text-[var(--color-text-secondary)] leading-relaxed">
+              <span className="text-[16px] text-[var(--color-text-secondary)] leading-[1.6]">
                 {item}
               </span>
             </li>
@@ -199,26 +253,32 @@ function TrackCard({
         </ul>
       </div>
 
+      {/* — Divider */}
+      <div className="mt-10 h-px bg-[var(--color-border)]" aria-hidden="true" />
+
       {/* Walk away */}
-      <div className="mt-8 pt-6 border-t border-[var(--color-border)]">
-        <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] mb-3">
+      <div className="mt-8">
+        <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] mb-4">
           What you walk away with
         </p>
-        <p className="text-base text-[var(--color-text-primary)] leading-relaxed">
+        <p className="text-[16px] md:text-[17px] text-[var(--color-text-primary)] leading-[1.65]">
           {track.walkAway}
         </p>
       </div>
 
+      {/* — Divider */}
+      <div className="mt-10 h-px bg-[var(--color-border)]" aria-hidden="true" />
+
       {/* Best for */}
-      <div className="mt-8 pt-6 border-t border-[var(--color-border)]">
-        <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] mb-3">
+      <div className="mt-8">
+        <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] mb-4">
           Best for
         </p>
-        <ul className="space-y-2">
+        <ul className="space-y-2.5">
           {track.bestFor.map((item) => (
             <li key={item} className="flex items-start gap-3">
               <span
-                className="font-[var(--font-mono)] text-[var(--color-accent)] leading-[1.55] mt-px flex-shrink-0"
+                className="font-[var(--font-mono)] text-[var(--color-accent-text)] leading-[1.55] mt-px flex-shrink-0"
                 aria-hidden="true"
               >
                 ›
@@ -231,41 +291,27 @@ function TrackCard({
         </ul>
       </div>
 
-      {/* CTA */}
-      <div className="mt-10 flex-grow flex items-end">
+      {/* CTA — arrow-prefixed text link (Interactivism) */}
+      <div className="mt-12 flex-grow flex items-end">
         <Link
           href={track.ctaHref}
           className={cn(
-            'inline-flex items-center justify-center gap-2 h-12 px-7 rounded-md',
-            'bg-[var(--color-accent)] text-[var(--color-text-on-accent)]',
-            'font-medium text-base w-full',
-            'hover:bg-[var(--color-accent-hover)] hover:shadow-[var(--shadow-glow)]',
-            'active:translate-y-px transition-all duration-150',
-            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-secondary)]'
+            'group inline-flex items-center gap-3',
+            'text-[18px] md:text-[19px] font-medium',
+            'text-[var(--color-text-primary)] hover:text-[var(--color-accent-text)]',
+            'transition-colors duration-150',
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--color-bg-secondary)] rounded-sm'
           )}
         >
+          <span
+            className="text-[var(--color-accent-text)] transition-transform duration-200 group-hover:translate-x-1"
+            aria-hidden="true"
+          >
+            →
+          </span>
           {track.ctaLabel}
-          <ArrowRight />
         </Link>
       </div>
-    </article>
-  );
-}
-
-function ArrowRight() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M5 12h14M13 5l7 7-7 7" />
-    </svg>
+    </div>
   );
 }

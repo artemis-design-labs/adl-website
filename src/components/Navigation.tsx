@@ -7,10 +7,10 @@ import { Logo } from '@/components/atoms/Logo';
 import { cn } from '@/lib/cn';
 
 const NAV_LINKS = [
-  { href: '/about', label: 'About' },
-  { href: '/our-ai', label: 'Our AI' },
+  { href: '/services', label: 'Services' },
   { href: '/work', label: 'Work' },
-  { href: '/pricing', label: 'Pricing' },
+  { href: '/clients', label: 'Clients' },
+  { href: '/blog', label: 'Blog' },
 ];
 
 export default function Navigation() {

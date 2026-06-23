@@ -8,73 +8,67 @@ export function CTASection() {
   const { ref, dataVisible } = useFadeInOnView(0.1);
 
   return (
+    /*
+     * Interactivism pattern: the accent color fills the entire section background —
+     * the one moment on the page where blue is the canvas, not the highlight.
+     * Centered layout, white text on blue, dark-on-white button, email + sub-note beneath.
+     * Blink UX accent: #0090ff as bg, white text, white filled button.
+     */
     <section
       ref={ref}
       id="contact"
-      className="py-16 md:py-20 bg-[var(--color-bg-primary)] border-t border-[var(--color-border)]"
+      className="bg-[var(--color-accent)]"
     >
-      <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-8">
+      <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-8 py-24 lg:py-32 flex flex-col items-center text-center">
 
-        {/* Headline */}
+        {/* Interactivism: bold question, white on accent bg */}
         <h2
           className={cn(
-            'text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-[1.0]',
-            'tracking-[-0.02em] text-[var(--color-text-primary)] mb-12 fade-up'
+            'text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[1.0] tracking-[-0.04em]',
+            'text-white max-w-[700px] mb-10 fade-up'
           )}
           data-visible={dataVisible}
         >
-          Close the gap between<br />
-          <span className="text-[var(--color-accent-text)]">&ldquo;it runs&rdquo; and production-ready.</span>
+          Ready to close<br />
+          the gap?
         </h2>
 
-        {/* Supporting line */}
-        <p
-          className="text-[16px] text-[var(--color-text-secondary)] leading-[1.6] max-w-[520px] mb-10 fade-up"
+        {/* Interactivism: dark button on accent bg — high contrast */}
+        <div
+          className="flex flex-col sm:flex-row items-center gap-5 mb-6 fade-up"
           data-visible={dataVisible}
           style={{ transitionDelay: '80ms' }}
-        >
-          Book a free 30-minute UI infrastructure audit. We&apos;ll produce a written
-          drift score and three specific recommendations — no pitch deck, no commitment.
-        </p>
-
-        {/* Button + email on one row */}
-        <div
-          className="flex flex-col sm:flex-row items-start sm:items-center gap-5 fade-up"
-          data-visible={dataVisible}
-          style={{ transitionDelay: '160ms' }}
         >
           <Link
             href="/contact?type=audit"
             className={cn(
-              'inline-flex items-center justify-center gap-2 h-[45px] px-7 rounded-[var(--radius-md)]',
-              'bg-[var(--color-accent)] text-[var(--color-text-on-accent)]',
-              'font-semibold text-[14px]',
-              'hover:bg-[var(--color-accent-hover)] hover:shadow-[var(--shadow-glow)]',
-              'active:brightness-90 transition-all duration-150',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]'
+              'inline-flex items-center justify-center gap-2 h-[48px] px-9 rounded-[var(--radius-md)]',
+              'bg-white text-[var(--color-accent)] font-bold text-[15px]',
+              'hover:bg-white/90 shadow-[0_2px_12px_rgba(0,0,0,0.15)]',
+              'active:brightness-95 transition-all duration-150',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-accent)]'
             )}
           >
             Book a free audit
           </Link>
-          <Link
-            href="/contact#book-a-call"
-            className={cn(
-              'inline-flex items-center justify-center gap-2 h-[45px] px-7 rounded-[var(--radius-md)]',
-              'border border-[var(--color-border)] text-[var(--color-text-primary)]',
-              'font-semibold text-[14px]',
-              'hover:border-[var(--color-accent)] hover:text-[var(--color-accent-text)] transition-all duration-150',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]'
-            )}
-          >
-            Book a call
-          </Link>
+
           <a
             href="mailto:hello@artemisdesignlabs.com"
-            className="text-[14px] text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] transition-colors duration-150"
+            className="font-[var(--font-mono)] text-[13px] text-white/70 hover:text-white transition-colors duration-150"
           >
             hello@artemisdesignlabs.com
           </a>
         </div>
+
+        {/* Sub-note */}
+        <p
+          className="text-[13px] text-white/60 leading-[1.5] max-w-[400px] fade-up"
+          data-visible={dataVisible}
+          style={{ transitionDelay: '160ms' }}
+        >
+          Free 30-minute UI infrastructure audit. Written drift score +
+          three specific recommendations. No pitch deck, no commitment.
+        </p>
 
       </div>
     </section>

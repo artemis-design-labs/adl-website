@@ -18,65 +18,59 @@ export function OperationalMoatSection() {
   const { ref, dataVisible } = useFadeInOnView(0.1);
 
   return (
+    /*
+     * Semiflat "Design is the first layer of trust" pattern: the headline is
+     * unconstrained — it fills the available width at display scale. Body text
+     * and tags sit beneath it. No accent bar, no sidebar, no image.
+     * The headline IS the whole visual event.
+     * Blink UX tokens: bg-primary, accent-text on second line, xxs tags.
+     */
     <section
       ref={ref}
-      className="py-16 md:py-20 bg-[var(--color-bg-primary)]"
+      className="py-10 bg-[var(--color-bg-primary)] border-b border-[var(--color-border)]"
     >
       <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-8">
 
-        {/* Accent bar + headline / body — 50/50 split */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-
-          {/* Left */}
-          <div>
-            <div
-              className="w-12 h-[3px] bg-[var(--color-accent)] mb-4 fade-up"
-              data-visible={dataVisible}
-              aria-hidden="true"
-            />
-            <h2
-              className={cn(
-                'text-[2rem] font-semibold leading-[1.2]',
-                'tracking-[-0.01em] text-[var(--color-text-primary)] fade-up'
-              )}
-              data-visible={dataVisible}
-              style={{ transitionDelay: '80ms' }}
-            >
-              The operational moat<br />
-              <span className="text-[var(--color-accent-text)]">no agency can replicate.</span>
-            </h2>
-          </div>
-
-          {/* Right */}
-          <p
-            className="text-[16px] text-[var(--color-text-secondary)] leading-[1.7] lg:pt-10 fade-up"
-            data-visible={dataVisible}
-            style={{ transitionDelay: '160ms' }}
-          >
-            ADL&apos;s agentic ecosystem — a master UI Infrastructure Architect
-            agent coordinating specialized sub-agents — is what allows us to
-            deliver the UI governance of a 500-person company to a 15-person
-            startup, at startup pricing, at a speed no human-only agency can
-            match. Every component passes through automated drift detection,
-            token validation, and governance enforcement before it reaches
-            your codebase. &ldquo;It runs&rdquo; is not the bar. Production-ready is.
-          </p>
-        </div>
-
-        {/* Tag pills */}
-        <div
-          className="flex flex-wrap gap-3 mt-12 fade-up"
+        {/* Semiflat: headline runs at full display scale — no max-w constraint */}
+        <h2
+          className={cn(
+            'text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[1.0] tracking-[-0.04em]',
+            'text-[var(--color-text-primary)] mb-8 fade-up'
+          )}
           data-visible={dataVisible}
-          style={{ transitionDelay: '280ms' }}
+        >
+          The operational moat<br />
+          <span className="text-[var(--color-accent-text)]">no agency can replicate.</span>
+        </h2>
+
+        {/* Body text */}
+        <p
+          className="text-[16px] text-[var(--color-text-secondary)] leading-[1.7] max-w-[620px] mb-10 fade-up"
+          data-visible={dataVisible}
+          style={{ transitionDelay: '80ms' }}
+        >
+          ADL&apos;s agentic ecosystem — a master UI Infrastructure Architect
+          agent coordinating specialized sub-agents — delivers the UI governance
+          of a 500-person company to a 15-person startup, at startup pricing,
+          at a speed no human-only agency can match. Every component passes
+          through automated drift detection, token validation, and governance
+          enforcement before it reaches your codebase. &ldquo;It runs&rdquo; is not
+          the bar. Production-ready is.
+        </p>
+
+        {/* Blink UX: xxs radius (2px) tags */}
+        <div
+          className="flex flex-wrap gap-2 fade-up"
+          data-visible={dataVisible}
+          style={{ transitionDelay: '160ms' }}
         >
           {TAGS.map((tag) => (
             <span
               key={tag}
               className={cn(
-                'inline-flex items-center px-4 py-2 rounded-full',
-                'bg-[var(--color-bg-elevated)]',
-                'font-[var(--font-mono)] text-[13px] text-[var(--color-accent-text)]',
-                'border border-[var(--color-border)]'
+                'inline-flex items-center px-3.5 py-1.5 rounded-[var(--radius-xxs)]',
+                'bg-[var(--color-bg-elevated)] border border-[var(--color-border)]',
+                'font-[var(--font-mono)] text-[12px] text-[var(--color-accent-text)]'
               )}
             >
               {tag}
