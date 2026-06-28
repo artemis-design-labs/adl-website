@@ -6,6 +6,7 @@ import { GeistMono } from 'geist/font/mono';
 import { ThemeProvider } from '@/context/ThemeContext';
 
 const CF_BEACON_TOKEN = '81fa03a077554854b911e476023935c6';
+const GA_MEASUREMENT_ID = 'G-SXX4NH3LQ9';
 
 const SITE_URL = 'https://artemisdesignlabs.com';
 const OG_IMAGE = '/images/logos/adl-logo-1.png';
@@ -115,6 +116,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           src="https://static.cloudflareinsights.com/beacon.min.js"
           data-cf-beacon={`{"token": "${CF_BEACON_TOKEN}"}`}
         />
+        {/* Google Analytics (gtag.js) */}
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
       </body>
     </html>
   );
