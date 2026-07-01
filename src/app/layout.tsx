@@ -129,6 +129,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', '${GA_MEASUREMENT_ID}');
           `}
         </Script>
+        <Script
+          strategy="afterInteractive"
+          src="https://behavioral-insights.vercel.app/tracker.js"
+          data-site-id="737de245-2a09-44f9-bdcd-f3357555eeca"
+        />
       </body>
     </html>
   );
