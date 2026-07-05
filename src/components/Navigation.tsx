@@ -7,9 +7,9 @@ import { Logo } from '@/components/atoms/Logo';
 import { cn } from '@/lib/cn';
 
 const NAV_LINKS = [
+  { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
   { href: '/work', label: 'Work' },
-  { href: '/clients', label: 'Clients' },
   { href: '/blog', label: 'Blog' },
 ];
 
