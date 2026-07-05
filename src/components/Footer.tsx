@@ -10,9 +10,7 @@ const FOOTER_LINKS = {
     { href: '/#about', label: 'Design-to-Code Handoff' },
   ],
   company: [
-    { href: '/about',   label: 'About' },
     { href: '/work',    label: 'Work' },
-    { href: '/pricing', label: 'Pricing' },
     { href: '/contact', label: 'Contact' },
   ],
 };

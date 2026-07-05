@@ -4,9 +4,7 @@ const SITE_URL = 'https://artemisdesignlabs.com';
 
 const ROUTES = [
   { path: '/',                      priority: 1.0,  changeFrequency: 'weekly' as const  },
-  { path: '/about',                 priority: 0.8,  changeFrequency: 'monthly' as const },
   { path: '/contact',               priority: 0.9,  changeFrequency: 'monthly' as const },
-  { path: '/pricing',               priority: 0.7,  changeFrequency: 'monthly' as const },
   { path: '/work',                  priority: 0.8,  changeFrequency: 'monthly' as const },
 ];
 

@@ -175,17 +175,6 @@ export default function ServicesPage() {
             >
               Book a free audit
             </Link>
-            <Link
-              href="/pricing"
-              className={cn(
-                'inline-flex items-center justify-center gap-2 h-[44px] px-7 rounded-[var(--radius-md)]',
-                'border border-[var(--color-border-strong)] text-[var(--color-text-secondary)] font-bold text-[14px]',
-                'hover:border-[var(--color-accent)] hover:text-[var(--color-accent-text)]',
-                'active:brightness-90 transition-all duration-150',
-              )}
-            >
-              View full pricing →
-            </Link>
           </div>
           <div className="border-t border-[var(--color-border)]" aria-hidden="true" />
         </div>

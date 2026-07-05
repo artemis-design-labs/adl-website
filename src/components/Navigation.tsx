@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
   { href: '/work', label: 'Work' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/blog', label: 'Content' },
 ];
 
 export default function Navigation() {
