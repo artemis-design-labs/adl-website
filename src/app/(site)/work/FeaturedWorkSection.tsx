@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { cn } from '@/lib/cn';
 
 const PROJECTS = [
@@ -130,12 +129,6 @@ export function FeaturedWorkSection() {
                 ))}
               </div>
 
-              <Link
-                href={project.href}
-                className="inline-block font-bold text-[13px] text-[var(--color-accent-text)] hover:text-[var(--color-accent-hover)] transition-colors duration-150"
-              >
-                Read case study →
-              </Link>
             </div>
 
           </div>

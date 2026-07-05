@@ -129,12 +129,6 @@ export function CaseStudySection() {
                 </span>
               </div>
 
-              <Link
-                href={project.href}
-                className="inline-block font-bold text-[13px] text-[var(--color-accent-text)] hover:text-[var(--color-accent-hover)] transition-colors duration-150"
-              >
-                Read the story →
-              </Link>
             </div>
           </article>
         ))}

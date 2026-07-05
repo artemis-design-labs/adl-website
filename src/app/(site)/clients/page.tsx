@@ -83,7 +83,7 @@ const FEATURED_WORK = [
     image: '/images/hands-ai/cover.png',
     metric: '40%',
     metricLabel: 'Faster case processing',
-    href: '/hands-ai',
+    href: '/work',
   },
   {
     eyebrow: 'ENTERPRISE MEDIA',

@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import { cn } from '@/lib/cn';
 
 const CONTENT = {
   eyebrow: 'The Technology Behind ADL',
@@ -65,21 +63,6 @@ export function OurAIPreviewSection() {
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="mt-12 text-center">
-          <Link
-            href={content.cta.href}
-            className={cn(
-              'inline-block text-xs tracking-[0.08em] uppercase px-6 py-3',
-              'border border-[var(--color-border)]',
-              'text-[var(--color-text-primary)]',
-              'hover:bg-[var(--color-bg-elevated)]',
-              'transition-colors duration-150'
-            )}
-          >
-            {content.cta.text}
-          </Link>
-        </div>
       </div>
     </section>
   );
