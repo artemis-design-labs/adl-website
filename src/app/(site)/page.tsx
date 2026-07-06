@@ -3,7 +3,7 @@
 import { Hero } from '@/components/organisms/Hero';
 import { StatBarSection } from '@/components/organisms/StatBarSection';
 import { ClientsSection } from '@/components/organisms/ClientsSection';
-import { ProblemSection } from '@/components/organisms/ProblemSection';
+import { ServicesSection } from '@/components/organisms/ServicesSection';
 import { CaseStudySection } from '@/components/organisms/CaseStudySection';
 import { OperationalMoatSection } from '@/components/organisms/OperationalMoatSection';
 import { TestimonialsSection } from '@/components/organisms/TestimonialsSection';
@@ -15,7 +15,7 @@ export default function HomePage() {
       <Hero />
       <StatBarSection />
       <ClientsSection />
-      <ProblemSection />
+      <ServicesSection />
       <CaseStudySection />
       <OperationalMoatSection />
       <TestimonialsSection />

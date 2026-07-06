@@ -1,157 +1,112 @@
 'use client';
 
-import Link from 'next/link';
+import { useFadeInOnView } from '@/hooks/useFadeInOnView';
+import { cn } from '@/lib/cn';
 
-const CONTENT = {
-  eyebrow: 'Human Expertise × AI Precision',
-  headline: 'Our Experts Build the Strategy.\nOur AI Builds the System.',
-  description: "Every engagement pairs our design systems specialists — people who've built and scaled design infrastructure at startups — with proprietary AI tools we developed in-house. The humans handle what AI can't: understanding your product, your team dynamics, your growth stage. The AI handles what humans shouldn't have to: the repetitive, error-prone, time-intensive work of turning designs into production-ready code.",
-  subDescription: 'This isn\'t "we use ChatGPT." We built our own tools from 190,000+ labeled training images, refined through hundreds of real engagements. The AI gets better with every project — and your team gets the benefit.',
-  services: [
-    {
-      id: 'creation',
-      number: 'A',
-      title: 'Design System Creation',
-      tagline: "We've built this from scratch before — for our own startups.",
-      description: "You either don't have a design system, or you have fragments of one scattered across your product that nobody trusts. We've been there. We come in, audit the chaos, and build you a real foundation: production-ready components in both Figma and code.",
-      features: [
-        '25+ production-ready components in Figma AND your framework (React, Angular, Vue)',
-        'Design tokens that sync across your entire product — not just a Figma file',
-        'Every component ships with full state coverage: loading, error, empty, partial, permission-denied',
-        "Documentation your engineers will actually read because it's built around their workflow",
-        'Accessibility baked in from day one — not bolted on before an audit',
-        'Delivered in 3-4 weeks, not 3-4 months, because our AI accelerates what used to be manual',
-      ],
-      investment: '$15,000 – $25,000',
-      timeline: '3-4 weeks',
-      href: '/solutions#creation',
-    },
-    {
-      id: 'maintenance',
-      number: 'B',
-      title: 'Design System Maintenance',
-      tagline: 'Because infrastructure without maintenance is just debt waiting to happen.',
-      description: "We've watched design systems die. Not because they were built poorly, but because nobody maintained them. Components drift. Documentation goes stale. We become your dedicated design systems team.",
-      features: [
-        'Continuous health monitoring with AI-powered drift detection between Figma and code',
-        'New components built and delivered as your product evolves — Figma, code, and documentation together',
-        'Monthly health reports that prove ROI to your leadership team',
-        'Dedicated office hours for your designers and engineers',
-        'Governance support that scales — from a 5-person team to a 500-person organization',
-        'Priority response when something breaks before a launch or a demo',
-      ],
-      investment: '$4,000 – $6,000/month',
-      timeline: '6-month minimum',
-      href: '/solutions#maintenance',
-    },
-    {
-      id: 'handoff',
-      number: 'C',
-      title: 'Design-to-Code Handoff',
-      tagline: 'Your designers did the work. Let our AI finish the job.',
-      description: "Your designs are sitting in Figma. Your designers did great work. But your engineering team doesn't have the frontend bandwidth to implement them. Our AI converts your existing design files into production-ready code.",
-      features: [
-        'Production-ready components built to your codebase standards — TypeScript, Tailwind, your conventions',
-        'Full state coverage beyond the happy path: loading, error, empty, partial, permission-denied',
-        'Performance optimization for enterprise-scale data — virtualization for 10K+ rows',
-        'Comprehensive Storybook documentation your team can onboard with immediately',
-        "Code that passes review on the first PR — because our AI was trained on production standards, not tutorials",
-        "Delivered in weeks, not the months it would take your team to build manually",
-      ],
-      investment: '$8,000 – $15,000',
-      timeline: '2-3 weeks',
-      href: '/solutions#handoff',
-    },
-  ],
-};
+const SERVICES = [
+  {
+    title: 'Design System Creation',
+    description:
+      'Tokenized component libraries built from the ground up — production-ready in Figma and code, documented, and scalable across your entire product surface.',
+  },
+  {
+    title: 'Design-to-Code Handoff',
+    description:
+      'Governed pipelines that close the gap between Figma and engineering — every component ships exactly as designed, with full state coverage.',
+  },
+  {
+    title: 'AI Model Training',
+    description:
+      'Custom AI trained on your design tokens, component patterns, and brand rules — so your team ships UI faster with significantly less manual lift.',
+  },
+  {
+    title: 'Governance Layer',
+    description:
+      'Automated drift detection and enforcement across your product surface — catching UI violations before they reach production.',
+  },
+];
 
 export function ServicesSection() {
-  const content = CONTENT;
-  const headlineLines = content.headline.split('\n');
+  const { ref, dataVisible } = useFadeInOnView(0.05);
 
   return (
-    <section className="py-24 md:py-32 bg-[var(--color-bg-primary)]">
-      <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
-        {/* Section Header */}
-        <header className="text-center mb-16">
-          <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
-            {content.eyebrow}
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-[-0.02em] text-[var(--color-text-primary)] leading-tight">
-            {headlineLines.map((line, i) => (
-              <span key={i}>
-                {line}
-                {i < headlineLines.length - 1 && <br />}
-              </span>
-            ))}
-          </h2>
-          <p className="mt-6 text-base text-[var(--color-text-secondary)] max-w-3xl mx-auto">
-            {content.description}
-          </p>
-          <p className="mt-4 text-sm text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-            {CONTENT.subDescription}
-          </p>
-        </header>
+    /*
+     * Apexon Services pattern — elevated bg, bold headline,
+     * thin horizontal divider, 2×2 grid with square accent bullet.
+     */
+    <section
+      ref={ref}
+      id="services"
+      className="bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)] py-20 md:py-28"
+    >
+      <div className="max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
 
-        {/* Services Grid */}
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--color-border)]"
-          style={{ border: '1px solid var(--color-border)' }}
+        {/* Eyebrow */}
+        <p
+          className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent-text)] mb-5 fade-up"
+          data-visible={dataVisible}
         >
-          {content.services.map((service, serviceIndex) => (
-            <article
-              key={service.id}
-              className="bg-[var(--color-bg-elevated)] p-6 lg:p-8 flex flex-col"
+          <span aria-hidden="true">›&nbsp;</span>
+          What We Do
+        </p>
+
+        {/* Headline */}
+        <h2
+          className={cn(
+            'text-[clamp(2rem,4.5vw,3.25rem)] font-bold leading-[1.05]',
+            'tracking-[-0.03em] text-[var(--color-text-primary)] mb-6 max-w-[640px] fade-up'
+          )}
+          data-visible={dataVisible}
+          style={{ transitionDelay: '60ms' }}
+        >
+          Everything your UI<br />infrastructure needs.
+        </h2>
+
+        {/* Body */}
+        <p
+          className="text-[16px] md:text-[17px] text-[var(--color-text-secondary)] leading-[1.7] max-w-[600px] fade-up"
+          data-visible={dataVisible}
+          style={{ transitionDelay: '120ms' }}
+        >
+          Artemis Design Labs delivers end-to-end UI infrastructure — from design system
+          architecture and component engineering through to AI model training,
+          governed code handoff, and ongoing drift monitoring.
+        </p>
+
+        {/* Horizontal divider */}
+        <div
+          className="mt-12 mb-12 h-px bg-[var(--color-border)] fade-up"
+          data-visible={dataVisible}
+          style={{ transitionDelay: '180ms' }}
+          aria-hidden="true"
+        />
+
+        {/* 2×2 service grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-10">
+          {SERVICES.map((svc, i) => (
+            <div
+              key={svc.title}
+              className="flex items-start gap-4 fade-up"
+              data-visible={dataVisible}
+              style={{ transitionDelay: `${240 + i * 80}ms` }}
             >
-              <span className="text-sm font-medium tracking-[0.15em] text-[var(--color-text-secondary)] mb-4">
-                {service.number}
-              </span>
-
-              <h3 className="text-lg lg:text-xl font-medium text-[var(--color-text-primary)] leading-snug mb-2">
-                {service.title}
-              </h3>
-
-              <p className="text-[10px] tracking-[0.1em] uppercase text-[var(--color-accent)] mb-4">
-                {service.tagline}
-              </p>
-
-              <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-6">
-                {service.description}
-              </p>
-
-              <ul className="space-y-2 mb-6 flex-grow">
-                {service.features.map((feature, featureIndex) => (
-                  <li
-                    key={featureIndex}
-                    className="flex items-start gap-2 text-sm text-[var(--color-text-secondary)]"
-                  >
-                    <span className="text-[var(--color-text-secondary)]">—</span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-
-              <div className="pt-4 border-t border-[var(--color-border)]">
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-xs">
-                    <span className="text-[var(--color-text-secondary)] uppercase tracking-wider">Investment</span>
-                    <span className="text-[var(--color-text-primary)] font-medium">{CONTENT.services[serviceIndex].investment}</span>
-                  </div>
-                  <div className="flex justify-between text-xs">
-                    <span className="text-[var(--color-text-secondary)] uppercase tracking-wider">Timeline</span>
-                    <span className="text-[var(--color-text-primary)] font-medium">{CONTENT.services[serviceIndex].timeline}</span>
-                  </div>
-                </div>
-                <Link
-                  href={service.href}
-                  className="text-xs tracking-[0.05em] uppercase text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-150"
-                >
-                  Learn more →
-                </Link>
+              {/* Square accent bullet — Apexon signature */}
+              <div
+                className="w-[10px] h-[10px] flex-shrink-0 mt-[5px] bg-[var(--color-accent)]"
+                aria-hidden="true"
+              />
+              <div>
+                <h3 className="text-[15px] font-semibold text-[var(--color-text-primary)] mb-2 leading-snug">
+                  {svc.title}
+                </h3>
+                <p className="text-[14px] text-[var(--color-text-secondary)] leading-[1.7]">
+                  {svc.description}
+                </p>
               </div>
-            </article>
+            </div>
           ))}
         </div>
+
       </div>
     </section>
   );
