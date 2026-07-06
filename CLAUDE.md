@@ -57,13 +57,13 @@ Reference sizes in JSX via `text-[length:var(--text-h2)]`. Everything resolves t
 - **Base unit:** 4px
 - **Scale:** 4 · 8 · 16 · 20 · 24 · 40 · 48 · 64 · 96 · 128
 - **Border radius:** sm `4px` / md `8px` / lg `20px` / full `9999px`
-- **Section padding:** 64px vertical · 40px horizontal
+- **Section padding:** 64px vertical · `px-10 lg:px-20` horizontal (40px, 80px at ≥1024px)
 
 ### Layout & Grid
 
 - **Max content width:** 1280px (12-col grid)
 - **Gutter:** 24px
-- **Section padding:** 64px top/bottom · 40px left/right (matches spacing token)
+- **Section padding:** 64px top/bottom · `px-10 lg:px-20` left/right (40px mobile, 80px desktop) — hard rule for every section container, nav, and footer on every page
 
 ### Key UI patterns
 
