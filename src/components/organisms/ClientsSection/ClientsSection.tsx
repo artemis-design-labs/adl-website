@@ -13,48 +13,56 @@ const CLIENTS = [
   { name: 'Freshop',   src: '/images/Freshop-logo.png' },
 ];
 
+const DESCRIPTOR = 'SaaS · Enterprise · Nonprofit · Government · Emerging Tech';
+
 export function ClientsSection() {
   return (
+    /*
+     * Wandr Studio variant — static logo row, no marquee.
+     * Dot-separated descriptor above, logos in a centered flex wrap.
+     */
     <section
-      className="bg-[var(--color-bg-secondary)] border-y border-[var(--color-border)]"
+      className="bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)] py-10 md:py-12"
       aria-labelledby="clients-heading"
     >
-      <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-8 py-14 md:py-16">
+      <div className="max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
+
+        {/* Descriptor */}
         <p
           id="clients-heading"
-          className="font-[var(--font-mono)] text-[length:var(--text-xs)] uppercase tracking-[0.12em] text-[var(--color-text-muted)] mb-8"
+          className="font-[var(--font-mono)] text-[11px] text-[var(--color-text-tertiary)] tracking-[0.06em] mb-8"
         >
-          TRUSTED BY PRODUCT TEAMS YOU'D RECOGNIZE
+          {DESCRIPTOR}
         </p>
 
         {/* SR-only list */}
         <ul className="sr-only">
-          {CLIENTS.map((c) => (
-            <li key={c.name}>{c.name}</li>
-          ))}
+          {CLIENTS.map((c) => <li key={c.name}>{c.name}</li>)}
         </ul>
 
-        {/* Scrollable logo row */}
-        <div className="overflow-hidden marquee-mask" aria-hidden="true">
-          <ul className="flex w-max items-center gap-5 md:gap-7 animate-marquee-x">
-            {[...CLIENTS, ...CLIENTS].map((client, i) => (
-              <li
-                key={`${client.name}-${i}`}
-                className="flex-shrink-0 flex items-center justify-center h-16 md:h-20 w-44 md:w-52 px-6 py-4 bg-white rounded-xl"
-              >
-                <Image
-                  src={client.src}
-                  alt=""
-                  width={200}
-                  height={80}
-                  decoding="async"
-                  className="max-h-full max-w-full w-auto h-auto object-contain"
-                  unoptimized
-                />
-              </li>
-            ))}
-          </ul>
+        {/* Static logo row */}
+        <div
+          className="flex flex-wrap items-center gap-3 md:gap-4"
+          aria-hidden="true"
+        >
+          {CLIENTS.map((client) => (
+            <div
+              key={client.name}
+              className="flex items-center justify-center h-14 w-36 md:h-16 md:w-44 px-5 py-3 bg-white rounded-lg border border-[var(--color-border)]"
+            >
+              <Image
+                src={client.src}
+                alt=""
+                width={160}
+                height={64}
+                decoding="async"
+                className="max-h-full max-w-full w-auto h-auto object-contain"
+                unoptimized
+              />
+            </div>
+          ))}
         </div>
+
       </div>
     </section>
   );
