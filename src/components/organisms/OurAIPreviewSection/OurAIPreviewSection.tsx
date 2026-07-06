@@ -31,7 +31,7 @@ export function OurAIPreviewSection() {
 
   return (
     <section className="py-24 md:py-32 bg-[var(--color-bg-secondary)]">
-      <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
+      <div className="max-w-[var(--container-wide)] mx-auto px-10 lg:px-20">
         {/* Section Header */}
         <header className="text-center mb-16">
           <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">

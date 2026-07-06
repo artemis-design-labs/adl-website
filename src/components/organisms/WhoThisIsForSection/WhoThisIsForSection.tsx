@@ -30,7 +30,7 @@ export function WhoThisIsForSection() {
       id="who-this-is-for"
       className="relative bg-[var(--color-bg-primary)] scroll-mt-24"
     >
-      <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8 py-28 md:py-36">
+      <div className="max-w-[var(--container-wide)] mx-auto px-10 lg:px-20 py-28 md:py-36">
         {/* Section header */}
         <header
           className="text-center mb-16 md:mb-20 max-w-3xl mx-auto fade-up"

@@ -55,7 +55,7 @@ export function ProblemSection() {
       id="services"
       className="bg-[var(--color-bg-primary)] border-b border-[var(--color-border)] py-24 md:py-32"
     >
-      <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-8">
+      <div className="max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
 
         {/* Section header — Interactivism 60/40 asymmetric, left-aligned */}
         <header className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">

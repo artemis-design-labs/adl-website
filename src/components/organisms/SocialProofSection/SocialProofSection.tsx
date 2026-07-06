@@ -44,7 +44,7 @@ export function SocialProofSection() {
     <div className="relative">
       {/* Metrics Section */}
       <section className="py-20 md:py-28 bg-[var(--color-bg-primary)]">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-10 lg:px-20">
           <header className="text-center mb-16">
             <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
               {content.metricsEyebrow}
@@ -77,7 +77,7 @@ export function SocialProofSection() {
 
       {/* Testimonials Section */}
       <section className="py-20 md:py-28 bg-[var(--color-bg-secondary)]">
-        <div className="max-w-5xl mx-auto px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto px-10 lg:px-20">
           <header className="text-center mb-16">
             <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
               {content.testimonialsEyebrow}
@@ -120,7 +120,7 @@ export function SocialProofSection() {
 
       {/* Clients Section */}
       <section className="py-20 md:py-28 bg-[var(--color-bg-primary)]">
-        <div className="max-w-5xl mx-auto px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto px-10 lg:px-20">
           <header className="text-center mb-12">
             <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-secondary)] mb-4">
               {content.clientsEyebrow}

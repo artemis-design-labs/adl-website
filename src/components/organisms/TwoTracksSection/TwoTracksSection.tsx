@@ -79,7 +79,7 @@ export function TwoTracksSection() {
       id="tracks"
       className="relative bg-[var(--color-bg-secondary)] scroll-mt-24"
     >
-      <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8 py-28 md:py-36">
+      <div className="max-w-[var(--container-wide)] mx-auto px-10 lg:px-20 py-28 md:py-36">
 
         {/* Section header — Interactivism 60/40 asymmetric, left-aligned */}
         <header

@@ -65,7 +65,7 @@ export function MetricsTestimonialsSection() {
 
   return (
     <section ref={ref} className="py-24 md:py-32 bg-[var(--color-bg-primary)]">
-      <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
+      <div className="max-w-[var(--container-wide)] mx-auto px-10 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left — Metrics */}
           <div className="lg:col-span-6">

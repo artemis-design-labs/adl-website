@@ -78,7 +78,7 @@ export function AboutUsSection() {
       id="about"
       className="relative py-24 md:py-32 bg-[var(--color-bg-secondary)] overflow-hidden"
     >
-      <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
+      <div className="max-w-[var(--container-wide)] mx-auto px-10 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left — About */}
           <div className="lg:col-span-6 space-y-8">

@@ -42,7 +42,7 @@ export function CaseStudySection() {
       ref={ref}
       className="bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)]"
     >
-      <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-8 pt-10">
+      <div className="max-w-[var(--container-max)] mx-auto px-10 lg:px-20 pt-10">
 
         {/* Section header */}
         <div className="flex items-end justify-between mb-12">
