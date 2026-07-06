@@ -1,9 +1,15 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { GeistSans } from 'geist/font/sans';
-import { GeistMono } from 'geist/font/mono';
+import { Roboto } from 'next/font/google';
 import { ThemeProvider } from '@/context/ThemeContext';
+
+const roboto = Roboto({
+  weight: ['400', '500', '700'],
+  subsets: ['latin'],
+  variable: '--font-roboto',
+  display: 'swap',
+});
 
 const CF_BEACON_TOKEN = '81fa03a077554854b911e476023935c6';
 const GA_MEASUREMENT_ID = 'G-SXX4NH3LQ9';
@@ -79,8 +85,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${GeistSans.variable} ${GeistMono.variable}`}
-      data-theme="dark"
+      className={`scroll-smooth ${roboto.variable}`}
+      data-theme="light"
       suppressHydrationWarning
     >
       <head>
@@ -99,8 +105,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     document.documentElement.setAttribute('data-theme', stored);
                     return;
                   }
-                  var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+                  document.documentElement.setAttribute('data-theme', 'light');
                 } catch (e) {}
               })();
             `,

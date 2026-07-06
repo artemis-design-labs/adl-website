@@ -19,7 +19,7 @@ export function Hero() {
      * navigational capabilities card right. Short accent rule above the
      * eyebrow. Headline is all primary color — no inline accent span.
      */
-    <section className="relative bg-[var(--color-bg-primary)] pt-20 md:pt-24 pb-8 lg:pb-12 overflow-hidden">
+    <section className="relative bg-[var(--color-bg-primary)] pt-[88px] md:pt-[104px] pb-8 lg:pb-12 overflow-hidden">
       <div className="relative max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 

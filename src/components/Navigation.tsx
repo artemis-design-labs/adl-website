@@ -44,14 +44,14 @@ export default function Navigation() {
       )}
     >
       <div className="max-w-[var(--container-wide)] mx-auto px-10 lg:px-20">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between pt-[14px] pb-3">
           {/* Logo */}
           <Link
             href="/"
-            className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]"
+            className="-ml-3 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]"
             aria-label="Artemis Design Labs — Home"
           >
-            <Logo size="md" />
+            <Logo size="lg" />
           </Link>
 
           {/* Desktop nav */}

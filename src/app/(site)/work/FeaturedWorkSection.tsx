@@ -58,7 +58,7 @@ export function FeaturedWorkSection() {
 
   return (
     <section className="py-16 bg-[var(--color-bg-primary)] border-b border-[var(--color-border)]">
-      <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-8">
+      <div className="max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
 
         <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--color-accent-text)] mb-8">
           FEATURED WORK

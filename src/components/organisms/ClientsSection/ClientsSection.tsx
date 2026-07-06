@@ -3,14 +3,14 @@
 import Image from 'next/image';
 
 const CLIENTS = [
-  { name: 'AT&T',      src: '/images/AT&T-Logo.png' },
-  { name: 'Verizon',   src: '/images/Verizon-logo.png' },
-  { name: 'NBCU',      src: '/images/NBCU-logo.png' },
-  { name: 'NYCPS',     src: '/images/NYCPS-logo.png' },
-  { name: 'NYCERS',    src: '/images/NYCERS-logo.png' },
-  { name: 'CMA',       src: '/images/CMA-logo.png' },
-  { name: 'Qualitrol', src: '/images/Qualitrol-logo.png' },
-  { name: 'Freshop',   src: '/images/Freshop-logo.png' },
+  { name: 'AT&T',             src: '/images/atnt.svg'         },
+  { name: 'Verizon',          src: '/images/verizon.svg'      },
+  { name: 'NBCUniversal',     src: '/images/nbcuniversal.svg' },
+  { name: 'NYC Public Schools', src: '/images/nycps.svg'      },
+  { name: 'NYCERS',           src: '/images/nycers.svg'       },
+  { name: 'CMA',              src: '/images/cma.svg'          },
+  { name: 'Qualitrol',        src: '/images/qualitrol.svg'    },
+  { name: 'Freshop',          src: '/images/freshop.svg'      },
 ];
 
 const DESCRIPTOR = 'SaaS · Enterprise · Nonprofit · Government · Emerging Tech';
@@ -48,7 +48,7 @@ export function ClientsSection() {
           {CLIENTS.map((client) => (
             <div
               key={client.name}
-              className="flex items-center justify-center h-14 w-36 md:h-16 md:w-44 px-5 py-3 bg-white rounded-lg border border-[var(--color-border)]"
+              className="flex items-center justify-center h-14 w-36 md:h-16 md:w-44 px-5 py-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-primary)]"
             >
               <Image
                 src={client.src}

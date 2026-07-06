@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Script from 'next/script';
 import { Turnstile } from '@/components/atoms/Turnstile';
 import { cn } from '@/lib/cn';
+import { CTASection } from '@/components/organisms/CTASection';
 
 const TURNSTILE_REQUIRED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 const ADMIN_EMAIL = 'hello@artemisdesignlabs.com';
@@ -81,7 +82,7 @@ export default function ContactPage() {
           className="absolute inset-x-0 top-0 h-[50vh] pointer-events-none opacity-60"
           style={{ background: 'var(--gradient-subtle)' }}
         />
-        <div className="relative max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
+        <div className="relative max-w-[var(--container-wide)] mx-auto px-10 lg:px-20">
           <div className="max-w-3xl">
             <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-5">
               › get in touch
@@ -102,7 +103,7 @@ export default function ContactPage() {
 
       {/* Book a call — Calendly inline scheduler */}
       <section id="book-a-call" className="pb-4 scroll-mt-24">
-        <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
+        <div className="max-w-[var(--container-wide)] mx-auto px-10 lg:px-20">
           <div className="max-w-2xl mb-6">
             <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-3">
               › book a call
@@ -116,7 +117,7 @@ export default function ContactPage() {
           </div>
           <div
             className="calendly-inline-widget rounded-2xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-elevated)]"
-            data-url="https://calendly.com/itadmin-artemisdesignlabs/30min?hide_gdpr_banner=1&background_color=1b1b26&text_color=ededf0&primary_color=7c3aed"
+            data-url="https://calendly.com/itadmin-artemisdesignlabs/30min?hide_gdpr_banner=1&background_color=fafafa&text_color=141414&primary_color=2f77ea"
             style={{ minWidth: '320px', height: '700px' }}
           />
         </div>
@@ -127,8 +128,8 @@ export default function ContactPage() {
       />
 
       {/* Form section */}
-      <section className="py-16 md:py-20">
-        <div className="max-w-[var(--container-wide)] mx-auto px-6 lg:px-8">
+      <section className="py-16 md:py-20 border-b border-[var(--color-border)]">
+        <div className="max-w-[var(--container-wide)] mx-auto px-10 lg:px-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Left — what to expect */}
             <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-8">
@@ -277,6 +278,8 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      <CTASection />
 
     </>
   );

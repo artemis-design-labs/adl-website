@@ -1,102 +1,115 @@
 /*
- * ADL Design Tokens — Blink UX Design Language
+ * ADL Design Tokens — Ramotion colors · Creative Navy typography & spacing
  *
- * Source: Figma node 99:3 — "Website Design Templates / Blink UX"
- * Palette: Electric blue #0090ff primary, blue-shifted near-black surfaces.
- * Type: 64px display · 48px heading XL · 32px heading LG · 700 weight · 1.15lh
- * Radius: 2px xxs · 8px sm · 16px md · 999px full
- * Section padding: 40px (--space-section)
+ * Colors: Figma node 99:3 — "Website Design Templates / Ramotion"
+ * Typography & spacing: Creative Navy column (same Figma frame)
+ * Palette: #2f77ea electric blue · #fafafa bg · #141414 text · #262626 surface-dark
+ * Type: KeplerStd serif (display) + Roboto sans (body)
+ * Scale: Display 72px/400 · H1 44px/700 · H2 24px/700 · Body 16px/400 · Caption 14px/400
+ * Radius: sm 4px · md 8px · lg 20px · full 9999px
+ * Section padding: 64px vertical · 40px horizontal
+ * Grid: 1280px max · 12-col · 24px gutter
  */
 
 :root {
   /* ============================================
-     BACKGROUNDS — Blink UX dark
-     Blue-shifted near-black surfaces.
+     BACKGROUNDS — Ramotion light-first
+     #fafafa default; dark sections use #262626.
      ============================================ */
 
-  --color-bg-primary: #121215;            /* Blink bg-dark verbatim */
-  --color-bg-secondary: #17171b;          /* one step lighter */
-  --color-bg-tertiary: #1c1c21;           /* nested */
-  --color-bg-elevated: #212124;           /* Blink surface-dark verbatim */
-  --color-bg-hover: #2c2c30;
-  --color-bg-inset: #0e0e11;              /* deepest / footer */
+  --color-bg-primary: #fafafa;
+  --color-bg-secondary: #f2f2f2;
+  --color-bg-tertiary: #ebebeb;
+  --color-bg-elevated: #ffffff;
+  --color-bg-hover: #f5f5f5;
+  --color-bg-inset: #e8e8e8;
+
+  /* Dark section surfaces */
+  --color-bg-dark: #141414;
+  --color-surface-dark: #262626;
 
   /* ============================================
-     TEXT
+     TEXT — Ramotion
      ============================================ */
 
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #bdbcba;        /* Blink text-muted-dark verbatim */
-  --color-text-tertiary: #8e8e8e;         /* Blink text-muted verbatim */
-  --color-text-muted: #666669;
-  --color-text-disabled: #2e2e32;
+  --color-text-primary: #141414;
+  --color-text-secondary: #3a3a3a;
+  --color-text-tertiary: #6f7984;
+  --color-text-muted: #6f7984;
+  --color-text-disabled: #c0c0c0;
   --color-text-on-accent: #ffffff;
+  --color-text-on-dark: #ffffff;
+  --color-text-inverse: #ffffff;
 
   /* ============================================
-     ACCENT — Blink UX electric blue
+     BRAND COLORS — Ramotion electric blue
      ============================================ */
 
-  --color-accent: #0090ff;                /* Blink primary verbatim */
-  --color-accent-text: #40aaff;           /* brighter for small text on dark */
-  --color-accent-hover: #2a6de1;          /* Blink accent-blue verbatim */
-  --color-accent-muted: #1a5eb8;
-  --color-accent-subtle: rgba(0, 144, 255, 0.12);
-  --color-accent-glow: rgba(0, 144, 255, 0.35);
+  --color-primary: #2f77ea;
+  --color-primary-hover: #1f60d0;
+  --color-primary-subtle: rgba(47, 119, 234, 0.08);
+  --color-primary-glow: rgba(47, 119, 234, 0.25);
+
+  --color-accent: #2f77ea;         /* Ramotion uses a single blue accent */
+  --color-accent-hover: #1f60d0;
+  --color-accent-subtle: rgba(47, 119, 234, 0.08);
 
   /* ============================================
-     BORDERS
+     BORDERS — Ramotion
      ============================================ */
 
-  --color-border: #2a2a2e;
-  --color-border-hover: #363639;
-  --color-border-strong: #444448;
-  --color-border-accent: #0090ff;
+  --color-border: #e0e0e0;
+  --color-border-hover: #c8c8c8;
+  --color-border-strong: #000000;
+  --color-border-accent: #2f77ea;
 
   /* ============================================
      SEMANTIC
      ============================================ */
 
-  --color-success: #34D399;
-  --color-success-muted: rgba(52, 211, 153, 0.12);
-  --color-error: #F87171;
-  --color-error-muted: rgba(248, 113, 113, 0.12);
-  --color-warning: #FBBF24;
-  --color-warning-muted: rgba(251, 191, 36, 0.12);
+  --color-success: #16a34a;
+  --color-success-muted: rgba(22, 163, 74, 0.10);
+  --color-error: #dc2626;
+  --color-error-muted: rgba(220, 38, 38, 0.10);
+  --color-warning: #d97706;
+  --color-warning-muted: rgba(217, 119, 6, 0.10);
 
   /* ============================================
-     GRADIENTS
+     GRADIENTS — Ramotion blue
      ============================================ */
 
-  --gradient-accent: linear-gradient(135deg, #0090ff 0%, #2a6de1 100%);
-  --gradient-subtle: radial-gradient(ellipse at top, rgba(0, 144, 255, 0.07), transparent 70%);
+  --gradient-primary: linear-gradient(135deg, #2f77ea 0%, #1f60d0 100%);
+  --gradient-subtle: radial-gradient(ellipse at top, rgba(47, 119, 234, 0.05), transparent 70%);
 
   /* ============================================
-     TYPOGRAPHY — Geist Sans (NeueHaasGrot substitute)
-     Blink UX dual-font: display + text (both Geist here).
+     TYPOGRAPHY
+     KeplerStd loaded via Adobe Fonts (@import in globals.css).
+     Roboto loaded via next/font/google (--font-roboto CSS variable).
      ============================================ */
 
-  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), 'JetBrains Mono', 'IBM Plex Mono', 'Courier New', monospace;
+  --font-display: 'kepler-std', Georgia, 'Times New Roman', serif;
+  --font-sans: var(--font-roboto, 'Roboto'), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', 'Courier New', monospace;
 
-  /* Blink UX type scale */
-  --text-display: 4rem;        /* 64px · 700 — DISPLAY */
-  --text-h1: 3rem;             /* 48px · 700 · 1.15lh — HEADING XL */
-  --text-h2: 2rem;             /* 32px · 700 · 1.15lh — HEADING LG */
+  /* Creative Navy type scale */
+  --text-display: 4.5rem;      /* 72px · 400 weight · 1.2lh — KeplerStd hero display */
+  --text-h1: 2.75rem;          /* 44px · 700 · 1.2lh */
+  --text-h2: 1.5rem;           /* 24px · 700 · 1.2lh */
   --text-h3: 1.25rem;          /* 20px */
   --text-body-lg: 1.125rem;    /* 18px */
-  --text-body: 1rem;           /* 16px · 400 · 1.6lh */
-  --text-sm: 0.875rem;         /* 14px */
-  --text-xs: 0.8125rem;        /* 13px · CAPTION · 1.4lh */
+  --text-body: 1rem;           /* 16px · 400 · 1.5lh */
+  --text-sm: 0.875rem;         /* 14px · caption */
+  --text-xs: 0.6875rem;        /* 11px · labels */
 
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  --leading-tight: 1.15;       /* Blink heading lh */
-  --leading-snug: 1.25;
-  --leading-normal: 1.60;      /* Blink body lh */
-  --leading-relaxed: 1.70;
+  --leading-tight: 1.2;        /* headlines */
+  --leading-snug: 1.35;
+  --leading-normal: 1.5;       /* body */
+  --leading-relaxed: 1.6;
 
   --tracking-tight: -0.01em;
   --tracking-normal: 0;
@@ -105,12 +118,25 @@
   --tracking-widest: 0.14em;
 
   /* ============================================
-     SPACING — Blink UX base unit: 4px
+     SPACING — 4px base unit
+     Scale: 4 · 8 · 16 · 20 · 24 · 40 · 48 · 64 · 96 · 128
      ============================================ */
 
-  --space-section: 2.5rem;     /* 40px — Blink section padding */
-  --space-component: 2rem;     /* 32px */
-  --space-element: 1.25rem;    /* 20px */
+  --space-1: 0.25rem;          /* 4px */
+  --space-2: 0.5rem;           /* 8px */
+  --space-4: 1rem;             /* 16px */
+  --space-5: 1.25rem;          /* 20px */
+  --space-6: 1.5rem;           /* 24px */
+  --space-10: 2.5rem;          /* 40px */
+  --space-12: 3rem;            /* 48px */
+  --space-16: 4rem;            /* 64px */
+  --space-24: 6rem;            /* 96px */
+  --space-32: 8rem;            /* 128px */
+
+  --space-section-v: 4rem;     /* 64px vertical section padding */
+  --space-section-h: 2.5rem;   /* 40px horizontal section padding */
+
+  /* Legacy aliases — preserved for existing components */
   --space-xs: 0.25rem;         /* 4px */
   --space-sm: 0.5rem;          /* 8px */
   --space-md: 0.75rem;         /* 12px */
@@ -118,42 +144,46 @@
   --space-xl: 1.25rem;         /* 20px */
   --space-2xl: 1.5rem;         /* 24px */
   --space-3xl: 2rem;           /* 32px */
+  --space-component: 2.5rem;   /* 40px */
+  --space-element: 1.25rem;    /* 20px */
+  --space-section: 4rem;       /* 64px */
 
   /* ============================================
-     LAYOUT — 1440px max, 12-col, 24px gutter
+     LAYOUT — 1280px max · 12-col · 24px gutter
      ============================================ */
 
-  --container-max: 1440px;
-  --container-narrow: 720px;
-  --container-wide: 1360px;
+  --container-max: 1280px;
+  --container-narrow: 680px;
+  --container-wide: 1200px;
+  --grid-columns: 12;
+  --grid-gutter: 1.5rem;       /* 24px */
 
   /* ============================================
-     RADIUS — Blink UX scale
-     xxs 2px · sm 8px · md 16px · full 999px
+     RADIUS — Creative Navy scale
+     sm 4px · md 8px · lg 20px · full 9999px
      ============================================ */
 
   --radius-none: 0;
-  --radius-xxs: 2px;
-  --radius-sm: 8px;
-  --radius-md: 16px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
   --radius-lg: 20px;
-  --radius-xl: 999px;
-  --radius-full: 999px;
+  --radius-xl: 40px;
+  --radius-full: 9999px;
 
   /* ============================================
-     SHADOWS
+     SHADOWS — light-surface defaults
      ============================================ */
 
   --shadow-none: none;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.30);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.45);
-  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.03);
-  --shadow-glow: 0 0 0 1px rgba(0, 144, 255, 0.45),
-                 0 8px 24px -4px rgba(0, 144, 255, 0.30);
-  --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.05);
-  --shadow-card-hover: 0 4px 20px -4px rgba(0, 0, 0, 0.60),
-                       0 0 0 1px rgba(255, 255, 255, 0.09);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
+  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --shadow-glow: 0 0 0 1px rgba(47, 119, 234, 0.30),
+                 0 8px 24px -4px rgba(47, 119, 234, 0.20);
+  --shadow-card: 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 4px 16px -4px rgba(0, 0, 0, 0.12),
+                       0 0 0 1px rgba(47, 119, 234, 0.20);
 
   /* ============================================
      ANIMATION
@@ -178,53 +208,55 @@
      OVERLAYS
      ============================================ */
 
-  --overlay-light: rgba(0, 144, 255, 0.06);
-  --overlay-dim: rgba(0, 0, 0, 0.60);
+  --overlay-light: rgba(47, 119, 234, 0.04);
+  --overlay-dim: rgba(0, 0, 0, 0.50);
 }
 
 /* ============================================
-   LIGHT MODE — Blink UX light (#f1efec neutral base)
+   DARK MODE — for full-page dark theme toggle.
+   Individual dark sections use bg-[var(--color-bg-dark)]
+   directly without needing this override.
    ============================================ */
-[data-theme="light"] {
-  --color-bg-primary: #f1efec;
-  --color-bg-secondary: #e8e6e3;
-  --color-bg-tertiary: #dedad6;
-  --color-bg-elevated: #ffffff;
-  --color-bg-hover: #eae8e5;
-  --color-bg-inset: #dbd9d6;
+[data-theme="dark"] {
+  --color-bg-primary: #141414;
+  --color-bg-secondary: #1c1c1c;
+  --color-bg-tertiary: #242424;
+  --color-bg-elevated: #262626;
+  --color-bg-hover: #2e2e2e;
+  --color-bg-inset: #0a0a0a;
 
-  --color-text-primary: #0a0a0f;
-  --color-text-secondary: #4b4b57;
-  --color-text-tertiary: #6e6e78;
-  --color-text-muted: #8e8e8e;
-  --color-text-disabled: #c5c5ce;
-  --color-text-on-accent: #ffffff;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #d4d4d4;
+  --color-text-tertiary: #9ca3af;
+  --color-text-muted: #6b7280;
+  --color-text-disabled: #3a3a3a;
 
-  --color-accent: #0073cc;
-  --color-accent-text: #0073cc;
-  --color-accent-hover: #2a6de1;
-  --color-accent-muted: #0090ff;
-  --color-accent-subtle: rgba(0, 115, 204, 0.08);
-  --color-accent-glow: rgba(0, 115, 204, 0.20);
+  --color-primary: #4d8ef0;
+  --color-primary-hover: #6aa0f4;
+  --color-primary-subtle: rgba(47, 119, 234, 0.15);
+  --color-primary-glow: rgba(47, 119, 234, 0.35);
 
-  --color-border: #d8d6d3;
-  --color-border-hover: #c0bebb;
-  --color-border-strong: #a8a6a3;
-  --color-border-accent: #0073cc;
+  --color-accent: #4d8ef0;
+  --color-accent-hover: #6aa0f4;
+  --color-accent-subtle: rgba(47, 119, 234, 0.15);
 
-  --gradient-accent: linear-gradient(135deg, #0073cc 0%, #0090ff 100%);
-  --gradient-subtle: radial-gradient(ellipse at top, rgba(0, 115, 204, 0.06), transparent 70%);
+  --color-border: #2a2a2a;
+  --color-border-hover: #3a3a3a;
+  --color-border-strong: #555555;
+  --color-border-accent: #4d8ef0;
 
-  --shadow-sm: 0 1px 2px rgba(15, 15, 25, 0.06);
-  --shadow-md: 0 4px 12px rgba(15, 15, 25, 0.08);
-  --shadow-lg: 0 12px 32px rgba(15, 15, 25, 0.10);
-  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 1);
-  --shadow-glow: 0 0 0 1px rgba(0, 115, 204, 0.25),
-                 0 8px 24px -4px rgba(0, 115, 204, 0.20);
-  --shadow-card: 0 0 0 1px rgba(0, 0, 0, 0.06);
-  --shadow-card-hover: 0 2px 8px -2px rgba(0, 0, 0, 0.08),
-                       0 0 0 1px rgba(0, 0, 0, 0.08);
+  --gradient-subtle: radial-gradient(ellipse at top, rgba(47, 119, 234, 0.08), transparent 70%);
 
-  --overlay-light: rgba(0, 115, 204, 0.05);
-  --overlay-dim: rgba(15, 15, 25, 0.60);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.40);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.50);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.60);
+  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  --shadow-glow: 0 0 0 1px rgba(47, 119, 234, 0.40),
+                 0 8px 24px -4px rgba(47, 119, 234, 0.25);
+  --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-card-hover: 0 4px 20px -4px rgba(0, 0, 0, 0.60),
+                       0 0 0 1px rgba(47, 119, 234, 0.20);
+
+  --overlay-light: rgba(47, 119, 234, 0.06);
+  --overlay-dim: rgba(0, 0, 0, 0.70);
 }
