@@ -12,6 +12,7 @@
  */
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import { BackToTop } from '@/components/atoms/BackToTop/BackToTop';
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -19,6 +20,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <Navigation />
       <main id="main-content">{children}</main>
       <Footer />
+      <BackToTop />
     </div>
   );
 }

@@ -44,14 +44,20 @@ export default function Navigation() {
       )}
     >
       <div className="max-w-[var(--container-wide)] mx-auto px-10 lg:px-20">
-        <div className="flex items-center justify-between pt-[14px] pb-3">
+        <div className={cn(
+          'flex items-center justify-between transition-[padding] duration-300 ease-in-out',
+          isScrolled ? 'pt-1 pb-1' : 'pt-[14px] pb-3'
+        )}>
           {/* Logo */}
           <Link
             href="/"
             className="-ml-3 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]"
             aria-label="Artemis Design Labs — Home"
           >
-            <Logo size="lg" />
+            <Logo className={cn(
+              'transition-[height] duration-300 ease-in-out',
+              isScrolled ? 'h-[44px]' : 'h-[76px]'
+            )} />
           </Link>
 
           {/* Desktop nav */}

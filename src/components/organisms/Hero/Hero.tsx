@@ -83,7 +83,7 @@ export function Hero() {
                 Book a free audit
               </Link>
               <Link
-                href="/work"
+                href="#clients"
                 className={cn(
                   'inline-flex items-center justify-center gap-2 h-[44px] px-7 rounded-[var(--radius-md)]',
                   'border border-[var(--color-border-strong)] text-[var(--color-text-secondary)] font-bold text-[14px]',
@@ -92,7 +92,7 @@ export function Hero() {
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]'
                 )}
               >
-                Our Methodology →
+                About us →
               </Link>
             </div>
           </div>

@@ -122,9 +122,12 @@ export default function ContactPage() {
           />
         </div>
       </section>
+      {/* data-cfasync="false" tells Cloudflare Rocket Loader to skip this script
+          so it isn't sandboxed in an about:blank frame where it can't execute */}
       <Script
         src="https://assets.calendly.com/assets/external/widget.js"
         strategy="afterInteractive"
+        data-cfasync="false"
       />
 
       {/* Form section */}
