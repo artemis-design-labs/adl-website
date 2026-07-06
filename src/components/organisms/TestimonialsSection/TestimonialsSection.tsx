@@ -1,7 +1,7 @@
 'use client';
 
-import { cn } from '@/lib/cn';
 import { useFadeInOnView } from '@/hooks/useFadeInOnView';
+import { cn } from '@/lib/cn';
 
 const TESTIMONIALS = [
   {
@@ -29,49 +29,51 @@ export function TestimonialsSection() {
 
   return (
     /*
-     * Interactivism pattern: 3-col dark cards, each opened by a large accent
-     * quotation mark (blue instead of yellow). Quote body fills the card,
-     * attribution sits at the very bottom separated by a thin rule.
-     * Blink UX tokens: bg-elevated section, bg-primary cards, radius-md, accent color.
+     * Interactivism testimonials pattern — dark bg, plain bold h2,
+     * 3 equal cards each opened by a large accent quotation mark,
+     * quote body fills card, attribution separated by thin rule at bottom.
      */
-    <section ref={ref} className="py-10 bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)]">
-      <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-8">
+    <section
+      ref={ref}
+      className="bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)] py-20 md:py-28"
+    >
+      <div className="max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
 
-        <p
-          className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--color-accent-text)] mb-10 fade-up"
+        <h2
+          className={cn(
+            'text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-[1.05]',
+            'tracking-[-0.025em] text-[var(--color-text-primary)] mb-12 fade-up'
+          )}
           data-visible={dataVisible}
         >
-          WHAT FOUNDERS SAY
-        </p>
+          What Our Clients Say
+        </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {TESTIMONIALS.map((t, i) => (
             <article
               key={i}
               className={cn(
                 'bg-[var(--color-bg-primary)] border border-[var(--color-border)]',
-                'rounded-[var(--radius-md)] p-6 flex flex-col',
-                'fade-up'
+                'rounded-[var(--radius-md)] p-6 flex flex-col fade-up'
               )}
               data-visible={dataVisible}
-              style={{ transitionDelay: `${60 + i * 80}ms` }}
+              style={{ transitionDelay: `${80 + i * 80}ms` }}
             >
               {/* Interactivism: large accent quotation mark as card opener */}
               <span
-                className="text-[3.5rem] font-bold leading-none text-[var(--color-accent)] mb-3 select-none"
+                className="text-[3rem] font-bold leading-none text-[var(--color-accent)] mb-4 select-none"
                 aria-hidden="true"
               >
                 &ldquo;
               </span>
 
-              {/* Quote body */}
-              <blockquote className="text-[14px] text-[var(--color-text-primary)] leading-[1.7] flex-1 mb-6">
+              <blockquote className="text-[14px] text-[var(--color-text-secondary)] leading-[1.7] flex-1 mb-6">
                 {t.quote}
               </blockquote>
 
-              {/* Thin rule + attribution */}
               <div className="border-t border-[var(--color-border)] pt-4">
-                <p className="font-[var(--font-mono)] text-[11px] text-[var(--color-text-tertiary)] uppercase tracking-[0.08em] leading-[1.5]">
+                <p className="text-[12px] text-[var(--color-text-tertiary)] leading-[1.6]">
                   {t.author}<br />{t.company}
                 </p>
               </div>
