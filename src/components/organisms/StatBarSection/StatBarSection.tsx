@@ -3,7 +3,6 @@
 import { useFadeInOnView } from '@/hooks/useFadeInOnView';
 
 const METRICS = [
-  { value: '3–4 wks', label: 'Sprint delivery' },
   { value: '190K+',   label: 'AI training images' },
   { value: '5 states', label: 'Per component' },
   { value: '0',       label: 'Figma-only deliverables' },

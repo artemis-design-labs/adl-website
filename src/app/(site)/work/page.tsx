@@ -15,10 +15,9 @@ const PROJECTS = [
     client: 'HANDS AI',
     title: 'HANDS AI — WIC Case Management Platform',
     description:
-      'A complete redesign of a WIC case management platform with a custom AI-powered design system and production React frontend — delivered in three weeks. First PR passed senior-engineer review on submission.',
+      'A complete redesign of a WIC case management platform with a custom AI-powered design system and production React frontend. First PR passed senior-engineer review on submission.',
     stats: [
       { label: 'Outcome',   value: '40% faster' },
-      { label: 'Timeline',  value: '3 weeks'    },
       { label: 'PR review', value: '94% pass'   },
     ],
     href: '/hands-ai',
@@ -32,7 +31,6 @@ const PROJECTS = [
     stats: [
       { label: 'Decision time', value: '60% faster' },
       { label: 'Dashboards',    value: '30+'         },
-      { label: 'Timeline',      value: '3 weeks'     },
     ],
     href: '/insight',
   },
@@ -45,7 +43,6 @@ const PROJECTS = [
     stats: [
       { label: 'Velocity',  value: '+25%'    },
       { label: 'Items',     value: '10K+'    },
-      { label: 'Timeline',  value: '3 weeks' },
     ],
     href: '/my-project-inbox',
   },

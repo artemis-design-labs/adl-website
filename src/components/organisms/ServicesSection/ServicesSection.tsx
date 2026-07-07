@@ -5,24 +5,29 @@ import { cn } from '@/lib/cn';
 
 const SERVICES = [
   {
-    title: 'Design System Creation',
+    title: 'Design Language Architecture',
     description:
-      'Tokenized component libraries built from the ground up — production-ready in Figma and code, documented, and scalable across your entire product surface.',
+      'The token-based foundation that gives every design decision a single source of truth across your entire product.',
   },
   {
-    title: 'Design-to-Code Handoff',
+    title: 'Figma-to-Code Pipeline',
     description:
-      'Governed pipelines that close the gap between Figma and engineering — every component ships exactly as designed, with full state coverage.',
+      'Automated sync between design intent and production code, eliminating the translation layer that costs engineering teams hours every sprint.',
   },
   {
-    title: 'AI Model Training',
+    title: 'Agentic UI Generation',
     description:
-      'Custom AI trained on your design tokens, component patterns, and brand rules — so your team ships UI faster with significantly less manual lift.',
+      'AI-powered pipelines that produce production-ready UI at the speed your roadmap demands, without the manual overhead.',
   },
   {
-    title: 'Governance Layer',
+    title: 'Drift Detection & Governance',
     description:
-      'Automated drift detection and enforcement across your product surface — catching UI violations before they reach production.',
+      'Continuous monitoring that catches inconsistencies before they compound, keeping every layer aligned as your team scales.',
+  },
+  {
+    title: 'Infrastructure Lifecycle Management',
+    description:
+      'Ongoing evolution of the system as your product, team, and stack grow — so the infrastructure never becomes the constraint.',
   },
 ];
 
@@ -37,7 +42,7 @@ export function ServicesSection() {
     <section
       ref={ref}
       id="services"
-      className="bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)] py-20 md:py-28"
+      className="bg-[var(--color-bg-primary)] border-b border-[var(--color-border)] py-20 md:py-28"
     >
       <div className="max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
 
@@ -59,7 +64,7 @@ export function ServicesSection() {
           data-visible={dataVisible}
           style={{ transitionDelay: '60ms' }}
         >
-          Everything your UI<br />infrastructure needs.
+          One Single Ecosystem designed to scale<br />with your product and team.
         </h2>
 
         {/* Body */}
@@ -68,9 +73,9 @@ export function ServicesSection() {
           data-visible={dataVisible}
           style={{ transitionDelay: '120ms' }}
         >
-          Artemis Design Labs delivers end-to-end UI infrastructure — from design system
-          architecture and component engineering through to AI model training,
-          governed code handoff, and ongoing drift monitoring.
+          Most infrastructure work fixes one layer at a time. ADL architects every layer
+          as a unified system — so design decisions, code, and documentation compound
+          together instead of drifting apart.
         </p>
 
         {/* Horizontal divider */}
@@ -81,7 +86,7 @@ export function ServicesSection() {
           aria-hidden="true"
         />
 
-        {/* 2×2 service grid */}
+        {/* Service grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-10">
           {SERVICES.map((svc, i) => (
             <div

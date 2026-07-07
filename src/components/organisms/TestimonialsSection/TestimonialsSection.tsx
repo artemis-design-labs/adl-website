@@ -6,19 +6,19 @@ import { cn } from '@/lib/cn';
 const TESTIMONIALS = [
   {
     quote:
-      "We'd burned $40K on an agency that delivered Figma files our engineers couldn't use. ADL delivered Figma and production-ready React in three weeks — and the code actually passed review the first time. I didn't know that was possible at this stage.",
+      "We'd burned $40K on an agency that delivered Figma files our engineers couldn't use. ADL delivered Figma and production-ready React — and the code actually passed review the first time. I didn't know that was possible at this stage.",
     author: 'CTO & Co-founder',
     company: 'Series A Healthcare SaaS',
   },
   {
     quote:
-      "We lost an enterprise deal because the buyer flagged UI inconsistency in the demo. Six weeks after ADL built our governance system, we closed the same deal. That's the only number that matters.",
+      "We lost an enterprise deal because the buyer flagged UI inconsistency in the demo. After ADL built our governance system, we closed the same deal. That's the only number that matters.",
     author: 'CEO & Co-founder',
     company: 'Seed-Stage B2B SaaS',
   },
   {
     quote:
-      "Nobody on our team owned UI infrastructure — everyone built inconsistently and the debt was invisible until it wasn't. ADL built the governance layer and ran it for us. New engineers ship their first feature in three days now. It used to take two weeks.",
+      "Nobody on our team owned UI infrastructure — everyone built inconsistently and the debt was invisible until it wasn't. ADL built the governance layer and ran it for us. New engineers ship their first feature significantly faster now.",
     author: 'VP of Engineering',
     company: 'Series A Analytics Platform',
   },

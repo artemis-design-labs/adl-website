@@ -11,13 +11,12 @@ const PROJECTS = [
     client: 'HANDS AI',
     title: 'Building a WIC case management platform that cut processing time by 40%.',
     description:
-      'A custom AI-powered design system and production React frontend delivered in three weeks. The first PR passed senior-engineer review on submission — no revision cycles, no cleanup sprint.',
+      'A custom AI-powered design system and production React frontend. The first PR passed senior-engineer review on submission — no revision cycles, no cleanup sprint.',
     image: '/images/hands-ai/cover.png',
     href: '/hands-ai',
     metrics: [
-      { value: '40%',    label: 'Faster case processing' },
-      { value: '3 wks',  label: 'Delivery time' },
-      { value: '94%',    label: 'First-PR approval rate' },
+      { value: '40%',  label: 'Faster case processing' },
+      { value: '94%',  label: 'First-PR approval rate' },
     ],
   },
   {
@@ -32,7 +31,6 @@ const PROJECTS = [
     metrics: [
       { value: '60%',  label: 'Decision time reduction' },
       { value: '30+',  label: 'Dashboards supported' },
-      { value: '3 wks', label: 'Delivery time' },
     ],
   },
   {
@@ -41,13 +39,12 @@ const PROJECTS = [
     client: 'My Project Inbox',
     title: 'A unified engineering surface that increased team velocity by 25%.',
     description:
-      'Cuts context-switching between Linear, GitHub, and Slack. Full state coverage with virtualized lists handling 10K+ items. Shipped in three weeks with zero scope creep.',
+      'Cuts context-switching between Linear, GitHub, and Slack. Full state coverage with virtualized lists handling 10K+ items. Zero scope creep.',
     image: '/images/my-project-inbox/cover.png',
     href: '/my-project-inbox',
     metrics: [
       { value: '25%',   label: 'Team velocity increase' },
       { value: '10K+',  label: 'Items virtualized' },
-      { value: '3 wks', label: 'Delivery time' },
     ],
   },
 ];

@@ -20,6 +20,7 @@ const articles = [
 export default function PublicationPage() {
     return (
         <>
+      <section className="bg-[var(--color-bg-primary)] border-b border-[var(--color-border)]">
       <div className="max-w-[var(--container-max)] mx-auto px-10 lg:px-20 pt-36 pb-16 md:pt-44">
         <h1 className="text-4xl md:text-5xl font-semibold tracking-[-0.025em] mb-10 text-[var(--color-text-primary)]">Online Publication</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -42,7 +43,8 @@ export default function PublicationPage() {
           ))}
         </div>
       </div>
-      <CTASection />
+      </section>
+      <CTASection background="elevated" />
     </>
     );
 } 

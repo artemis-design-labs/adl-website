@@ -6,11 +6,11 @@ import { ThemeToggle } from '@/components/atoms/ThemeToggle';
 import { Logo } from '@/components/atoms/Logo';
 import { cn } from '@/lib/cn';
 
-const NAV_LINKS = [
+const NAV_LINKS: { href: string; label: string; external?: boolean }[] = [
   { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
   { href: '/work', label: 'Work' },
-  { href: '/blog', label: 'Blog' },
+  { href: 'https://medium.com/ai-ui', label: 'Blog', external: true },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -68,6 +68,8 @@ export default function Navigation() {
                   <Link
                     role="menuitem"
                     href={link.href}
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
                     className={cn(
                       'px-3 py-2 rounded-md text-sm',
                       'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]',
@@ -147,6 +149,8 @@ export default function Navigation() {
               <li key={link.href}>
                 <Link
                   href={link.href}
+                  target={link.external ? '_blank' : undefined}
+                  rel={link.external ? 'noopener noreferrer' : undefined}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block px-3 py-3 rounded-md text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)]"
                 >

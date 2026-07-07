@@ -13,14 +13,26 @@ const SERVICES = [
   {
     num: '01',
     title: 'Build Track',
-    tagline: 'From fragmented to governed in 3–4 weeks.',
+    tagline: 'Your foundation for governed, scalable UI.',
     description:
-      'We audit your UI infrastructure, then build a custom AI-powered governance system — component architecture, drift detection, and a Figma-to-React pipeline your team owns after delivery.',
-    features: [
-      'User Research · Token Architecture · Component Audit',
-      'Figma Components · React · Storybook',
-      'WCAG 2.1 AA · Accessibility Baked In',
-      'Governance Layer · Drift Detection',
+      'For teams that want to own their UI infrastructure but need the expertise to build it right. ADL audits what\'s broken, designs a custom governance system around your stack, and delivers an operational capability your team can run — not a Figma file that becomes tomorrow\'s debt.',
+    capabilities: [
+      {
+        title: 'Infrastructure Foundation',
+        description: 'A custom governance system built around your stack, giving your team a single source of truth between design and code from day one.',
+      },
+      {
+        title: 'Automated Design-to-Code',
+        description: 'An AI-powered pipeline that converts Figma to production-ready React, eliminating the translation work that burns engineering cycles every sprint.',
+      },
+      {
+        title: 'Drift Prevention Architecture',
+        description: 'Governance rules and detection baselines built into the system before handoff, so consistency is enforced structurally — not manually.',
+      },
+      {
+        title: 'Team Ownership by Design',
+        description: 'Your team is embedded throughout the build so when ADL hands off, you run a system you understand — not a dependency you manage.',
+      },
     ],
     href: '/contact?type=build-track',
   },
@@ -29,42 +41,26 @@ const SERVICES = [
     title: 'Operate Track',
     tagline: 'We run your UI infrastructure. You ship product.',
     description:
-      'We take over and run your entire UI infrastructure operation. Drift monitoring, governed component delivery, governance enforcement, and monthly health reports.',
-    features: [
-      'Up to 5 Components/Month · Figma + Code',
-      'AI Drift Detection · Monthly Health Reports',
-      'Office Hours · Design + Engineering',
-      'Governance · Scales 5 to 500',
+      'For teams that want UI infrastructure to work without dedicating internal headcount to it. ADL runs the entire operation — powered by a coordinated system of AI agents — so your engineers stay focused on product while the foundation stays governed underneath them.',
+    capabilities: [
+      {
+        title: 'Always-On Infrastructure Management',
+        description: 'A coordinated system of AI agents that keeps your UI layer stable, consistent, and evolving — without internal headcount dedicated to it.',
+      },
+      {
+        title: 'Continuous Design-Code Alignment',
+        description: 'Bidirectional sync that catches drift before it compounds, keeping what ships matching what was designed.',
+      },
+      {
+        title: 'Autonomous Component Delivery',
+        description: 'Production-ready components generated and governed on a monthly cadence, without engineering time spent on recurring UI work.',
+      },
+      {
+        title: 'Operational Visibility',
+        description: 'Monthly health reports showing what was maintained, what was added, and the velocity impact — so you always know the infrastructure is working.',
+      },
     ],
     href: '/contact?type=operate-track',
-  },
-  {
-    num: '03',
-    title: 'Agentic Ecosystem',
-    tagline: '500-person quality. 15-person startup pricing.',
-    description:
-      'A master UI Infrastructure Architect agent coordinating specialized sub-agents that autonomously govern, maintain, and scale your frontend infrastructure.',
-    features: [
-      'Master UI Infrastructure Agent · Autonomous Governance',
-      'Token Validation Pipeline · Before Code Merge',
-      'Figma ↔ React Sync · Bidirectional · Continuous',
-      'WCAG 2.1 AA · Automated Checks',
-    ],
-    href: '/contact?type=agentic',
-  },
-  {
-    num: '04',
-    title: 'UI Forge',
-    tagline: 'Figma in. Production React out.',
-    description:
-      'Our internal AI engine converts Figma designs into production-ready React — all 5 interaction states, full token integration, governance review before output touches your codebase.',
-    features: [
-      'TypeScript + Tailwind · Production Ready',
-      'Full State Coverage · Beyond the Happy Path',
-      'Performance Optimization · 10K+ Row Virtualization',
-      'PR-Ready · Passes Review on First Submission',
-    ],
-    href: '/contact?type=ui-forge',
   },
 ];
 
@@ -72,55 +68,53 @@ const PROCESS = [
   {
     num: '01',
     title: 'UI Audit',
-    description: 'We map your component drift, token sprawl, and handoff gaps in 48 hours.',
+    description: 'We identify where your UI is drifting, where ownership is missing, and what needs to be built.',
   },
   {
     num: '02',
     title: 'System Architecture',
-    description: 'Token hierarchy, component API, governance rules — designed for your stack.',
+    description: 'We design a governance system around your stack — the foundation every component is built on.',
   },
   {
     num: '03',
     title: 'AI-Assisted Build',
-    description: 'Our agents convert Figma to production React, state by state.',
+    description: 'Our agents convert design intent into production-ready code, consistently, across every component.',
   },
   {
     num: '04',
     title: 'Governance Layer',
-    description: 'Drift detection, enforcement rules, and monthly health reports.',
+    description: 'Drift detection and enforcement are embedded before delivery — consistency is structural, not manual.',
   },
   {
     num: '05',
     title: 'Handoff or Operate',
-    description: 'Your team takes ownership — or we keep running it under the Operate Track.',
+    description: 'Your team takes ownership, or ADL keeps running it. The infrastructure doesn\'t stop at delivery.',
   },
 ];
 
 const OUTCOMES = [
-  '25+ components in Figma AND your framework',
-  'Design tokens synced across the entire product',
-  'Full state coverage: loading · error · empty',
-  'Storybook documentation built for engineers',
-  'WCAG 2.1 AA accessibility from day one',
-  '30-day post-delivery support included',
+  'Engineering ships UI without rebuilding the same patterns every sprint',
+  'Design and code share a single source of truth — drift is caught before it ships',
+  'New engineers contribute from day one, without weeks of codebase archaeology',
+  'Every component covers every interaction state — QA cycles shrink',
+  'The system scales with your product without rebuilding when your team doubles',
+  'Governance is structural — not dependent on whoever remembered to check',
 ];
 
 const PRICING = [
   {
     num: '01',
     name: 'Build Track',
-    descriptor: 'Fixed Scope · 3–4 Weeks',
-    price: '$15K',
-    priceRange: '– $25K',
-    priceNote: 'one-time',
+    descriptor: 'Fixed Scope · One-Time',
     featured: false,
     features: [
-      '25+ components: Figma + React',
-      'Full token architecture',
-      'All 5 interaction states',
-      'Storybook docs',
-      'WCAG 2.1 AA baked in',
-      '30-day support',
+      'Component library: Figma + production React',
+      'Token architecture tailored to your stack',
+      'Full interaction state coverage',
+      'AI-powered Figma → React pipeline',
+      'Storybook documentation',
+      'WCAG 2.1 AA accessibility',
+      'Post-delivery support included',
     ],
     href: '/contact?type=build-track',
   },
@@ -128,55 +122,17 @@ const PRICING = [
     num: '02',
     name: 'Operate Track',
     descriptor: 'Monthly Retainer · Ongoing',
-    price: '$4K',
-    priceRange: '– $15K',
-    priceNote: 'per month',
     featured: true,
     features: [
-      'Up to 5 new components/month',
-      'AI drift detection + alerts',
-      'Monthly health reports',
+      'Ongoing component delivery: Figma + React',
+      'Agentic drift detection + alerts',
+      'Figma ↔ React continuous sync',
+      'Autonomous governance enforcement',
+      'Monthly infrastructure health reports',
       'Office hours included',
-      'Governance enforcement',
       'Priority response SLA',
     ],
     href: '/contact?type=operate-track',
-  },
-  {
-    num: '03',
-    name: 'UI Forge',
-    descriptor: 'Per Engagement · 2–3 Weeks',
-    price: '$8K',
-    priceRange: '– $15K',
-    priceNote: 'per engagement',
-    featured: false,
-    features: [
-      'Figma → production React',
-      'TypeScript + Tailwind',
-      'Full state coverage',
-      'Performance optimization',
-      'PR-ready first submission',
-      'Framework agnostic',
-    ],
-    href: '/contact?type=ui-forge',
-  },
-  {
-    num: '04',
-    name: 'Agentic Ecosystem',
-    descriptor: 'Custom Scope · Always On',
-    price: 'Custom',
-    priceRange: '',
-    priceNote: 'scoped per org',
-    featured: false,
-    features: [
-      'Master UI Architect agent',
-      'Automated drift detection',
-      'Figma ↔ React sync',
-      'Token validation pipeline',
-      'WCAG automated checks',
-      'Scale-stage governance',
-    ],
-    href: '/contact?type=agentic',
   },
 ];
 
@@ -273,7 +229,7 @@ export default function ServicesPage() {
               'text-[var(--color-text-primary)] mb-12 max-w-[600px]'
             )}
           >
-            Four ways to engage.<br />One standard of output.
+            Two ways to engage.<br />One standard of output.
           </h2>
 
           {/* Semiflat 2×2 numbered grid */}
@@ -283,14 +239,9 @@ export default function ServicesPage() {
                 key={svc.num}
                 className={cn(
                   'py-10 pr-10',
-                  // teal top border on every cell
                   'border-t-2 border-t-[var(--color-accent)]',
-                  // right border on odd (left column)
                   i % 2 === 0 && 'md:border-r md:border-r-[var(--color-border)]',
-                  // extra left padding on right column
                   i % 2 === 1 && 'md:pl-10',
-                  // bottom border on first row
-                  i < 2 && 'border-b border-b-[var(--color-border)]',
                 )}
               >
                 <span className="block font-[var(--font-mono)] text-[11px] text-[var(--color-accent)] uppercase tracking-[0.14em] mb-3">
@@ -308,21 +259,25 @@ export default function ServicesPage() {
                   {svc.description}
                 </p>
 
-                {/* Semiflat dot-separated feature tags */}
-                <div className="space-y-1.5 mb-6">
-                  {svc.features.map((f) => (
-                    <p key={f} className="text-[12px] text-[var(--color-accent)] leading-[1.5]">
-                      {f}
-                    </p>
+                <div className="space-y-4 mb-6">
+                  {svc.capabilities.map((cap) => (
+                    <div key={cap.title} className="flex items-start gap-3">
+                      <div
+                        className="w-[6px] h-[6px] flex-shrink-0 mt-[5px] bg-[var(--color-accent)]"
+                        aria-hidden="true"
+                      />
+                      <div>
+                        <p className="text-[13px] font-semibold text-[var(--color-text-primary)] leading-snug mb-0.5">
+                          {cap.title}
+                        </p>
+                        <p className="text-[12px] text-[var(--color-text-secondary)] leading-[1.6]">
+                          {cap.description}
+                        </p>
+                      </div>
+                    </div>
                   ))}
                 </div>
 
-                <Link
-                  href={svc.href}
-                  className="font-[var(--font-mono)] text-[12px] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-150 inline-flex items-center gap-1.5"
-                >
-                  Learn more →
-                </Link>
               </div>
             ))}
           </div>
@@ -351,10 +306,10 @@ export default function ServicesPage() {
             </div>
             <div className="flex items-end">
               <p className="text-[15px] text-[var(--color-text-secondary)] leading-[1.7]">
-                Our engagements are structured to move fast without cutting corners.
-                We start with a focused discovery phase, then move through architecture,
-                AI-assisted build, and governance — keeping you informed at every stage
-                without overwhelming your calendar.
+                Every engagement follows the same sequence — not because it's templated,
+                but because the order matters. Each phase builds on the last, so the system
+                you receive is coherent from the token layer up, not assembled from
+                independent decisions made in isolation.
               </p>
             </div>
           </div>
@@ -386,7 +341,7 @@ export default function ServicesPage() {
           {/* Semiflat "Typical outcomes" checkmark section */}
           <div className="mt-14 pt-10 border-t border-[var(--color-border)]">
             <p className="font-[var(--font-mono)] text-[12px] text-[var(--color-text-tertiary)] uppercase tracking-[0.14em] mb-5">
-              Typical outcomes:
+              What changes after:
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-3">
               {OUTCOMES.map((o) => (
@@ -401,12 +356,12 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ── 04 PRICING — Wandr Studio ───────────────────────────────────────── */}
+      {/* ── 04 ENGAGEMENT OPTIONS ───────────────────────────────────────────── */}
       <section className="bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)] py-20 md:py-28">
         <div className="max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
 
           <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-5">
-            Pricing
+            Engagement
           </p>
 
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
@@ -416,16 +371,16 @@ export default function ServicesPage() {
                 'text-[var(--color-text-primary)] max-w-[480px]'
               )}
             >
-              Outcome-based pricing. No surprises.
+              Scoped to your situation.
             </h2>
             <p className="text-[14px] text-[var(--color-text-secondary)] max-w-[360px] leading-[1.65]">
-              Every engagement is scoped precisely after the discovery call.
-              The proposal you sign is the proposal you pay.
+              Every engagement is scoped after a discovery call.
+              Pricing is determined by the complexity and scale of your infrastructure needs.
             </p>
           </div>
 
           {/* Wandr Studio pricing cards — dot-separated descriptors, → feature lists */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {PRICING.map((plan) => (
               <div
                 key={plan.num}
@@ -441,23 +396,9 @@ export default function ServicesPage() {
                   {plan.descriptor}
                 </p>
 
-                <h3 className="text-[16px] font-bold text-[var(--color-text-primary)] mb-3 leading-[1.2]">
+                <h3 className="text-[16px] font-bold text-[var(--color-text-primary)] mb-5 leading-[1.2]">
                   {plan.name}
                 </h3>
-
-                <div className="mb-5">
-                  <span className="text-[2rem] font-bold text-[var(--color-accent)] leading-none tracking-[-0.02em]">
-                    {plan.price}
-                  </span>
-                  {plan.priceRange && (
-                    <span className="text-[1.25rem] font-bold text-[var(--color-text-disabled)] leading-none">
-                      {plan.priceRange}
-                    </span>
-                  )}
-                  <p className="font-[var(--font-mono)] text-[11px] text-[var(--color-text-tertiary)] uppercase tracking-[0.1em] mt-1">
-                    {plan.priceNote}
-                  </p>
-                </div>
 
                 {/* Wandr Studio → feature list */}
                 <ul className="space-y-2.5 flex-1 mb-6">

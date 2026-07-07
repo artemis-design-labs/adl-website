@@ -35,7 +35,7 @@ export function OperationalMoatSection() {
               data-visible={dataVisible}
               style={{ transitionDelay: '60ms' }}
             >
-              We believe UI infrastructure is the only competitive moat that scales.
+              Your product can only scale as far as your UI infrastructure lets it.
             </h2>
           </div>
 
@@ -46,10 +46,10 @@ export function OperationalMoatSection() {
             style={{ transitionDelay: '140ms' }}
           >
             <p className="text-[16px] md:text-[17px] text-[var(--color-text-secondary)] leading-[1.7]">
-              Most agencies ship Figma files and call it done. We build the layer underneath
-              — the governance, the automation, the AI — that lets your product team ship UI
-              at scale without growing a design operations team to match. Every engagement
-              starts with architecture, not aesthetics.
+              Most agencies hand off a Figma file and leave your team to figure out the rest.
+              ADL builds the layer that makes everything else move faster — the architecture,
+              the automation, the guardrails — so your team ships consistent UI without a
+              growing design ops headcount. Every engagement starts with systems, not screens.
             </p>
           </div>
 

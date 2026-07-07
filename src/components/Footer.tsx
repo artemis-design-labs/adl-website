@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
-const FOOTER_NAV = [
+const FOOTER_NAV: { href: string; label: string; external?: boolean }[] = [
   { href: '/services', label: 'Services' },
   { href: '/work',     label: 'Work' },
-  { href: '/blog',     label: 'Blog' },
+  { href: 'https://medium.com/ai-ui', label: 'Blog', external: true },
   { href: '/contact',  label: 'Contact' },
 ];
 
@@ -12,7 +12,7 @@ const FOOTER_SOCIAL = [
   { href: 'https://github.com/artemis-design-labs',               label: 'GitHub' },
 ];
 
-const ADMIN_EMAIL = 'hello@artemisdesignlabs.com';
+const ADMIN_EMAIL = 'pritish@artemisdesignlabs.com';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -47,6 +47,8 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
+                      target={link.external ? '_blank' : undefined}
+                      rel={link.external ? 'noopener noreferrer' : undefined}
                       className="text-[13px] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-150"
                     >
                       {link.label}

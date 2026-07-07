@@ -7,7 +7,7 @@ import { cn } from '@/lib/cn';
 import { CTASection } from '@/components/organisms/CTASection';
 
 const TURNSTILE_REQUIRED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
-const ADMIN_EMAIL = 'hello@artemisdesignlabs.com';
+const ADMIN_EMAIL = 'pritish@artemisdesignlabs.com';
 
 const SERVICES = [
   { value: 'audit',      label: 'Free design-to-code audit' },
@@ -76,7 +76,7 @@ export default function ContactPage() {
     <>
 
       {/* Hero */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden">
+      <section className="relative bg-[var(--color-bg-primary)] pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-[50vh] pointer-events-none opacity-60"
@@ -102,7 +102,10 @@ export default function ContactPage() {
       </section>
 
       {/* Book a call — Calendly inline scheduler */}
-      <section id="book-a-call" className="pb-4 scroll-mt-24">
+      <section
+        id="book-a-call"
+        className="bg-[var(--color-bg-elevated)] border-y border-[var(--color-border)] py-12 md:py-16 scroll-mt-24"
+      >
         <div className="max-w-[var(--container-wide)] mx-auto px-10 lg:px-20">
           <div className="max-w-2xl mb-6">
             <span className="inline-block font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-3">
@@ -116,7 +119,7 @@ export default function ContactPage() {
             </p>
           </div>
           <div
-            className="calendly-inline-widget rounded-2xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-elevated)]"
+            className="calendly-inline-widget rounded-2xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-primary)]"
             data-url="https://calendly.com/itadmin-artemisdesignlabs/30min?hide_gdpr_banner=1&background_color=fafafa&text_color=141414&primary_color=2f77ea"
             style={{ minWidth: '320px', height: '700px' }}
           />
@@ -131,7 +134,7 @@ export default function ContactPage() {
       />
 
       {/* Form section */}
-      <section className="py-16 md:py-20 border-b border-[var(--color-border)]">
+      <section className="bg-[var(--color-bg-primary)] py-16 md:py-20 border-b border-[var(--color-border)]">
         <div className="max-w-[var(--container-wide)] mx-auto px-10 lg:px-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Left — what to expect */}
@@ -282,7 +285,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <CTASection />
+      <CTASection background="elevated" />
 
     </>
   );

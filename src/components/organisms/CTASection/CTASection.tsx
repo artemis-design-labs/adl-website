@@ -4,7 +4,12 @@ import Link from 'next/link';
 import { cn } from '@/lib/cn';
 import { useFadeInOnView } from '@/hooks/useFadeInOnView';
 
-export function CTASection() {
+interface CTASectionProps {
+  /** Pick the token that continues the page's primary/elevated alternation. */
+  background?: 'primary' | 'elevated';
+}
+
+export function CTASection({ background = 'primary' }: CTASectionProps) {
   const { ref, dataVisible } = useFadeInOnView(0.1);
 
   return (
@@ -16,7 +21,12 @@ export function CTASection() {
     <section
       ref={ref}
       id="contact"
-      className="bg-[var(--color-bg-primary)] py-20 md:py-28"
+      className={cn(
+        background === 'elevated'
+          ? 'bg-[var(--color-bg-elevated)]'
+          : 'bg-[var(--color-bg-primary)]',
+        'py-20 md:py-28'
+      )}
     >
       <div className="max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
 
@@ -49,10 +59,10 @@ export function CTASection() {
           </Link>
 
           <a
-            href="mailto:hello@artemisdesignlabs.com"
+            href="mailto:pritish@artemisdesignlabs.com"
             className="font-[var(--font-mono)] text-[13px] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors duration-150"
           >
-            hello@artemisdesignlabs.com
+            pritish@artemisdesignlabs.com
           </a>
         </div>
 

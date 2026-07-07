@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { cn } from '@/lib/cn';
 
 const CAPABILITIES = [
-  { label: 'Design System Creation',    href: '/services' },
-  { label: 'Design System Maintenance', href: '/services' },
-  { label: 'Design-to-Code Handoff',   href: '/services' },
-  { label: 'AI Model Training',         href: '/services' },
-  { label: 'Governance Layer',          href: '/services' },
+  { label: 'Design Language Architecture',      href: '/services' },
+  { label: 'Figma-to-Code Pipeline',            href: '/services' },
+  { label: 'Agentic UI Generation',             href: '/services' },
+  { label: 'Drift Detection & Governance',      href: '/services' },
+  { label: 'Infrastructure Lifecycle Management', href: '/services' },
 ];
 
 export function Hero() {
@@ -49,8 +49,8 @@ export function Hero() {
               )}
               style={{ animationDelay: '80ms' }}
             >
-              We build the AI<br />
-              that scales your<br />
+              We build<br />
+              AI-engineered<br />
               UI Infrastructure.
             </h1>
 
@@ -126,27 +126,14 @@ function CapabilitiesPanel() {
         </p>
       </div>
 
-      {/* Capability links */}
+      {/* Capability list */}
       <ul className="divide-y divide-[var(--color-border)]">
         {CAPABILITIES.map((cap) => (
-          <li key={cap.label}>
-            <Link
-              href={cap.href}
-              className={cn(
-                'flex items-center justify-between gap-4 px-6 py-5 group',
-                'text-[15px] text-[var(--color-text-secondary)]',
-                'hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-inset)]',
-                'transition-colors duration-150'
-              )}
-            >
-              <span>{cap.label}</span>
-              <span
-                className="font-[var(--font-mono)] text-[13px] text-[var(--color-accent-text)] opacity-40 group-hover:opacity-100 transition-opacity duration-150"
-                aria-hidden="true"
-              >
-                →
-              </span>
-            </Link>
+          <li
+            key={cap.label}
+            className="px-6 py-5 text-[15px] text-[var(--color-text-secondary)]"
+          >
+            {cap.label}
           </li>
         ))}
       </ul>

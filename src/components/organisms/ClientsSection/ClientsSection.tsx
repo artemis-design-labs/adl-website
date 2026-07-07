@@ -13,6 +13,8 @@ const CLIENTS: Client[] = [
   { name: 'AT&T',         srcLight: '/images/atnt-light.svg',        srcDark: '/images/atnt-dark.svg'        },
   { name: 'Verizon',      srcLight: '/images/verizon-light.svg',      srcDark: '/images/verizon-dark.svg'      },
   { name: 'NBCUniversal', srcLight: '/images/nbcuniversal-light.svg', srcDark: '/images/nbcuniversal-dark.svg' },
+  { name: 'NYCERS',       srcLight: '/images/nycers-light.svg',       srcDark: '/images/nycers-dark.svg'       },
+  { name: 'Qualitrol',    srcLight: '/images/qualitrol-light.svg',    srcDark: '/images/qualitrol-dark.svg'    },
 ];
 
 
@@ -20,10 +22,6 @@ export function ClientsSection() {
   const { theme } = useTheme();
 
   return (
-    /*
-     * Wandr Studio variant — static logo row, no marquee.
-     * Dot-separated descriptor above, logos in a centered flex wrap.
-     */
     <section
       id="clients"
       className="bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)] py-10 md:py-12"
@@ -31,28 +29,22 @@ export function ClientsSection() {
     >
       <div className="max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
 
-        {/* SR-only list */}
         <ul className="sr-only">
           {CLIENTS.map((c) => <li key={c.name}>{c.name}</li>)}
         </ul>
 
-        {/* Logo row */}
-        <div
-          className="flex items-center gap-8 md:gap-12"
-          aria-hidden="true"
-        >
+        <div className="grid grid-cols-4 gap-8 md:gap-12 items-center" aria-hidden="true">
           {CLIENTS.map((client) => (
-            <div key={client.name} className="w-[180px] h-10 flex items-center justify-center">
-              <Image
-                src={theme === 'dark' ? client.srcDark : client.srcLight}
-                alt=""
-                width={180}
-                height={40}
-                decoding="async"
-                className="max-h-full max-w-full w-auto h-auto object-contain"
-                unoptimized
-              />
-            </div>
+            <Image
+              key={client.name}
+              src={theme === 'dark' ? client.srcDark : client.srcLight}
+              alt=""
+              width={300}
+              height={200}
+              decoding="async"
+              className="w-full h-auto"
+              unoptimized
+            />
           ))}
         </div>
 
