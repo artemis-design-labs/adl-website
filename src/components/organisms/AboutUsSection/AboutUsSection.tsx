@@ -8,8 +8,6 @@ const SERVICES = [
     number: '01',
     title: 'Design System Creation',
     tagline: "We've built this from scratch — for our own startups.",
-    price: '$15,000 – $25,000',
-    timeline: '3-4 weeks',
     description:
       "You either don't have a design system, or you have fragments scattered across your product. We audit the chaos and build you a real foundation — 25+ production-ready components in Figma AND your framework.",
   },
@@ -17,8 +15,6 @@ const SERVICES = [
     number: '02',
     title: 'Design System Maintenance',
     tagline: 'Infrastructure without maintenance is debt waiting to happen.',
-    price: '$4,000 – $6,000 / mo',
-    timeline: '6-month minimum',
     description:
       "Design systems die without maintenance. Components drift. Documentation goes stale. We become your dedicated design systems team with AI-powered drift detection and monthly health reports.",
   },
@@ -26,8 +22,6 @@ const SERVICES = [
     number: '03',
     title: 'Design-to-Code Handoff',
     tagline: 'Your designers did the work. Our AI finishes the job.',
-    price: '$8,000 – $15,000',
-    timeline: '2-3 weeks',
     description:
       "Designs sitting in Figma your engineering team doesn't have bandwidth to implement. Our AI converts your existing files into production-ready code your senior engineers approve on the first PR.",
   },
@@ -160,9 +154,6 @@ export function AboutUsSection() {
                   {service.number}
                 </span>
                 <span className="flex-1 h-px bg-[var(--color-border)]" />
-                <span className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.15em] text-[var(--color-text-tertiary)]">
-                  {service.timeline}
-                </span>
               </div>
 
               <h3 className="text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-[var(--color-text-primary)] mb-3">
@@ -178,15 +169,6 @@ export function AboutUsSection() {
               </p>
 
               <div className="flex items-baseline justify-between pt-6 border-t border-[var(--color-border)]">
-                <div>
-                  <span className="block font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] mb-1">
-                    Starting at
-                  </span>
-                  <span className="text-lg font-medium text-[var(--color-text-primary)]">
-                    {service.price}
-                  </span>
-                </div>
-
                 <div className="flex items-center gap-3">
                   <button
                     type="button"

@@ -379,7 +379,7 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          {/* Wandr Studio pricing cards — dot-separated descriptors, → feature lists */}
+          {/* Engagement track cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {PRICING.map((plan) => (
               <div

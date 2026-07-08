@@ -11,40 +11,48 @@ const FILTERS = ['All', 'Public Sector', 'Healthcare', 'Education', 'Enterprise'
 
 const PROJECTS = [
   {
-    category: 'Public Healthcare · AI Platform',
+    category: 'Enterprise · Internal Tooling',
+    client: 'AT&T',
+    title: 'AT&T Cloud Optimizer — Enterprise Data Design System',
+    description:
+      'A governed design system and data visualization component library for AT&T\'s internal cloud cost intelligence platform — serving everyone from SVP to individual application owner through a single, consistent UI.',
+    stats: [
+      { label: 'Applications', value: '1,800+' },
+      { label: 'Cloud spend surfaced', value: '$36.7M' },
+    ],
+  },
+  {
+    category: 'Public Healthcare · AI Design System',
     client: 'HANDS AI',
-    title: 'HANDS AI — WIC Case Management Platform',
+    title: 'HANDS AI — AI-Powered Case Management Design System',
     description:
-      'A complete redesign of a WIC case management platform with a custom AI-powered design system and production React frontend. First PR passed senior-engineer review on submission.',
+      'A tokenized design system and production component library for HANDS AI\'s WIC case management platform — purpose-built for predictive risk interfaces, natural language search, and AI-human collaboration at scale.',
     stats: [
-      { label: 'Outcome',   value: '40% faster' },
-      { label: 'PR review', value: '94% pass'   },
+      { label: 'Case prep time',      value: '40% faster' },
+      { label: 'Departments deployed', value: '6'         },
     ],
-    href: '/hands-ai',
   },
   {
-    category: 'Education · Data Platform',
-    client: 'Insight',
-    title: 'Insight — School Data Intelligence Platform',
+    category: 'Education · Data Visualization System',
+    client: 'Insight AI',
+    title: 'Insight — Data Intelligence Design System for NYC DOE',
     description:
-      'A school data intelligence platform for the Department of Education. Predictive AI on top, comprehensive visualization underneath — scales from 3 dashboards to 30 without rebuilding.',
+      'A data visualization design system for New York City\'s Department of Education — transforming fragmented student data into shareable visual narratives across 1,800+ public schools.',
     stats: [
-      { label: 'Decision time', value: '60% faster' },
-      { label: 'Dashboards',    value: '30+'         },
+      { label: 'NYC schools served',   value: '1,800+' },
+      { label: 'Data domains unified', value: '4'      },
     ],
-    href: '/insight',
   },
   {
-    category: 'Enterprise · Project Management',
-    client: 'My Project Inbox',
-    title: 'My Project Inbox — Unified Engineering Surface',
+    category: 'Enterprise · Internal Tooling Design System',
+    client: 'Verizon',
+    title: 'My Project Inbox — Enterprise Coordination Design System',
     description:
-      'A unified engineering surface that cuts context-switching between Linear, GitHub, and Slack. Full state coverage with virtualized lists handling 10K+ items.',
+      'A governed design system for Verizon\'s internal project coordination platform — replacing three fragmented tool categories with a single component library that standardizes how engineering teams track, assign, and hand off work.',
     stats: [
-      { label: 'Velocity',  value: '+25%'    },
-      { label: 'Items',     value: '10K+'    },
+      { label: 'Projects unified',     value: '60+'  },
+      { label: 'Tool categories replaced', value: '3' },
     ],
-    href: '/my-project-inbox',
   },
 ];
 
@@ -141,12 +149,6 @@ export default function WorkPage() {
                   ))}
                 </div>
 
-                <a
-                  href={p.href}
-                  className="inline-flex items-center justify-center h-[44px] px-7 rounded-full bg-[var(--color-accent)] text-[var(--color-text-on-accent)] font-bold text-[14px] hover:bg-[var(--color-accent-hover)] transition-colors duration-150"
-                >
-                  View Case Study
-                </a>
               </div>
 
             </div>

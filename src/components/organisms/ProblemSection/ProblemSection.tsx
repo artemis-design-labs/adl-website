@@ -15,7 +15,7 @@ const SERVICES = [
       'Governed Design-to-Code Pipeline',
       'Automated drift detection systems to catch UI violations',
     ],
-    terms: 'Fixed scope. Fixed price. $15K–$25K.',
+    terms: 'Fixed scope. Scoped after discovery.',
     link: "See what's included",
     href: '/services#build',
   },

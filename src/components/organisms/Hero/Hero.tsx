@@ -38,20 +38,20 @@ export function Hero() {
               className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--color-accent-text)] mb-5 hero-animate"
               style={{ animationDelay: '40ms' }}
             >
-              UI INFRASTRUCTURE · ENTERPRISE B2B STARTUPS
+              AI DESIGN INFRASTRUCTURE · B2B SOFTWARE TEAMS
             </p>
 
             {/* Headline — all primary color, no inline accent */}
             <h1
               className={cn(
-                'text-[clamp(2.75rem,6vw,5.25rem)] font-bold leading-[1.0] tracking-[-0.035em]',
+                'text-[clamp(2.25rem,4.5vw,4.25rem)] font-bold leading-[1.05] tracking-[-0.035em]',
                 'text-[var(--color-text-primary)] mb-6 hero-animate'
               )}
               style={{ animationDelay: '80ms' }}
             >
-              We build<br />
-              AI-engineered<br />
-              UI Infrastructure.
+              The UI infrastructure<br />
+              your product team<br />
+              is missing.
             </h1>
 
             {/* Body paragraph */}
@@ -59,10 +59,10 @@ export function Hero() {
               className="text-[16px] md:text-[17px] text-[var(--color-text-secondary)] leading-[1.65] mb-7 max-w-[560px] hero-animate"
               style={{ animationDelay: '160ms' }}
             >
-              Artemis Design Labs builds and governs scalable AI solutions
-              to remove design bottlenecks that plague enterprise startups.
-              From component architecture to the governance layer — we ensure
-              your teams ship features with minimal UI friction.
+              Most fast-growing teams have designers, engineers, and a roadmap
+              — but no single owner for the layer connecting them. ADL builds
+              that layer and keeps it governed, so your product scales without
+              the UI debt that compounds every sprint.
             </p>
 
             {/* CTAs */}
