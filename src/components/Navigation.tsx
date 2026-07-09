@@ -38,9 +38,11 @@ export default function Navigation() {
       aria-label="Primary"
       className={cn(
         'fixed top-0 inset-x-0 z-50 transition-[background-color,backdrop-filter,border-color] duration-200',
-        isScrolled
-          ? 'bg-[var(--color-bg-primary)]/85 backdrop-blur-md border-b border-[var(--color-border)]'
-          : 'bg-transparent border-b border-transparent'
+        isMobileMenuOpen
+          ? 'bg-[var(--color-bg-primary)] border-b border-[var(--color-border)]'
+          : isScrolled
+            ? 'bg-[var(--color-bg-primary)]/85 backdrop-blur-md border-b border-[var(--color-border)]'
+            : 'bg-transparent border-b border-transparent'
       )}
     >
       <div className="max-w-[var(--container-wide)] mx-auto px-10 lg:px-20">
