@@ -244,4 +244,4 @@ Owner directive is "no made-up numbers, 100% citable".
 | `1,800+` applications · `$36.7M` (AT&T) | `/work` | ⇡ same |
 | `1,800+` schools · `4` domains (Insight) | `/work` | ⇡ same |
 | `60+` projects · `3` categories (Verizon) | `/work` | ⇡ same |
-| Anonymous testimonials ×3 | Homepage | Real names, titles and LinkedIn links — needs client permission, so it can't be fixed in the repo. Top trust gap. |
+| Anonymous testimonials ×3 | Homepage | **Not a permission problem** — the owner confirmed (2026-06-17) all three quotes are real and attributable, and decided on real company names, text-only (no photos). The only thing missing is **Name — Title — Company** for each (+ optional LinkedIn URL to link the name). Supply those three lines and it's a 5-minute change to the `TESTIMONIALS` array. Top trust gap on the site. |
