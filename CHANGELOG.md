@@ -7,6 +7,18 @@ Tags follow semver — see "Releases" on GitHub for the immutable checkpoints.
 
 ---
 
+## [v1.4.3] — 2026-07-25 — Crawl verification + robots.txt / Search Console documented
+
+No code change. Verified the post-canonical-fix crawl path and wrote down two things that are invisible from the repo.
+
+- **Googlebot returns 200 on every indexable route** (`/`, `/services`, `/work`, `/contact`, `/hands-ai`, `/sitemap.xml`, `/robots.txt`) with no `cf-mitigated` header — Bot Fight Mode is still correctly off.
+- **The served `robots.txt` is not `src/app/robots.ts`.** Cloudflare prepends a managed block (dashboard → AI Crawl Control) setting `Content-Signal: search=yes,ai-train=no,use=reference` plus `Disallow: /` for GPTBot, ClaudeBot, Google-Extended, CCBot, Bytespider, Amazonbot, Applebot-Extended and meta-externalagent. Google **search** is unaffected (`Google-Extended` is the training crawler, not the search crawler), but the site is invisible to AI assistants — a business trade-off set outside the repo, where nobody reading the code would find it. Editing `robots.ts` cannot remove any of it.
+- **Search Console is a domain property**, so the sitemap box has no domain prefix and rejects a bare `sitemap.xml` as "Invalid sitemap address" — it needs the full `https://artemisdesignlabs.com/sitemap.xml`. Google last read the sitemap on 19 Jul 2026 with 3 URLs (the pre-fix set); re-submitted so it picks up 5.
+
+Both recorded in `DEPLOYMENT.md` → **Search / crawling**.
+
+---
+
 ## [v1.4.2] — 2026-07-25 — Dependabot alerts cleared (3 of 4)
 
 `npm audit fix` could only resolve these by downgrading Next.js to **9.3.3**, so the two fixable ones are pinned forward with `overrides` in `package.json` instead. All are build-time-only transitives — none ships in the Worker bundle.

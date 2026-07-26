@@ -144,6 +144,32 @@ If a custom-domain attach ever fails with `Hostname '…' already has externally
 
 ---
 
+## Search / crawling
+
+### The served `robots.txt` is NOT just `src/app/robots.ts`
+
+Cloudflare **prepends a managed block** to the response, so what production serves is Cloudflare's content followed by the app's. Fetch `https://artemisdesignlabs.com/robots.txt` before concluding a rule is missing or wrong — editing `robots.ts` cannot remove anything in the managed block.
+
+The managed block (Cloudflare dashboard → **AI Crawl Control**) sets `Content-Signal: search=yes,ai-train=no,use=reference` and adds `Disallow: /` for AI crawlers: `GPTBot`, `ClaudeBot`, `Google-Extended`, `CCBot`, `Bytespider`, `Amazonbot`, `Applebot-Extended`, `meta-externalagent`, `CloudflareBrowserRenderingCrawler`.
+
+Two consequences worth knowing:
+- **Google search indexing is unaffected.** `Google-Extended` is the AI-training crawler, not the search crawler; `Googlebot` is allowed and verified returning 200 on every indexable route.
+- **The site is invisible to AI assistants** (ChatGPT, Claude, Perplexity) when someone asks them to recommend an agency. That is a business trade-off, not a bug — but it is set in Cloudflare, so nobody reading this repo would ever discover it. Change it in the dashboard, not in code.
+
+It also means the response contains **two `User-agent: *` groups**. Google merges same-agent groups per spec, so `Disallow: /admin` and `/api/` still apply.
+
+### Google Search Console
+
+The property is a **domain property** (`artemisdesignlabs.com`), which covers every subdomain and both schemes. Consequence when submitting a sitemap: the input box has **no domain prefix**, so a bare `sitemap.xml` is rejected with *"Invalid sitemap address"*. Enter the full URL:
+
+```
+https://artemisdesignlabs.com/sitemap.xml
+```
+
+Re-submitting a URL already in the list is safe — it forces a re-fetch rather than creating a duplicate. To verify a canonical is being read correctly, use **URL Inspection** and compare *User-declared canonical* against *Google-selected canonical*; **Test Live URL** bypasses Google's cached copy.
+
+---
+
 ## Manual deploy (rare — CI does this for you)
 
 If you need to deploy without pushing to `main`:

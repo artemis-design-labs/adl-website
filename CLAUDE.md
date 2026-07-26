@@ -93,7 +93,9 @@ src/
 │   ├── layout.tsx                # Roboto font, JSON-LD Organization, metadata, ThemeProvider,
 │   │                             # CF Web Analytics + GA4 + behavioral-insights scripts
 │   ├── icon.svg / apple-icon.svg # Favicon + iOS home-screen icon
-│   ├── robots.ts / sitemap.ts    # Metadata routes
+│   ├── robots.ts / sitemap.ts    # Metadata routes. NOTE: prod robots.txt is
+│   │                             # NOT just robots.ts — Cloudflare prepends a
+│   │                             # managed block (see DEPLOYMENT.md → Search)
 │   ├── globals.css               # Imports tokens + global animations (fade-up, hero-animate)
 │   ├── admin/                    # /admin — Mongo-backed contact submissions viewer
 │   │                             # (gated by Cloudflare Access — see security note)
