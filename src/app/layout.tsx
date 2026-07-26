@@ -1,13 +1,22 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { Roboto } from 'next/font/google';
+import { Roboto, Open_Sans } from 'next/font/google';
 import { ThemeProvider } from '@/context/ThemeContext';
 
+// Body / UI face.
 const roboto = Roboto({
   weight: ['400', '500', '700'],
   subsets: ['latin'],
   variable: '--font-roboto',
+  display: 'swap',
+});
+
+// Display face for headlines — drives --font-display in tokens.css.
+const openSans = Open_Sans({
+  weight: ['600', '700'],
+  subsets: ['latin'],
+  variable: '--font-open-sans',
   display: 'swap',
 });
 
@@ -16,9 +25,9 @@ const GA_MEASUREMENT_ID = 'G-SXX4NH3LQ9';
 
 const SITE_URL = 'https://artemisdesignlabs.com';
 const OG_IMAGE = '/images/logos/adl-logo-1.png';
-const TITLE = 'Artemis Design Labs | AI-Powered Design Infrastructure';
+const TITLE = 'Artemis Design Labs | Governed UI Infrastructure for B2B Teams';
 const DESCRIPTION =
-  'We build the AI that builds your design infrastructure. Founder-built, human-validated, production-ready. Trained on 190K+ design-to-code examples.';
+  'ADL builds and operates the UI infrastructure your product team is missing — design language architecture, an automated Figma-to-React pipeline, and drift governance that keeps design and code in sync as you scale.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -28,17 +37,21 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   keywords: [
+    'UI infrastructure',
     'design system',
-    'AI-powered design',
+    'design system governance',
     'figma to code',
-    'design infrastructure',
+    'design token architecture',
+    'AI-powered design',
     'B2B startups',
     'production-ready React',
-    'AI design tools',
   ],
   authors: [{ name: 'Artemis Design Labs', url: SITE_URL }],
   creator: 'Artemis Design Labs',
-  alternates: { canonical: SITE_URL },
+  // './' resolves against metadataBase per-route, so every page is
+  // self-canonical. A hardcoded SITE_URL here is inherited by every child
+  // route and tells Google the whole site is a duplicate of the homepage.
+  alternates: { canonical: './' },
   robots: {
     index: true,
     follow: true,
@@ -85,7 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${roboto.variable}`}
+      className={`scroll-smooth ${roboto.variable} ${openSans.variable}`}
       data-theme="light"
       suppressHydrationWarning
     >

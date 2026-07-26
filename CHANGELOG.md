@@ -7,6 +7,80 @@ Tags follow semver — see "Releases" on GitHub for the immutable checkpoints.
 
 ---
 
+## [v1.4.1] — 2026-07-25 — Open Sans replaces KeplerStd, docs resynced, sitemap + contact deep-links fixed
+
+Housekeeping pass after pulling `main` up to `12077e9`. No visual redesign — one font change, three bug fixes, and the documentation brought back in line with the code.
+
+### Typography — Adobe Fonts dropped
+- **KeplerStd is gone; Open Sans is the display face.** KeplerStd had never actually rendered — its Typekit `@import` was commented out behind a placeholder kit id (`use.typekit.net/XXXXXXX.css`) and no component referenced `--font-display`, so headlines fell back to Roboto.
+- **Open Sans (600/700) now loads via `next/font/google`** alongside Roboto, so both faces are self-hosted from the app bundle — **no external font CDN, no Typekit account, nothing to configure outside the repo**. Removed the dead `@import` from `globals.css`.
+- `--font-display` is applied **once**, via an `h1, h2` base rule in `globals.css`, rather than per component — new headings are correct by default and `font-sans` opts one back out. Roles swap by editing the two tokens in `tokens.css`; nothing names a font family directly.
+
+### Fixes
+- **`sitemap.ts` was missing two live pages.** `/services` and `/hands-ai` had been indexable but unlisted since the v1.4.0 restructure; both added. `/publication` stays out on purpose — it ships `noindex`.
+- **`/services` → `/contact` deep links were dead.** The four "Get started →" CTAs pointed at `?type=build-track` / `?type=operate-track`, but the contact page only recognised `type === 'audit'` and its dropdown still listed the retired priced services (*"Design System Creation — $15-25K"* etc.) that no longer appear anywhere else on the site. Options are now Audit / Build Track / Operate Track / Not sure, and the handler preselects any valid option; the audit banner still shows for `?type=audit` only. `service` is a free-form string server-side, so no API change was needed.
+- **Turnstile's fail-open is now loud.** `verifyTurnstile` still accepts submissions when `TURNSTILE_SECRET_KEY` is absent (a missing secret must not take the contact form down), but it logs a warning instead of passing silently — the Worker has observability on, so a vanished secret is now visible.
+
+### Turnstile — verified working end to end
+Audited rather than changed: `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is set as a GitHub repo **variable** (inlined at build), `TURNSTILE_SECRET_KEY` is a GitHub **secret** synced to the Worker by the deploy job, and the Cloudflare Worker confirms the secret is present. The site key and the challenge-script loader are both inlined in the deployed `/contact` chunk. Spam protection is live. Note the site key is **not** in local `.env`, so the widget renders nothing in `npm run dev` and the form submits unverified locally — add it if you want to exercise the flow.
+
+### SEO — every page was canonicalised to the homepage
+- **`alternates: { canonical: SITE_URL }` in the root layout was inherited by every route**, so `/services`, `/work`, `/contact` and `/hands-ai` each shipped `<link rel="canonical" href="https://artemisdesignlabs.com">` — telling Google the entire site is a duplicate of the homepage and shouldn't be indexed separately. Verified against production before and after. Changed to `canonical: './'`, which resolves against `metadataBase` per route so each page is self-canonical.
+- **`/contact` had no title of its own** — it's a Client Component (form state, Turnstile, Calendly) and so can't export `metadata`, leaving the highest-intent page on the site serving the generic homepage title. Added a passthrough `layout.tsx` carrying its title, description and OG data, matching the pattern already used for the archived client-component case studies.
+- **Sitewide title and description moved onto the current positioning** — was still "We build the AI that builds your design infrastructure… Trained on 190K+ design-to-code examples" while every page led with governed UI infrastructure. Keywords retargeted accordingly.
+
+### Fact audit
+- **`190K+ AI training images` removed** from the homepage StatBar and the site metadata — no citable source, per the owner's "no made-up numbers" directive. The StatBar now runs 5 states / 0 Figma-only deliverables / WCAG 2.1 AA, all backed by the Build Track deliverables on `/services`, and its grid was corrected from 4 columns to 3 (it had been rendering 3 metrics in a 4-col grid).
+- The `/work` client outcome figures and the 3 anonymous testimonials are **deliberately unchanged** — they need the owner's sources and client permission respectively, not a code change. Tracked in `Website-Content.md`.
+
+### Docs
+- **`CHANGELOG.md`** — v1.4.0 written up retroactively (the 17 commits had gone undocumented).
+- **`CLAUDE.md`** — file tree, homepage composition, fonts, routes and env vars resynced; added the `_archived/` explanation and a list of the 11 unwired organisms that are dead code.
+- **`Website-Content.md`** — rewritten; it still described the pre-June homepage.
+
+---
+
+## [v1.4.0] — 2026-06-23 → 2026-07-09 — Site narrowed to 6 pages, repositioned on UI infrastructure, Ramotion/Creative Navy design system
+
+Seventeen commits by Electromau5 (`1a4e0ee` → `12077e9`), documented retroactively on 2026-07-25. This is the largest change since v1.2.0: the site was cut down to the pages that were actually finished, repositioned from "AI that builds your design infrastructure" to **"governed UI infrastructure"**, and re-skinned onto a new design system.
+
+### Scope — 10 pages archived, 6 remain
+- **`src/app/_archived/`** now holds `about`, `blog`, `clients`, `pricing`, `our-ai`, a duplicate `hands-ai`, `insight`, `marketplace`, `design-system-license`, `my-project-inbox`. The folder sits **outside the router** (`(site)` is the routed group), so these pages no longer build, route, or appear anywhere — reviving one means moving the folder back **and** re-adding it to `sitemap.ts` and the nav/footer link lists.
+- **Live routes:** `/`, `/services`, `/work`, `/contact`, `/hands-ai`, `/publication` (noindex) + `/admin` + `/api/contact`. Inbound links to archived pages were removed from nav and footer at the same time.
+- **`/services` is new** and absorbs what `/pricing` used to carry — Build Track / Operate Track, a 5-step process, "what changes after" outcomes, and two engagement cards. **Dollar figures were removed**: engagements are now "scoped after a discovery call" rather than listing $15–25K / $4–6K/mo.
+- **Blog is now external** — nav and footer point at `medium.com/ai-ui` rather than an on-site route.
+
+### Positioning
+- Homepage headline is now **"The UI infrastructure your product team is missing."** with the hero framed around the missing owner of the design↔engineering layer. The hero's right rail is a **Capabilities panel** (Design Language Architecture, Figma-to-Code Pipeline, Agentic UI Generation, Drift Detection & Governance, Infrastructure Lifecycle Management).
+- Primary CTA sitewide is **"Book a free audit"** → `/contact?type=audit`.
+- **Public email moved to `pritish@artemisdesignlabs.com`** (footer, `CTASection`, JSON-LD `Organization.email`) — this supersedes the v1.3.1 switch to `hello@`.
+
+### Design system — Ramotion colors + Creative Navy typography
+- **Light-first**: `--color-bg-primary: #fafafa`, elevated `#ffffff`, text `#141414`; the dark theme is now the alternate (`[data-theme="dark"]` → `#141414` / `#262626`). Accent stays Ramotion blue `#2f77ea`.
+- **Type**: Roboto via `next/font/google` replaces Geist Sans/Mono. A KeplerStd serif display face was also specified, but its Adobe Fonts `@import` was left commented out behind a placeholder kit id, so `--font-display` never resolved and nothing referenced it — the site rendered Roboto throughout. Resolved in v1.4.1 by dropping KeplerStd for Open Sans.
+- Sections are built from named reference patterns (Creative Navy, Apexon, CRZY, Semiflat, Interactivism, Wandr Studio, Blink UX) — the pattern name is in a comment at the top of each component.
+- **`px-10 lg:px-20` horizontal padding is now a hard sitewide rule** for every section container, nav and footer, enforced across all pages and documented in `CLAUDE.md`.
+- Sections **alternate `--color-bg-primary` / `--color-bg-elevated`**; `CTASection` takes a `background` prop so it can continue whichever alternation its page ends on.
+
+### Homepage recomposition
+`Hero` → `ClientsSection` → `ServicesSection` → `StatBarSection` → `OperationalMoatSection` → `TestimonialsSection` → `CTASection`. Case studies came off the homepage; `StatBar` was removed and later reinstated with 3 metrics.
+
+### Components
+- **Client logos are now theme-aware SVGs** (`-light` / `-dark` per client) in a 4-column grid on desktop and a auto-advancing one-at-a-time carousel on mobile — replacing the v1.3.2 PNG chips and the animated marquee before them.
+- **`BackToTop`** added to the `(site)` shell.
+- **Nav**: logo enlarged; **mobile menu overlay now paints a solid background when open** (`12077e9`) — it was previously transparent and unreadable over page content.
+- Calendly embed fixed on `/contact`.
+
+### Analytics & dependencies
+- **Google Analytics 4** (`G-SXX4NH3LQ9`) added alongside the existing Cloudflare Web Analytics beacon, plus a third-party **behavioral-insights tracker** (`behavioral-insights.vercel.app/tracker.js`).
+- **15 Dependabot high alerts** cleared by bumping dev transitives (`8672c7e`).
+
+### Undocumented at the time, noted here
+- **Cloudflare Turnstile shipped** on the contact form (`atoms/Turnstile` + `siteverify` in `api/contact`), closing the v1.3.0 backlog item. It **fails open** — verification is skipped when `TURNSTILE_SECRET_KEY` is unset.
+- **`sitemap.ts` was not kept in step** with the restructure: it listed only `/`, `/contact`, `/work`, omitting the new `/services` and `/hands-ai`. Fixed 2026-07-25 (`/publication` stays out — it's `noindex`).
+
+---
+
 ## [v1.3.2] — 2026-06-18 — Client logo strip enlarged
 
 - **Client logos now render ~3–4× bigger** on the homepage `ClientsSection` marquee. Root cause was the source PNGs, not the CSS: all 8 logos had **opaque white backgrounds** with the actual mark filling only ~25–40% of a 219×150 frame (AT&T's globe rendered ~16px tall in a 64px cell). Made every background **transparent** and trimmed each to its content bbox (`public/images/*-logo.png` — e.g. AT&T 219×150 → 80×38, NBCU → 148×18), then render them inside **uniform white rounded chips** (`bg-white rounded-xl`, even padding) so multi-color marks stay crisp at full brand color on the dark `#141414` strip.

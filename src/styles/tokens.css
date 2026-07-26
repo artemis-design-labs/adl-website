@@ -4,8 +4,8 @@
  * Colors: Figma node 99:3 — "Website Design Templates / Ramotion"
  * Typography & spacing: Creative Navy column (same Figma frame)
  * Palette: #2f77ea electric blue · #fafafa bg · #141414 text · #262626 surface-dark
- * Type: KeplerStd serif (display) + Roboto sans (body)
- * Scale: Display 72px/400 · H1 44px/700 · H2 24px/700 · Body 16px/400 · Caption 14px/400
+ * Type: Open Sans (display headlines) + Roboto (body) — both via next/font/google
+ * Scale: Display 72px/700 · H1 44px/700 · H2 24px/700 · Body 16px/400 · Caption 14px/400
  * Radius: sm 4px · md 8px · lg 20px · full 9999px
  * Section padding: 64px vertical · 40px horizontal
  * Grid: 1280px max · 12-col · 24px gutter
@@ -83,16 +83,18 @@
 
   /* ============================================
      TYPOGRAPHY
-     KeplerStd loaded via Adobe Fonts (@import in globals.css).
-     Roboto loaded via next/font/google (--font-roboto CSS variable).
+     Both faces load via next/font/google in app/layout.tsx — no
+     third-party font CDN, nothing to configure outside the repo.
+       --font-open-sans → display headlines (h1/h2)
+       --font-roboto    → body, UI, labels
      ============================================ */
 
-  --font-display: 'kepler-std', Georgia, 'Times New Roman', serif;
+  --font-display: var(--font-open-sans, 'Open Sans'), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --font-sans: var(--font-roboto, 'Roboto'), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'IBM Plex Mono', 'Courier New', monospace;
 
   /* Creative Navy type scale */
-  --text-display: 4.5rem;      /* 72px · 400 weight · 1.2lh — KeplerStd hero display */
+  --text-display: 4.5rem;      /* 72px · 700 weight · 1.2lh — Open Sans hero display */
   --text-h1: 2.75rem;          /* 44px · 700 · 1.2lh */
   --text-h2: 1.5rem;           /* 24px · 700 · 1.2lh */
   --text-h3: 1.25rem;          /* 20px */

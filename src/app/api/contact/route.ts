@@ -18,7 +18,11 @@ const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/sit
 async function verifyTurnstile(token: string | undefined, remoteIp: string | null): Promise<{ ok: boolean; reason?: string }> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
   if (!secret) {
-    // Verification not configured — fail open (dev / pre-rollout).
+    // Verification not configured — fail open so a missing secret can't take
+    // the contact form down with it. Deliberately loud: in production the
+    // Worker secret IS set, so this line means spam protection has silently
+    // disappeared and needs re-syncing (see .github/workflows/deploy.yml).
+    console.warn('TURNSTILE_SECRET_KEY not set — accepting submission WITHOUT spam verification.');
     return { ok: true };
   }
   if (!token) {

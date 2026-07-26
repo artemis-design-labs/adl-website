@@ -9,12 +9,13 @@ import { CTASection } from '@/components/organisms/CTASection';
 const TURNSTILE_REQUIRED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 const ADMIN_EMAIL = 'pritish@artemisdesignlabs.com';
 
+// Values double as the `?type=` deep-link keys used by the CTAs on /services.
+// Keep them in sync with the hrefs there.
 const SERVICES = [
-  { value: 'audit',      label: 'Free design-to-code audit' },
-  { value: 'creation',   label: 'Design System Creation — $15-25K' },
-  { value: 'maintenance',label: 'Design System Maintenance — $4-6K / mo' },
-  { value: 'handoff',    label: 'Design-to-Code Handoff — $8-15K' },
-  { value: 'not-sure',   label: "Not sure yet — let's talk" },
+  { value: 'audit',          label: 'Free design-to-code audit' },
+  { value: 'build-track',    label: 'Build Track — fixed scope, one-time' },
+  { value: 'operate-track',  label: 'Operate Track — monthly retainer' },
+  { value: 'not-sure',       label: "Not sure yet — let's talk" },
 ];
 
 const EXPECT_STEPS = [
@@ -30,14 +31,15 @@ export default function ContactPage() {
   const [errorMsg, setErrorMsg] = useState('');
   const [isAudit, setIsAudit] = useState(false);
 
-  // Honor the "Get a Free Audit" CTAs (/contact?type=audit): preselect the
-  // audit option and acknowledge the request so the intent isn't dropped.
+  // Honor the deep-linked CTAs (/contact?type=audit from the hero + CTA blocks,
+  // ?type=build-track / ?type=operate-track from the /services cards): preselect
+  // the matching option so the intent isn't dropped on the way over.
   useEffect(() => {
     const type = new URLSearchParams(window.location.search).get('type');
-    if (type === 'audit') {
-      setIsAudit(true);
-      setFormData((prev) => ({ ...prev, service: 'audit' }));
-    }
+    if (!type) return;
+    if (!SERVICES.some((s) => s.value === type)) return;
+    setIsAudit(type === 'audit');
+    setFormData((prev) => ({ ...prev, service: type }));
   }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {

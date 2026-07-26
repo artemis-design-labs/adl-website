@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "../styles/tokens.css";
-/* KeplerStd via Adobe Fonts — replace XXXXXXX with your kit ID from fonts.adobe.com */
-/* @import url("https://use.typekit.net/XXXXXXX.css"); */
+/* Fonts (Open Sans + Roboto) are self-hosted by next/font/google in
+   app/layout.tsx — deliberately no external font CDN @import here. */
 
 /* Tailwind v4 theme configuration */
 @theme {
@@ -185,6 +185,15 @@ body {
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
   transition: background-color var(--duration-base), color var(--duration-base);
+}
+
+/* Headlines run on the display face (Open Sans); everything else inherits
+   the body face (Roboto). Set here rather than per-component so any new
+   h1/h2 is correct by default — add `font-sans` to opt an individual
+   heading back out. */
+h1,
+h2 {
+  font-family: var(--font-display);
 }
 
 /* ============================================
