@@ -23,6 +23,27 @@
       "next lint --fix --file"
     ]
   },
+  "//overrides": [
+    "Both are build-time-only transitives pinned by Next; neither ships in the",
+    "Worker bundle. `npm audit fix` could only clear them by downgrading Next to",
+    "9.3.3, so they are pinned forward here instead.",
+    "sharp   <0.35.0 — inherited libvips CVEs (GHSA-f88m-g3jw-g9cj)",
+    "postcss <8.5.10 — XSS via unescaped </style> in stringify output",
+    "Drop an entry once the upstream package requires the patched range itself.",
+    "",
+    "NOT overridable — brace-expansion <=5.0.7 (GHSA-mh99-v99m-4gvg, DoS via",
+    "unbounded expansion). The only patched release is 5.0.8, which removed the",
+    "default export; minimatch's ESM build does `import expand from` and dies with",
+    "'does not provide an export named default'. `next build` still passes because",
+    "it never loads that path — `npm run cf:build` (what CI runs) fails. Verified",
+    "2026-07-25. It is reached only via minimatch/glob in the eslint + opennextjs",
+    "build chain, where the input is this repo's own file paths, so it is not a",
+    "runtime risk. Wait for minimatch to publish a build compatible with 5.0.8."
+  ],
+  "overrides": {
+    "sharp": "^0.35.2",
+    "postcss": "$postcss"
+  },
   "dependencies": {
     "chart.js": "^4.4.9",
     "clsx": "^2.1.1",
@@ -48,7 +69,7 @@
     "eslint-config-next": "15.2.4",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.7",
-    "postcss": "^8.5.3",
+    "postcss": "^8.5.23",
     "tailwindcss": "^4.1.4",
     "typescript": "^5",
     "wrangler": "^4.0.0"

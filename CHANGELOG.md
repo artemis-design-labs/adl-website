@@ -7,6 +7,26 @@ Tags follow semver — see "Releases" on GitHub for the immutable checkpoints.
 
 ---
 
+## [v1.4.2] — 2026-07-25 — Dependabot alerts cleared (3 of 4)
+
+`npm audit fix` could only resolve these by downgrading Next.js to **9.3.3**, so the two fixable ones are pinned forward with `overrides` in `package.json` instead. All are build-time-only transitives — none ships in the Worker bundle.
+
+- **`sharp` → 0.35.3** (high) — inherited libvips CVEs, `GHSA-f88m-g3jw-g9cj`. Pinned by Next; overridden.
+- **`postcss` → 8.5.23** (moderate) — XSS via unescaped `</style>` in stringify output. The direct devDependency was bumped and nested copies routed to it via `"postcss": "$postcss"` (npm rejects an override that conflicts with a direct dependency spec).
+- **`body-parser` → 2.3.0** (low) — resolved by plain `npm audit fix`.
+
+### `brace-expansion` is deliberately left alone — do not "fix" it
+The remaining alert (`GHSA-mh99-v99m-4gvg`, DoS via unbounded expansion) has exactly one patched release, **5.0.8**, which **removed the package's default export**. minimatch's ESM build does `import expand from 'brace-expansion'`, so overriding it produces:
+
+```
+SyntaxError: The requested module 'brace-expansion'
+does not provide an export named 'default'
+```
+
+Critically, **`npm run build` still passes** with that override in place — it never loads the failing path. Only `npm run cf:build`, which is what CI runs, fails. Anyone re-attempting this fix must verify with `cf:build`, not `build`, or they will push a broken deploy. It is reachable only through minimatch/glob in the eslint + opennextjs build chain, where the only input is this repo's own file paths, so it carries no runtime risk. Revisit once minimatch ships a release compatible with 5.0.8.
+
+---
+
 ## [v1.4.1] — 2026-07-25 — Open Sans replaces KeplerStd, docs resynced, sitemap + contact deep-links fixed
 
 Housekeeping pass after pulling `main` up to `12077e9`. No visual redesign — one font change, three bug fixes, and the documentation brought back in line with the code.
