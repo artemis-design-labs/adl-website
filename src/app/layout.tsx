@@ -128,38 +128,42 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans antialiased">
         <a href="#main-content" className="skip-link">Skip to content</a>
         <ThemeProvider>{children}</ThemeProvider>
-        {/* Cloudflare Web Analytics — privacy-friendly, no cookies. */}
-        <Script
-          strategy="afterInteractive"
-          src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon={`{"token": "${CF_BEACON_TOKEN}"}`}
-        />
-        {/* Google Analytics (gtag.js) */}
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        />
-        <Script id="gtag-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_MEASUREMENT_ID}');
-          `}
-        </Script>
-        <Script
-          strategy="afterInteractive"
-          src="https://behavioral-insights.vercel.app/tracker.js"
-          data-site-id="737de245-2a09-44f9-bdcd-f3357555eeca"
-        />
-        {/* Leadsy vtag — lead identification */}
-        <Script
-          id="vtag-ai-js"
-          strategy="afterInteractive"
-          src="https://r2.leadsy.ai/tag.js"
-          data-pid="1kQ7vLBVnDLKUtS7s"
-          data-version="062024"
-        />
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            {/* Cloudflare Web Analytics — privacy-friendly, no cookies. */}
+            <Script
+              strategy="afterInteractive"
+              src="https://static.cloudflareinsights.com/beacon.min.js"
+              data-cf-beacon={`{"token": "${CF_BEACON_TOKEN}"}`}
+            />
+            {/* Google Analytics (gtag.js) */}
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+            />
+            <Script id="gtag-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_MEASUREMENT_ID}');
+              `}
+            </Script>
+            <Script
+              strategy="afterInteractive"
+              src="https://behavioral-insights.vercel.app/tracker.js"
+              data-site-id="737de245-2a09-44f9-bdcd-f3357555eeca"
+            />
+            {/* Leadsy vtag — lead identification */}
+            <Script
+              id="vtag-ai-js"
+              strategy="afterInteractive"
+              src="https://r2.leadsy.ai/tag.js"
+              data-pid="1kQ7vLBVnDLKUtS7s"
+              data-version="062024"
+            />
+          </>
+        )}
       </body>
     </html>
   );

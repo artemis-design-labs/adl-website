@@ -13,10 +13,12 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { BackToTop } from '@/components/atoms/BackToTop/BackToTop';
+import { PageLoader } from '@/components/atoms/PageLoader';
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]">
+      <PageLoader />
       <Navigation />
       <main id="main-content">{children}</main>
       <Footer />

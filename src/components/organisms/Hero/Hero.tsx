@@ -38,7 +38,7 @@ export function Hero() {
               className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--color-accent-text)] mb-5 hero-animate"
               style={{ animationDelay: '40ms' }}
             >
-              AI DESIGN INFRASTRUCTURE · B2B SOFTWARE TEAMS
+              DESIGN INFRASTRUCTURE FOR ENGINEERING-LED SAAS TEAMS
             </p>
 
             {/* Headline — all primary color, no inline accent */}
@@ -49,9 +49,8 @@ export function Hero() {
               )}
               style={{ animationDelay: '80ms' }}
             >
-              The UI infrastructure<br />
-              your product team<br />
-              is missing.
+              You don't need more designers.<br />
+              You need a system.
             </h1>
 
             {/* Body paragraph */}
