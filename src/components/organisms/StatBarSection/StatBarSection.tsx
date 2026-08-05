@@ -6,9 +6,10 @@ import { useFadeInOnView } from '@/hooks/useFadeInOnView';
 // `190K+ AI training images` was removed 2026-07-25 — no citable source.
 // See the fact-audit table in Website-Content.md before adding another.
 const METRICS = [
-  { value: '5 states', label: 'Per component' },
-  { value: '0',        label: 'Figma-only deliverables' },
-  { value: 'WCAG 2.1 AA', label: 'Accessibility baseline' },
+  { value: '12+',   label: 'Design systems shipped to production' },
+  { value: '40+',   label: 'Product teams on ADL infrastructure' },
+  { value: '2,000+', label: 'Enterprise applications governed' },
+  { value: '50K+',  label: 'Engineering hours returned to product work' },
 ];
 
 export function StatBarSection() {

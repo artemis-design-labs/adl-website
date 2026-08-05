@@ -152,6 +152,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           src="https://behavioral-insights.vercel.app/tracker.js"
           data-site-id="737de245-2a09-44f9-bdcd-f3357555eeca"
         />
+        {/* Leadsy vtag — lead identification */}
+        <Script
+          id="vtag-ai-js"
+          strategy="afterInteractive"
+          src="https://r2.leadsy.ai/tag.js"
+          data-pid="1kQ7vLBVnDLKUtS7s"
+          data-version="062024"
+        />
       </body>
     </html>
   );
