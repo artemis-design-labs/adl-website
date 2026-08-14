@@ -3,14 +3,6 @@
 import Link from 'next/link';
 import { cn } from '@/lib/cn';
 
-const CAPABILITIES = [
-  { label: 'Design Language Architecture',      href: '/services' },
-  { label: 'Figma-to-Code Pipeline',            href: '/services' },
-  { label: 'Agentic UI Generation',             href: '/services' },
-  { label: 'Drift Detection & Governance',      href: '/services' },
-  { label: 'Infrastructure Lifecycle Management', href: '/services' },
-];
-
 export function Hero() {
   return (
     /*
@@ -96,9 +88,32 @@ export function Hero() {
             </div>
           </div>
 
-          {/* RIGHT — 40% (col-span-5) — Capabilities Panel (Creative Navy pattern) */}
+          {/* RIGHT — 40% (col-span-5) — Product UI showcase.
+              Scaled up 25% on desktop via a wrapper (kept off the animated
+              card so the hero-animate transform doesn't override the scale). */}
           <div className="lg:col-span-5">
-            <CapabilitiesPanel />
+            <div className="lg:scale-[1.25] lg:origin-center">
+            <div
+              className={cn(
+                'rounded-[var(--radius-md)] border border-[var(--color-border)]',
+                'bg-[var(--color-bg-elevated)] overflow-hidden shadow-[var(--shadow-card)] hero-animate'
+              )}
+              style={{ animationDelay: '320ms' }}
+            >
+              <video
+                src="/videos/mixpanel-insights.mp4"
+                poster="/videos/mixpanel-insights-poster.jpg"
+                width={1440}
+                height={900}
+                autoPlay
+                loop
+                muted
+                playsInline
+                aria-label="A product-analytics dashboard ADL built — funnels, retention charts, and metric cards updating in real time."
+                className="w-full h-auto"
+              />
+            </div>
+            </div>
           </div>
         </div>
 
@@ -106,36 +121,5 @@ export function Hero() {
         <div className="mt-8 lg:mt-12 border-t border-[var(--color-border)]" aria-hidden="true" />
       </div>
     </section>
-  );
-}
-
-function CapabilitiesPanel() {
-  return (
-    <div
-      className={cn(
-        'rounded-[var(--radius-md)] border border-[var(--color-border)]',
-        'bg-[var(--color-bg-elevated)] overflow-hidden hero-animate'
-      )}
-      style={{ animationDelay: '320ms' }}
-    >
-      {/* Panel header */}
-      <div className="px-6 py-5 border-b border-[var(--color-border)]">
-        <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-accent-text)]">
-          › Capabilities
-        </p>
-      </div>
-
-      {/* Capability list */}
-      <ul className="divide-y divide-[var(--color-border)]">
-        {CAPABILITIES.map((cap) => (
-          <li
-            key={cap.label}
-            className="px-6 py-5 text-[15px] text-[var(--color-text-secondary)]"
-          >
-            {cap.label}
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }
