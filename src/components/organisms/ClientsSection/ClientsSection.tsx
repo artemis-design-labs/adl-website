@@ -15,8 +15,8 @@ type Client = {
 const CLIENTS: Client[] = [
   { name: 'AT&T',         srcLight: '/images/atnt-light.svg',        srcDark: '/images/atnt-dark.svg'        },
   { name: 'Verizon',      srcLight: '/images/verizon-light.svg',      srcDark: '/images/verizon-dark.svg'      },
-  { name: 'NBCUniversal', srcLight: '/images/nbcuniversal-light.svg', srcDark: '/images/nbcuniversal-dark.svg', heightClass: 'h-[92px]' },
-  { name: 'NYCERS',       srcLight: '/images/nycers-light.svg',       srcDark: '/images/nycers-dark.svg',       heightClass: 'h-[92px]' },
+  { name: 'NBCUniversal', srcLight: '/images/nbcuniversal-light.svg', srcDark: '/images/nbcuniversal-dark.svg', heightClass: 'h-[115px]' },
+  { name: 'NYCERS',       srcLight: '/images/nycers-light.svg',       srcDark: '/images/nycers-dark.svg',       heightClass: 'h-[115px]' },
   { name: 'Qualitrol',    srcLight: '/images/qualitrol-light.svg',    srcDark: '/images/qualitrol-dark.svg'    },
   { name: 'CMA Global',   srcLight: '/images/cma-global-light.svg',   srcDark: '/images/cma-global-dark.svg'   },
   { name: 'NYC DOE',      srcLight: '/images/nyc-doe-light.svg',      srcDark: '/images/nyc-doe-dark.svg'      },
@@ -57,7 +57,7 @@ export function ClientsSection() {
                   width={300}
                   height={200}
                   decoding="async"
-                  className={`${client.heightClass ?? 'h-[84px]'} w-auto object-contain`}
+                  className={`${client.heightClass ?? 'h-[105px]'} w-auto object-contain`}
                   unoptimized
                 />
               </div>

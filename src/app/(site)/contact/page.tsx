@@ -12,20 +12,37 @@ const ADMIN_EMAIL = 'pritish@artemisdesignlabs.com';
 // Values double as the `?type=` deep-link keys used by the CTAs on /services.
 // Keep them in sync with the hrefs there.
 const SERVICES = [
-  { value: 'audit',          label: 'Free design-to-code audit' },
+  { value: 'audit',          label: 'Free operational audit' },
   { value: 'build-track',    label: 'Build Track — fixed scope, one-time' },
   { value: 'operate-track',  label: 'Operate Track — monthly retainer' },
   { value: 'not-sure',       label: "Not sure yet — let's talk" },
 ];
 
+const DOMAINS = [
+  { value: 'healthcare',    label: 'Healthcare' },
+  { value: 'supply-chain',  label: 'Supply Chain' },
+  { value: 'government',    label: 'Government' },
+  { value: 'fintech',       label: 'FinTech' },
+  { value: 'b2b-saas',      label: 'B2B SaaS' },
+  { value: 'real-estate',   label: 'Real Estate' },
+];
+
 const EXPECT_STEPS = [
   { num: '01', label: 'Within 24h', detail: 'We review your message and respond to schedule.' },
   { num: '02', label: '15-30 min call', detail: 'No pitch deck. We talk about what you\'re building and where it\'s stuck.' },
-  { num: '03', label: 'Free audit, 48h', detail: 'You get an audit of your design-to-code workflow. Yours to keep either way.' },
+  { num: '03', label: 'Free audit, 48h', detail: 'You get an operational audit identifying where your team is losing the most time. Yours to keep either way.' },
 ];
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({ name: '', email: '', company: '', service: '', message: '' });
+  const [formData, setFormData] = useState({
+    company: '',
+    name: '',
+    email: '',
+    domain: '',
+    service: '',
+    businessDescription: '',
+    painPoints: '',
+  });
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
@@ -65,7 +82,15 @@ export default function ContactPage() {
       });
       if (!res.ok) throw new Error('Submission failed');
       setStatus('success');
-      setFormData({ name: '', email: '', company: '', service: '', message: '' });
+      setFormData({
+        company: '',
+        name: '',
+        email: '',
+        domain: '',
+        service: '',
+        businessDescription: '',
+        painPoints: '',
+      });
       setTurnstileToken(null);
     } catch (err) {
       console.error(err);
@@ -97,7 +122,7 @@ export default function ContactPage() {
               for what you&apos;re scaling.
             </h1>
             <p className="mt-7 text-base md:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-2xl">
-              We&apos;ve been on your side of this call. We know what you&apos;re looking for. No pitch deck, no pressure — just a real conversation about your design infrastructure.
+              No pitch deck, no pressure — just a real conversation about where your operation is losing time and what it would take to fix it.
             </p>
           </div>
         </div>
@@ -209,7 +234,7 @@ export default function ContactPage() {
                 >
                   {isAudit && (
                     <div className="p-4 rounded-md border border-[var(--color-accent)]/40 bg-[var(--color-accent-subtle)] text-sm text-[var(--color-text-primary)]">
-                      <strong className="font-medium text-[var(--color-accent)]">Free design-to-code audit.</strong>{' '}
+                      <strong className="font-medium text-[var(--color-accent)]">Free operational audit.</strong>{' '}
                       Tell us about your current setup below — we&apos;ll send your audit within 48 hours, yours to keep either way.
                     </div>
                   )}
@@ -224,27 +249,48 @@ export default function ContactPage() {
                   )}
 
                   <div className="grid sm:grid-cols-2 gap-4">
-                    <Field label="Name" name="name" required value={formData.name} onChange={onChange} placeholder="Your name" />
-                    <Field label="Company" name="company" value={formData.company} onChange={onChange} placeholder="Your company" />
+                    <Field label="Company name" name="company" required value={formData.company} onChange={onChange} placeholder="Your company" />
+                    <Field label="Contact name" name="name" required value={formData.name} onChange={onChange} placeholder="Your name" />
                   </div>
 
                   <Field label="Email" name="email" type="email" required value={formData.email} onChange={onChange} placeholder="you@company.com" />
 
-                  <SelectField
-                    label="What are you interested in?"
-                    name="service"
-                    value={formData.service}
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <SelectField
+                      label="Domain"
+                      name="domain"
+                      value={formData.domain}
+                      onChange={onChange}
+                      options={DOMAINS}
+                      placeholder="Choose a domain…"
+                    />
+                    <SelectField
+                      label="What are you interested in?"
+                      name="service"
+                      value={formData.service}
+                      onChange={onChange}
+                      options={SERVICES}
+                      placeholder="Choose a service…"
+                    />
+                  </div>
+
+                  <TextareaField
+                    label="Description of Business"
+                    name="businessDescription"
+                    required
+                    value={formData.businessDescription}
                     onChange={onChange}
-                    options={SERVICES}
+                    rows={4}
+                    placeholder="What does your business do? Who do you serve?"
                   />
 
                   <TextareaField
-                    label="Tell us about your project"
-                    name="message"
-                    required
-                    value={formData.message}
+                    label="Current Pain Points"
+                    name="painPoints"
+                    value={formData.painPoints}
                     onChange={onChange}
-                    placeholder="What's your current design system situation? What are you hoping to achieve?"
+                    rows={4}
+                    placeholder="Where are manual processes costing your team the most time?"
                   />
 
                   {TURNSTILE_REQUIRED && (
@@ -328,8 +374,9 @@ interface SelectFieldProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   options: { value: string; label: string }[];
+  placeholder?: string;
 }
-function SelectField({ label, name, value, onChange, options }: SelectFieldProps) {
+function SelectField({ label, name, value, onChange, options, placeholder = 'Choose one…' }: SelectFieldProps) {
   return (
     <div>
       <label
@@ -351,7 +398,7 @@ function SelectField({ label, name, value, onChange, options }: SelectFieldProps
           'transition-colors'
         )}
       >
-        <option value="">Choose a service…</option>
+        <option value="">{placeholder}</option>
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>
             {opt.label}

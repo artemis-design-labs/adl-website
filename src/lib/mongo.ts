@@ -27,6 +27,19 @@ export interface ContactDoc {
   name: string;
   email: string;
   company: string | null;
+  /** Industry vertical from the Domain dropdown (Healthcare, FinTech, …). */
+  domain: string | null;
+  /** Selected track/interest from the "What are you interested in?" dropdown. */
+  service: string | null;
+  /** Description of Business textarea. */
+  businessDescription: string | null;
+  /** Current Pain Points textarea. */
+  painPoints: string | null;
+  /**
+   * Human-readable composite of the structured fields above. Kept so the /admin
+   * viewer and the Resend notification can render one block without knowing the
+   * individual fields.
+   */
   message: string;
   createdAt: Date;
 }

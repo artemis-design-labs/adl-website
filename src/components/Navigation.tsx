@@ -9,6 +9,7 @@ import { cn } from '@/lib/cn';
 const NAV_LINKS: { href: string; label: string; external?: boolean }[] = [
   { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
+  { href: '/marketplace', label: 'Marketplace' },
   { href: '/work', label: 'Work' },
   { href: 'https://medium.com/ai-ui', label: 'Blog', external: true },
   { href: '/contact', label: 'Contact' },

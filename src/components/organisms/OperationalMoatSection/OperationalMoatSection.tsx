@@ -35,7 +35,7 @@ export function OperationalMoatSection() {
               data-visible={dataVisible}
               style={{ transitionDelay: '60ms' }}
             >
-              Your product can only scale as far as your UI infrastructure lets it.
+              Your business can only scale as fast as the systems running it.
             </h2>
           </div>
 
@@ -46,10 +46,10 @@ export function OperationalMoatSection() {
             style={{ transitionDelay: '140ms' }}
           >
             <p className="text-[16px] md:text-[17px] text-[var(--color-text-secondary)] leading-[1.7]">
-              Most agencies hand off a Figma file and leave your team to figure out the rest.
-              ADL builds the layer that makes everything else move faster — the architecture,
-              the automation, the guardrails — so your team ships consistent UI without a
-              growing design ops headcount. Every engagement starts with systems, not screens.
+              Most agencies solve one thing and leave your team to manage the rest.
+              ADL installs four connected systems — UI infrastructure, AI tools, automated
+              workflows, and training — so your operation runs cleanly as you scale.
+              Every engagement targets the root cause, not the symptom.
             </p>
           </div>
 

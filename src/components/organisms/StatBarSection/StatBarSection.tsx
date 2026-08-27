@@ -6,10 +6,10 @@ import { useFadeInOnView } from '@/hooks/useFadeInOnView';
 // `190K+ AI training images` was removed 2026-07-25 — no citable source.
 // See the fact-audit table in Website-Content.md before adding another.
 const METRICS = [
-  { value: '12+',   label: 'Design systems shipped to production' },
-  { value: '40+',   label: 'Product teams on ADL infrastructure' },
-  { value: '2,000+', label: 'Enterprise applications governed' },
-  { value: '50K+',  label: 'Engineering hours returned to product work' },
+  { value: '10',   label: 'Design systems deployed' },
+  { value: '15',   label: 'AI solutions & agentic workflows implemented' },
+  { value: '20+',  label: 'Years of combined experience' },
+  { value: '250+', label: 'Active users trained on our solutions' },
 ];
 
 export function StatBarSection() {
@@ -22,11 +22,11 @@ export function StatBarSection() {
      */
     <section
       ref={ref}
-      className="bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)] py-12 md:py-16"
+      className="bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)] py-6 md:py-8"
       aria-label="Key metrics"
     >
       <div className="max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-10 lg:gap-16">
           {METRICS.map((m, i) => (
             <div
               key={m.label}

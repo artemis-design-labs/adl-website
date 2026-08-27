@@ -15,8 +15,8 @@ export function Hero() {
       <div className="relative max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
-          {/* LEFT — 60% (col-span-7) */}
-          <div className="lg:col-span-7">
+          {/* LEFT — 50% (col-span-6) */}
+          <div className="lg:col-span-6">
 
             {/* Creative Navy signature: short accent rule above eyebrow */}
             <div
@@ -30,7 +30,7 @@ export function Hero() {
               className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--color-accent-text)] mb-5 hero-animate"
               style={{ animationDelay: '40ms' }}
             >
-              DESIGN INFRASTRUCTURE FOR ENGINEERING-LED SAAS TEAMS
+              OPERATIONAL AI FOR TEAMS THAT ARE SCALING
             </p>
 
             {/* Headline — all primary color, no inline accent */}
@@ -41,8 +41,7 @@ export function Hero() {
               )}
               style={{ animationDelay: '80ms' }}
             >
-              You don't need more designers.<br />
-              You need a system.
+              Your team is spending time on work <span className="text-[var(--color-accent)]">AI should be doing.</span>
             </h1>
 
             {/* Body paragraph */}
@@ -50,10 +49,10 @@ export function Hero() {
               className="text-[16px] md:text-[17px] text-[var(--color-text-secondary)] leading-[1.65] mb-7 max-w-[560px] hero-animate"
               style={{ animationDelay: '160ms' }}
             >
-              Most fast-growing teams have designers, engineers, and a roadmap
-              — but no single owner for the layer connecting them. ADL builds
-              that layer and keeps it governed, so your product scales without
-              the UI debt that compounds every sprint.
+              Every growing team hits the same wall: manual processes eating
+              capacity that should go toward the actual work. We replace those
+              bottlenecks with AI-powered systems that run automatically —
+              and train your team to own them.
             </p>
 
             {/* CTAs */}
@@ -88,11 +87,8 @@ export function Hero() {
             </div>
           </div>
 
-          {/* RIGHT — 40% (col-span-5) — Product UI showcase.
-              Scaled up 25% on desktop via a wrapper (kept off the animated
-              card so the hero-animate transform doesn't override the scale). */}
-          <div className="lg:col-span-5">
-            <div className="lg:scale-[1.25] lg:origin-center">
+          {/* RIGHT — 50% (col-span-6) — Product UI showcase */}
+          <div className="lg:col-span-6">
             <div
               className={cn(
                 'rounded-[var(--radius-md)] border border-[var(--color-border)]',
@@ -112,7 +108,6 @@ export function Hero() {
                 aria-label="A product-analytics dashboard ADL built — funnels, retention charts, and metric cards updating in real time."
                 className="w-full h-auto"
               />
-            </div>
             </div>
           </div>
         </div>

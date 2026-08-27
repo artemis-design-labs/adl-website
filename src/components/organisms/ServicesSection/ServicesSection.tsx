@@ -3,31 +3,26 @@
 import { useFadeInOnView } from '@/hooks/useFadeInOnView';
 import { cn } from '@/lib/cn';
 
-const SERVICES = [
+const PILLARS = [
   {
-    title: 'Design Language Architecture',
+    title: 'UI Infrastructure',
     description:
-      'The token-based foundation that gives every design decision a single source of truth across your entire product.',
+      'As your team grows, different people make different decisions. Products start looking inconsistent, and fixing it eats more time than building new features. We install the foundation that keeps everything aligned — across every team, every screen, every release.',
   },
   {
-    title: 'Figma-to-Code Pipeline',
+    title: 'AI Product Solutions',
     description:
-      'Automated sync between design intent and production code, eliminating the translation layer that costs engineering teams hours every sprint.',
+      'Off-the-shelf AI tools handle generic tasks. We build custom solutions for the specific manual work slowing your team down — automating the workflows that currently require a person to check, generate, or approve.',
   },
   {
-    title: 'Agentic UI Generation',
+    title: 'Agentic Workflows & Automations',
     description:
-      'AI-powered pipelines that produce production-ready UI at the speed your roadmap demands, without the manual overhead.',
+      'When critical knowledge lives in one person\'s head, you\'re one departure away from a crisis. We build automated systems that monitor your operations, catch problems early, and handle complex coordination — without someone managing them every day.',
   },
   {
-    title: 'Drift Detection & Governance',
+    title: 'Training',
     description:
-      'Continuous monitoring that catches inconsistencies before they compound, keeping every layer aligned as your team scales.',
-  },
-  {
-    title: 'Infrastructure Lifecycle Management',
-    description:
-      'Ongoing evolution of the system as your product, team, and stack grow — so the infrastructure never becomes the constraint.',
+      'Most agencies deliver and disappear. We treat your team\'s ability to own and evolve the system as a core deliverable. New hires are productive in days, not weeks. Key exits don\'t break anything. The work lasts.',
   },
 ];
 
@@ -64,7 +59,7 @@ export function ServicesSection() {
           data-visible={dataVisible}
           style={{ transitionDelay: '60ms' }}
         >
-          One Single Ecosystem designed to scale<br />with your product and team.
+          We fix what&apos;s broken. <span className="text-[var(--color-accent)]">Then we build what keeps it fixed.</span>
         </h2>
 
         {/* Body */}
@@ -73,9 +68,10 @@ export function ServicesSection() {
           data-visible={dataVisible}
           style={{ transitionDelay: '120ms' }}
         >
-          Most infrastructure work fixes one layer at a time. ADL architects every layer
-          as a unified system — so design decisions, code, and documentation compound
-          together instead of drifting apart.
+          ADL is an operational partner — not a vendor that drops off files. We
+          identify where manual processes cost your team the most, then replace
+          them with AI-powered systems, automated workflows, and trained teams
+          that keep running long after we&apos;re gone.
         </p>
 
         {/* Horizontal divider */}
@@ -88,9 +84,9 @@ export function ServicesSection() {
 
         {/* Service grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-10">
-          {SERVICES.map((svc, i) => (
+          {PILLARS.map((pillar, i) => (
             <div
-              key={svc.title}
+              key={pillar.title}
               className="flex items-start gap-4 fade-up"
               data-visible={dataVisible}
               style={{ transitionDelay: `${240 + i * 80}ms` }}
@@ -102,10 +98,10 @@ export function ServicesSection() {
               />
               <div>
                 <h3 className="text-[15px] font-semibold text-[var(--color-text-primary)] mb-2 leading-snug">
-                  {svc.title}
+                  {pillar.title}
                 </h3>
                 <p className="text-[14px] text-[var(--color-text-secondary)] leading-[1.7]">
-                  {svc.description}
+                  {pillar.description}
                 </p>
               </div>
             </div>

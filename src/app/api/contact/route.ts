@@ -7,7 +7,10 @@ interface IncomingContact {
   name?: string;
   email?: string;
   company?: string;
+  domain?: string;
   service?: string;
+  businessDescription?: string;
+  painPoints?: string;
   message?: string;
   turnstileToken?: string;
 }
@@ -57,13 +60,18 @@ async function notifyByEmail(submission: ContactDoc) {
   const from = process.env.RESEND_FROM ?? 'ADL <noreply@artemisdesignlabs.com>';
 
   const lines = [
-    `Name: ${submission.name}`,
+    `Contact name: ${submission.name}`,
     `Email: ${submission.email}`,
     submission.company ? `Company: ${submission.company}` : null,
+    submission.domain ? `Domain: ${submission.domain}` : null,
+    submission.service ? `Interested in: ${submission.service}` : null,
     '',
-    'Message:',
-    submission.message,
-  ].filter(Boolean);
+    submission.businessDescription ? 'Description of Business:' : null,
+    submission.businessDescription ?? null,
+    submission.businessDescription ? '' : null,
+    submission.painPoints ? 'Current Pain Points:' : null,
+    submission.painPoints ?? null,
+  ].filter((line) => line !== null);
 
   try {
     const res = await fetch('https://api.resend.com/emails', {
@@ -93,9 +101,20 @@ async function notifyByEmail(submission: ContactDoc) {
 export async function POST(req: Request) {
   try {
     const body = (await req.json()) as IncomingContact;
-    const { name, company, email, service, message, turnstileToken } = body;
+    const {
+      name,
+      company,
+      email,
+      domain,
+      service,
+      businessDescription,
+      painPoints,
+      turnstileToken,
+    } = body;
 
-    if (!name || !email || !message) {
+    // Contact name, email, and a business description are the minimum we need
+    // to act on a lead. Everything else is optional context.
+    if (!name || !email || !businessDescription) {
       return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 });
     }
 
@@ -107,14 +126,29 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Spam protection check failed.' }, { status: 400 });
     }
 
-    const fullMessage = service
-      ? `[Service Interest: ${service}]\n\n${message}`
-      : message;
+    // Composite kept for the /admin viewer and email, which render `message` as
+    // one block without knowing the individual structured fields.
+    const fullMessage = [
+      domain ? `Domain: ${domain}` : null,
+      service ? `Interested in: ${service}` : null,
+      domain || service ? '' : null,
+      'Description of Business:',
+      businessDescription,
+      painPoints ? '' : null,
+      painPoints ? 'Current Pain Points:' : null,
+      painPoints ?? null,
+    ]
+      .filter((line) => line !== null)
+      .join('\n');
 
     const submission: ContactDoc = {
       name,
       email,
       company: company || null,
+      domain: domain || null,
+      service: service || null,
+      businessDescription,
+      painPoints: painPoints || null,
       message: fullMessage,
       createdAt: new Date(),
     };

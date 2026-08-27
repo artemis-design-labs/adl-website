@@ -9,7 +9,6 @@ const FOOTER_NAV: { href: string; label: string; external?: boolean }[] = [
 
 const FOOTER_SOCIAL = [
   { href: 'https://www.linkedin.com/company/artemis-design-labs', label: 'LinkedIn' },
-  { href: 'https://github.com/artemis-design-labs',               label: 'GitHub' },
 ];
 
 const ADMIN_EMAIL = 'pritish@artemisdesignlabs.com';
@@ -31,7 +30,7 @@ export default function Footer() {
           {/* Brand + tagline */}
           <div className="flex-shrink-0">
             <p className="font-bold text-[15px] text-[var(--color-text-primary)] mb-1">
-              Artemis Design Labs
+              Artemis Design Labs LLC
             </p>
             <p className="text-[13px] text-[var(--color-text-tertiary)]">
               UI Infrastructure · AI-Native · New York
@@ -89,7 +88,7 @@ export default function Footer() {
         {/* Copyright bar */}
         <div className="mt-12 pt-6 border-t border-[var(--color-border)]">
           <p className="text-[12px] text-[var(--color-text-tertiary)]">
-            © {year} Artemis Design Labs. All rights reserved.
+            © {year} Artemis Design Labs LLC. All rights reserved.
           </p>
         </div>
 
