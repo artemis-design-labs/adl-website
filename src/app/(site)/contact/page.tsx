@@ -9,13 +9,11 @@ import { CTASection } from '@/components/organisms/CTASection';
 const TURNSTILE_REQUIRED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 const ADMIN_EMAIL = 'pritish@artemisdesignlabs.com';
 
-// Values double as the `?type=` deep-link keys used by the CTAs on /services.
-// Keep them in sync with the hrefs there.
-const SERVICES = [
-  { value: 'audit',          label: 'Free operational audit' },
-  { value: 'build-track',    label: 'Build Track — fixed scope, one-time' },
-  { value: 'operate-track',  label: 'Operate Track — monthly retainer' },
-  { value: 'not-sure',       label: "Not sure yet — let's talk" },
+const PILLARS = [
+  { value: 'ui-infrastructure',       label: 'UI Infrastructure Solutions' },
+  { value: 'internal-ai-optimization', label: 'Internal AI Optimization' },
+  { value: 'agentic-workflows',        label: 'Agentic Workflows & Automations' },
+  { value: 'training',                 label: 'Training' },
 ];
 
 const DOMAINS = [
@@ -25,6 +23,7 @@ const DOMAINS = [
   { value: 'fintech',       label: 'FinTech' },
   { value: 'b2b-saas',      label: 'B2B SaaS' },
   { value: 'real-estate',   label: 'Real Estate' },
+  { value: 'other',         label: 'Other' },
 ];
 
 const EXPECT_STEPS = [
@@ -39,7 +38,8 @@ export default function ContactPage() {
     name: '',
     email: '',
     domain: '',
-    service: '',
+    domainOther: '',
+    pillars: [] as string[],
     businessDescription: '',
     painPoints: '',
   });
@@ -48,19 +48,22 @@ export default function ContactPage() {
   const [errorMsg, setErrorMsg] = useState('');
   const [isAudit, setIsAudit] = useState(false);
 
-  // Honor the deep-linked CTAs (/contact?type=audit from the hero + CTA blocks,
-  // ?type=build-track / ?type=operate-track from the /services cards): preselect
-  // the matching option so the intent isn't dropped on the way over.
   useEffect(() => {
     const type = new URLSearchParams(window.location.search).get('type');
-    if (!type) return;
-    if (!SERVICES.some((s) => s.value === type)) return;
-    setIsAudit(type === 'audit');
-    setFormData((prev) => ({ ...prev, service: type }));
+    if (type === 'audit') setIsAudit(true);
   }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const onPillarToggle = (value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      pillars: prev.pillars.includes(value)
+        ? prev.pillars.filter((p) => p !== value)
+        : [...prev.pillars, value],
+    }));
   };
 
   const onTurnstileToken = useCallback((token: string) => setTurnstileToken(token), []);
@@ -87,7 +90,8 @@ export default function ContactPage() {
         name: '',
         email: '',
         domain: '',
-        service: '',
+        domainOther: '',
+        pillars: [] as string[],
         businessDescription: '',
         painPoints: '',
       });
@@ -264,15 +268,23 @@ export default function ContactPage() {
                       options={DOMAINS}
                       placeholder="Choose a domain…"
                     />
-                    <SelectField
-                      label="What are you interested in?"
-                      name="service"
-                      value={formData.service}
-                      onChange={onChange}
-                      options={SERVICES}
-                      placeholder="Choose a service…"
-                    />
+                    {formData.domain === 'other' && (
+                      <Field
+                        label="Please specify"
+                        name="domainOther"
+                        value={formData.domainOther}
+                        onChange={onChange}
+                        placeholder="Your industry or domain"
+                      />
+                    )}
                   </div>
+
+                  <CheckboxGroupField
+                    label="Which services are you interested in?"
+                    options={PILLARS}
+                    selected={formData.pillars}
+                    onToggle={onPillarToggle}
+                  />
 
                   <TextareaField
                     label="Description of Business"
@@ -435,6 +447,59 @@ function TextareaField({ label, name, required, ...rest }: TextareaFieldProps) {
         )}
         {...rest}
       />
+    </div>
+  );
+}
+
+interface CheckboxGroupFieldProps {
+  label: string;
+  options: { value: string; label: string }[];
+  selected: string[];
+  onToggle: (value: string) => void;
+}
+function CheckboxGroupField({ label, options, selected, onToggle }: CheckboxGroupFieldProps) {
+  return (
+    <div>
+      <p className="block font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-tertiary)] mb-3">
+        {label}
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        {options.map((opt) => {
+          const checked = selected.includes(opt.value);
+          return (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => onToggle(opt.value)}
+              className={cn(
+                'flex items-center gap-3 w-full px-4 py-3 rounded-md text-left',
+                'border transition-colors duration-150',
+                checked
+                  ? 'border-[var(--color-accent)] bg-[var(--color-accent-subtle)] text-[var(--color-text-primary)]'
+                  : 'border-[var(--color-border)] bg-[var(--color-bg-inset)] text-[var(--color-text-secondary)] hover:border-[var(--color-text-tertiary)]'
+              )}
+              aria-pressed={checked}
+            >
+              <span
+                className={cn(
+                  'flex-shrink-0 w-4 h-4 rounded-[3px] border flex items-center justify-center transition-colors duration-150',
+                  checked
+                    ? 'bg-[var(--color-accent)] border-[var(--color-accent)]'
+                    : 'border-[var(--color-border)] bg-transparent'
+                )}
+                aria-hidden="true"
+              >
+                {checked && (
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <polyline points="1.5 5 4 7.5 8.5 2.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                )}
+              </span>
+              <span className="text-[13px] font-medium leading-snug">{opt.label}</span>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
