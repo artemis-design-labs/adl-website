@@ -8,7 +8,9 @@ interface IncomingContact {
   email?: string;
   company?: string;
   domain?: string;
+  domainOther?: string;
   service?: string;
+  pillars?: string[];
   businessDescription?: string;
   painPoints?: string;
   message?: string;
@@ -65,6 +67,7 @@ async function notifyByEmail(submission: ContactDoc) {
     submission.company ? `Company: ${submission.company}` : null,
     submission.domain ? `Domain: ${submission.domain}` : null,
     submission.service ? `Interested in: ${submission.service}` : null,
+    submission.pillars?.length ? `Services: ${submission.pillars.join(', ')}` : null,
     '',
     submission.businessDescription ? 'Description of Business:' : null,
     submission.businessDescription ?? null,
@@ -106,7 +109,9 @@ export async function POST(req: Request) {
       company,
       email,
       domain,
+      domainOther,
       service,
+      pillars,
       businessDescription,
       painPoints,
       turnstileToken,
@@ -129,9 +134,10 @@ export async function POST(req: Request) {
     // Composite kept for the /admin viewer and email, which render `message` as
     // one block without knowing the individual structured fields.
     const fullMessage = [
-      domain ? `Domain: ${domain}` : null,
+      domain ? `Domain: ${domain === 'other' && domainOther ? domainOther : domain}` : null,
       service ? `Interested in: ${service}` : null,
-      domain || service ? '' : null,
+      pillars?.length ? `Services: ${pillars.join(', ')}` : null,
+      domain || service || pillars?.length ? '' : null,
       'Description of Business:',
       businessDescription,
       painPoints ? '' : null,
@@ -147,18 +153,28 @@ export async function POST(req: Request) {
       company: company || null,
       domain: domain || null,
       service: service || null,
+      pillars: pillars?.length ? pillars : null,
       businessDescription,
       painPoints: painPoints || null,
       message: fullMessage,
       createdAt: new Date(),
     };
 
-    const db = await getDb();
-    const result = await db.collection<ContactDoc>('contacts').insertOne(submission);
-
+    // Email fires first — guaranteed capture regardless of DB state.
     await notifyByEmail(submission);
 
-    return NextResponse.json({ success: true, id: result.insertedId.toString() });
+    // MongoDB is best-effort. A connection failure (e.g. Atlas IP restriction)
+    // must not block the submission or the email notification.
+    let insertedId: string | null = null;
+    try {
+      const db = await getDb();
+      const result = await db.collection<ContactDoc>('contacts').insertOne(submission);
+      insertedId = result.insertedId.toString();
+    } catch (dbErr) {
+      console.error('MongoDB write failed (submission captured via email):', dbErr);
+    }
+
+    return NextResponse.json({ success: true, id: insertedId });
   } catch (error) {
     console.error('Contact API error:', error);
     return NextResponse.json({ error: 'Internal server error.' }, { status: 500 });
