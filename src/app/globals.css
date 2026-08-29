@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "../styles/tokens.css";
-/* Fonts (Open Sans + Roboto) are self-hosted by next/font/google in
-   app/layout.tsx — deliberately no external font CDN @import here. */
+/* Fonts are system-ui (SF Pro on macOS, Segoe UI on Windows) —
+   no font loading, no layout shift, no external CDN. */
 
 /* Tailwind v4 theme configuration */
 @theme {
@@ -67,15 +67,15 @@
   animation: floatY 4s ease-in-out infinite;
 }
 
-/* Pulsing teal glow for the product visual */
+/* Pulsing lavender glow for the product visual */
 @keyframes glowPulse {
   0%, 100% {
-    box-shadow: 0 0 0 1px rgba(13, 148, 136, 0.30),
-                0 8px 24px -4px rgba(45, 212, 191, 0.20);
+    box-shadow: 0 0 0 1px rgba(94, 106, 210, 0.25),
+                0 8px 24px -4px rgba(94, 106, 210, 0.15);
   }
   50% {
-    box-shadow: 0 0 0 1px rgba(13, 148, 136, 0.55),
-                0 12px 40px -4px rgba(45, 212, 191, 0.35);
+    box-shadow: 0 0 0 1px rgba(94, 106, 210, 0.45),
+                0 12px 40px -4px rgba(94, 106, 210, 0.28);
   }
 }
 
@@ -323,11 +323,15 @@ select:focus-visible,
    Quick, functional
    ============================================ */
 .transition-base {
-  transition: all var(--duration-fast) var(--ease-linear);
+  transition: color, background-color, border-color, opacity, box-shadow, transform;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-linear);
 }
 
 .transition-slow {
-  transition: all var(--duration-base) var(--ease-out);
+  transition: color, background-color, border-color, opacity, box-shadow, transform;
+  transition-duration: var(--duration-base);
+  transition-timing-function: var(--ease-out);
 }
 
 /* ============================================
@@ -377,7 +381,10 @@ select:focus-visible,
   font-size: var(--text-sm);
   letter-spacing: var(--tracking-wide);
   border-radius: var(--radius-sm);
-  transition: all var(--duration-fast) var(--ease-out),
+  transition: background-color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out),
               transform 200ms var(--ease-out);
   cursor: pointer;
   text-transform: uppercase;

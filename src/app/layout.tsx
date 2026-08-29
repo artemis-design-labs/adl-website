@@ -1,24 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { Roboto, Open_Sans } from 'next/font/google';
 import { ThemeProvider } from '@/context/ThemeContext';
-
-// Body / UI face.
-const roboto = Roboto({
-  weight: ['400', '500', '700'],
-  subsets: ['latin'],
-  variable: '--font-roboto',
-  display: 'swap',
-});
-
-// Display face for headlines — drives --font-display in tokens.css.
-const openSans = Open_Sans({
-  weight: ['600', '700'],
-  subsets: ['latin'],
-  variable: '--font-open-sans',
-  display: 'swap',
-});
 
 const CF_BEACON_TOKEN = '81fa03a077554854b911e476023935c6';
 const GA_MEASUREMENT_ID = 'G-SXX4NH3LQ9';
@@ -98,8 +81,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${roboto.variable} ${openSans.variable}`}
-      data-theme="light"
+      className="scroll-smooth"
+      data-theme="dark"
       suppressHydrationWarning
     >
       <head>
@@ -107,23 +90,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSON_LD) }}
         />
-        {/* Set the data-theme attribute before paint so we don't flash the wrong theme. */}
+        {/* Linear is dark-only — always set data-theme to dark. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var stored = localStorage.getItem('adl-theme');
-                  if (stored === 'light' || stored === 'dark') {
-                    document.documentElement.setAttribute('data-theme', stored);
-                    return;
-                  }
-                  document.documentElement.setAttribute('data-theme', 'light');
-                } catch (e) {}
-              })();
-            `,
+            __html: `document.documentElement.setAttribute('data-theme','dark');`,
           }}
         />
+        <meta name="theme-color" content="#010102" />
+        <link rel="preconnect" href="https://challenges.cloudflare.com" />
       </head>
       <body className="font-sans antialiased">
         <a href="#main-content" className="skip-link">Skip to content</a>

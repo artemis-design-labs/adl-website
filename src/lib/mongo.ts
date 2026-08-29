@@ -31,6 +31,8 @@ export interface ContactDoc {
   domain: string | null;
   /** Selected track/interest from the "What are you interested in?" dropdown. */
   service: string | null;
+  /** Service pillars selected via checkboxes (UI Infrastructure, AI Optimization, etc.). */
+  pillars: string[] | null;
   /** Description of Business textarea. */
   businessDescription: string | null;
   /** Current Pain Points textarea. */

@@ -1,154 +1,154 @@
 /*
- * ADL Design Tokens — Ramotion colors · Creative Navy typography & spacing
+ * ADL Design Tokens — Linear-inspired dark system
  *
- * Colors: Figma node 99:3 — "Website Design Templates / Ramotion"
- * Typography & spacing: Creative Navy column (same Figma frame)
- * Palette: #2f77ea electric blue · #fafafa bg · #141414 text · #262626 surface-dark
- * Type: Open Sans (display headlines) + Roboto (body) — both via next/font/google
- * Scale: Display 72px/700 · H1 44px/700 · H2 24px/700 · Body 16px/400 · Caption 14px/400
- * Radius: sm 4px · md 8px · lg 20px · full 9999px
- * Section padding: 64px vertical · 40px horizontal
- * Grid: 1280px max · 12-col · 24px gutter
+ * Based on Linear's design system: near-black canvas (#010102),
+ * lavender accent (#5e6ad2), system-ui font stack, hairline borders,
+ * surface-ladder depth (no shadows). Dark-only — no theme toggle.
  */
 
 :root {
-  /* ============================================
-     BACKGROUNDS — Ramotion light-first
-     #fafafa default; dark sections use #262626.
-     ============================================ */
-
-  --color-bg-primary: #fafafa;
-  --color-bg-secondary: #f2f2f2;
-  --color-bg-tertiary: #ebebeb;
-  --color-bg-elevated: #ffffff;
-  --color-bg-hover: #f5f5f5;
-  --color-bg-inset: #e8e8e8;
-
-  /* Dark section surfaces */
-  --color-bg-dark: #141414;
-  --color-surface-dark: #262626;
+  color-scheme: dark;
 
   /* ============================================
-     TEXT — Ramotion
+     BACKGROUNDS — Linear four-step surface ladder
+     Depth via surface color steps, not shadows.
      ============================================ */
 
-  --color-text-primary: #141414;
-  --color-text-secondary: #3a3a3a;
-  --color-text-tertiary: #6f7984;
-  --color-text-muted: #6f7984;
-  --color-text-disabled: #c0c0c0;
+  --color-bg-primary: #010102;       /* canvas — near-black with faint blue tint */
+  --color-bg-secondary: #0f1011;     /* surface-1 — cards, panels */
+  --color-bg-tertiary: #141516;      /* surface-2 — featured / hover surfaces */
+  --color-bg-elevated: #0f1011;      /* elevated cards */
+  --color-bg-hover: #18191a;         /* surface-3 — hover target */
+  --color-bg-inset: #06060a;         /* form fields, code wells */
+
+  /* Legacy section aliases — kept for backward-compat with dark-section components */
+  --color-bg-dark: #010102;
+  --color-surface-dark: #0f1011;
+
+  /* ============================================
+     TEXT — Linear hierarchy
+     ============================================ */
+
+  --color-text-primary: #f7f8f8;
+  --color-text-secondary: #d0d6e0;
+  --color-text-tertiary: #8a8f98;
+  --color-text-muted: #62666d;
+  --color-text-disabled: #3e3e44;
   --color-text-on-accent: #ffffff;
-  --color-text-on-dark: #ffffff;
-  --color-text-inverse: #ffffff;
+  --color-text-on-dark: #f7f8f8;
+  --color-text-inverse: #010102;
 
   /* ============================================
-     BRAND COLORS — Ramotion electric blue
+     BRAND COLORS — Linear lavender
+     Scarcity rule: accent appears only on brand mark,
+     focus rings, primary CTAs, and link emphasis.
      ============================================ */
 
-  --color-primary: #2f77ea;
-  --color-primary-hover: #1f60d0;
-  --color-primary-subtle: rgba(47, 119, 234, 0.08);
-  --color-primary-glow: rgba(47, 119, 234, 0.25);
+  --color-primary: #5e6ad2;
+  --color-primary-hover: #828fff;
+  --color-primary-subtle: rgba(94, 106, 210, 0.12);
+  --color-primary-glow: rgba(94, 106, 210, 0.25);
 
-  --color-accent: #2f77ea;         /* Ramotion uses a single blue accent */
-  --color-accent-hover: #1f60d0;
-  --color-accent-subtle: rgba(47, 119, 234, 0.08);
+  --color-accent: #5e6ad2;
+  --color-accent-hover: #828fff;
+  --color-accent-subtle: rgba(94, 106, 210, 0.12);
+  --color-accent-text: #5e6ad2;      /* alias used by organism components */
 
   /* ============================================
-     BORDERS — Ramotion
+     BORDERS — Linear hairlines
      ============================================ */
 
-  --color-border: #e0e0e0;
-  --color-border-hover: #c8c8c8;
-  --color-border-strong: #000000;
-  --color-border-accent: #2f77ea;
+  --color-border: #23252a;
+  --color-border-hover: #34343a;
+  --color-border-strong: #3e3e44;
+  --color-border-accent: #5e6ad2;
 
   /* ============================================
      SEMANTIC
      ============================================ */
 
-  --color-success: #16a34a;
-  --color-success-muted: rgba(22, 163, 74, 0.10);
-  --color-error: #dc2626;
-  --color-error-muted: rgba(220, 38, 38, 0.10);
-  --color-warning: #d97706;
-  --color-warning-muted: rgba(217, 119, 6, 0.10);
+  --color-success: #27a644;
+  --color-success-muted: rgba(39, 166, 68, 0.12);
+  --color-error: #e5484d;
+  --color-error-muted: rgba(229, 72, 77, 0.12);
+  --color-warning: #ffb224;
+  --color-warning-muted: rgba(255, 178, 36, 0.12);
 
   /* ============================================
-     GRADIENTS — Ramotion blue
+     GRADIENTS — Linear uses none
      ============================================ */
 
-  --gradient-primary: linear-gradient(135deg, #2f77ea 0%, #1f60d0 100%);
-  --gradient-subtle: radial-gradient(ellipse at top, rgba(47, 119, 234, 0.05), transparent 70%);
+  --gradient-primary: none;
+  --gradient-subtle: none;
 
   /* ============================================
-     TYPOGRAPHY
-     Both faces load via next/font/google in app/layout.tsx — no
-     third-party font CDN, nothing to configure outside the repo.
-       --font-open-sans → display headlines (h1/h2)
-       --font-roboto    → body, UI, labels
+     TYPOGRAPHY — System-ui (SF Pro on macOS)
+     Linear's proprietary Linear Display/Text → SF Pro
+     is the closest publicly available equivalent.
+     No external font CDN — system fonts only.
      ============================================ */
 
-  --font-display: var(--font-open-sans, 'Open Sans'), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-sans: var(--font-roboto, 'Roboto'), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', 'Courier New', monospace;
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+  --font-sans:    -apple-system, BlinkMacSystemFont, 'SF Pro Text',    'Segoe UI', system-ui, sans-serif;
+  --font-mono:    'SF Mono', 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
 
-  /* Creative Navy type scale */
-  --text-display: 4.5rem;      /* 72px · 700 weight · 1.2lh — Open Sans hero display */
-  --text-h1: 2.75rem;          /* 44px · 700 · 1.2lh */
-  --text-h2: 1.5rem;           /* 24px · 700 · 1.2lh */
-  --text-h3: 1.25rem;          /* 20px */
-  --text-body-lg: 1.125rem;    /* 18px */
-  --text-body: 1rem;           /* 16px · 400 · 1.5lh */
-  --text-sm: 0.875rem;         /* 14px · caption */
-  --text-xs: 0.6875rem;        /* 11px · labels */
+  /* Linear type scale */
+  --text-display: 5rem;           /* 80px · Display XL */
+  --text-h1: 3.5rem;              /* 56px · Display Lg */
+  --text-h2: 2.5rem;              /* 40px · Display Md */
+  --text-h3: 1.75rem;             /* 28px · Headline */
+  --text-body-lg: 1.375rem;       /* 22px · Card title */
+  --text-body: 1rem;              /* 16px · Body */
+  --text-sm: 0.875rem;            /* 14px · Button */
+  --text-xs: 0.75rem;             /* 12px · Caption */
 
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
-  --font-weight-bold: 700;
+  --font-weight-bold: 600;        /* Linear caps at 600, never 700+ */
 
-  --leading-tight: 1.2;        /* headlines */
-  --leading-snug: 1.35;
-  --leading-normal: 1.5;       /* body */
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
   --leading-relaxed: 1.6;
 
-  --tracking-tight: -0.01em;
-  --tracking-normal: 0;
+  /* Linear aggressive negative tracking */
+  --tracking-tight: -0.025em;    /* display-scale default */
+  --tracking-normal: -0.003em;   /* body: -0.05px at 16px */
   --tracking-wide: 0.04em;
   --tracking-wider: 0.08em;
   --tracking-widest: 0.14em;
 
   /* ============================================
      SPACING — 4px base unit
-     Scale: 4 · 8 · 16 · 20 · 24 · 40 · 48 · 64 · 96 · 128
+     Scale: 4 · 8 · 16 · 20 · 24 · 40 · 48 · 80 · 96 · 128
      ============================================ */
 
-  --space-1: 0.25rem;          /* 4px */
-  --space-2: 0.5rem;           /* 8px */
-  --space-4: 1rem;             /* 16px */
-  --space-5: 1.25rem;          /* 20px */
-  --space-6: 1.5rem;           /* 24px */
-  --space-10: 2.5rem;          /* 40px */
-  --space-12: 3rem;            /* 48px */
-  --space-16: 4rem;            /* 64px */
-  --space-24: 6rem;            /* 96px */
-  --space-32: 8rem;            /* 128px */
+  --space-1: 0.25rem;            /* 4px */
+  --space-2: 0.5rem;             /* 8px */
+  --space-4: 1rem;               /* 16px */
+  --space-5: 1.25rem;            /* 20px */
+  --space-6: 1.5rem;             /* 24px */
+  --space-10: 2.5rem;            /* 40px */
+  --space-12: 3rem;              /* 48px */
+  --space-16: 4rem;              /* 64px */
+  --space-24: 6rem;              /* 96px */
+  --space-32: 8rem;              /* 128px */
 
-  --space-section-v: 4rem;     /* 64px vertical section padding */
-  --space-section-h: 2.5rem;   /* 40px horizontal section padding */
+  --space-section-v: 6rem;       /* 96px — Linear section padding */
+  --space-section-h: 2.5rem;     /* 40px horizontal */
 
   /* Legacy aliases — preserved for existing components */
-  --space-xs: 0.25rem;         /* 4px */
-  --space-sm: 0.5rem;          /* 8px */
-  --space-md: 0.75rem;         /* 12px */
-  --space-lg: 1rem;            /* 16px */
-  --space-xl: 1.25rem;         /* 20px */
-  --space-2xl: 1.5rem;         /* 24px */
-  --space-3xl: 2rem;           /* 32px */
-  --space-component: 2.5rem;   /* 40px */
-  --space-element: 1.25rem;    /* 20px */
-  --space-section: 4rem;       /* 64px */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 0.75rem;
+  --space-lg: 1rem;
+  --space-xl: 1.25rem;
+  --space-2xl: 1.5rem;
+  --space-3xl: 2rem;
+  --space-component: 2.5rem;
+  --space-element: 1.25rem;
+  --space-section: 6rem;
 
   /* ============================================
      LAYOUT — 1280px max · 12-col · 24px gutter
@@ -158,34 +158,33 @@
   --container-narrow: 680px;
   --container-wide: 1200px;
   --grid-columns: 12;
-  --grid-gutter: 1.5rem;       /* 24px */
+  --grid-gutter: 1.5rem;         /* 24px */
 
   /* ============================================
-     RADIUS — Creative Navy scale
-     sm 4px · md 8px · lg 20px · full 9999px
+     RADIUS — Linear: 8px buttons/inputs, 12px cards
      ============================================ */
 
   --radius-none: 0;
-  --radius-sm: 4px;
+  --radius-sm: 6px;
   --radius-md: 8px;
-  --radius-lg: 20px;
-  --radius-xl: 40px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
   --radius-full: 9999px;
 
   /* ============================================
-     SHADOWS — light-surface defaults
+     SHADOWS — Linear uses none (surface ladder only)
+     Only shadow-glow is preserved for focus/CTA states.
      ============================================ */
 
   --shadow-none: none;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.10);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
-  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  --shadow-glow: 0 0 0 1px rgba(47, 119, 234, 0.30),
-                 0 8px 24px -4px rgba(47, 119, 234, 0.20);
-  --shadow-card: 0 0 0 1px rgba(0, 0, 0, 0.06);
-  --shadow-card-hover: 0 4px 16px -4px rgba(0, 0, 0, 0.12),
-                       0 0 0 1px rgba(47, 119, 234, 0.20);
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-inset: none;
+  --shadow-glow: 0 0 0 1px rgba(94, 106, 210, 0.30),
+                 0 8px 24px -4px rgba(94, 106, 210, 0.20);
+  --shadow-card: none;
+  --shadow-card-hover: none;
 
   /* ============================================
      ANIMATION
@@ -196,6 +195,7 @@
   --duration-slow: 300ms;
   --ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-linear: linear;
 
   /* ============================================
      Z-INDEX
@@ -210,55 +210,6 @@
      OVERLAYS
      ============================================ */
 
-  --overlay-light: rgba(47, 119, 234, 0.04);
-  --overlay-dim: rgba(0, 0, 0, 0.50);
-}
-
-/* ============================================
-   DARK MODE — for full-page dark theme toggle.
-   Individual dark sections use bg-[var(--color-bg-dark)]
-   directly without needing this override.
-   ============================================ */
-[data-theme="dark"] {
-  --color-bg-primary: #141414;
-  --color-bg-secondary: #1c1c1c;
-  --color-bg-tertiary: #242424;
-  --color-bg-elevated: #262626;
-  --color-bg-hover: #2e2e2e;
-  --color-bg-inset: #0a0a0a;
-
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #d4d4d4;
-  --color-text-tertiary: #9ca3af;
-  --color-text-muted: #6b7280;
-  --color-text-disabled: #3a3a3a;
-
-  --color-primary: #4d8ef0;
-  --color-primary-hover: #6aa0f4;
-  --color-primary-subtle: rgba(47, 119, 234, 0.15);
-  --color-primary-glow: rgba(47, 119, 234, 0.35);
-
-  --color-accent: #4d8ef0;
-  --color-accent-hover: #6aa0f4;
-  --color-accent-subtle: rgba(47, 119, 234, 0.15);
-
-  --color-border: #2a2a2a;
-  --color-border-hover: #3a3a3a;
-  --color-border-strong: #555555;
-  --color-border-accent: #4d8ef0;
-
-  --gradient-subtle: radial-gradient(ellipse at top, rgba(47, 119, 234, 0.08), transparent 70%);
-
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.40);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.50);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.60);
-  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  --shadow-glow: 0 0 0 1px rgba(47, 119, 234, 0.40),
-                 0 8px 24px -4px rgba(47, 119, 234, 0.25);
-  --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.06);
-  --shadow-card-hover: 0 4px 20px -4px rgba(0, 0, 0, 0.60),
-                       0 0 0 1px rgba(47, 119, 234, 0.20);
-
-  --overlay-light: rgba(47, 119, 234, 0.06);
+  --overlay-light: rgba(94, 106, 210, 0.06);
   --overlay-dim: rgba(0, 0, 0, 0.70);
 }

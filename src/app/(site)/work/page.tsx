@@ -2,57 +2,78 @@ import type { Metadata } from 'next';
 import { CTASection } from '@/components/organisms/CTASection';
 
 export const metadata: Metadata = {
-  title: 'Work',
+  title: 'Work | Artemis Design Labs',
   description:
-    'Selected projects from Artemis Design Labs — UI infrastructure, design systems, and AI-powered platforms shipped for enterprise teams.',
+    'Selected projects from Artemis Design Labs — AI-powered platforms, workflow systems, and operational infrastructure built for enterprise and public sector organizations.',
 };
 
-const FILTERS = ['All', 'Public Sector', 'Healthcare', 'Education', 'Enterprise'];
+const FILTERS = ['All', 'Public Sector', 'Education', 'Enterprise'];
 
 const PROJECTS = [
   {
-    category: 'Enterprise · Internal Tooling',
-    client: 'AT&T',
-    title: 'AT&T Cloud Optimizer — Enterprise Data Design System',
+    year: '2024–2025',
+    category: 'Public Sector · AI Workflow System',
+    client: 'NYCERS',
+    title: 'NYCEPAS — AI-Powered Pension Administration System',
     description:
-      'A governed design system and data visualization component library for AT&T\'s internal cloud cost intelligence platform — serving everyone from SVP to individual application owner through a single, consistent UI.',
+      'An AI-powered workflow system that unified pension administration across all four NYCERS business units into one intelligent case surface. Cases that previously required manual cross-unit coordination now route automatically — with AI-assisted tier determination, eligibility checks, and benefit calculations that are fully auditable and sourced to statute.',
     stats: [
-      { label: 'Applications', value: '1,800+' },
-      { label: 'Cloud spend surfaced', value: '$36.7M' },
+      { label: 'Members served',         value: '350,000+' },
+      { label: 'Business units unified',  value: '4'        },
     ],
+    deliverables: ['Product Design', 'AI Workflow System', 'Rules Engine', 'Agentic Automation'],
   },
   {
-    category: 'Public Healthcare · AI Design System',
-    client: 'HANDS AI',
-    title: 'HANDS AI — AI-Powered Case Management Design System',
+    year: '2024',
+    category: 'Public Health · AI Case Management',
+    client: 'CMA Global',
+    title: 'HANDS AI — AI-Powered Case Management for Family Services',
     description:
-      'A tokenized design system and production component library for HANDS AI\'s WIC case management platform — purpose-built for predictive risk interfaces, natural language search, and AI-human collaboration at scale.',
+      'An AI-powered assistant for family support caseworkers that surfaces the highest-risk families every morning — with a plain-language explanation for every flag. Caseworkers can ask questions across their entire caseload in natural language instead of navigating fragmented systems, turning reactive record-keeping into proactive, focused care.',
     stats: [
-      { label: 'Case prep time',      value: '40% faster' },
-      { label: 'Departments deployed', value: '6'         },
+      { label: 'Caseload prioritization', value: 'Daily' },
+      { label: 'Risk flags',              value: 'Explained' },
     ],
+    deliverables: ['Product Design', 'AI Case Management', 'Risk Intelligence', 'Natural Language Search'],
   },
   {
-    category: 'Education · Data Visualization System',
-    client: 'Insight AI',
-    title: 'Insight — Data Intelligence Design System for NYC DOE',
+    year: '2022–2023',
+    category: 'Education · Data Intelligence Platform',
+    client: 'NYC Department of Education',
+    title: 'Insight AI — Student Data Intelligence for NYC Schools',
     description:
-      'A data visualization design system for New York City\'s Department of Education — transforming fragmented student data into shareable visual narratives across 1,800+ public schools.',
+      'A data intelligence platform that transformed fragmented student data into actionable dashboards for New York City\'s public school system. Principals, teachers, and counselors can now surface trends across attendance, achievement, course access, and discipline — and coordinate on interventions — without manually reconciling spreadsheets.',
     stats: [
       { label: 'NYC schools served',   value: '1,800+' },
       { label: 'Data domains unified', value: '4'      },
     ],
+    deliverables: ['Product Design', 'Data Visualization', 'Analytics Platform'],
   },
   {
-    category: 'Enterprise · Internal Tooling Design System',
-    client: 'Verizon',
-    title: 'My Project Inbox — Enterprise Coordination Design System',
+    year: '2022',
+    category: 'Enterprise · Media Operations',
+    client: 'NBCUniversal',
+    title: 'Data Mesh — Real-Time Observability for Global Content Distribution',
     description:
-      'A governed design system for Verizon\'s internal project coordination platform — replacing three fragmented tool categories with a single component library that standardizes how engineering teams track, assign, and hand off work.',
+      'A unified observability platform for NBCUniversal\'s Network Operations Center that brought linear, cable, and streaming distribution monitoring into a single real-time view. Engineers went from piecing together incidents across a patchwork of siloed tools to detecting and triaging problems in one place — before viewers are affected.',
     stats: [
-      { label: 'Projects unified',     value: '60+'  },
-      { label: 'Tool categories replaced', value: '3' },
+      { label: 'Platforms unified',  value: '3'         },
+      { label: 'Signal aggregation', value: 'Real-time' },
     ],
+    deliverables: ['Product Design', 'Observability Platform', 'Real-Time Monitoring'],
+  },
+  {
+    year: '2020–2021',
+    category: 'Enterprise · Internal Tooling',
+    client: 'Verizon',
+    title: 'My Project Inbox — Engineering Coordination Platform',
+    description:
+      'A shared coordination platform that replaced scattered spreadsheets, email threads, and tracking tools across Verizon\'s engineering organization with a single project inbox. Every contributor could see exactly what they owned, what was blocking them, and who was involved — across every active project at once.',
+    stats: [
+      { label: 'Projects unified',         value: '60+' },
+      { label: 'Tool categories replaced',  value: '3'   },
+    ],
+    deliverables: ['Product Design', 'UI Infrastructure', 'Internal Tooling'],
   },
 ];
 
@@ -127,7 +148,7 @@ export default function WorkPage() {
                   Featured
                 </p>
                 <p className="font-[var(--font-mono)] text-[11px] text-[var(--color-text-tertiary)] tracking-[0.1em] mb-6">
-                  {p.category}
+                  {p.category} · {p.year}
                 </p>
                 <h2 className="text-[clamp(1.5rem,2vw,2rem)] font-bold leading-[1.15] tracking-[-0.03em] text-[var(--color-text-primary)] mb-5">
                   {p.title}
@@ -146,6 +167,17 @@ export default function WorkPage() {
                         {s.value}
                       </p>
                     </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {p.deliverables.map((d) => (
+                    <span
+                      key={d}
+                      className="inline-flex items-center h-[26px] px-3 rounded-full border border-[var(--color-border)] font-[var(--font-mono)] text-[10px] tracking-[0.08em] uppercase text-[var(--color-text-tertiary)]"
+                    >
+                      {d}
+                    </span>
                   ))}
                 </div>
 

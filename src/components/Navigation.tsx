@@ -2,14 +2,12 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { ThemeToggle } from '@/components/atoms/ThemeToggle';
 import { Logo } from '@/components/atoms/Logo';
 import { cn } from '@/lib/cn';
 
 const NAV_LINKS: { href: string; label: string; external?: boolean }[] = [
   { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
-  { href: '/marketplace', label: 'Marketplace' },
   { href: '/work', label: 'Work' },
   { href: 'https://medium.com/ai-ui', label: 'Blog', external: true },
   { href: '/contact', label: 'Contact' },
@@ -87,34 +85,28 @@ export default function Navigation() {
               ))}
             </ul>
 
-            <div className="flex items-center gap-3 pl-3 border-l border-[var(--color-border)]">
-              <ThemeToggle />
-
-              {/* Prominent CTA */}
-              <Link
-                href="/contact#book-a-call"
-                className={cn(
-                  'inline-flex items-center gap-1.5 h-10 px-5 rounded-md',
-                  'bg-[var(--color-accent)] text-[var(--color-text-on-accent)]',
-                  'border border-[var(--color-accent)]',
-                  'text-sm font-medium',
-                  'hover:bg-[var(--color-accent-hover)] hover:border-[var(--color-accent-hover)]',
-                  'hover:shadow-[var(--shadow-glow)]',
-                  'transition-all duration-150',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]'
-                )}
-              >
-                Book a Call
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M5 12h14M13 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
+            <Link
+              href="/contact#book-a-call"
+              className={cn(
+                'inline-flex items-center gap-1.5 h-9 px-4 rounded-md',
+                'bg-[var(--color-accent)] text-[var(--color-text-on-accent)]',
+                'border border-[var(--color-accent)]',
+                'text-sm font-medium',
+                'hover:bg-[var(--color-accent-hover)] hover:border-[var(--color-accent-hover)]',
+                'hover:shadow-[var(--shadow-glow)]',
+                'transition-[background-color,border-color,box-shadow] duration-150',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]'
+              )}
+            >
+              Book a Call
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
 
           {/* Mobile controls */}
           <div className="flex md:hidden items-center gap-3">
-            <ThemeToggle />
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen((s) => !s)}

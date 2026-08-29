@@ -253,11 +253,11 @@ export default function ContactPage() {
                   )}
 
                   <div className="grid sm:grid-cols-2 gap-4">
-                    <Field label="Company name" name="company" required value={formData.company} onChange={onChange} placeholder="Your company" />
-                    <Field label="Contact name" name="name" required value={formData.name} onChange={onChange} placeholder="Your name" />
+                    <Field label="Company name" name="company" required value={formData.company} onChange={onChange} placeholder="Your company" autoComplete="organization" />
+                    <Field label="Contact name" name="name" required value={formData.name} onChange={onChange} placeholder="Your name" autoComplete="name" />
                   </div>
 
-                  <Field label="Email" name="email" type="email" required value={formData.email} onChange={onChange} placeholder="you@company.com" />
+                  <Field label="Email" name="email" type="email" required value={formData.email} onChange={onChange} placeholder="you@company.com" autoComplete="email" spellCheck={false} />
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <SelectField
@@ -318,7 +318,7 @@ export default function ContactPage() {
                       'font-medium text-base',
                       'hover:bg-[var(--color-accent-hover)] hover:shadow-[var(--shadow-glow)]',
                       'active:translate-y-px',
-                      'transition-all duration-150',
+                      'transition-[background-color,box-shadow,transform] duration-150',
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-elevated)]',
                       'disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none disabled:active:translate-y-0'
                     )}
