@@ -205,3 +205,27 @@ TURNSTILE_SECRET_KEY=0x...             # Worker secret in prod
 - `ContentVersionContext` / `ContentSwitcher` / V1+V2 content blocks — deleted Jun 3 2026 with their `test-content-*` branches.
 - `vercel.json` / `.vercel/` — we're on Cloudflare now.
 - The `src/app/components/` tree of old molecules/atoms/templates — purged.
+
+---
+
+# Claude Code Operating Guidelines
+
+## Performance & Optimization Defaults
+- Optimize for speed, brevity, and low latency by default.
+- Minimize conversational filler, preambles, and lengthy explanations for straightforward coding queries.
+- Prioritize targeted edits over rewriting whole files.
+
+## Dynamic Reasoning Escalation (Autonomous Thinking)
+You are authorized to bypass fast/brief mode and escalate to deep reasoning (utilizing your maximum thinking tools and deep context analysis) without explicit user instruction ONLY when the task meets the following criteria:
+1. Complex Architecture: Cross-file refactoring, state management overhauls, or breaking changes to core APIs.
+2. Hard Debugging: Race conditions, memory leaks, silent failures, or issues involving complex asynchronous logic.
+3. High Uncertainty: When the prompt requirements directly conflict with existing codebase patterns or introduce security risks.
+
+## Compaction & Context Protocol
+- Efficiently self-manage context. If context length begins to affect performance on a routine task, suggest a `/compact` or `/clear` command when moving to an unrelated sub-task.
+- If deep reasoning is triggered under the Escalation rules, explicitly state why you are escalating (e.g., "Triggering deep analysis due to multi-file state conflict...").
+
+## Development Server Rules
+- Never run development servers (`npm run dev`, `uvicorn`, `next dev`, etc.) in the foreground.
+- Always append background operators or use detached jobs (e.g., `npm run dev &` or detached background tasks).
+- Never pipe watchers or log streams directly into the active prompt context.
