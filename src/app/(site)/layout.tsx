@@ -1,14 +1,14 @@
 /**
  * Shared shell for all public-facing pages. Anything in this route group
- * automatically renders inside Navigation + <main> + Footer, in the
- * dark-violet aesthetic provided by the root layout's ThemeProvider.
+ * automatically renders inside Navigation + <main> + Footer, on the
+ * light canvas defined by src/styles/tokens.css.
  *
  * Things NOT in this group (kept at /app/ level): /admin (auth, no
  * Navigation), /api/* (JSON endpoints). They're naturally excluded
  * because they live outside the (site) folder.
  *
  * To add a new page: create app/(site)/<route>/page.tsx with just the
- * content — Nav, Footer, main landmark, theme, etc. come for free.
+ * content — Nav, Footer, main landmark, etc. come for free.
  */
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';

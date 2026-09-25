@@ -9,15 +9,11 @@ interface CTASectionProps {
   background?: 'primary' | 'elevated';
 }
 
+/** Single column, isolated. Nothing competes with the one action. */
 export function CTASection({ background = 'primary' }: CTASectionProps) {
   const { ref, dataVisible } = useFadeInOnView(0.1);
 
   return (
-    /*
-     * Creative Navy CTA pattern — dark bg, left-aligned layout,
-     * light-weight headline, accent button + email inline.
-     * No centering, no decorative elements — just the question and the action.
-     */
     <section
       ref={ref}
       id="contact"
@@ -25,31 +21,31 @@ export function CTASection({ background = 'primary' }: CTASectionProps) {
         background === 'elevated'
           ? 'bg-[var(--color-bg-elevated)]'
           : 'bg-[var(--color-bg-primary)]',
-        'py-20 md:py-28'
+        'py-28 md:py-36'
       )}
     >
       <div className="max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
 
         <h2
           className={cn(
-            'text-[clamp(2rem,4.5vw,3.75rem)] font-light leading-[1.1]',
-            'tracking-[-0.025em] text-[var(--color-text-primary)] max-w-[680px] mb-10 fade-up'
+            'text-[clamp(1.75rem,3.5vw,var(--text-h2))] font-semibold leading-[1.1]',
+            'tracking-[-0.03em] text-[var(--color-text-primary)] max-w-[18ch] mb-10 fade-up'
           )}
           data-visible={dataVisible}
         >
-          Ready to build your<br />UI infrastructure?
+          Let&apos;s start transforming your business
         </h2>
 
         <div
-          className="flex flex-col sm:flex-row items-start sm:items-center gap-5 fade-up"
+          className="flex flex-col sm:flex-row items-start sm:items-center gap-6 fade-up"
           data-visible={dataVisible}
           style={{ transitionDelay: '80ms' }}
         >
           <Link
-            href="/contact?type=audit"
+            href="/contact#book-a-call"
             className={cn(
-              'inline-flex items-center justify-center gap-2 h-[44px] px-7 rounded-[var(--radius-md)]',
-              'bg-[var(--color-accent)] text-[var(--color-text-on-accent)] font-bold text-[14px]',
+              'inline-flex items-center justify-center gap-2 h-[48px] px-8 rounded-[var(--radius-md)]',
+              'bg-[var(--color-accent)] text-[var(--color-text-on-accent)] font-semibold text-[15px]',
               'hover:bg-[var(--color-accent-hover)] hover:shadow-[var(--shadow-glow)]',
               'active:brightness-90 transition-all duration-150',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]'

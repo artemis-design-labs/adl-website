@@ -31,7 +31,7 @@ export function PageLoader() {
   return (
     <div
       className={[
-        'fixed inset-0 z-[9999] flex items-center justify-center bg-[#141414]',
+        'fixed inset-0 z-[9999] flex items-center justify-center bg-[var(--color-bg-primary)]',
         'transition-opacity',
         hiding ? 'opacity-0 pointer-events-none' : 'opacity-100',
       ].join(' ')}

@@ -26,84 +26,77 @@ const PILLARS = [
   },
 ];
 
+/**
+ * 2-column capability grid (R/GA pattern) — numbered, hairline top rule
+ * per cell. The number does the ordering work that a decorative bullet
+ * used to do, and reads as a system rather than a list.
+ */
 export function ServicesSection() {
   const { ref, dataVisible } = useFadeInOnView(0.05);
 
   return (
-    /*
-     * Apexon Services pattern — elevated bg, bold headline,
-     * thin horizontal divider, 2×2 grid with square accent bullet.
-     */
     <section
       ref={ref}
       id="services"
-      className="bg-[var(--color-bg-primary)] border-b border-[var(--color-border)] py-20 md:py-28"
+      className="bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)] py-24 md:py-32"
     >
       <div className="max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
 
-        {/* Eyebrow */}
-        <p
-          className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent-text)] mb-5 fade-up"
-          data-visible={dataVisible}
-        >
-          <span aria-hidden="true">›&nbsp;</span>
-          What We Do
-        </p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-16 gap-y-8 mb-16 md:mb-20">
+          <div className="lg:col-span-5">
+            <p
+              className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.18em] text-[var(--color-accent-text)] mb-5 fade-up"
+              data-visible={dataVisible}
+            >
+              What We Do
+            </p>
+            <h2
+              className={cn(
+                'text-[clamp(1.75rem,3.5vw,var(--text-h2))] font-semibold leading-[1.1]',
+                'tracking-[-0.03em] text-[var(--color-text-primary)] fade-up'
+              )}
+              data-visible={dataVisible}
+              style={{ transitionDelay: '60ms' }}
+            >
+              We fix what&apos;s broken. Then we build what keeps it fixed.
+            </h2>
+          </div>
 
-        {/* Headline */}
-        <h2
-          className={cn(
-            'text-[clamp(2rem,4.5vw,3.25rem)] font-bold leading-[1.05]',
-            'tracking-[-0.03em] text-[var(--color-text-primary)] mb-6 max-w-[640px] fade-up'
-          )}
-          data-visible={dataVisible}
-          style={{ transitionDelay: '60ms' }}
-        >
-          We fix what&apos;s broken. <span className="text-[var(--color-accent)]">Then we build what keeps it fixed.</span>
-        </h2>
+          <p
+            className="lg:col-span-6 lg:col-start-7 text-[16px] md:text-[17px] text-[var(--color-text-secondary)] leading-[1.7] fade-up lg:pt-10"
+            data-visible={dataVisible}
+            style={{ transitionDelay: '120ms' }}
+          >
+            ADL is an operational partner — not a vendor that drops off files. We
+            identify where manual processes cost your team the most, then replace
+            them with AI-powered systems, automated workflows, and trained teams
+            that keep running long after we&apos;re gone.
+          </p>
+        </div>
 
-        {/* Body */}
-        <p
-          className="text-[16px] md:text-[17px] text-[var(--color-text-secondary)] leading-[1.7] max-w-[600px] fade-up"
-          data-visible={dataVisible}
-          style={{ transitionDelay: '120ms' }}
-        >
-          ADL is an operational partner — not a vendor that drops off files. We
-          identify where manual processes cost your team the most, then replace
-          them with AI-powered systems, automated workflows, and trained teams
-          that keep running long after we&apos;re gone.
-        </p>
-
-        {/* Horizontal divider */}
-        <div
-          className="mt-12 mb-12 h-px bg-[var(--color-border)] fade-up"
-          data-visible={dataVisible}
-          style={{ transitionDelay: '180ms' }}
-          aria-hidden="true"
-        />
-
-        {/* Service grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-10">
+        {/* 2 × 2 block lattice — hairlines are the 1px grid gap showing
+            through from the container beneath, so every rule is exactly
+            one pixel and no borders ever double up. */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px border border-[var(--color-border)] bg-[var(--color-border)]">
           {PILLARS.map((pillar, i) => (
             <div
               key={pillar.title}
-              className="flex items-start gap-4 fade-up"
+              className="bg-[var(--color-bg-primary)] p-8 md:p-10 fade-up"
               data-visible={dataVisible}
-              style={{ transitionDelay: `${240 + i * 80}ms` }}
+              style={{ transitionDelay: `${180 + i * 80}ms` }}
             >
-              {/* Square accent bullet — Apexon signature */}
-              <div
-                className="w-[10px] h-[10px] flex-shrink-0 mt-[5px] bg-[var(--color-accent)]"
+              <span
+                className="block font-[var(--font-mono)] text-[11px] tracking-[0.14em] text-[var(--color-accent-text)] mb-6"
                 aria-hidden="true"
-              />
-              <div>
-                <h3 className="text-[15px] font-semibold text-[var(--color-text-primary)] mb-2 leading-snug">
-                  {pillar.title}
-                </h3>
-                <p className="text-[14px] text-[var(--color-text-secondary)] leading-[1.7]">
-                  {pillar.description}
-                </p>
-              </div>
+              >
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 className="text-[clamp(1.125rem,1.6vw,var(--text-body-lg))] font-semibold text-[var(--color-text-primary)] mb-3 leading-snug">
+                {pillar.title}
+              </h3>
+              <p className="text-[15px] text-[var(--color-text-secondary)] leading-[1.7] max-w-[46ch]">
+                {pillar.description}
+              </p>
             </div>
           ))}
         </div>

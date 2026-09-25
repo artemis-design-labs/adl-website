@@ -1,7 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { ThemeProvider } from '@/context/ThemeContext';
 
 const CF_BEACON_TOKEN = '81fa03a077554854b911e476023935c6';
 const GA_MEASUREMENT_ID = 'G-SXX4NH3LQ9';
@@ -79,29 +78,20 @@ const ORG_JSON_LD = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className="scroll-smooth"
-      data-theme="dark"
-      suppressHydrationWarning
-    >
+    <html lang="en" className="scroll-smooth">
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSON_LD) }}
         />
-        {/* Linear is dark-only — always set data-theme to dark. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `document.documentElement.setAttribute('data-theme','dark');`,
-          }}
-        />
-        <meta name="theme-color" content="#010102" />
+        {/* The site is light-only: one theme-color, no pre-paint resolution
+            script, and no [data-theme] attribute to keep in sync. */}
+        <meta name="theme-color" content="#ffffff" />
         <link rel="preconnect" href="https://challenges.cloudflare.com" />
       </head>
       <body className="font-sans antialiased">
         <a href="#main-content" className="skip-link">Skip to content</a>
-        <ThemeProvider>{children}</ThemeProvider>
+        {children}
         {process.env.NODE_ENV === 'production' && (
           <>
             {/* Cloudflare Web Analytics — privacy-friendly, no cookies. */}

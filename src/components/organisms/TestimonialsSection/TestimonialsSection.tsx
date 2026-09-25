@@ -24,60 +24,45 @@ const TESTIMONIALS = [
   },
 ];
 
+/**
+ * 3-column proof grid. Hairline top rule per column instead of bordered
+ * cards and an oversized quotation mark — the quote carries itself.
+ */
 export function TestimonialsSection() {
   const { ref, dataVisible } = useFadeInOnView(0.1);
 
   return (
-    /*
-     * Interactivism testimonials pattern — dark bg, plain bold h2,
-     * 3 equal cards each opened by a large accent quotation mark,
-     * quote body fills card, attribution separated by thin rule at bottom.
-     */
     <section
       ref={ref}
-      className="bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)] py-20 md:py-28"
+      className="bg-[var(--color-bg-primary)] border-b border-[var(--color-border)] py-24 md:py-32"
     >
       <div className="max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
 
         <h2
           className={cn(
-            'text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-[1.05]',
-            'tracking-[-0.025em] text-[var(--color-text-primary)] mb-12 fade-up'
+            'text-[clamp(1.75rem,3.5vw,var(--text-h2))] font-semibold leading-[1.1]',
+            'tracking-[-0.03em] text-[var(--color-text-primary)] mb-16 max-w-[20ch] fade-up'
           )}
           data-visible={dataVisible}
         >
           What Our Clients Say
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px border border-[var(--color-border)] bg-[var(--color-border)]">
           {TESTIMONIALS.map((t, i) => (
-            <article
+            <figure
               key={i}
-              className={cn(
-                'bg-[var(--color-bg-primary)] border border-[var(--color-border)]',
-                'rounded-[var(--radius-md)] p-6 flex flex-col fade-up'
-              )}
+              className="flex flex-col bg-[var(--color-bg-elevated)] p-8 md:p-10 fade-up"
               data-visible={dataVisible}
               style={{ transitionDelay: `${80 + i * 80}ms` }}
             >
-              {/* Interactivism: large accent quotation mark as card opener */}
-              <span
-                className="text-[3rem] font-bold leading-none text-[var(--color-accent)] mb-4 select-none"
-                aria-hidden="true"
-              >
-                &ldquo;
-              </span>
-
-              <blockquote className="text-[14px] text-[var(--color-text-secondary)] leading-[1.7] flex-1 mb-6">
+              <blockquote className="flex-1 text-[15px] text-[var(--color-text-secondary)] leading-[1.75] mb-8">
                 {t.quote}
               </blockquote>
-
-              <div className="border-t border-[var(--color-border)] pt-4">
-                <p className="text-[12px] text-[var(--color-text-tertiary)] leading-[1.6]">
-                  {t.author}<br />{t.company}
-                </p>
-              </div>
-            </article>
+              <figcaption className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.12em] text-[var(--color-text-tertiary)] leading-[1.7]">
+                {t.author}<br />{t.company}
+              </figcaption>
+            </figure>
           ))}
         </div>
 

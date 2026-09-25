@@ -1,119 +1,152 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/cn';
 
+/**
+ * Hero — single full-bleed banner.
+ *
+ * One unbroken media band with the copy set ON it, centred on both axes and
+ * sized to 75vw. This is the 12-column lead cell of the homepage bento:
+ * nothing is inset, nothing is split, and the banner runs edge to edge so the
+ * grid below it reads as the first *divided* surface on the page.
+ *
+ * The band stays dark in BOTH themes so the overlaid copy keeps its
+ * contrast. Legibility is held by two layers, both tokenised so they can be
+ * tuned without touching this file: --banner-media-filter grades the footage
+ * down (darker, flatter, slightly desaturated) so it reads as ground rather
+ * than subject, and --banner-scrim lays a four-stop gradient over it that
+ * peaks through the vertical middle, where the copy now sits.
+ *
+ * Audio: the source has been stripped of its audio track at encode time
+ * (`ffmpeg -an`), and the element is `muted` regardless — muted is also
+ * what makes autoplay legal in every browser.
+ *
+ * Single CTA by design: "Who we are" drops the reader into the About us
+ * tile directly below (#about in HomeBento). Booking lives in the nav.
+ */
 export function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Respect prefers-reduced-motion: hold on the poster frame instead of
+  // looping. Autoplay can't be gated in CSS, so it's gated here.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const apply = () => {
+      if (media.matches) {
+        video.pause();
+        video.currentTime = 0;
+      } else {
+        void video.play().catch(() => {
+          /* autoplay blocked — poster remains, no action needed */
+        });
+      }
+    };
+
+    apply();
+    media.addEventListener('change', apply);
+    return () => media.removeEventListener('change', apply);
+  }, []);
+
   return (
-    /*
-     * Creative Navy pattern — Enterprise UX & Research.
-     * Clean dark background (no grid lines). 60/40 split: content left,
-     * navigational capabilities card right. Short accent rule above the
-     * eyebrow. Headline is all primary color — no inline accent span.
-     */
-    <section className="relative bg-[var(--color-bg-primary)] pt-[88px] md:pt-[104px] pb-8 lg:pb-12 overflow-hidden">
-      <div className="relative max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+    <section className="relative isolate flex min-h-svh items-center overflow-hidden bg-[var(--color-bg-dark)] pt-[var(--nav-height-full)]">
 
-          {/* LEFT — 50% (col-span-6) */}
-          <div className="lg:col-span-6">
+      {/* ---- Banner media ----------------------------------------------
+          Decorative: the headline carries the meaning, so the video is
+          hidden from assistive tech entirely. */}
+      <video
+        ref={videoRef}
+        aria-hidden="true"
+        tabIndex={-1}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        poster="/videos/adl-hero-poster.jpg"
+        className="absolute inset-0 -z-10 h-full w-full object-cover [filter:var(--banner-media-filter)]"
+      >
+        <source src="/videos/adl-hero.mp4" type="video/mp4" />
+      </video>
 
-            {/* Creative Navy signature: short accent rule above eyebrow */}
-            <div
-              className="w-8 h-[2px] bg-[var(--color-accent)] mb-4 hero-animate"
-              style={{ animationDelay: '0ms' }}
-              aria-hidden="true"
-            />
+      {/* Scrim — four stops, peaking through the vertical middle where the
+          centred copy sits, and still substantial at the top for the nav
+          that overlays this band. Tunable via --banner-scrim. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 [background-image:var(--banner-scrim)]"
+      />
 
-            {/* Mono eyebrow */}
-            <p
-              className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.14em] text-[var(--color-accent-text)] mb-5 hero-animate"
-              style={{ animationDelay: '40ms' }}
-            >
-              OPERATIONAL AI FOR TEAMS THAT ARE SCALING
-            </p>
+      {/* ---- Content ----------------------------------------------------
+          Centred on both axes and sized to 75vw.
 
-            {/* Headline — all primary color, no inline accent */}
-            <h1
-              className={cn(
-                'text-[clamp(2.25rem,4.5vw,4.25rem)] font-bold leading-[1.05] tracking-[-0.035em]',
-                'text-[var(--color-text-primary)] mb-6 hero-animate'
-              )}
-              style={{ animationDelay: '80ms' }}
-            >
-              Your team is spending time on work <span className="text-[var(--color-accent)]">AI should be doing.</span>
-            </h1>
+          Below md the block goes full-width with the standard page gutter —
+          75vw on a phone leaves too little room to set display type. From md
+          up the 12.5vw margin either side already exceeds the 40/80px page
+          gutter (96px at 768, 240px at 1920), so the rule is satisfied by the
+          width itself and no px is needed. */}
+      <div className="relative mx-auto w-full px-10 md:w-[75vw] md:px-0 lg:w-[86vw] py-16 md:py-24 text-center">
 
-            {/* Body paragraph */}
-            <p
-              className="text-[16px] md:text-[17px] text-[var(--color-text-secondary)] leading-[1.65] mb-7 max-w-[560px] hero-animate"
-              style={{ animationDelay: '160ms' }}
-            >
-              Every growing team hits the same wall: manual processes eating
-              capacity that should go toward the actual work. We replace those
-              bottlenecks with AI-powered systems that run automatically —
-              and train your team to own them.
-            </p>
+        {/* Display scale — the one element on the site allowed to be this
+            large. Everything else steps down hard from here.
 
-            {/* CTAs */}
-            <div
-              className="flex flex-col sm:flex-row items-start gap-3 hero-animate"
-              style={{ animationDelay: '240ms' }}
-            >
-              <Link
-                href="/contact?type=audit"
-                className={cn(
-                  'inline-flex items-center justify-center gap-2 h-[44px] px-7 rounded-[var(--radius-md)]',
-                  'bg-[var(--color-accent)] text-[var(--color-text-on-accent)] font-bold text-[14px]',
-                  'hover:bg-[var(--color-accent-hover)] hover:shadow-[var(--shadow-glow)]',
-                  'active:brightness-90 transition-all duration-150',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]'
-                )}
-              >
-                Book a free audit
-              </Link>
-              <Link
-                href="#clients"
-                className={cn(
-                  'inline-flex items-center justify-center gap-2 h-[44px] px-7 rounded-[var(--radius-md)]',
-                  'border border-[var(--color-border-strong)] text-[var(--color-text-secondary)] font-bold text-[14px]',
-                  'hover:border-[var(--color-accent)] hover:text-[var(--color-accent-text)]',
-                  'active:brightness-90 transition-all duration-150',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]'
-                )}
-              >
-                About us →
-              </Link>
-            </div>
-          </div>
+            Two lines at lg+, forced rather than inferred: text-wrap:balance
+            picks its own break and flips to three lines the moment the
+            container tightens, so the break is set explicitly here.
 
-          {/* RIGHT — 50% (col-span-6) — Product UI showcase */}
-          <div className="lg:col-span-6">
-            <div
-              className={cn(
-                'rounded-[var(--radius-md)] border border-[var(--color-border)]',
-                'bg-[var(--color-bg-elevated)] overflow-hidden shadow-[var(--shadow-card)] hero-animate'
-              )}
-              style={{ animationDelay: '320ms' }}
-            >
-              <video
-                src="/videos/mixpanel-insights.mp4"
-                poster="/videos/mixpanel-insights-poster.jpg"
-                width={1440}
-                height={900}
-                autoPlay
-                loop
-                muted
-                playsInline
-                aria-label="A product-analytics dashboard ADL built — funnels, retention charts, and metric cards updating in real time."
-                className="w-full h-auto"
-              />
-            </div>
-          </div>
+            The three numbers below are solved, not guessed. Measured from
+            SFNS.ttf with tracking-[-0.035em] applied, the longer of the two
+            lines ("remove operational bottlenecks.") is 12.26em, or ~12.75em
+            allowing for semibold being wider than the regular master. So the
+            container must satisfy  W >= 12.75 * font-size  at every width:
+
+              below the clamp ceiling   0.86vw >= 12.75 * 0.065vw = 0.829vw  OK
+              at the ceiling (80px)     0.86 * 1231 = 1059 >= 1020           OK
+
+            That leaves ~8% headroom over the measured width. If the copy ever
+            changes, re-measure: the constraint is the LONGER line, and the
+            only number to move is the 86vw. */}
+        <h1
+          className={cn(
+            'text-[clamp(2.5rem,6.5vw,var(--text-display))] font-semibold',
+            'leading-[1.02] tracking-[-0.035em] text-balance',
+            'text-[var(--color-text-on-dark)] mb-7 hero-animate'
+          )}
+          style={{ animationDelay: '120ms' }}
+        >
+          We build AI solutions that{' '}
+          <span className="lg:block">remove operational bottlenecks.</span>
+        </h1>
+
+        <p
+          className="mx-auto text-[17px] md:text-[18px] leading-[1.6] text-[color-mix(in_srgb,var(--color-text-on-dark)_72%,transparent)] max-w-[62ch] mb-9 hero-animate"
+          style={{ animationDelay: '200ms' }}
+        >
+          Every growing business needs to run without friction. In the age
+          of AI, manual processes need to be replaced with AI-powered
+          systems and solutions that run automatically. Our team builds that
+          infrastructure and ensures it integrates seamlessly into your
+          organization.
+        </p>
+
+        <div className="hero-animate" style={{ animationDelay: '280ms' }}>
+          <Link
+            href="#about"
+            className={cn(
+              'inline-flex items-center justify-center gap-2 h-[48px] px-8 rounded-[var(--radius-md)]',
+              'bg-[var(--color-accent)] text-[var(--color-text-on-accent)] font-semibold text-[15px]',
+              'hover:bg-[var(--color-accent-hover)] hover:shadow-[var(--shadow-glow)]',
+              'active:brightness-90 transition-all duration-150',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-dark)]'
+            )}
+          >
+            Who we are
+          </Link>
         </div>
-
-        {/* Thin separator */}
-        <div className="mt-8 lg:mt-12 border-t border-[var(--color-border)]" aria-hidden="true" />
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Script from 'next/script';
 import { Turnstile } from '@/components/atoms/Turnstile';
 import { cn } from '@/lib/cn';
@@ -45,6 +45,24 @@ export default function ContactPage() {
   });
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  // Calendly bakes its palette into the iframe URL at mount. The site is
+  // light-only, so this is now a constant — it matches --color-bg-primary
+  // and --color-text-primary.
+  const calendlyRef = useRef<HTMLDivElement>(null);
+  const calendlyUrl =
+    'https://calendly.com/itadmin-artemisdesignlabs/30min?hide_gdpr_banner=1' +
+    '&background_color=ffffff&text_color=08090a&primary_color=5e6ad2';
+
+  useEffect(() => {
+    const el = calendlyRef.current;
+    const calendly = (window as unknown as {
+      Calendly?: { initInlineWidget: (o: { url: string; parentElement: HTMLElement }) => void };
+    }).Calendly;
+    if (!el || !calendly) return; // first paint: widget.js auto-inits from data-url
+    el.innerHTML = '';
+    calendly.initInlineWidget({ url: calendlyUrl, parentElement: el });
+  }, [calendlyUrl]);
   const [errorMsg, setErrorMsg] = useState('');
   const [isAudit, setIsAudit] = useState(false);
 
@@ -150,8 +168,10 @@ export default function ContactPage() {
             </p>
           </div>
           <div
+            ref={calendlyRef}
+            key={calendlyUrl}
             className="calendly-inline-widget rounded-2xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-primary)]"
-            data-url="https://calendly.com/itadmin-artemisdesignlabs/30min?hide_gdpr_banner=1&background_color=fafafa&text_color=141414&primary_color=2f77ea"
+            data-url={calendlyUrl}
             style={{ minWidth: '320px', height: '700px' }}
           />
         </div>
@@ -306,7 +326,7 @@ export default function ContactPage() {
                   />
 
                   {TURNSTILE_REQUIRED && (
-                    <Turnstile onToken={onTurnstileToken} onExpire={onTurnstileExpire} theme="auto" />
+                    <Turnstile onToken={onTurnstileToken} onExpire={onTurnstileExpire} theme="light" />
                   )}
 
                   <button

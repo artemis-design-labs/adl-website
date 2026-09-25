@@ -76,6 +76,7 @@ Reference sizes in JSX via `text-[length:var(--text-h2)]`. Everything resolves t
 - **Max content width:** 1280px (12-col grid)
 - **Gutter:** 24px
 - **Section padding:** 64px top/bottom · `px-10 lg:px-20` left/right (40px mobile, 80px desktop) — hard rule for every section container, nav, and footer on every page
+- **Full-page grid exception — 10px margin rule:** when a grid system lays out an entire page (e.g. the homepage bento), every container block uses a single **10px** margin: the gap between blocks *and* the space between the outer blocks and the screen edges. Drive it from `--bento-gap` (`gap-[var(--bento-gap)]` on the grid, `p-[var(--bento-gap)]` on the section), drop the `max-w-[...]` wrapper, and do **not** apply `px-10 lg:px-20` to that grid. Content *inside* each block keeps its own padding. All other sections, the nav and the footer still follow the `px-10 lg:px-20` rule.
 
 ### Key UI patterns
 
@@ -159,7 +160,7 @@ Homepage composition (`src/app/(site)/page.tsx`):
 
 ## Workflow
 
-- `npm run dev` — standard Next dev server (vanilla, no Worker emulation, fastest).
+- `npm run dev` — standard Next dev server (vanilla, no Worker emulation, fastest). **Always runs on http://localhost:5173** — pinned in `package.json` (`dev`, `start`) and `wrangler.jsonc` (`dev.port`, for `cf:preview`). Never start a local server on another port.
 - `npm run cf:preview` — local OpenNext + Workers preview. Closest to prod runtime. Requires Node ≥20.
 - `npm run lint` / `npm run typecheck` — sanity checks. Pre-commit hook (husky + lint-staged) runs lint --fix and tsc on staged files.
 - `git push origin main` — production deploy. Watch the run at github.com/artemis-design-labs/adl-website/actions.

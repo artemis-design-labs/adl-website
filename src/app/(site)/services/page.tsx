@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { cn } from '@/lib/cn';
 import { CTASection } from '@/components/organisms/CTASection';
+import { LatestProjects } from '@/components/organisms/LatestProjects';
 
 export const metadata: Metadata = {
   title: 'Services | Artemis Design Labs',
@@ -301,6 +302,9 @@ export default function ServicesPage() {
 
         </div>
       </section>
+
+      {/* ── 04 LATEST PROJECTS — proof before the ask ───────────────────────── */}
+      <LatestProjects background="elevated" />
 
       {/* ── CTA — Creative Navy (same as homepage) ──────────────────────────── */}
       <CTASection />

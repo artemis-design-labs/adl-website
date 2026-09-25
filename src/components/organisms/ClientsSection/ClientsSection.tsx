@@ -1,69 +1,64 @@
 'use client';
 
 import Image from 'next/image';
-import { useTheme } from '@/context/ThemeContext';
+import { useFadeInOnView } from '@/hooks/useFadeInOnView';
 
 type Client = {
   name: string;
-  srcLight: string;
-  srcDark: string;
-  // Per-logo height override for logos whose artboard reads optically small.
-  // Defaults to the shared 84px height when omitted.
-  heightClass?: string;
+  /** White-ink artwork — the canvas is black. NOTE: this component is no
+   *  longer wired to the homepage; the client wall lives in HomeBento. */
+  src: string;
 };
 
 const CLIENTS: Client[] = [
-  { name: 'AT&T',         srcLight: '/images/atnt-light.svg',        srcDark: '/images/atnt-dark.svg'        },
-  { name: 'Verizon',      srcLight: '/images/verizon-light.svg',      srcDark: '/images/verizon-dark.svg'      },
-  { name: 'NBCUniversal', srcLight: '/images/nbcuniversal-light.svg', srcDark: '/images/nbcuniversal-dark.svg', heightClass: 'h-[115px]' },
-  { name: 'NYCERS',       srcLight: '/images/nycers-light.svg',       srcDark: '/images/nycers-dark.svg',       heightClass: 'h-[115px]' },
-  { name: 'Qualitrol',    srcLight: '/images/qualitrol-light.svg',    srcDark: '/images/qualitrol-dark.svg'    },
-  { name: 'CMA Global',   srcLight: '/images/cma-global-light.svg',   srcDark: '/images/cma-global-dark.svg'   },
-  { name: 'NYC DOE',      srcLight: '/images/nyc-doe-light.svg',      srcDark: '/images/nyc-doe-dark.svg'      },
-  { name: 'Freshop',      srcLight: '/images/freshop-light.svg',      srcDark: '/images/freshop-dark.svg'      },
+  { name: 'AT&T',         src: '/images/atnt-dark.svg'},
+  { name: 'Verizon',      src: '/images/verizon-dark.svg'},
+  { name: 'NBCUniversal', src: '/images/nbcuniversal-dark.svg'},
+  { name: 'NYCERS',       src: '/images/nycers-dark.svg'},
+  { name: 'Qualitrol',    src: '/images/qualitrol-dark.svg'},
+  { name: 'CMA Global',   src: '/images/cma-global-dark.svg'},
+  { name: 'NYC DOE',      src: '/images/nyc-doe-dark.svg'},
+  { name: 'Freshop',      src: '/images/freshop-dark.svg'},
 ];
 
-// Rendered twice back-to-back so the -50% marquee keyframe loops seamlessly.
-const TRACK = [...CLIENTS, ...CLIENTS];
-
+/**
+ * Trust band — static 4×2 / 8×1 grid.
+ *
+ * Replaces the scrolling marquee: logos now sit quiet and aligned at a
+ * size subordinate to the body type, which is how a reference client is
+ * presented when you are confident about it.
+ */
 export function ClientsSection() {
-  const { theme } = useTheme();
-  const srcFor = (c: Client) => (theme === 'dark' ? c.srcDark : c.srcLight);
+  const { ref, dataVisible } = useFadeInOnView(0.1);
 
   return (
     <section
+      ref={ref}
       id="clients"
-      className="bg-[var(--color-bg-elevated)] border-b border-[var(--color-border)] py-3"
+      className="bg-[var(--color-bg-primary)] border-b border-[var(--color-border)] py-10 md:py-12"
       aria-label="Client logos"
     >
       <div className="max-w-[var(--container-max)] mx-auto px-10 lg:px-20">
-
-        <ul className="sr-only">
-          {CLIENTS.map((c) => <li key={c.name}>{c.name}</li>)}
+        <ul className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-px border border-[var(--color-border)] bg-[var(--color-border)]">
+          {CLIENTS.map((client, i) => (
+            <li
+              key={client.name}
+              className="flex items-center justify-center bg-[var(--color-bg-elevated)] px-4 py-8 fade-up"
+              data-visible={dataVisible}
+              style={{ transitionDelay: `${i * 40}ms` }}
+            >
+              <Image
+                src={client.src}
+                alt={client.name}
+                width={300}
+                height={200}
+                decoding="async"
+                className="h-[30px] w-auto object-contain opacity-60 transition-opacity duration-200 hover:opacity-100"
+                unoptimized
+              />
+            </li>
+          ))}
         </ul>
-
-        {/* Single-row infinite marquee. Edges fade via .marquee-mask; hovering
-            pauses the scroll (both handled in globals.css). */}
-        <div className="marquee-mask overflow-hidden" aria-hidden="true">
-          <div className="animate-marquee-x flex w-max items-center">
-            {TRACK.map((client, i) => (
-              <div
-                key={`${client.name}-${i}`}
-                className="flex shrink-0 items-center justify-center px-8 md:px-12"
-              >
-                <Image
-                  src={srcFor(client)}
-                  alt=""
-                  width={300}
-                  height={200}
-                  decoding="async"
-                  className={`${client.heightClass ?? 'h-[105px]'} w-auto object-contain`}
-                  unoptimized
-                />
-              </div>
-            ))}
-          </div>
-        </div>
 
       </div>
     </section>

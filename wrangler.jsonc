@@ -12,6 +12,9 @@
     "binding": "ASSETS",
     "directory": ".open-next/assets"
   },
+  "dev": {
+    "port": 5173
+  },
   "observability": {
     "enabled": true
   }

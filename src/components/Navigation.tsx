@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { Logo } from '@/components/atoms/Logo';
 import { cn } from '@/lib/cn';
 
@@ -15,6 +16,10 @@ const NAV_LINKS: { href: string; label: string; external?: boolean }[] = [
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
+  // The homepage opens on a permanently dark banner, so an unscrolled nav
+  // there must render on-dark even though the canvas is light. Every other
+  // route opens on the light canvas and inherits the normal token colours.
+  const onDarkBanner = usePathname() === '/' && !isScrolled;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -72,9 +77,10 @@ export default function Navigation() {
                     target={link.external ? '_blank' : undefined}
                     rel={link.external ? 'noopener noreferrer' : undefined}
                     className={cn(
-                      'px-3 py-2 rounded-md text-sm',
-                      'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]',
-                      'hover:bg-[var(--color-bg-hover)]',
+                      'px-3 py-2 rounded-md text-sm transition-colors',
+                      onDarkBanner
+                        ? 'text-[color-mix(in_srgb,var(--color-text-on-dark)_78%,transparent)] hover:text-[var(--color-text-on-dark)] hover:bg-white/10'
+                        : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)]',
                       'transition-colors duration-150',
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]'
                     )}
@@ -84,6 +90,7 @@ export default function Navigation() {
                 </li>
               ))}
             </ul>
+
 
             <Link
               href="/contact#book-a-call"
@@ -106,14 +113,15 @@ export default function Navigation() {
           </div>
 
           {/* Mobile controls */}
-          <div className="flex md:hidden items-center gap-3">
+          <div className="flex md:hidden items-center gap-1">
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen((s) => !s)}
               className={cn(
                 'inline-flex items-center justify-center w-10 h-10 rounded-md',
-                'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]',
-                'hover:bg-[var(--color-bg-hover)]',
+                onDarkBanner
+                  ? 'text-[var(--color-text-on-dark)] hover:bg-white/10'
+                  : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)]',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]'
               )}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}

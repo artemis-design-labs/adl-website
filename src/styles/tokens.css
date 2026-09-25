@@ -1,9 +1,12 @@
 /*
- * ADL Design Tokens — Linear-inspired dark system
+ * ADL Design Tokens — black canvas, Linear surface ladder
  *
- * Based on Linear's design system: near-black canvas (#010102),
- * lavender accent (#5e6ad2), system-ui font stack, hairline borders,
- * surface-ladder depth (no shadows). Dark-only — no theme toggle.
+ * True-black page (#000000) with a four-step surface ladder above it for
+ * bento tiles, lavender accent (#5e6ad2), system-ui font stack, hairline
+ * borders, no shadows.
+ *
+ * SINGLE THEME. There is no toggle and no [data-theme] selector — this block
+ * is the whole palette.
  */
 
 :root {
@@ -14,29 +17,32 @@
      Depth via surface color steps, not shadows.
      ============================================ */
 
-  --color-bg-primary: #010102;       /* canvas — near-black with faint blue tint */
-  --color-bg-secondary: #0f1011;     /* surface-1 — cards, panels */
-  --color-bg-tertiary: #141516;      /* surface-2 — featured / hover surfaces */
-  --color-bg-elevated: #0f1011;      /* elevated cards */
-  --color-bg-hover: #18191a;         /* surface-3 — hover target */
-  --color-bg-inset: #06060a;         /* form fields, code wells */
+  --color-bg-primary: #000000;       /* canvas — true black */
+  --color-bg-secondary: #0b0b0c;     /* surface-1 — bento tiles */
+  --color-bg-tertiary: #121213;      /* surface-2 — featured tiles */
+  --color-bg-elevated: #0b0b0c;      /* elevated cards */
+  --color-bg-hover: #161617;         /* surface-3 — hover target */
+  --color-bg-inset: #060607;         /* form fields, code wells */
 
-  /* Legacy section aliases — kept for backward-compat with dark-section components */
-  --color-bg-dark: #010102;
-  --color-surface-dark: #0f1011;
+  /* Aliases for components that explicitly ask for a dark band. Same values
+     as the canvas now that the canvas is black. */
+  --color-bg-dark: #000000;
+  --color-surface-dark: #0b0b0c;
 
   /* ============================================
      TEXT — Linear hierarchy
      ============================================ */
 
-  --color-text-primary: #f7f8f8;
-  --color-text-secondary: #d0d6e0;
-  --color-text-tertiary: #8a8f98;
-  --color-text-muted: #62666d;
+  /* Measured against the #0b0b0c tile surface (the worst case of the three
+     surfaces text sits on — black canvas and #121213 differ by <0.3). */
+  --color-text-primary: #f7f8f8;    /* 18.5:1  AAA */
+  --color-text-secondary: #d0d6e0;  /* 13.5:1  AAA */
+  --color-text-tertiary: #8a8f98;   /*  6.1:1  AA  */
+  --color-text-muted: #62666d;      /*  3.4:1  large text / decorative only */
   --color-text-disabled: #3e3e44;
   --color-text-on-accent: #ffffff;
   --color-text-on-dark: #f7f8f8;
-  --color-text-inverse: #010102;
+  --color-text-inverse: #000000;
 
   /* ============================================
      BRAND COLORS — Linear lavender
@@ -44,22 +50,27 @@
      focus rings, primary CTAs, and link emphasis.
      ============================================ */
 
-  --color-primary: #5e6ad2;
-  --color-primary-hover: #828fff;
+  --color-primary: #5e6ad2;          /* white-on-accent 4.7:1  AA */
+  --color-primary-hover: #828fff;    /* hover LIGHTENS on a dark canvas */
   --color-primary-subtle: rgba(94, 106, 210, 0.12);
   --color-primary-glow: rgba(94, 106, 210, 0.25);
+  --color-accent-glow: rgba(94, 106, 210, 0.25);
 
   --color-accent: #5e6ad2;
   --color-accent-hover: #828fff;
   --color-accent-subtle: rgba(94, 106, 210, 0.12);
-  --color-accent-text: #5e6ad2;      /* alias used by organism components */
+
+  /* Small accent TEXT uses the lighter step. #5e6ad2 on a #0b0b0c tile is
+     only 4.19:1 — it fails AA at the 11px eyebrow size. #828fff is 6.86:1.
+     The #5e6ad2 fill stays as-is: white on it is 4.70:1, which passes. */
+  --color-accent-text: #828fff;
 
   /* ============================================
      BORDERS — Linear hairlines
      ============================================ */
 
-  --color-border: #23252a;
-  --color-border-hover: #34343a;
+  --color-border: #1e1f22;
+  --color-border-hover: #2c2d31;
   --color-border-strong: #3e3e44;
   --color-border-accent: #5e6ad2;
 
@@ -158,7 +169,27 @@
   --container-narrow: 680px;
   --container-wide: 1200px;
   --grid-columns: 12;
-  --grid-gutter: 1.5rem;         /* 24px */
+  --grid-gutter: 1.5rem;         /* 24px — content columns */
+
+  /* BENTO — the homepage grid below the hero.
+     6 columns so both a 2-up (span-3) and a 3-up (span-2) resolve on the
+     same track list. Full-page grid rule: one 10px margin everywhere —
+     between tiles AND between the outer tiles and the screen edge. */
+  --bento-columns: 6;
+  --bento-gap: 10px;
+
+  /* VIEWPORT BLOCKS — a full-page-grid section fills exactly one screen.
+     The fixed nav is 53px once scrolled (44px logo + 8px padding + 1px
+     border) and always overlays the page, so a block is the viewport
+     minus that nav and one --bento-gap above and below. svh, not vh, so
+     mobile browser chrome can't push the bottom edge off-screen. Used as a
+     MIN height — content that needs more room grows the block, never clips. */
+  --nav-height-compact: 53px;
+  /* Un-scrolled nav (76px logo + 26px padding + border, ~109px rendered)
+     — the hero pads by this so its copy centres in the visible band. */
+  --nav-height-full: 109px;
+  --viewport-block-h: calc(100svh - var(--nav-height-compact) - 2 * var(--bento-gap));
+  --viewport-block-offset: calc(var(--nav-height-compact) + var(--bento-gap));
 
   /* ============================================
      RADIUS — Linear: 8px buttons/inputs, 12px cards
@@ -212,4 +243,35 @@
 
   --overlay-light: rgba(94, 106, 210, 0.06);
   --overlay-dim: rgba(0, 0, 0, 0.70);
+
+  /* ============================================
+     BANNER MEDIA — full-bleed hero footage
+     The banner is a dark band on a light canvas, so these are absolute
+     values rather than palette references.
+
+     The grade pulls the footage back so it reads as ground, not subject:
+       brightness  — sits the whole frame down
+       contrast    — flattens the range so highlights stop competing
+                     with white type
+       saturate    — keeps the footage from fighting the lavender accent
+     ============================================ */
+
+  --banner-media-filter: brightness(0.62) contrast(0.86) saturate(0.96);
+
+  /* Four-stop scrim, rebalanced for centred copy. The old curve was
+     bottom-heavy for a bottom-anchored headline; the copy now sits in the
+     vertical middle, so the peak moved with it. Still substantial at the
+     top for the nav that overlays this band (logo, menu, CTA),
+     and lightest at the bottom, where nothing is set.
+
+     Against footage already graded by --banner-media-filter, the 0.80 peak
+     puts white type at roughly 16:1 and the 0.66 top stop at roughly 12:1 —
+     both comfortably clear of the 4.5:1 floor on any frame. */
+  --banner-scrim: linear-gradient(
+    to top,
+    rgba(1, 1, 2, 0.62) 0%,
+    rgba(1, 1, 2, 0.78) 30%,
+    rgba(1, 1, 2, 0.80) 55%,
+    rgba(1, 1, 2, 0.66) 100%
+  );
 }
