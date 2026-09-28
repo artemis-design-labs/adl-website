@@ -98,28 +98,31 @@ export function Hero() {
             picks its own break and flips to three lines the moment the
             container tightens, so the break is set explicitly here.
 
-            The three numbers below are solved, not guessed. Measured from
-            SFNS.ttf with tracking-[-0.035em] applied, the longer of the two
-            lines ("remove operational bottlenecks.") is 12.26em, or ~12.75em
-            allowing for semibold being wider than the regular master. So the
-            container must satisfy  W >= 12.75 * font-size  at every width:
+            Two lines from md up, forced: each line is its own nowrap block,
+            so the break always falls after "that" and never mid-phrase.
 
-              below the clamp ceiling   0.86vw >= 12.75 * 0.065vw = 0.829vw  OK
-              at the ceiling (80px)     0.86 * 1231 = 1059 >= 1020           OK
+            The size is solved from the LONGER line. Measured in the rendered
+            face with tracking-[-0.035em], "We build AI-powered systems that"
+            is 14.04em; with ~6% headroom that is 14.9em. So the font must
+            satisfy  font-size <= container / 14.9  at every width:
 
-            That leaves ~8% headroom over the measured width. If the copy ever
-            changes, re-measure: the constraint is the LONGER line, and the
-            only number to move is the 86vw. */}
+              md  (container 75vw)   75 / 14.9 = 5.03vw   → 5vw
+              lg  (container 86vw)   86 / 14.9 = 5.77vw   → 5.75vw
+
+            both capped at --text-display. Below md the headline wraps
+            naturally. If the copy changes, re-measure the longer line and
+            move only these two vw values. */}
         <h1
           className={cn(
             'text-[clamp(2.5rem,6.5vw,var(--text-display))] font-semibold',
+            'md:text-[length:min(5vw,var(--text-display))] lg:text-[length:min(5.75vw,var(--text-display))]',
             'leading-[1.02] tracking-[-0.035em] text-balance',
             'text-[var(--color-text-on-dark)] mb-7 hero-animate'
           )}
           style={{ animationDelay: '120ms' }}
         >
-          We build AI solutions that{' '}
-          <span className="lg:block">remove operational bottlenecks.</span>
+          <span className="md:block md:whitespace-nowrap">We build AI-powered systems that</span>{' '}
+          <span className="md:block md:whitespace-nowrap">remove operational bottlenecks.</span>
         </h1>
 
         <p

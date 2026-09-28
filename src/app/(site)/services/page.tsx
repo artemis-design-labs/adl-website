@@ -2,7 +2,6 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { cn } from '@/lib/cn';
 import { CTASection } from '@/components/organisms/CTASection';
-import { LatestProjects } from '@/components/organisms/LatestProjects';
 
 export const metadata: Metadata = {
   title: 'Services | Artemis Design Labs',
@@ -183,10 +182,6 @@ export default function ServicesPage() {
             >
               Two ways to engage.<br />Scoped to your situation.
             </h2>
-            <p className="text-[14px] text-[var(--color-text-secondary)] max-w-[360px] leading-[1.65]">
-              Every engagement is scoped after a discovery call.
-              Pricing is determined by what you need and how fast you need it — not a menu.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -303,11 +298,8 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ── 04 LATEST PROJECTS — proof before the ask ───────────────────────── */}
-      <LatestProjects background="elevated" />
-
       {/* ── CTA — Creative Navy (same as homepage) ──────────────────────────── */}
-      <CTASection />
+      <CTASection background="elevated" />
     </>
   );
 }
