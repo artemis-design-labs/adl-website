@@ -16,7 +16,7 @@ const PROJECTS = [
     client: 'NYCERS',
     title: 'NYCEPAS — AI-Powered Pension Administration System',
     description:
-      'An AI-powered workflow system that unified pension administration across all four NYCERS business units into one intelligent case surface. Cases that previously required manual cross-unit coordination now route automatically — with AI-assisted tier determination, eligibility checks, and benefit calculations that are fully auditable and sourced to statute.',
+      'One case system for pension administration across all four NYCERS business units, serving more than 350,000 members. Cases that used to need manual hand-offs between units now route themselves, and AI checks every tier, eligibility and benefit decision against the rules — with each answer traceable to the law it came from. Designed and built end-to-end for work where a wrong answer is permanent.',
     stats: [
       { label: 'Members served',         value: '350,000+' },
       { label: 'Business units unified',  value: '4'        },
@@ -29,7 +29,7 @@ const PROJECTS = [
     client: 'CMA Global',
     title: 'HANDS AI — AI-Powered Case Management for Family Services',
     description:
-      'An AI-powered assistant for family support caseworkers that surfaces the highest-risk families every morning — with a plain-language explanation for every flag. Caseworkers can ask questions across their entire caseload in natural language instead of navigating fragmented systems, turning reactive record-keeping into proactive, focused care.',
+      'An AI assistant for caseworkers who each carry 250+ families. Every morning it ranks the families most at risk of slipping through the cracks and explains every flag in plain language. Caseworkers search across what used to be four disconnected systems by simply asking a question, and every answer shows where it came from. Live across six health departments. Designed, built and governed end-to-end.',
     stats: [
       { label: 'Caseload prioritization', value: 'Daily' },
       { label: 'Risk flags',              value: 'Explained' },
@@ -42,7 +42,7 @@ const PROJECTS = [
     client: 'NYC Department of Education',
     title: 'Insight AI — Student Data Intelligence for NYC Schools',
     description:
-      'A data intelligence platform that transformed fragmented student data into actionable dashboards for New York City\'s public school system. Principals, teachers, and counselors can now surface trends across attendance, achievement, course access, and discipline — and coordinate on interventions — without manually reconciling spreadsheets.',
+      'An analytics platform for the country\'s largest public school system. It turns scattered data on attendance, achievement, course access and discipline into clear visual stories that principals and teachers can act on. Teams annotate and share the same views, so everyone agrees on the numbers before deciding on an intervention. Its reusable building blocks were adopted across 15+ data products. Platform, system and rollout playbook delivered end-to-end.',
     stats: [
       { label: 'NYC schools served',   value: '1,800+' },
       { label: 'Data domains unified', value: '4'      },
@@ -55,7 +55,7 @@ const PROJECTS = [
     client: 'NBCUniversal',
     title: 'Data Mesh — Real-Time Observability for Global Content Distribution',
     description:
-      'A unified observability platform for NBCUniversal\'s Network Operations Center that brought linear, cable, and streaming distribution monitoring into a single real-time view. Engineers went from piecing together incidents across a patchwork of siloed tools to detecting and triaging problems in one place — before viewers are affected.',
+      'A real-time operations view for NBCUniversal\'s media supply chain. Delays, volume and errors across linear, cable and streaming distribution come together on one screen, so the network operations team can spot, prioritize and resolve incidents before viewers notice. Designed end-to-end, from how the data is structured to the screen an engineer sees mid-incident. Designed for the 3am call.',
     stats: [
       { label: 'Platforms unified',  value: '3'         },
       { label: 'Signal aggregation', value: 'Real-time' },
@@ -68,7 +68,7 @@ const PROJECTS = [
     client: 'Verizon',
     title: 'My Project Inbox — Engineering Coordination Platform',
     description:
-      'A shared coordination platform that replaced scattered spreadsheets, email threads, and tracking tools across Verizon\'s engineering organization with a single project inbox. Every contributor could see exactly what they owned, what was blocking them, and who was involved — across every active project at once.',
+      'One shared coordination platform for Verizon\'s engineering organization, replacing a sprawl of personal spreadsheets, one-off trackers and lost email threads. Every contributor sees what they own, what\'s blocking them and who else is involved; leadership sees every active project at once, with a blocker list they can trust. Fewer dropped tasks, more predictable delivery dates. Defined, designed and built end-to-end.',
     stats: [
       { label: 'Projects unified',         value: '60+' },
       { label: 'Tool categories replaced',  value: '3'   },
