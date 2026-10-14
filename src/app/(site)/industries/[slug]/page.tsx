@@ -21,7 +21,10 @@ export function generateStaticParams() {
   return INDUSTRIES.map(({ slug }) => ({ slug }));
 }
 
-export const dynamicParams = false;
+// No `dynamicParams = false`: on Cloudflare (OpenNext, no incremental cache
+// configured) a prerendered path is looked up in the cache, misses, and with
+// fallback off that miss becomes a 404 for every industry. Unknown slugs
+// still 404 through notFound() below.
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const industry = getIndustry((await params).slug);
