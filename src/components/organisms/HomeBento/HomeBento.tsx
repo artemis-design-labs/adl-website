@@ -3,8 +3,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useRef, useState } from 'react';
+import { BeforeAfterStrip } from '@/components/atoms/BeforeAfterStrip';
 import { useFadeInOnView } from '@/hooks/useFadeInOnView';
 import { cn } from '@/lib/cn';
+import { PILLAR_STRIPS } from './pillarArt';
 
 /* ------------------------------------------------------------------ data */
 
@@ -195,23 +197,17 @@ function PillarCarousel() {
       <div
         ref={trackRef}
         onScroll={onScroll}
-        className="flex flex-1 snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex flex-1 snap-x snap-mandatory overflow-x-auto [scrollbar-width:none]! [&::-webkit-scrollbar]:hidden"
       >
-        {PILLARS.map((pillar) => (
+        {PILLARS.map((pillar, i) => (
           <div
             key={pillar.title}
             aria-hidden="true"
             className="flex w-full shrink-0 snap-start flex-col"
           >
-            {/* Image placeholder — replace with real asset when provided */}
-            <div className="relative flex min-h-[240px] w-full flex-1 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-bg-tertiary)]">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[var(--color-border)]">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <rect x="2" y="4" width="16" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" className="text-[var(--color-text-tertiary)]" />
-                  <circle cx="7" cy="8.5" r="1.5" fill="currentColor" className="text-[var(--color-text-tertiary)]" />
-                  <path d="M2 14l4-3 3 2.5 3-4 4 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-text-tertiary)]" />
-                </svg>
-              </div>
+            {/* Before / after strip per pillar — scenes from pillarArt.tsx */}
+            <div className="flex min-h-[240px] w-full flex-1 items-center rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] p-4 md:p-6">
+              <BeforeAfterStrip {...PILLAR_STRIPS[i]} />
             </div>
           </div>
         ))}

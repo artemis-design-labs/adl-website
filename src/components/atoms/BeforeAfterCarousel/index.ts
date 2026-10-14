@@ -1,0 +1,1 @@
+export { BeforeAfterCarousel } from './BeforeAfterCarousel';

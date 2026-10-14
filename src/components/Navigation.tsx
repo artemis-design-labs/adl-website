@@ -1,14 +1,29 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { Logo } from '@/components/atoms/Logo';
 import { cn } from '@/lib/cn';
+import { INDUSTRIES, industryHref } from '@/lib/industries';
 
-const NAV_LINKS: { href: string; label: string; external?: boolean }[] = [
+type NavLink = {
+  href: string;
+  label: string;
+  external?: boolean;
+  /** Dropdown items. The parent stays a real link to `href`. */
+  children?: { href: string; label: string }[];
+};
+
+const NAV_LINKS: NavLink[] = [
   { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
+  {
+    // Labelled "Industries", but the parent still lands on /services.
+    href: '/services',
+    label: 'Industries',
+    children: INDUSTRIES.map((i) => ({ href: industryHref(i.slug), label: i.name })),
+  },
   { href: '/work', label: 'Work' },
   { href: 'https://medium.com/ai-ui', label: 'Blog', external: true },
   { href: '/contact', label: 'Contact' },
@@ -21,6 +36,18 @@ export default function Navigation() {
   // route opens on the light canvas and inherits the normal token colours.
   const onDarkBanner = usePathname() === '/' && !isScrolled;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  // Short grace period so the pointer can cross the gap between the trigger
+  // and the panel without the menu snapping shut.
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const openMenu = (href: string) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpenDropdown(href);
+  };
+  const closeMenuSoon = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setOpenDropdown(null), 120);
+  };
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 12);
@@ -31,7 +58,10 @@ export default function Navigation() {
 
   useEffect(() => {
     const onEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsMobileMenuOpen(false);
+      if (e.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+        setOpenDropdown(null);
+      }
     };
     document.addEventListener('keydown', onEscape);
     return () => document.removeEventListener('keydown', onEscape);
@@ -70,14 +100,31 @@ export default function Navigation() {
           <div className="hidden md:flex items-center gap-1">
             <ul className="flex items-center gap-1 mr-3" role="menubar">
               {NAV_LINKS.map((link) => (
-                <li key={link.href} role="none">
+                <li
+                  key={link.label}
+                  role="none"
+                  className={cn(link.children && 'relative')}
+                  onMouseEnter={link.children ? () => openMenu(link.href) : undefined}
+                  onMouseLeave={link.children ? closeMenuSoon : undefined}
+                  onFocus={link.children ? () => openMenu(link.href) : undefined}
+                  onBlur={
+                    link.children
+                      ? (e) => {
+                          if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpenDropdown(null);
+                        }
+                      : undefined
+                  }
+                >
                   <Link
                     role="menuitem"
                     href={link.href}
                     target={link.external ? '_blank' : undefined}
                     rel={link.external ? 'noopener noreferrer' : undefined}
+                    aria-haspopup={link.children ? 'menu' : undefined}
+                    aria-expanded={link.children ? openDropdown === link.href : undefined}
+                    onClick={link.children ? () => setOpenDropdown(null) : undefined}
                     className={cn(
-                      'px-3 py-2 rounded-md text-sm transition-colors',
+                      'inline-flex items-center gap-1 px-3 py-2 rounded-md text-sm transition-colors',
                       onDarkBanner
                         ? 'text-[color-mix(in_srgb,var(--color-text-on-dark)_78%,transparent)] hover:text-[var(--color-text-on-dark)] hover:bg-white/10'
                         : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)]',
@@ -86,11 +133,56 @@ export default function Navigation() {
                     )}
                   >
                     {link.label}
+                    {link.children && (
+                      <svg
+                        width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+                        className={cn('transition-transform duration-150', openDropdown === link.href && 'rotate-180')}
+                      >
+                        <path d="M6 9l6 6 6-6" />
+                      </svg>
+                    )}
                   </Link>
+
+                  {link.children && (
+                    // pt-2 is a hover bridge: the panel's padding, not a gap,
+                    // sits between trigger and list so the pointer never leaves.
+                    <div
+                      className={cn(
+                        'absolute left-0 top-full pt-2 w-72 transition-[opacity,transform] duration-150',
+                        openDropdown === link.href
+                          ? 'opacity-100 translate-y-0 visible'
+                          : 'opacity-0 -translate-y-1 invisible pointer-events-none'
+                      )}
+                    >
+                      <ul
+                        role="menu"
+                        aria-label={link.label}
+                        className="p-2 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-bg-secondary)]"
+                      >
+                        {link.children.map((child) => (
+                          <li key={child.href} role="none">
+                            <Link
+                              role="menuitem"
+                              href={child.href}
+                              onClick={() => setOpenDropdown(null)}
+                              className={cn(
+                                'block px-3 py-2.5 rounded-md text-sm',
+                                'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)]',
+                                'transition-colors duration-150',
+                                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]'
+                              )}
+                            >
+                              {child.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
-
 
             <Link
               href="/contact#book-a-call"
@@ -144,12 +236,12 @@ export default function Navigation() {
           id="mobile-menu"
           className={cn(
             'md:hidden overflow-hidden transition-[max-height,opacity] duration-200',
-            isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+            isMobileMenuOpen ? 'max-h-[calc(100svh-80px)] overflow-y-auto opacity-100' : 'max-h-0 opacity-0'
           )}
         >
           <ul className="py-3 border-t border-[var(--color-border)] flex flex-col gap-1">
             {NAV_LINKS.map((link) => (
-              <li key={link.href}>
+              <li key={link.label}>
                 <Link
                   href={link.href}
                   target={link.external ? '_blank' : undefined}
@@ -159,6 +251,21 @@ export default function Navigation() {
                 >
                   {link.label}
                 </Link>
+                {link.children && (
+                  <ul className="mb-1 ml-3 pl-3 border-l border-[var(--color-border)] flex flex-col">
+                    {link.children.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="block px-3 py-2.5 rounded-md text-[13px] text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)]"
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
             <li className="pt-2">

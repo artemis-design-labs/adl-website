@@ -2,6 +2,8 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { cn } from '@/lib/cn';
 import { CTASection } from '@/components/organisms/CTASection';
+import { BeforeAfterStrip } from '@/components/atoms/BeforeAfterStrip';
+import { SERVICES_HERO_STRIP, BuildIcon, OperateIcon, ProcessDiagram } from './servicesArt';
 
 export const metadata: Metadata = {
   title: 'Services | Artemis Design Labs',
@@ -27,6 +29,7 @@ const TRACKS = [
       'Post-delivery support included',
     ],
     featured: false,
+    Icon: BuildIcon,
   },
   {
     num: '02',
@@ -45,6 +48,7 @@ const TRACKS = [
       'Quarterly system reviews and evolution planning',
     ],
     featured: true,
+    Icon: OperateIcon,
   },
 ];
 
@@ -159,6 +163,11 @@ export default function ServicesPage() {
             </Link>
           </div>
 
+          {/* Before / after strip — copy-creator skill §13.4 (hero) */}
+          <div className="mt-16 max-w-[760px] rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] p-4 md:p-6">
+            <BeforeAfterStrip {...SERVICES_HERO_STRIP} />
+          </div>
+
         </div>
       </section>
 
@@ -193,6 +202,7 @@ export default function ServicesPage() {
                   'bg-[var(--color-bg-primary)] border border-[var(--color-border)]'
                 )}
               >
+                <track.Icon />
                 <p className="font-[var(--font-mono)] text-[10px] text-[var(--color-text-tertiary)] uppercase tracking-[0.14em] mb-4">
                   {track.descriptor}
                 </p>
@@ -255,6 +265,8 @@ export default function ServicesPage() {
               last so the result is coherent, not a collection of independent fixes.
             </p>
           </div>
+
+          <ProcessDiagram className="mb-14" />
 
           {/* Semiflat numbered step columns */}
           <div className="grid grid-cols-1 sm:grid-cols-5 border-t-2 border-t-[var(--color-accent)]">

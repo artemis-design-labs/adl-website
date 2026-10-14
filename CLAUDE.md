@@ -147,7 +147,7 @@ Homepage composition (`src/app/(site)/page.tsx`):
 
 **Unwired organisms** (present in `src/components/organisms/`, imported by nothing under `src/app/` — dead code kept for reference): `AboutUsSection`, `CaseStudySection`, `HowItWorksSection`, `MetricsTestimonialsSection`, `OurAIPreviewSection`, `ProblemSection`, `SocialProofSection`, `TwoTracksSection`, `WhoThisIsForSection`, plus `Hero/HeroBackdrop` and `Hero/HeroProductVisual`. Check imports before reviving one — most carry copy from a superseded positioning.
 
-**Live routes** are only `/`, `/services`, `/work`, `/contact`, `/hands-ai`, `/publication` (noindex), plus `/admin` and `/api/contact`. Everything under `src/app/_archived/` is outside the router: it does not build, route, or appear in the sitemap. Moving a page back means moving the folder into `(site)/` **and** adding it to `sitemap.ts` + the nav/footer link lists.
+**Live routes** are only `/`, `/services` (labelled "Industries" in the nav), `/industries/[slug]` (six pages from `src/lib/industries.ts`; an industry with `content` is indexable and listed in the sitemap, one without renders as a noindex placeholder), `/work`, `/contact`, `/hands-ai`, `/publication` (noindex), plus `/admin` and `/api/contact`. Everything under `src/app/_archived/` is outside the router: it does not build, route, or appear in the sitemap. Moving a page back means moving the folder into `(site)/` **and** adding it to `sitemap.ts` + the nav/footer link lists.
 
 ## Conventions
 

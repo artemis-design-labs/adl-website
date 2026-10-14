@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 const FOOTER_NAV: { href: string; label: string; external?: boolean }[] = [
-  { href: '/services', label: 'Services' },
+  { href: '/services', label: 'Industries' },
   { href: '/work',     label: 'Work' },
   { href: 'https://medium.com/ai-ui', label: 'Blog', external: true },
   { href: '/contact',  label: 'Contact' },
